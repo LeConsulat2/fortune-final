@@ -14,14 +14,13 @@ export interface FortuneConfig {
   quiz: Question[];
 }
 
-export const fortuneConfigs = {
-  overall: {
-    label: {
-      name: 'Overall Fortune',
-      emoji: '✨',
-      description: 'Complete daily energy flow',
-    },
-    guidance: `
+export const general: FortuneConfig = {
+  label: {
+    name: 'Overall Fortune',
+    emoji: '✨',
+    description: 'Complete daily energy flow',
+  },
+  guidance: `
   OVERALL FORTUNE FOCUS: Create a comprehensive reading that weaves together all life aspects into a cohesive narrative about today's energy patterns.
   
   SPECIFIC GUIDANCE:
@@ -48,6 +47,5 @@ export const fortuneConfigs = {
   - Include specific timing suggestions for important conversations
   - Provide guidance on balancing different responsibilities
   - Address how to recognize and act on emerging opportunities`,
-    quiz: [],
-  },
+  quiz: [],
 };

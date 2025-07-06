@@ -10,7 +10,7 @@ import {
   staggerContainerVariants,
   fadeInUpVariants,
 } from '@/lib/animated-flow';
-import { seededRandom } from '@/lib/utils';
+import { seededRandom } from '@/lib/seeded-random';
 
 export default function Home() {
   const router = useRouter();
