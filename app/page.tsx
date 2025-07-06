@@ -1,103 +1,143 @@
-import Image from "next/image";
+'use client';
+
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/ui/button';
+import {
+  streamDownVariants,
+  zipInVariants,
+  pulseGlowVariants,
+  staggerContainerVariants,
+  fadeInUpVariants,
+} from '@/lib/animated-flow';
+import { seededRandom } from '@/lib/utils';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const router = useRouter();
+  const needsOnboarding = useNeedsOnboarding();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleStartJourney = () => {
+    if (needsOnboarding) {
+      router.push('/onboarding/gender');
+    } else {
+      router.push('/fortune/general');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white overflow-hidden relative">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3 }}
+          className="absolute top-20 left-20 w-2 h-2 bg-yellow-400 rounded-full warm-glow"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3, delay: 0.8 }}
+          className="absolute top-40 right-32 w-1 h-1 bg-orange-400 rounded-full float-gentle"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3, delay: 1.5 }}
+          className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-amber-400 rounded-full warm-glow"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3, delay: 2 }}
+          className="absolute bottom-20 right-20 w-1 h-1 bg-red-400 rounded-full float-gentle"
+        />
+      </div>
+
+      {/* Main content */}
+      <div className="min-h-screen flex flex-col items-center justify-center px-6">
+        <motion.div
+          variants={staggerContainerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-md mx-auto text-center"
+        >
+          {/* Hero text */}
+          <motion.div
+            variants={streamDownVariants}
+            className="space-y-6 pb-64 stream-down"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
+              Today&apos;s Daily Fortune
+            </h1>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            variants={fadeInUpVariants}
+            className="text-base md:text-lg text-amber-200 leading-relaxed"
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            Feel your fortune for the day, while you create your own fortune!
+          </motion.p>
+
+          {/* Main CTA */}
+          <motion.div variants={zipInVariants} className="pt-6 zip-in">
+            <motion.div
+              variants={pulseGlowVariants}
+              initial="initial"
+              animate="animate"
+              className="inline-block pulse-glow"
+            >
+              <Button
+                onClick={handleStartJourney}
+                size="lg"
+                className="w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 border-0 shadow-2xl"
+              >
+                ✨{''} Start Your Fortune {''}✨
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          {/* Footer text */}
+          <motion.div
+            variants={fadeInUpVariants}
+            className="pt-8 text-center text-orange-300 text-sm"
+          >
+            <p>
+              ✨ It&apos;s your fortune for the day! But Remember, this is just
+              for a fun, you create your own fortunes ok? ✨
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Floating particles animation */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 4 }}
+      >
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-orange-400 rounded-full"
+            style={{
+              left: `${seededRandom(i) * 100}%`,
+              top: `${seededRandom(i + 100) * 100}%`,
+            }}
+            animate={{
+              y: [0, -25, 0],
+              opacity: [0.2, 0.8, 0.2],
+            }}
+            transition={{
+              duration: 5 + seededRandom(i + 200) * 3,
+              repeat: Infinity,
+              delay: seededRandom(i + 300) * 3,
+            }}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        ))}
+      </motion.div>
     </div>
   );
 }
