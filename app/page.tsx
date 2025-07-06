@@ -104,8 +104,9 @@ export default function Home() {
             className="pt-8 text-center text-orange-300 text-sm"
           >
             <p>
-              ✨ It&apos;s your fortune for the day! But Remember, this is just
-              for a fun, you create your own fortunes ok? ✨
+              ✨ It&apos;s your fortune for the day! But Remember, this is only
+              for an entertainment purposes ok?, you create your own fortunes
+              ok? ✨
             </p>
           </motion.div>
         </motion.div>
