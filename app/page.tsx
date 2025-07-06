@@ -5,14 +5,45 @@ import { motion } from 'framer-motion';
 import { Button } from '@/ui/button';
 import {
   streamDownVariants,
-  zipInVariants,
   pulseGlowVariants,
   staggerContainerVariants,
-  fadeInUpVariants,
+  zipInVariants,
 } from '@/lib/animated-flow';
 import { seededRandom } from '@/lib/seeded-random';
 
 import Image from 'next/image';
+
+// Custom variants for streaming down effect
+const streamDownItemVariants = {
+  hidden: { y: -50, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 50,
+      damping: 15,
+    },
+  },
+};
+
+// Warm gas effect for the image with persistent subtle glow
+const warmGasImageVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    filter: 'blur(15px) brightness(1.2)',
+  },
+  visible: {
+    opacity: 0.65,
+    scale: 1,
+    filter: 'blur(0px) brightness(1.1)',
+    transition: {
+      duration: 2.5,
+      ease: 'easeOut' as const,
+    },
+  },
+};
 
 export default function Home() {
   //const router = useRouter();
@@ -59,28 +90,33 @@ export default function Home() {
           {/* Hero text */}
           <motion.div
             variants={streamDownVariants}
-            className="space-y-6 pb-10 stream-down"
+            className="space-y-4 pb-10 stream-down  "
           >
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
-              Today&apos;s Daily Fortune
+              Your Daily Fortune
             </h1>
           </motion.div>
 
-          <Image
-            src="/thumbnail-nextjs.png"
-            alt="Fortune"
-            width={500}
-            height={500}
-            className="rounded-xl shadow-2xl w-full h-full opacity-65"
-          />
+          {/* Image with warm gas effect and subtle glow */}
+          <motion.div variants={warmGasImageVariants} className="my-4 relative">
+            <div className="absolute inset-0 bg-orange-300/10 rounded-xl blur-md warm-glow"></div>
+            <Image
+              src="/thumbnail-nextjs.png"
+              alt="Fortune"
+              width={500}
+              height={500}
+              className="rounded-xl shadow-2xl w-full h-full relative z-10"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-red-500/5 rounded-xl mix-blend-overlay"></div>
+          </motion.div>
 
           {/* Description */}
-          <motion.p
-            variants={fadeInUpVariants}
-            className="text-sm md:text-lg text-amber-200 leading-relaxed"
+          {/* <motion.p
+            variants={streamDownItemVariants}
+            className="text-sm md:text-lg text-amber-200 leading-relaxed mt-6"
           >
             Explore your fortune for the day, while you create your own!
-          </motion.p>
+          </motion.p> */}
 
           {/* Main CTA */}
           <motion.div variants={zipInVariants} className="pt-6 zip-in">
@@ -95,7 +131,7 @@ export default function Home() {
                 size="lg"
                 className="hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 border-none shadow-2xl"
               >
-                <Link href="/fortune/general">
+                <Link href="/choice">
                   ✨{''} Explore Your Fortune {''}✨
                 </Link>
               </Button>
@@ -104,12 +140,12 @@ export default function Home() {
 
           {/* Footer text */}
           <motion.div
-            variants={fadeInUpVariants}
+            variants={streamDownItemVariants}
             className="pt-8 text-center text-orange-300 text-sm"
           >
-            <p>
+            <p className="text-sm md:text-md">
               ✨ It&apos;s your fortune of the day! But Remember, this is only
-              for an entertainment purposes ok?, you create your own fortunes!
+              for an entertainment purposes ok?, You create your own fortunes!
               ✨
             </p>
           </motion.div>
