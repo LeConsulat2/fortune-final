@@ -1,4 +1,4 @@
-import type { ZodiacSign } from '@/lib/zodiac-sign-label';
+import type { ZodiacSign } from '@/lib/common-constants';
 import { DateTime } from 'luxon';
 
 /**

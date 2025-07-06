@@ -101,7 +101,7 @@ export function calculateZodiacSign(birthDate: string): ZodiacSign {
   throw new Error('Invalid birth date or failed to calculate zodiac sign'); //여기  예외처리 하거나, 디폴트값 추가해야함 아님 zodiacSign?
 }
 
-export type Gender = 'male' | 'female' | '';
+export type Gender = 'male' | 'female';
 
 export const personalInfoSchema = z.object({
   name: z

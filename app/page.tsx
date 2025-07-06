@@ -1,7 +1,7 @@
 'use client';
-
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+
 import { Button } from '@/ui/button';
 import {
   streamDownVariants,
@@ -12,17 +12,11 @@ import {
 } from '@/lib/animated-flow';
 import { seededRandom } from '@/lib/seeded-random';
 
-export default function Home() {
-  const router = useRouter();
-  const needsOnboarding = useNeedsOnboarding();
+import Image from 'next/image';
 
-  const handleStartJourney = () => {
-    if (needsOnboarding) {
-      router.push('/onboarding/gender');
-    } else {
-      router.push('/fortune/general');
-    }
-  };
+export default function Home() {
+  //const router = useRouter();
+  //const needsOnboarding = useNeedsOnboarding();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white overflow-hidden relative">
@@ -65,19 +59,27 @@ export default function Home() {
           {/* Hero text */}
           <motion.div
             variants={streamDownVariants}
-            className="space-y-6 pb-64 stream-down"
+            className="space-y-6 pb-10 stream-down"
           >
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
               Today&apos;s Daily Fortune
             </h1>
           </motion.div>
 
+          <Image
+            src="/thumbnail-nextjs.png"
+            alt="Fortune"
+            width={500}
+            height={500}
+            className="rounded-xl shadow-2xl w-full h-full opacity-65"
+          />
+
           {/* Description */}
           <motion.p
             variants={fadeInUpVariants}
-            className="text-base md:text-lg text-amber-200 leading-relaxed"
+            className="text-sm md:text-lg text-amber-200 leading-relaxed"
           >
-            Feel your fortune for the day, while you create your own fortune!
+            Explore your fortune for the day, while you create your own!
           </motion.p>
 
           {/* Main CTA */}
@@ -89,11 +91,13 @@ export default function Home() {
               className="inline-block pulse-glow"
             >
               <Button
-                onClick={handleStartJourney}
+                asChild
                 size="lg"
-                className="w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 border-0 shadow-2xl"
+                className="hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 border-none shadow-2xl"
               >
-                ✨{''} Start Your Fortune {''}✨
+                <Link href="/fortune/general">
+                  ✨{''} Explore Your Fortune {''}✨
+                </Link>
               </Button>
             </motion.div>
           </motion.div>
@@ -104,9 +108,9 @@ export default function Home() {
             className="pt-8 text-center text-orange-300 text-sm"
           >
             <p>
-              ✨ It&apos;s your fortune for the day! But Remember, this is only
-              for an entertainment purposes ok?, you create your own fortunes
-              ok? ✨
+              ✨ It&apos;s your fortune of the day! But Remember, this is only
+              for an entertainment purposes ok?, you create your own fortunes!
+              ✨
             </p>
           </motion.div>
         </motion.div>
