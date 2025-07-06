@@ -14,176 +14,325 @@ export interface FortuneConfig {
   quiz: Question[];
 }
 
-export const wellBeing: FortuneConfig = {
+export const mentalHealth: FortuneConfig = {
   label: {
-    name: 'Wellness Fortune',
-    emoji: '🧘',
-    description: 'Mind and body health',
+    name: 'Mental Health Fortune',
+    emoji: '🧠',
+    description: 'Mind, emotions, and inner well-being',
   },
   guidance: `
-HEALTH & WELLBEING FOCUS: Connect physical vitality to emotional states, stress patterns, mind-body integration, and holistic wellness.
+MENTAL HEALTH & EMOTIONAL WELLNESS FOCUS: Provide nuanced insights into psychological patterns, emotional processing, and mental well-being without clinical language. Each reading should feel like guidance from someone who understands the complex landscape of modern mental health.
 
-SPECIFIC GUIDANCE:
-- Address the connection between emotional states and physical energy
-- Include insights about stress patterns and their manifestation in the body
-- Provide guidance on energy management and sustainable self-care practices
-- Address how life transitions affect overall health and vitality
-- Include wisdom about recognizing early warning signs of imbalance
-- Address the psychology of health habits and sustainable lifestyle changes
-- Provide insights about rest, recovery, and energy restoration
-- Include guidance on mind-body practices and conscious movement
-- Address how relationships and environment impact overall wellbeing
+SOPHISTICATED PSYCHOLOGICAL AWARENESS:
+- Recognize the difference between temporary mood shifts and deeper patterns
+- Address how perfectionism and high-functioning anxiety manifest in daily life
+- Explore the psychology of comparison and social media's impact on mental health
+- Examine how childhood patterns influence adult emotional responses
+- Address the complexity of imposter syndrome and self-worth struggles
+- Discuss how trauma responses can be subtle and persistent
+- Explore the relationship between creativity and mental health
+- Address how life transitions trigger unexpected emotional responses
+- Examine the difference between healthy solitude and isolation
 
-MENTAL & EMOTIONAL HEALTH:
-- Acknowledge the complexity of maintaining emotional balance
-- Address anxiety, stress, or overwhelm patterns and coping strategies
-- Include insights about emotional regulation and processing difficult feelings
-- Provide guidance on mental clarity and cognitive function optimization
-- Address how perfectionism or high standards impact mental health
-- Include wisdom about setting healthy boundaries for emotional protection
+EMOTIONAL INTELLIGENCE & REGULATION:
+- Address the challenge of feeling emotions without being overwhelmed by them
+- Explore how to sit with discomfort without immediately trying to fix it
+- Discuss the complexity of being sensitive in a world that often feels harsh
+- Address how to maintain empathy without absorbing others' emotions
+- Explore the psychology of emotional boundaries and energy protection
+- Discuss how to process grief that doesn't follow traditional timelines
+- Address the challenge of feeling "too much" or "not enough"
+- Explore how to handle criticism without internalized shame
+- Discuss the complexity of healing while still functioning in daily life
 
-PHYSICAL VITALITY:
-- Address how daily choices accumulate into long-term health patterns
-- Include insights about nutrition, movement, and body awareness
-- Provide guidance on sleep quality and energy cycles
-- Address how to listen to body wisdom and internal signals
-- Include wisdom about preventive care and health maintenance
-- Address the relationship between physical activity and mental clarity
+MODERN MENTAL HEALTH CHALLENGES:
+- Address decision fatigue and the overwhelming nature of modern choices
+- Explore how digital overwhelm affects attention and peace of mind
+- Discuss the pressure to be constantly productive and optimized
+- Address how to find meaning in work that doesn't fulfill you
+- Explore the loneliness epidemic and difficulty forming deep connections
+- Discuss how to maintain hope during uncertain times
+- Address the challenge of aging parents and shifting family dynamics
+- Explore how to handle success anxiety and fear of failure equally
+- Discuss the complexity of living authentically in performative culture
 
-HOLISTIC WELLNESS:
-- Provide specific guidance on integrating wellness practices into busy schedules
-- Include insights about creating supportive environments for health
-- Address how to balance health goals with life enjoyment
-- Provide guidance on building sustainable health habits that feel authentic
-- Include wisdom about health as foundation for all other life pursuits`,
+AUTHENTIC RESPONSE PATTERNS:
+- Avoid therapeutic jargon and clinical terminology
+- Use metaphors and imagery that resonate with emotional experience
+- Address the internal contradictions people feel about their mental health
+- Acknowledge when healing isn't linear or predictable
+- Include insights about the relationship between mental health and creativity
+- Address how seasonal changes, hormonal cycles, and life phases affect mood
+- Discuss the difference between what we project and what we actually feel
+- Include recognition of high-functioning struggles that others might not see
+
+NUANCED COPING & GROWTH:
+- Address how to build resilience without toxic positivity
+- Explore how to accept help without feeling like a burden
+- Discuss the challenge of maintaining boundaries with family patterns
+- Address how to find therapists and support that actually fit
+- Explore how to handle medication decisions and treatment complexity
+- Discuss how to maintain mental health during major life changes
+- Address the challenge of loving someone with mental health struggles
+- Explore how to support others without losing yourself
+- Discuss how to recognize when professional help is needed
+
+PRACTICAL WISDOM FOR DAILY LIFE:
+- Provide specific guidance on managing morning anxiety or evening rumination
+- Address how to create mental space in overstimulated environments
+- Discuss how to handle social situations when you're struggling internally
+- Provide insights about recognizing and interrupting negative thought spirals
+- Address how to maintain mental health during busy or stressful periods
+- Discuss how to find authentic ways to practice self-compassion
+- Address how to handle the gap between who you are and who you want to be
+- Provide guidance on building sustainable mental health practices`,
+
   quiz: [
     {
-      id: 'energyLevel',
-      q: 'How are your energy levels lately?',
+      id: 'mentalHealthPattern',
+      q: 'Which pattern best describes your mental health experience lately?',
       options: [
         {
-          value: 'High and consistent',
-          emoji: '⚡',
-          description: 'I feel energized most of the time',
+          value: 'High-functioning struggle',
+          emoji: '🎭',
+          description: 'I appear fine on the outside but struggle internally',
         },
         {
-          value: 'Up and down',
-          emoji: '🎢',
-          description: 'My energy fluctuates throughout the day',
+          value: 'Seasonal sensitivity',
+          emoji: '🌦️',
+          description: 'My mood shifts with weather, seasons, or life phases',
         },
         {
-          value: 'Often tired',
-          emoji: '😴',
-          description: 'I frequently feel drained or exhausted',
+          value: 'Anxiety spiral cycles',
+          emoji: '🌀',
+          description: 'I get caught in worry loops that are hard to break',
         },
         {
-          value: 'Slowly building',
-          emoji: '🌱',
-          description: "I'm working on improving my vitality",
+          value: 'Emotional overwhelm',
+          emoji: '🌊',
+          description: "I feel everything deeply and sometimes it's too much",
+        },
+        {
+          value: 'Steady but fragile',
+          emoji: '🪶',
+          description: "I'm doing okay but feel like I could tip easily",
         },
       ],
     },
     {
-      id: 'stressLevel',
-      q: 'How do you typically handle stress?',
+      id: 'emotionalRegulation',
+      q: 'How do you typically process difficult emotions?',
       options: [
         {
-          value: 'Active coping',
-          emoji: '🏃',
-          description: 'I exercise or move my body',
-        },
-        {
-          value: 'Mindful practices',
-          emoji: '🧘',
-          description: 'I meditate or practice mindfulness',
-        },
-        {
-          value: 'Social support',
-          emoji: '👥',
-          description: 'I talk with friends or family',
-        },
-        {
-          value: 'Creative outlets',
-          emoji: '🎨',
-          description: 'I express myself through art or hobbies',
-        },
-      ],
-    },
-    {
-      id: 'healthPriority',
-      q: 'What aspect of health is most important to you right now?',
-      options: [
-        {
-          value: 'Physical fitness',
-          emoji: '💪',
-          description: 'Building strength and endurance',
-        },
-        {
-          value: 'Mental clarity',
-          emoji: '🧠',
-          description: 'Improving focus and cognitive function',
-        },
-        {
-          value: 'Emotional balance',
-          emoji: '⚖️',
-          description: 'Managing emotions and mood stability',
-        },
-        {
-          value: 'Better sleep',
-          emoji: '😴',
-          description: 'Improving rest and recovery',
-        },
-      ],
-    },
-    {
-      id: 'wellnessChallenge',
-      q: 'What health challenge affects you most?',
-      options: [
-        {
-          value: 'Time for self-care',
-          emoji: '⏰',
-          description: 'Struggling to prioritize wellness',
-        },
-        {
-          value: 'Consistency with habits',
-          emoji: '🔄',
-          description: 'Starting and stopping healthy routines',
-        },
-        {
-          value: 'Work-life balance',
-          emoji: '⚖️',
-          description: 'Managing stress from responsibilities',
-        },
-        {
-          value: 'Motivation and energy',
-          emoji: '🔋',
-          description: 'Finding drive to maintain healthy choices',
-        },
-      ],
-    },
-    {
-      id: 'bodyConnection',
-      q: "How connected do you feel to your body's signals?",
-      options: [
-        {
-          value: 'Very attuned',
-          emoji: '🎯',
-          description: "I notice and respond to my body's needs",
-        },
-        {
-          value: 'Sometimes aware',
-          emoji: '👂',
-          description: "I'm learning to listen more carefully",
-        },
-        {
-          value: 'Often disconnected',
-          emoji: '🌫️',
-          description: 'I tend to ignore physical signals',
-        },
-        {
-          value: 'Working on it',
+          value: 'Analyze and intellectualize',
           emoji: '🔍',
-          description: "I'm practicing body awareness",
+          description: 'I try to think my way through feelings',
+        },
+        {
+          value: 'Feel fully then move on',
+          emoji: '🌊',
+          description: 'I let myself experience emotions completely',
+        },
+        {
+          value: 'Distract until it passes',
+          emoji: '📱',
+          description: 'I stay busy to avoid sitting with difficult feelings',
+        },
+        {
+          value: 'Talk it out with others',
+          emoji: '💬',
+          description: 'I process by sharing with trusted people',
+        },
+        {
+          value: 'Body-based processing',
+          emoji: '🏃',
+          description: 'I move, breathe, or use physical practices',
+        },
+      ],
+    },
+    {
+      id: 'anxietyTriggers',
+      q: 'What tends to trigger your anxiety or stress most?',
+      options: [
+        {
+          value: 'Uncertainty about future',
+          emoji: '🔮',
+          description: "Not knowing what's coming next unsettles me",
+        },
+        {
+          value: 'Social performance pressure',
+          emoji: '🎪',
+          description: 'Feeling like I need to be "on" around others',
+        },
+        {
+          value: 'Perfectionism and control',
+          emoji: '🎯',
+          description: "When things don't go according to plan",
+        },
+        {
+          value: 'Comparison and inadequacy',
+          emoji: '📊',
+          description: "Measuring myself against others' success",
+        },
+        {
+          value: 'Conflict and confrontation',
+          emoji: '⚔️',
+          description: 'Disagreements or tension with others',
+        },
+      ],
+    },
+    {
+      id: 'mentalHealthSupport',
+      q: 'How do you currently support your mental health?',
+      options: [
+        {
+          value: 'Professional therapy',
+          emoji: '🛋️',
+          description: 'I work with a therapist regularly',
+        },
+        {
+          value: 'Medication and monitoring',
+          emoji: '💊',
+          description: 'I use medication as part of my mental health care',
+        },
+        {
+          value: 'Self-directed practices',
+          emoji: '📚',
+          description: 'I use books, apps, or personal practices',
+        },
+        {
+          value: 'Friend and family support',
+          emoji: '👥',
+          description: 'I rely on my personal support network',
+        },
+        {
+          value: 'Still figuring it out',
+          emoji: '🧩',
+          description: "I'm exploring what works for me",
+        },
+      ],
+    },
+    {
+      id: 'selfCompassion',
+      q: "How do you treat yourself when you're struggling?",
+      options: [
+        {
+          value: 'Harsh internal critic',
+          emoji: '⚖️',
+          description: "I'm harder on myself than I would be on others",
+        },
+        {
+          value: 'Gentle but realistic',
+          emoji: '🌸',
+          description: 'I try to be kind while acknowledging reality',
+        },
+        {
+          value: 'Avoidance and numbing',
+          emoji: '🌫️',
+          description: 'I tend to escape or distract from difficult feelings',
+        },
+        {
+          value: 'Practical problem-solving',
+          emoji: '🛠️',
+          description: 'I focus on what I can do to improve things',
+        },
+        {
+          value: 'Inconsistent compassion',
+          emoji: '🎲',
+          description: "Sometimes I'm kind, sometimes I'm cruel to myself",
+        },
+      ],
+    },
+    {
+      id: 'mentalHealthGoals',
+      q: 'What would most improve your mental health right now?',
+      options: [
+        {
+          value: 'Better anxiety management',
+          emoji: '🧘',
+          description: 'Tools to handle worry and overwhelm',
+        },
+        {
+          value: 'Improved self-worth',
+          emoji: '💎',
+          description: 'Feeling more confident and secure in myself',
+        },
+        {
+          value: 'Healthier relationships',
+          emoji: '🤝',
+          description: 'Better boundaries and communication skills',
+        },
+        {
+          value: 'Life direction clarity',
+          emoji: '🧭',
+          description: 'Feeling more purposeful and aligned',
+        },
+        {
+          value: 'Emotional stability',
+          emoji: '⚖️',
+          description: 'Less extreme mood swings and more balance',
+        },
+      ],
+    },
+    {
+      id: 'stressResponse',
+      q: "When you're overwhelmed, what happens to you?",
+      options: [
+        {
+          value: 'Shutdown and withdraw',
+          emoji: '🏠',
+          description: 'I isolate and need space to recharge',
+        },
+        {
+          value: 'Hyperactive and scattered',
+          emoji: '🌪️',
+          description: "I become restless and can't focus",
+        },
+        {
+          value: 'Irritable and reactive',
+          emoji: '🌋',
+          description: 'Small things trigger disproportionate responses',
+        },
+        {
+          value: 'Physical symptoms',
+          emoji: '🤕',
+          description: 'I feel it in my body - headaches, tension, fatigue',
+        },
+        {
+          value: 'Emotional numbness',
+          emoji: '🧊',
+          description: 'I disconnect from feelings entirely',
+        },
+      ],
+    },
+    {
+      id: 'mentalHealthAwareness',
+      q: 'How aware are you of your mental health patterns?',
+      options: [
+        {
+          value: 'Highly self-aware',
+          emoji: '🔍',
+          description: 'I notice patterns and triggers clearly',
+        },
+        {
+          value: 'Learning to recognize',
+          emoji: '👁️',
+          description: "I'm developing better self-awareness",
+        },
+        {
+          value: 'Others notice first',
+          emoji: '👥',
+          description: 'Friends or family point out changes before I do',
+        },
+        {
+          value: 'Hindsight clarity',
+          emoji: '🪞',
+          description: "I understand patterns only after they've passed",
+        },
+        {
+          value: 'Still discovering',
+          emoji: '🗺️',
+          description: "I'm just beginning to understand my mental health",
         },
       ],
     },
