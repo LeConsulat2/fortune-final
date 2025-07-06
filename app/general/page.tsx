@@ -2,20 +2,18 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { useUserMemory } from '../../../lib/useUserMemory';
-import { fortuneCategoryLabels, zodiacSignLabels } from '../../../schema';
-import type { FortuneCategory } from '../../../schema';
-import { fortuneConfigs } from '../../../lib/fortuneConfigs';
-import { seededRandom } from '../../../lib/utils';
+import { useUserMemory } from '@/lib/useUserMemory';
+import {
+  FortuneCategoryLabels,
+  ZODIAC_SIGNS_LABELS,
+} from '@/lib/common-constants';
+import type { FortuneCategory } from '@/lib/common-constants';
 
-import { Button } from '../../../ui/button';
-import { Card } from '../../../ui/card';
-import { formatDate } from '../../../lib/zodiac';
+import { seededRandom } from '@/lib/seeded-random';
 
-// Dynamically derive categories except 'overall'
-const categories: FortuneCategory[] = (
-  Object.keys(fortuneConfigs) as FortuneCategory[]
-).filter((c) => c !== 'overall');
+import { Button } from '@/ui/button';
+import { Card } from '@/ui/card';
+import { formatDate } from '@/lib/zodiac';
 
 export default function GeneralFortunePage() {
   const router = useRouter();
@@ -25,12 +23,12 @@ export default function GeneralFortunePage() {
     return null;
   }
 
-  if (!userMemory || !userMemory.fullName) {
-    router.push('/onboarding/gender');
-    return null;
-  }
+  // if (!userMemory || !userMemory.name) {
+  //   router.push('/onboarding/gender');
+  //   return null;
+  // }
 
-  const zodiacInfo = zodiacSignLabels[userMemory.zodiacSign];
+  const zodiacInfo = ZODIAC_SIGNS_LABELS[userMemory?.zodiacSign];
   const today = formatDate(new Date());
 
   const handleCategorySelect = (category: FortuneCategory) => {
@@ -75,7 +73,7 @@ export default function GeneralFortunePage() {
             className="text-center mb-12 stream-down"
           >
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent mb-4">
-              {userMemory.fullName}&apos;s Fortune
+              {userMemory.name}&apos;s Fortune
             </h1>
             <p className="text-lg text-amber-200 mb-2">{today}</p>
             <div className="flex items-center justify-center space-x-2 text-base">
@@ -124,8 +122,8 @@ export default function GeneralFortunePage() {
             </div>
 
             <div className="space-y-3">
-              {categories.map((category, index) => {
-                const categoryInfo = fortuneCategoryLabels[category];
+              {FORTUNE_CATEGORIES.map((category, index) => {
+                const categoryInfo = FortuneCategoryLabels[category];
                 return (
                   <motion.div
                     key={category}

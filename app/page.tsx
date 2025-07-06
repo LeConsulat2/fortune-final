@@ -143,11 +143,10 @@ export default function Home() {
             variants={streamDownItemVariants}
             className="pt-8 text-center text-orange-300 text-sm"
           >
-            <p className="text-sm md:text-md">
-              ✨ It&apos;s your fortune of the day! But Remember, this is only
-              for an entertainment purposes ok?, You create your own fortunes!
-              ✨
-            </p>
+            <span className="text-sm md:text-md">
+              ✨ This is only for an entertainment purposes, You create your own
+              fortune! ✨
+            </span>
           </motion.div>
         </motion.div>
       </div>

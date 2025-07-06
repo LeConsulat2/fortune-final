@@ -1,78 +1,162 @@
 'use client';
-import { Card, CardContent } from '@/ui/card';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import type { Variants } from 'framer-motion';
 import {
   Heart,
   Brain,
   Briefcase,
   CircleDollarSign,
   Sparkles,
-  Hourglass,
-  Gem,
-  Star,
+  ChevronRight,
+  Stethoscope,
+  LandPlot,
 } from 'lucide-react';
+import { streamDownVariants, zipInVariants } from '@/lib/animated-flow';
+
+// Custom variants for streaming down effect
+const streamDownItemVariants = {
+  hidden: { y: -20, opacity: 0 },
+  visible: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: i * 0.1,
+      type: 'spring' as const,
+      stiffness: 50,
+      damping: 15,
+    },
+  }),
+};
+
+// Custom variants for selection
+const selectionVariants = {
+  initial: { scale: 1 },
+  hover: { scale: 1.02 },
+  tap: { scale: 0.98 },
+};
 
 export default function Choice() {
   const fortuneCategories = [
-    { name: 'Love', icon: <Heart size={48} />, path: '/fortune/love' },
+    { name: 'Your Today', icon: <Sparkles size={24} />, path: '/general' },
+    { name: 'Love', icon: <Heart size={24} />, path: '/love' },
     {
       name: 'Mental Health',
-      icon: <Brain size={48} />,
-      path: '/fortune/mental-health',
+      icon: <Brain size={24} />,
+      path: '/mental-health',
     },
-    { name: 'Career', icon: <Briefcase size={48} />, path: '/fortune/job' },
+
+    {
+      name: 'Composer',
+      icon: <Stethoscope size={24} />,
+      path: '/composer',
+    },
+    { name: 'Job', icon: <Briefcase size={24} />, path: '/job' },
     {
       name: 'Money',
-      icon: <CircleDollarSign size={48} />,
-      path: '/fortune/money',
+      icon: <CircleDollarSign size={24} />,
+      path: '/money',
     },
-    { name: 'General', icon: <Sparkles size={48} />, path: '/fortune/general' },
-    { name: 'Future', icon: <Hourglass size={48} />, path: '/fortune/future' },
     {
-      name: 'Personal Growth',
-      icon: <Gem size={48} />,
-      path: '/fortune/growth',
+      name: 'Exams & Assignments',
+      icon: <Brain size={24} />,
+      path: '/assessment',
     },
-    { name: 'Destiny', icon: <Star size={48} />, path: '/fortune/destiny' },
+    {
+      name: 'Golf',
+      icon: <LandPlot size={24} />,
+      path: '/golf',
+    },
   ];
 
-  // Framer Motion animation variants
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 70,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 80,
-      },
-    },
-  };
-
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 py-10 px-4 text-white">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start bg-gradient-to-br from-amber-950 via-red-950 to-red-900 py-6 px-4 text-white">
+      {/* Progress indicator */}
+      <div className="w-full max-w-md flex justify-between px-2 mb-12">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`h-1 rounded-full ${
+              i === 1 ? 'bg-orange-500 w-12' : 'bg-gray-600 w-12'
+            }`}
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ delay: i * 0.1, duration: 0.4 }}
+          />
+        ))}
+      </div>
+
+      <motion.div
+        variants={streamDownVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full max-w-md px-4 mb-8"
+      >
+        <h2 className="text-2xl font-semibold mb-2">
+          What type of fortune are you interested in today?
+        </h2>
+      </motion.div>
+
+      <div className="w-full max-w-md flex flex-col gap-3">
+        {fortuneCategories.map((category, i) => (
+          <motion.div
+            key={category.name}
+            custom={i}
+            variants={streamDownItemVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover="hover"
+            whileTap="tap"
+          >
+            <Link href={category.path} className="block w-full">
+              <motion.div
+                variants={selectionVariants}
+                className="flex items-center justify-between bg-black/20 border border-orange-500/30 rounded-xl p-4 hover:bg-black/30 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-orange-400">{category.icon}</span>
+                  <span className="text-lg font-medium text-orange-100">
+                    {category.name}
+                  </span>
+                </div>
+                <ChevronRight className="text-orange-400" size={20} />
+              </motion.div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Navigation buttons */}
+      <div className="w-full max-w-md mt-auto pt-8 flex gap-3">
+        <Link href="/" className="w-1/3">
+          <motion.button
+            variants={zipInVariants}
+            initial="hidden"
+            animate="visible"
+            className="w-full py-3 px-4 bg-black/30 text-orange-200 rounded-lg border border-orange-900/30"
+          >
+            Back
+          </motion.button>
+        </Link>
+        <Link href="/fortune/general" className="w-2/3">
+          <motion.button
+            variants={zipInVariants}
+            initial="hidden"
+            animate="visible"
+            className="w-full py-3 px-4 bg-gradient-to-r from-orange-700 to-red-700 text-white rounded-lg"
+          >
+            Continue
+          </motion.button>
+        </Link>
+      </div>
+
       {/* Floating particles animation */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 4 }}
+        transition={{ duration: 2 }}
       >
-        {[...Array(15)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-orange-400 rounded-full"
@@ -81,69 +165,16 @@ export default function Choice() {
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -20, 0],
-              opacity: [0.2, 0.8, 0.2],
+              y: [0, -15, 0],
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 3,
+              duration: 3 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 2,
             }}
           />
         ))}
-      </motion.div>
-
-      <motion.div
-        className="text-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl font-bold mb-2 tracking-tight bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
-          Choose Your Fortune Path
-        </h1>
-        <p className="text-xl text-amber-200 mb-10">
-          What aspect of your future would you like to explore today?
-        </p>
-      </motion.div>
-
-      <motion.div
-        className="grid w-full max-w-screen-xl gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {fortuneCategories.map((category) => (
-          <motion.div
-            key={category.name}
-            variants={itemVariants}
-            whileHover={{ scale: 1.05, y: -5 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href={category.path} className="block h-full">
-              <Card className="h-full bg-gradient-to-br from-orange-800/40 to-red-900/40 border-2 border-amber-500/30 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:bg-amber-800/50 hover:border-amber-400/50 shadow-lg">
-                <CardContent className="flex flex-col gap-4 aspect-square items-center justify-center p-6 text-center">
-                  <div className="text-amber-300">{category.icon}</div>
-                  <span className="text-2xl font-semibold tracking-wide text-amber-100">
-                    {category.name}
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <motion.div
-        className="mt-10 text-center text-amber-200/80 text-sm"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-      >
-        <p>
-          ✨ Choose wisely, as your path will reveal different aspects of your
-          fortune ✨
-        </p>
       </motion.div>
     </div>
   );
