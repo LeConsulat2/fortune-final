@@ -1,6 +1,13 @@
 // Definitions for Fortune Categories
 // Defines all types, interfaces and constants used across the app
 
+import { z } from 'zod';
+import {
+  fortuneCategories as FortuneCategories,
+  fortuneCategoryLabels as FortuneCategoryLabels,
+  type FortuneCategory,
+} from '@/lib/fortuneConfig';
+
 export type ZodiacSign =
   | 'aries'
   | 'taurus'
@@ -52,7 +59,63 @@ export const ZODIAC_SIGNS_LABELS: Record<
   pisces: { name: 'Pisces', emoji: '♓', dateRange: 'Feb 19 - Mar 20' },
 };
 
+// Zodiac date ranges (month-day format)
+export const zodiacDateRanges: Record<
+  ZodiacSign,
+  { start: string; end: string; year?: number }[]
+> = {
+  capricorn: [
+    { start: '12-22', end: '12-31' },
+    { start: '01-01', end: '01-19' },
+  ],
+  aquarius: [{ start: '01-20', end: '02-18' }],
+  pisces: [{ start: '02-19', end: '03-20' }],
+  aries: [{ start: '03-21', end: '04-19' }],
+  taurus: [{ start: '04-20', end: '05-20' }],
+  gemini: [{ start: '05-21', end: '06-20' }],
+  cancer: [{ start: '06-21', end: '07-22' }],
+  leo: [{ start: '07-23', end: '08-22' }],
+  virgo: [{ start: '08-23', end: '09-22' }],
+  libra: [{ start: '09-23', end: '10-22' }],
+  scorpio: [{ start: '10-23', end: '11-21' }],
+  sagittarius: [{ start: '11-22', end: '12-21' }],
+};
+
+// Calculate zodiac sign from birth date
+export function calculateZodiacSign(birthDate: string): ZodiacSign {
+  const date = new Date(birthDate);
+  const month = date.getMonth() + 1; // getMonth() returns 0-11
+  const day = date.getDate();
+  const monthDay = `${month.toString().padStart(2, '0')}-${day
+    .toString()
+    .padStart(2, '0')}`;
+
+  for (const [sign, ranges] of Object.entries(zodiacDateRanges)) {
+    for (const range of ranges) {
+      if (monthDay >= range.start && monthDay <= range.end) {
+        return sign as ZodiacSign;
+      }
+    }
+  }
+  //여기  예외처리 하거나, 디폴트값 추가해야함 아님 zodiacSign? 할수는없음.
+  throw new Error('Invalid birth date or failed to calculate zodiac sign'); //여기  예외처리 하거나, 디폴트값 추가해야함 아님 zodiacSign?
+}
+
 export type Gender = 'male' | 'female' | '';
+
+export const personalInfoSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(50, 'Name must be less than 50 characters'),
+  gender: z.enum(['male', 'female']).optional(),
+  birthDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Birth date must be in YYYY-MM-DD format'),
+  jobTitle: z.string().optional(),
+  zodiacSign: z.string().optional(),
+  calculatedSign: z.string().optional(),
+});
 
 export interface PersonalInfo {
   name?: string;
@@ -60,6 +123,7 @@ export interface PersonalInfo {
   birthDate: string; // ISO date string (YYYY-MM-DD)
   jobTitle?: string;
   zodiacSign?: ZodiacSign;
+  calculatedSign: ZodiacSign;
 }
 
 export interface CategoryFortune {
@@ -69,6 +133,7 @@ export interface CategoryFortune {
   advice: string;
 }
 
+//////이게 필요한가?? 여기서??? 아마 아닌듯????
 export interface DailyFortune {
   overall: {
     score: number;
@@ -88,53 +153,54 @@ export interface General {
 }
 
 export interface Job {
-    score: number;
+  score: number;
   message: string;
   detailed_message: string;
   personalised_insight: string;
 }
 
 export interface Love {
-    score: number;
+  score: number;
   message: string;
   detailed_message: string;
   personalised_insight: string;
 }
 
 export interface Money {
-    score: number;
-    message: string;
-    detailed_message: string;
-    personalised_insight: string;
+  score: number;
+  message: string;
+  detailed_message: string;
+  personalised_insight: string;
 }
 
 export interface MentalHealth {
-    score: number;
-    message: string;
-    detailed_message: string;
-    personalised_insight: string;
+  score: number;
+  message: string;
+  detailed_message: string;
+  personalised_insight: string;
 }
 
 export interface Composure {
-    score: number;
-    message: string;
-    detailed_message: string;
-    personalised_insight: string;
+  score: number;
+  message: string;
+  detailed_message: string;
+  personalised_insight: string;
 }
 
 export interface QuizAnswer {
   [key: string]: string | number | boolean | string[] | number[];
 }
 
-export interface userMemory {
-    gender?: Gender;
-    birthDate: string;
-    zodiacSign: ZodiacSign;
-    name?: string;
-    jobTitle?: string;
+export interface UserMemory {
+  gender?: Gender;
+  birthDate: string;
+  zodiacSign: ZodiacSign;
+  name?: string;
+  jobTitle?: string;
 }
 
-export const fortuneCategoryLabels = Object.fromEntries(
-    Object.entries(fortuneConfigs).map(([key, cfg]) => [key, cfg.label]),
-) as Record<FortuneCategory, name: string; emoji: string; description: string >;
-
+//Fortune Category labels for UI
+export const ALL_FORTUNE_CATEGORIES = Object.keys(
+  FortuneCategories,
+) as FortuneCategory[];
+export { FortuneCategories, FortuneCategoryLabels, FortuneCategory };

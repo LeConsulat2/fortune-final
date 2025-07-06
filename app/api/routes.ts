@@ -1,5 +1,6 @@
 import { FortuneCategory } from '@/lib/zodiac-sign-label';
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { PersonalInfo, UserMemory } from '@/lib/common-constants';
 
 interface OpenAIResponse {
   choices: {
