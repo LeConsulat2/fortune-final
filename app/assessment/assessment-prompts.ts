@@ -1,6 +1,17 @@
+export interface QuizOption {
+  value: string;
+  emoji: string;
+  description: string;
+}
+export interface Question {
+  id: string;
+  q: string;
+  options: QuizOption[];
+}
 export interface FortuneConfig {
   label: { name: string; emoji: string; description: string };
   guidance: string;
+  quiz: Question[];
 }
 
 export const assessment: FortuneConfig = {
@@ -16,19 +27,19 @@ export const assessment: FortuneConfig = {
   ◆ STYLE
   • Write in clear, friendly English.
   • Use expressive, cinematic phrasing when helpful: 
-    – “A day that straddles danger and opportunity.”  
-    – “One bold step could become a narrow escape.”
+    – "A day that straddles danger and opportunity."  
+    – "One bold step could become a narrow escape."
   • Two short paragraphs (8–10 sentences total) for the general section.
-  • Blend optimism with pragmatic warnings—highlight what happens if the reader overreaches (“If you try to seize every coin, you may drop the whole purse”).
+  • Blend optimism with pragmatic warnings—highlight what happens if the reader overreaches ("If you try to seize every coin, you may drop the whole purse").
   • Avoid repeating the same word in consecutive sentences.
   • One or two tasteful emoji are allowed, never more (e.g. 🚀, 🌙).
   
   
   ◆ CONTENT
-  • Weave in “risk vs. reward” tension: near-misses, last-minute chances, moments where restraint pays off.
+  • Weave in "risk vs. reward" tension: near-misses, last-minute chances, moments where restraint pays off.
   • Use concrete daily scenes: deadlines, unexpected calls, spur-of-the-moment invitations, tempting purchases.
   • Acknowledge natural emotions (greed, fear of missing out, relief) and provide step-by-step actions to channel them productively.
-  • Offer timing cues when useful (“Late afternoon is the pivot point…”).
+  • Offer timing cues when useful ("Late afternoon is the pivot point…").
   • Avoid mystical jargon; keep advice grounded and specific.
   • If job title is omitted, create workplace scenarios that apply broadly (team dynamics, shifting priorities, recognition).
   • If gender is omitted, use inclusive language.
@@ -45,4 +56,77 @@ export const assessment: FortuneConfig = {
     },
   
   Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
+
+  quiz: [
+    {
+      id: 'relationshipStatus',
+      q: "What's your current relationship status?",
+      options: [
+        {
+          value: 'Single',
+          emoji: '💫',
+          description: "I'm not dating anyone right now",
+        },
+        {
+          value: 'In a relationship',
+          emoji: '💕',
+          description: 'I have a partner',
+        },
+        {
+          value: 'Crushing',
+          emoji: '💭',
+          description: "I've got a crush on someone",
+        },
+        { value: 'Complicated', emoji: '🌀', description: "It's… complicated" },
+      ],
+    },
+    {
+      id: 'currentMood',
+      q: 'How have you been feeling about romance lately?',
+      options: [
+        {
+          value: 'Excited',
+          emoji: '😊',
+          description: 'Butterflies and happy vibes',
+        },
+        { value: 'Anxious', emoji: '😰', description: 'Uneasy and worried' },
+        {
+          value: 'Lonely',
+          emoji: '😔',
+          description: 'Feeling lonely and down',
+        },
+        {
+          value: 'Content',
+          emoji: '😌',
+          description: 'Pretty satisfied with things',
+        },
+      ],
+    },
+    {
+      id: 'loveGoal',
+      q: 'What do you want most in the love department?',
+      options: [
+        {
+          value: 'MeetSomeoneNew',
+          emoji: '✨',
+          description: 'I’d like to meet someone new',
+        },
+        {
+          value: 'DeepenRelationship',
+          emoji: '💘',
+          description: 'I want to deepen my current relationship',
+        },
+        {
+          value: 'ResolveConflict',
+          emoji: '🤝',
+          description: 'I need to work through conflicts with my partner',
+        },
+        {
+          value: 'SelfLove',
+          emoji: '🌱',
+          description: 'I want to love myself more',
+        },
+      ],
+    },
+  ],
 };
