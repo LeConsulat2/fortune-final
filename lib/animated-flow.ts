@@ -213,6 +213,24 @@ export const progressVariants: Variants = {
   }),
 };
 
+// Warm gas effect for the image with persistent subtle glow
+export const warmGasImageVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    filter: 'blur(15px) brightness(1.2)',
+  },
+  visible: {
+    opacity: 0.65,
+    scale: 1,
+    filter: 'blur(0px) brightness(1.1)',
+    transition: {
+      duration: 2.5,
+      ease: 'easeOut' as const,
+    },
+  },
+};
+
 /**
  * Custom hook for managing animation states
  */
