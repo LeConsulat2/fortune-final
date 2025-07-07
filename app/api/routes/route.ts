@@ -21,8 +21,8 @@ export async function POST(request: Request) {
           score: 8,
           message: 'A day of steady progress and hidden opportunities',
           detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-          personalised_insight: userMemory.jobTitle
-            ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+          personalised_insight: userMemory.occupation
+            ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
             : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
         },
       };
@@ -70,8 +70,8 @@ export async function POST(request: Request) {
             score: 7,
             message: 'A day of steady progress and hidden opportunities',
             detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-            personalised_insight: userMemory.jobTitle
-              ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+            personalised_insight: userMemory.occupation
+              ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
               : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
           },
         };
@@ -89,8 +89,8 @@ export async function POST(request: Request) {
           score: 8,
           message: 'A day of steady progress and hidden opportunities',
           detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-          personalised_insight: userMemory.jobTitle
-            ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+          personalised_insight: userMemory.occupation
+            ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
             : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
         },
       };
@@ -107,7 +107,7 @@ Name: ${userMemory.name}
 Gender: ${userMemory.gender || 'not specified'}
 Zodiac Sign: ${userMemory.zodiacSign || 'not specified'}
 Birth Date: ${userMemory.birthDate}
-Job Title: ${userMemory.jobTitle || 'not specified'}
+Job Title: ${userMemory.occupation || 'not specified'}
 
 Please follow the guidance exactly and return only the JSON with the object containing score, message, detailed_message, and personalised_insight fields.`;
 
@@ -153,8 +153,8 @@ Please follow the guidance exactly and return only the JSON with the object cont
           score: 8,
           message: 'A day of steady progress and hidden opportunities',
           detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-          personalised_insight: userMemory.jobTitle
-            ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+          personalised_insight: userMemory.occupation
+            ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
             : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
         },
       };
@@ -173,8 +173,8 @@ Please follow the guidance exactly and return only the JSON with the object cont
             score: 8,
             message: 'A day of steady progress and hidden opportunities',
             detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-            personalised_insight: userMemory.jobTitle
-              ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+            personalised_insight: userMemory.occupation
+              ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
               : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
           },
         };
@@ -191,8 +191,8 @@ Please follow the guidance exactly and return only the JSON with the object cont
             score: 8,
             message: 'A day of steady progress and hidden opportunities',
             detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-            personalised_insight: userMemory.jobTitle
-              ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+            personalised_insight: userMemory.occupation
+              ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
               : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
           },
         };
@@ -218,8 +218,8 @@ Please follow the guidance exactly and return only the JSON with the object cont
             score: 8,
             message: 'A day of steady progress and hidden opportunities',
             detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-            personalised_insight: userMemory.jobTitle
-              ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+            personalised_insight: userMemory.occupation
+              ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
               : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
           },
         };
@@ -234,8 +234,8 @@ Please follow the guidance exactly and return only the JSON with the object cont
           score: 8,
           message: 'A day of steady progress and hidden opportunities',
           detailed_message: `Hello ${userMemory.name}! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-          personalised_insight: userMemory.jobTitle
-            ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+          personalised_insight: userMemory.occupation
+            ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
             : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
         },
       };
@@ -252,8 +252,8 @@ Please follow the guidance exactly and return only the JSON with the object cont
         detailed_message: `Hello ${
           userMemory?.name || 'friend'
         }! Today brings a blend of familiar routines and unexpected possibilities. The morning hours favor careful planning, while afternoon presents chances to connect with others in meaningful ways. Your natural instincts will guide you toward the right choices, but remember that patience often yields better results than rushing. Take time to appreciate small victories and trust that your consistent efforts are building toward something significant.`,
-        personalised_insight: userMemory?.jobTitle
-          ? `Your role as ${userMemory.jobTitle} gives you unique insight into timing - use this skill in all areas of life today.`
+        personalised_insight: userMemory?.occupation
+          ? `Your role as ${userMemory.occupation} gives you unique insight into timing - use this skill in all areas of life today.`
           : 'Your professional experience has taught you to balance ambition with wisdom - apply this lesson beyond work today.',
       },
     };
