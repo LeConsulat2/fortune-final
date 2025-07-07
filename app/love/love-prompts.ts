@@ -72,7 +72,21 @@ export const love: FortuneConfig = {
   - Provide insights about creating space for someone to come to you
   - Address how to maintain dignity while being vulnerable
   - Discuss how to handle rejection without closing your heart
-  - Address how to love someone without losing yourself in the process`,
+  - Address how to love someone without losing yourself in the process
+
+OUTPUT:
+Return ONLY valid JSON with this exact schema:
+
+{
+  "overall": {
+    "score": 1-10,
+    "message": "brief, direct summary",
+    "detailed_message": "two short paragraphs about the main theme of their day with specific situations and clear advice",
+    "personalised_insight": "brief observation connecting their quiz answers to a practical life pattern"
+  }
+}
+
+Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 
   quiz: [
     {

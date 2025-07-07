@@ -128,13 +128,13 @@ export const personalInfoSchema = z.object({
   calculatedSign: z.string().optional(),
 });
 
-export interface PersonalInfo {
-  name: string;
-  gender?: Gender;
-  birthDate: string; // ISO date string (YYYY-MM-DD)
-  jobTitle?: string;
+export interface UserMemory {
+  name: string | null;
+  birthDate: string | null;
+  occupation: string | null;
   zodiacSign?: ZodiacSign;
-  calculatedSign?: ZodiacSign;
+  category?: string;
+  quizAnswers?: Record<string, string>;
 }
 
 export interface CategoryFortune {
@@ -142,6 +142,7 @@ export interface CategoryFortune {
   message: string;
   detailed_message: string;
   advice: string;
+  personalised_insight: string;
 }
 
 export interface DailyFortune {
@@ -199,14 +200,6 @@ export interface Composure {
 
 export interface QuizAnswer {
   [key: string]: string | number | boolean | string[] | number[];
-}
-
-export interface UserMemory {
-  name: string;
-  gender?: Gender;
-  birthDate: string;
-  zodiacSign?: ZodiacSign;
-  jobTitle?: string;
 }
 
 // Fortune Category labels for UI

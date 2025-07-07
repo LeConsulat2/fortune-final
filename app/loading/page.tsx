@@ -60,12 +60,15 @@ export default function LoadingPage() {
     // Call the API to generate the fortune
     const generateFortune = async () => {
       try {
-        const response = await fetch('/api/routes', {
+        // Ensure the category is included in the user memory object sent to the API
+        const memoryToSend = { ...userMemory, category };
+
+        const response = await fetch('/api/fortune', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(userMemory),
+          body: JSON.stringify(memoryToSend),
         });
 
         if (!response.ok) {

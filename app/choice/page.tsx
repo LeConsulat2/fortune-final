@@ -9,7 +9,6 @@ import {
   Sparkles,
   ChevronRight,
   Stethoscope,
-  LandPlot,
 } from 'lucide-react';
 import { streamDownVariants, zipInVariants } from '@/lib/animated-flow';
 
@@ -41,34 +40,43 @@ export default function Choice() {
       name: 'My Today',
       icon: <Sparkles size={24} />,
       path: '/loading?category=general',
+      categoryKey: 'general',
     },
-    { name: 'Love', icon: <Heart size={24} />, path: '/love' },
+    {
+      name: 'Love',
+      icon: <Heart size={24} />,
+      path: '/quiz/love',
+      categoryKey: 'love',
+    },
     {
       name: 'Mental Health',
       icon: <Brain size={24} />,
-      path: '/mental-health',
+      path: '/quiz/mental-health',
+      categoryKey: 'mental-health',
     },
-
     {
-      name: 'Composer',
+      name: 'Composure',
       icon: <Stethoscope size={24} />,
-      path: '/composer',
+      path: '/quiz/composure',
+      categoryKey: 'composure',
     },
-    { name: 'Job', icon: <Briefcase size={24} />, path: '/job' },
+    {
+      name: 'Job',
+      icon: <Briefcase size={24} />,
+      path: '/quiz/job',
+      categoryKey: 'job',
+    },
     {
       name: 'Money',
       icon: <CircleDollarSign size={24} />,
-      path: '/money',
+      path: '/quiz/money',
+      categoryKey: 'money',
     },
     {
-      name: 'Exams & Assignments',
+      name: 'Assessment',
       icon: <Brain size={24} />,
-      path: '/assessment',
-    },
-    {
-      name: 'Golf',
-      icon: <LandPlot size={24} />,
-      path: '/golf',
+      path: '/quiz/assessment',
+      categoryKey: 'assessment',
     },
   ];
 
@@ -103,7 +111,7 @@ export default function Choice() {
       <div className="w-full max-w-md flex flex-col gap-3">
         {fortuneCategories.map((category, index) => (
           <motion.div
-            key={category.name}
+            key={category.categoryKey}
             custom={index}
             variants={streamDownItemVariants}
             initial="hidden"
