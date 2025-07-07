@@ -5,9 +5,9 @@ import { QuizClient } from './_components/quiz-client';
 export default async function QuizPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
-  const { category } = params;
+  const { category } = await params;
   const config = getFortuneConfig(category);
 
   if (!config || !config.quiz || config.quiz.length === 0) {
