@@ -166,7 +166,7 @@ export default function LoadingPage() {
           className="mb-8 flex justify-center"
         >
           <div className="relative">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-orange-300/30 via-purple-400/20 to-orange-300/30 backdrop-blur-sm flex items-center justify-center">
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br  from-amber-950 via-red-950 to-red-900 py-6 px-4 text-white backdrop-blur-sm flex items-center justify-center">
               <motion.div
                 className="absolute inset-0 rounded-full"
                 animate={{
