@@ -30,16 +30,16 @@ export default function Job() {
   const router = useRouter();
   const { updateUserMemory } = useUserMemory();
 
-  const [jobTitle, setJobTitle] = useState('');
+  const [occupation, setOccupation] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
 
   const handleJobSelect = (job: string) => {
     if (job === 'Enter Your Own') {
       setShowCustomInput(true);
-      setJobTitle('');
+      setOccupation('');
     } else {
       setShowCustomInput(false);
-      setJobTitle(job);
+      setOccupation(job);
     }
   };
 
@@ -49,12 +49,12 @@ export default function Job() {
 
   const handleComplete = () => {
     updateUserMemory({
-      jobTitle: jobTitle.trim(),
+      occupation: occupation.trim(),
     });
     router.push('/choice');
   };
 
-  const canProceed = jobTitle.trim().length > 0;
+  const canProceed = occupation.trim().length > 0;
 
   return (
     <QuizFrame
@@ -100,7 +100,7 @@ export default function Job() {
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleJobSelect(job)}
                     className={`w-full py-2 px-3 hover:cursor-pointer font-medium rounded-full text-sm transition-all duration-200 ${
-                      jobTitle === job && job !== 'Enter Your Own'
+                      occupation === job && job !== 'Enter Your Own'
                         ? 'bg-orange-500 text-white'
                         : 'bg-white/10 text-amber-200 hover:bg-white/20'
                     } ${
@@ -124,8 +124,8 @@ export default function Job() {
               >
                 <Input
                   type="text"
-                  value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
+                  value={occupation}
+                  onChange={(e) => setOccupation(e.target.value)}
                   className="bg-white/10 border-white/20 text-white placeholder:text-amber-400 focus:border-orange-400"
                   placeholder="Enter your occupation"
                   autoFocus
@@ -134,7 +134,7 @@ export default function Job() {
             )}
           </div>
 
-          {jobTitle && (
+          {occupation && (
             <motion.div
               variants={zipInVariants}
               initial="hidden"
@@ -142,7 +142,7 @@ export default function Job() {
               className="text-center p-4 bg-orange-600/20 rounded-lg border border-orange-400/30 zip-in"
             >
               <div className="text-lg font-medium text-white mb-1">
-                Wow, {jobTitle}! 👋
+                Wow, {occupation}! 👋
               </div>
               <p className="text-sm text-amber-300 mt-2">
                 You&apos;re all set to receive your personalized fortune ✨
