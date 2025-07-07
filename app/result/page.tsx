@@ -95,7 +95,7 @@ export default function ResultPage() {
   const detailedParagraphs = fortune.overall.detailed_message.split('\n\n');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start bg-gradient-to-br from-amber-950 via-red-950 to-red-900 py-6 px-4 text-white">
       {/* Background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(15)].map((_, i) => (
@@ -220,7 +220,7 @@ export default function ResultPage() {
             className="flex justify-between"
           >
             <Button
-              onClick={() => router.push('/general')}
+              onClick={() => router.push('/choice')}
               className="px-6 bg-orange-500 hover:bg-orange-600 text-white"
             >
               Back to Categories
