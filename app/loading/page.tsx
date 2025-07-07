@@ -111,7 +111,7 @@ export default function LoadingPage() {
   // If there's an error, show it
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white flex flex-col items-center justify-center p-6">
+      <div className="min-h-screen bg-gradient-to-br from-amber-950 via-red-950 to-red-900 text-white flex flex-col items-center justify-center p-6">
         <div className="max-w-md mx-auto w-full text-center">
           <div className="mb-8 text-5xl">😕</div>
           <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent mb-4">
@@ -120,7 +120,8 @@ export default function LoadingPage() {
           <p className="text-amber-200 mb-6">{error}</p>
           <Button
             onClick={() => router.push('/choice')}
-            className="w-full h-full hover:cursor-pointer bg-orange-500 hover:bg-orange-600 text-white rounded-md"
+            // Use colors from the first component for consistency
+            className="w-full h-full hover:cursor-pointer bg-black/60 hover:bg-black/80 text-orange-200 rounded-lg border border-orange-900/30"
           >
             Try Again
           </Button>
@@ -130,12 +131,13 @@ export default function LoadingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-amber-950 via-red-950 to-red-900 text-white flex flex-col items-center justify-center p-6">
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
+            // Use the same orange-400 color for particles
             className="absolute w-1 h-1 bg-orange-400 rounded-full opacity-30"
             style={{
               left: `${Math.random() * 100}%`,
@@ -166,12 +168,14 @@ export default function LoadingPage() {
           className="mb-8 flex justify-center"
         >
           <div className="relative">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br  from-amber-950 via-red-950 to-red-900 py-6 px-4 text-white backdrop-blur-sm flex items-center justify-center">
+            {/* Crystal ball background matching main gradient */}
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-amber-950 via-red-950 to-red-900 py-6 px-4 text-white backdrop-blur-sm flex items-center justify-center">
               <motion.div
                 className="absolute inset-0 rounded-full"
                 animate={{
+                  // Adjusted glow color to match orange-400/500 palette
                   boxShadow: [
-                    '0 0 20px rgba(251, 146, 60, 0.3)',
+                    '0 0 20px rgba(251, 146, 60, 0.3)', // orange-500 equivalent
                     '0 0 40px rgba(251, 146, 60, 0.6)',
                     '0 0 20px rgba(251, 146, 60, 0.3)',
                   ],
@@ -197,6 +201,7 @@ export default function LoadingPage() {
 
             {/* Glowing effect */}
             <motion.div
+              // Consistent orange-500/20 for glowing effect
               className="absolute inset-0 rounded-full blur-xl bg-orange-500/20"
               animate={{
                 opacity: [0.3, 0.6, 0.3],
@@ -215,6 +220,7 @@ export default function LoadingPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
+          // This gradient looks good and is distinct, keep it unless you want it to be a solid color from the first component
           className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent mb-4"
         >
           Generating Your Fortune
@@ -227,7 +233,8 @@ export default function LoadingPage() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="h-8 mb-6 text-amber-200"
+          // Changed to orange-100 or orange-200 for consistency with "My Today" or "Back" button text
+          className="h-8 mb-6 text-orange-100"
         >
           {LOADING_MESSAGES[currentMessageIndex]}
         </motion.div>
@@ -235,7 +242,8 @@ export default function LoadingPage() {
         {/* Progress bar */}
         <div className="w-full bg-white/10 rounded-full h-3 mb-10 overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-yellow-500 to-orange-500"
+            // Use orange-500 for the progress bar fill, matching the one in Choice
+            className="h-full bg-orange-500"
             style={{ width: `${progress}%` }}
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
@@ -243,6 +251,7 @@ export default function LoadingPage() {
           />
         </div>
 
+        {/* Changed to orange-300 for consistency with the loading messages and general accent text */}
         <p className="text-sm text-orange-300">
           Please wait while we consult the cosmic forces...
         </p>
