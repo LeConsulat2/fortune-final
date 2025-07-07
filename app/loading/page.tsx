@@ -253,7 +253,7 @@ export default function LoadingPage() {
 
         {/* Changed to orange-300 for consistency with the loading messages and general accent text */}
         <p className="text-sm text-orange-300">
-          Please wait while we consult the cosmic forces...
+          Please wait while fortuner is reading your fortune for today...
         </p>
       </div>
     </div>

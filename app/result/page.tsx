@@ -189,23 +189,31 @@ export default function ResultPage() {
           >
             <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center stream-down italic">
               <div className="mb-4">
-                <div className="text-2xl font-medium mb-2">{score}</div>
+                {/* Display numeric score */}
+                <div className="text-2xl font-medium mb-2">
+                  {fortune.overall.score}
+                </div>
+
+                {/* Animated progress bar */}
                 <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
-                  <div
+                  <motion.div
                     className="h-full bg-gradient-to-r from-yellow-500 to-orange-500 font-semibold"
-                    style={{ width: `${(fortune.overall.score / 10) * 100}%` }}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${fortune.overall.score}%` }}
+                    transition={{ duration: 1.2, ease: 'easeOut' }}
                   />
                 </div>
               </div>
 
-              <div className="flex justify-between text-sm text-amber-300 mb-2 ">
+              <div className="flex justify-between text-sm text-amber-300 mb-2">
                 <span className="font-medium">Shadows Stirring</span>
                 <span className="font-medium">Turning Winds</span>
                 <span className="font-medium">Favorable Currents</span>
               </div>
 
-              <div className="text-2xl font-semibold mb-3 text-white ">
-                {fortune.overall.score}/10
+              {/* Updated label to show /100 */}
+              <div className="text-2xl font-semibold mb-3 text-white">
+                {fortune.overall.score}/100
               </div>
 
               <p className="text-amber-200 font-medium">
@@ -262,7 +270,7 @@ export default function ResultPage() {
           >
             <Button
               onClick={() => router.push('/choice')}
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer hover:scale-105 transition-all duration-300 focus:scale-105"
+              className="px-6 bg-red-500 hover:bg-orange-600 text-white hover:cursor-pointer hover:scale-105 transition-all duration-300 focus:scale-105"
             >
               Try Other Categories
             </Button>

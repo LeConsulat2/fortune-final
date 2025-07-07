@@ -13,17 +13,17 @@ import { zipInVariants, staggerContainerVariants } from '@/lib/animated-flow';
 
 // Common job titles that users can select from
 const COMMON_JOBS = [
+  'Enter Your Own',
   'Student',
   'Administrator',
   'Counsellor',
-  'Athlete',
   'Teacher',
+  'Doctor',
   'Developer',
   'Designer',
   'Marketer',
   'Self-Employed',
   'Model',
-  'Enter Your Own',
 ];
 
 export default function Job() {
@@ -57,16 +57,11 @@ export default function Job() {
   const canProceed = occupation.trim().length > 0;
 
   return (
-    <QuizFrame
-      title="Final Step!"
-      subtitle="Please provide a few more details for your personalized fortune"
-      currentStep={3}
-      totalSteps={3}
-    >
+    <QuizFrame title="Final Step!" currentStep={3} totalSteps={3}>
       <div className="space-y-8">
         <QuestionSection
           question="What do you do?"
-          description="Your occupation helps the fortuner provide more personalized insights"
+          description="Your occupation helps the fortuner to provide with more personalized insights"
         >
           <div className="space-y-3">
             <Label className="text-white">Occupation</Label>
