@@ -90,7 +90,7 @@ export default function Job() {
                     transition: {
                       duration: 0.6,
                       delay: 0.7 + index * 0.1,
-                      ease: [0.175, 0.885, 0.32, 1.275],
+                      ease: [0.42, 0, 0.58, 1.0],
                     },
                   }}
                   className="stream-down"

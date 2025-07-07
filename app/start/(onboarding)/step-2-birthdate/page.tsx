@@ -11,6 +11,7 @@ import { QuestionSection } from '@/ui/section';
 import { Button } from '@/ui/button';
 import { Input } from '@/ui/input';
 import { Label } from '@/ui/label';
+import { staggerContainerVariants, zipInVariants } from '@/lib/animated-flow';
 
 export default function BirthdatePage() {
   const router = useRouter();
@@ -64,32 +65,54 @@ export default function BirthdatePage() {
           question="When were you born?"
           description="We calculate your zodiac sign based on your birthdate and provide personalized fortune readings"
         >
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="birthdate" className="text-white">
-                Date of Birth
-              </Label>
-              <Input
-                id="birthdate"
-                type="date"
-                value={birthDate}
-                onChange={handleDateChange}
-                className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-purple-400"
-                placeholder="YYYY-MM-DD"
-                max={new Date().toISOString().split('T')[0]}
-              />
-            </div>
+          <motion.div
+            variants={staggerContainerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-4"
+            transition={{
+              staggerChildren: 0.3,
+              delayChildren: 0.4,
+            }}
+          >
+            <motion.div
+              initial={{ y: -60, opacity: 0 }}
+              animate={{
+                y: 0,
+                opacity: 1,
+                transition: {
+                  duration: 0.6,
+                  delay: 0.7,
+                  ease: [0.42, 0, 0.58, 1.0],
+                },
+              }}
+              className="stream-down"
+            >
+              <div className="space-y-2">
+                <Label htmlFor="birthdate" className="text-white">
+                  Date of Birth
+                </Label>
+                <Input
+                  id="birthdate"
+                  type="date"
+                  value={birthDate}
+                  onChange={handleDateChange}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-orange-400"
+                  placeholder="YYYY-MM-DD"
+                  max={new Date().toISOString().split('T')[0]}
+                />
+              </div>
+            </motion.div>
 
             {/* Zodiac sign preview */}
             {zodiacSign && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-center p-4 bg-orange-400/5 rounded-lg border border-orange-400/30"
+                variants={zipInVariants}
+                initial="hidden"
+                animate="visible"
+                className="text-center p-4 bg-orange-600/20 rounded-lg border border-orange-400/30 zip-in"
               >
-                <div className="text-2xl text-slate-300 mb-2">
-                  {zodiacSign} ✨
-                </div>
+                <div className="text-2xl text-white mb-2">{zodiacSign} ✨</div>
               </motion.div>
             )}
 
@@ -103,7 +126,7 @@ export default function BirthdatePage() {
                 Please enter a valid date of birth
               </motion.div>
             )}
-          </div>
+          </motion.div>
         </QuestionSection>
 
         <div className="flex justify-between pt-4">
@@ -122,8 +145,7 @@ export default function BirthdatePage() {
             <Button
               onClick={handleNext}
               disabled={!isValid}
-              size="lg"
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed:cursor-not-allowed"
+              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next →
             </Button>
