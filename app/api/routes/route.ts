@@ -3,9 +3,12 @@ import { general } from '@/app/general/general-prompts';
 import { UserMemory } from '@/lib/common-constants';
 
 export async function POST(request: Request) {
+  // Declare userMemory outside the try block so it's accessible in catch
+  let userMemory: UserMemory | null = null;
+
   try {
     const body = await request.json();
-    const userMemory: UserMemory = body;
+    userMemory = body; // Assign the value here
     const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
     console.log('=== DEBUG INFO ===');
@@ -245,6 +248,7 @@ Please follow the guidance exactly and return only the JSON with the object cont
     console.error('Unexpected error in fortune generation:', error);
 
     // Fallback fortune generation matching the expected schema
+    // Now userMemory is accessible here since it's declared outside the try block
     const fallbackFortune = {
       overall: {
         score: 8,
