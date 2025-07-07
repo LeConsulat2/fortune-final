@@ -40,7 +40,7 @@ export default function Choice() {
     {
       name: 'My Today',
       icon: <Sparkles size={24} />,
-      path: '/general',
+      path: '/loading?category=general',
     },
     { name: 'Love', icon: <Heart size={24} />, path: '/love' },
     {
@@ -142,7 +142,7 @@ export default function Choice() {
             Back
           </motion.button>
         </Link>
-        <Link href="/fortune/general" className="w-2/3">
+        <Link href="/loading?category=general" className="w-2/3">
           <motion.button
             variants={zipInVariants}
             initial="hidden"
