@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -53,7 +53,17 @@ const getCategoryTitles = (category: string) => {
   };
 };
 
-export default function ResultPage() {
+///// Suspense boundary added for useSearchParams requirement /////
+export default function ResultPageWithSuspense() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultPage />
+    </Suspense>
+  );
+}
+///// End Suspense boundary /////
+
+function ResultPage() {
   const router = useRouter();
   const { userMemory, isLoaded } = useUserMemory();
   const searchParams = useSearchParams();
