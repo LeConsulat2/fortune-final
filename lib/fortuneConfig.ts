@@ -5,12 +5,14 @@ import { love } from '@/app/love/love-prompts';
 import { money } from '@/app/money/money-prompts';
 import { mentalHealth } from '@/app/mental-health/mental-health-prompts';
 import { composure } from '@/app/composure/composure-prompts';
+import { assessment } from '@/app/assessment/assessment-prompts';
 
 export const fortuneCategories = {
   general,
   job,
   love,
   money,
+  assessment,
   mentalHealth,
   composure,
 } as const;

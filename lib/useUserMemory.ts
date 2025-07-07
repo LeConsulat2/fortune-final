@@ -56,34 +56,51 @@ export function useUserMemory(): UseUserMemoryReturn {
       if (!prev) {
         // If no existing memory, create new with required fields
         const newMemory: UserMemory = {
-          gender: updates.gender || undefined,
+          gender: updates.gender,
           birthDate: updates.birthDate || '',
-          zodiacSign:
-            updates.zodiacSign || calculateZodiacSign(updates.birthDate || ''),
+          zodiacSign: updates.zodiacSign,
           name: updates.name || '',
-          jobTitle: updates.jobTitle || '',
+          jobTitle: updates.jobTitle,
         };
         return newMemory;
       }
       // Update existing memory
       const updated = { ...prev, ...updates };
 
-      // Recalculate zodiac sign if birthDate changes
-      if (updates.birthDate && updates.birthDate !== prev.birthDate) {
-        updated.zodiacSign = calculateZodiacSign(updates.birthDate);
+      // Recalculate zodiac sign if birthDate changes and is not empty
+      if (
+        updates.birthDate &&
+        updates.birthDate !== prev.birthDate &&
+        updates.birthDate.trim() !== ''
+      ) {
+        try {
+          updated.zodiacSign = calculateZodiacSign(updates.birthDate);
+        } catch (error) {
+          console.warn('Failed to calculate zodiac sign:', error);
+          // Keep the previous zodiac sign if calculation fails
+        }
       }
       return updated;
     });
   }, []);
 
   const setPersonalInfo = useCallback((info: PersonalInfo) => {
-    const zodiacSign = info.zodiacSign || calculateZodiacSign(info.birthDate);
+    let zodiacSign = info.zodiacSign;
+
+    // Only calculate zodiac sign if birthDate is provided and valid
+    if (!zodiacSign && info.birthDate && info.birthDate.trim() !== '') {
+      try {
+        zodiacSign = calculateZodiacSign(info.birthDate);
+      } catch (error) {
+        console.warn('Failed to calculate zodiac sign:', error);
+      }
+    }
 
     const newMemory: UserMemory = {
       gender: info.gender,
       birthDate: info.birthDate,
-      zodiacSign: zodiacSign,
-      name: info.name,
+      zodiacSign,
+      name: info.name || '',
       jobTitle: info.jobTitle,
     };
 
@@ -131,10 +148,10 @@ export function useNeedsOnboarding(): boolean {
 export function userMemoryToPersonalInfo(memory: UserMemory): PersonalInfo {
   return {
     name: memory.name || '',
-    gender: memory.gender || undefined,
+    gender: memory.gender,
     birthDate: memory.birthDate || '',
-    jobTitle: memory.jobTitle || '',
-    zodiacSign: memory.zodiacSign || '',
-    calculatedSign: memory.zodiacSign || '',
+    jobTitle: memory.jobTitle,
+    zodiacSign: memory.zodiacSign,
+    calculatedSign: memory.zodiacSign,
   };
 }

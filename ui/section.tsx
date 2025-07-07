@@ -5,6 +5,8 @@ import { ReactNode } from 'react';
 import {
   fadeInUpVariants,
   staggerContainerVariants,
+  zipInVariants,
+  streamDownVariants,
 } from '@/lib/animated-flow';
 
 interface SectionProps {
@@ -38,7 +40,7 @@ export function Section({
         <div className="space-y-2">
           {title && (
             <motion.h2
-              variants={fadeInUpVariants}
+              variants={streamDownVariants}
               className="text-xl font-semibold text-white"
             >
               {title}
@@ -75,26 +77,40 @@ export function QuestionSection({
   className = '',
 }: QuestionSectionProps) {
   return (
-    <Section className={className}>
-      <motion.div variants={fadeInUpVariants} className="text-center space-y-3">
-        <h3 className="text-lg font-medium text-white leading-relaxed">
+    <motion.div
+      variants={staggerContainerVariants}
+      initial="hidden"
+      animate="visible"
+      className={`space-y-6 ${className}`}
+      transition={{
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      }}
+    >
+      <motion.div
+        variants={streamDownVariants}
+        className="text-center space-y-3 stream-down"
+      >
+        <motion.h3 className="text-lg font-medium text-white leading-relaxed">
           {question}
-        </h3>
+        </motion.h3>
         {description && (
-          <p className="text-sm text-slate-400 max-w-md mx-auto">
+          <motion.p className="text-sm text-slate-400 max-w-md mx-auto">
             {description}
-          </p>
+          </motion.p>
         )}
       </motion.div>
       <motion.div
         variants={staggerContainerVariants}
-        initial="hidden"
-        animate="visible"
         className="space-y-3"
+        transition={{
+          delayChildren: 0.4,
+          staggerChildren: 0.15,
+        }}
       >
         {children}
       </motion.div>
-    </Section>
+    </motion.div>
   );
 }
 
@@ -115,15 +131,15 @@ export function ChoiceItem({
 }: ChoiceItemProps) {
   return (
     <motion.button
-      variants={fadeInUpVariants}
+      variants={zipInVariants}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
       className={`
-        w-full p-4 rounded-lg border transition-all duration-200 text-left
+        w-full p-4 rounded-lg border transition-all duration-300 text-left
         ${
           selected
-            ? 'bg-purple-600/20 border-purple-400 shadow-lg shadow-purple-400/20'
+            ? 'bg-orange-600/20 border-orange-400 shadow-lg shadow-orange-400/20'
             : 'bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/30'
         }
         ${className}
@@ -136,6 +152,11 @@ export function ChoiceItem({
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
+            transition={{
+              type: 'spring',
+              stiffness: 300,
+              damping: 20,
+            }}
             className="ml-auto w-2 h-2 bg-purple-400 rounded-full"
           />
         )}

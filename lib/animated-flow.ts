@@ -55,7 +55,7 @@ export const pulseGlowVariants: Variants = {
       '0 0 20px rgba(251, 146, 60, 0.3)',
     ],
     transition: {
-      duration: 2,
+      duration: 1,
       ease: 'easeInOut',
       repeat: Infinity,
     },

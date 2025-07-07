@@ -6,8 +6,9 @@ import { useUserMemory } from '@/lib/useUserMemory';
 import {
   FortuneCategoryLabels,
   ZODIAC_SIGNS_LABELS,
+  ALL_FORTUNE_CATEGORIES,
+  type FortuneCategory,
 } from '@/lib/common-constants';
-import type { FortuneCategory } from '@/lib/common-constants';
 
 import { seededRandom } from '@/lib/seeded-random';
 
@@ -23,12 +24,13 @@ export default function GeneralFortunePage() {
     return null;
   }
 
-  // if (!userMemory || !userMemory.name) {
-  //   router.push('/onboarding/gender');
-  //   return null;
-  // }
+  //Redirect to onboarding if user info is not available
+  if (!userMemory || !userMemory.birthDate) {
+    router.push('/onboarding/birthdate');
+    return null;
+  }
 
-  const zodiacInfo = ZODIAC_SIGNS_LABELS[userMemory?.zodiacSign];
+  const zodiacInfo = ZODIAC_SIGNS_LABELS[userMemory.zodiacSign];
   const today = formatDate(new Date());
 
   const handleCategorySelect = (category: FortuneCategory) => {
@@ -40,7 +42,7 @@ export default function GeneralFortunePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-amber-900/75 via-orange-900/70 to-red-900 text-white">
       {/* Background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(15)].map((_, i) => (
@@ -93,14 +95,14 @@ export default function GeneralFortunePage() {
               <div className="text-3xl mb-1">✨</div>
               <h2 className="text-xl font-bold mb-1">Overall Fortune</h2>
               <p className="text-amber-200 mb-1 text-sm">
-                Check your general daily fortune for the day
+                Check out your today&apos;s fortune
               </p>
               <Button
                 onClick={handleOverallFortune}
                 size="lg"
                 className="w-full px-6 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold"
               >
-                View General Fortune for today 🔮
+                View Your Fortune today 🔮
               </Button>
             </Card>
           </motion.div>
@@ -122,7 +124,7 @@ export default function GeneralFortunePage() {
             </div>
 
             <div className="space-y-3">
-              {FORTUNE_CATEGORIES.map((category, index) => {
+              {ALL_FORTUNE_CATEGORIES.map((category, index) => {
                 const categoryInfo = FortuneCategoryLabels[category];
                 return (
                   <motion.div
@@ -168,9 +170,8 @@ export default function GeneralFortunePage() {
             className="text-center mt-8 text-orange-400 text-sm"
           >
             <p className="text-accent">
-              ✨ Explore your fortune of the day for fun! Remember, take this
-              lightly, it&apos;s not a fortune destiny. You create your own
-              fortune! ✨
+              ✨ Explore your fortune of the day for fun! Remember, this is only
+              for entertainment purposes. You create your own fortune! ✨
             </p>
           </motion.div>
         </div>

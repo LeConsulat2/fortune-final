@@ -60,7 +60,7 @@ export const ZODIAC_SIGNS_LABELS: Record<
 };
 
 // Zodiac date ranges (month-day format)
-export const zodiacDateRanges: Record<
+export const ZODIAC_DATE_RANGES: Record<
   ZodiacSign,
   { start: string; end: string; year?: number }[]
 > = {
@@ -90,19 +90,30 @@ export function calculateZodiacSign(birthDate: string): ZodiacSign {
     .toString()
     .padStart(2, '0')}`;
 
-  for (const [sign, ranges] of Object.entries(zodiacDateRanges)) {
+  for (const [sign, ranges] of Object.entries(ZODIAC_DATE_RANGES)) {
     for (const range of ranges) {
       if (monthDay >= range.start && monthDay <= range.end) {
         return sign as ZodiacSign;
       }
     }
   }
-  //여기  예외처리 하거나, 디폴트값 추가해야함 아님 zodiacSign? 할수는없음.
-  throw new Error('Invalid birth date or failed to calculate zodiac sign'); //여기  예외처리 하거나, 디폴트값 추가해야함 아님 zodiacSign?
+
+  // Default fallback - could also throw error if you prefer strict validation
+  throw new Error(
+    'Invalid birth date or failed to calculate zodiac sign, please try again',
+  );
 }
 
+// Gender type - keep it simple and optional
 export type Gender = 'male' | 'female';
 
+// Gender options for UI
+export const GENDER_OPTIONS = [
+  { value: 'male' as const, label: 'Male' },
+  { value: 'female' as const, label: 'Female' },
+] as const;
+
+// Zod schemas
 export const personalInfoSchema = z.object({
   name: z
     .string()
@@ -118,12 +129,12 @@ export const personalInfoSchema = z.object({
 });
 
 export interface PersonalInfo {
-  name?: string;
+  name: string;
   gender?: Gender;
   birthDate: string; // ISO date string (YYYY-MM-DD)
   jobTitle?: string;
   zodiacSign?: ZodiacSign;
-  calculatedSign: ZodiacSign;
+  calculatedSign?: ZodiacSign;
 }
 
 export interface CategoryFortune {
@@ -133,7 +144,6 @@ export interface CategoryFortune {
   advice: string;
 }
 
-//////이게 필요한가?? 여기서??? 아마 아닌듯????
 export interface DailyFortune {
   overall: {
     score: number;
@@ -192,14 +202,14 @@ export interface QuizAnswer {
 }
 
 export interface UserMemory {
+  name: string;
   gender?: Gender;
   birthDate: string;
-  zodiacSign: ZodiacSign;
-  name?: string;
+  zodiacSign?: ZodiacSign;
   jobTitle?: string;
 }
 
-//Fortune Category labels for UI
+// Fortune Category labels for UI
 export const ALL_FORTUNE_CATEGORIES = Object.keys(
   FortuneCategories,
 ) as FortuneCategory[];

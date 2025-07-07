@@ -3,7 +3,13 @@
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import { Card } from './card';
-import { pageTransitionVariants } from '@/lib/animated-flow';
+import {
+  streamDownVariants,
+  zipInVariants,
+  staggerContainerVariants,
+  fadeInUpVariants,
+} from '@/lib/animated-flow';
+import { seededRandom } from '@/lib/seeded-random';
 
 interface QuizFrameProps {
   children: ReactNode;
@@ -24,24 +30,24 @@ export function QuizFrame({
 }: QuizFrameProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white">
-      {/* Background particles */}
+      {/* Background particles - softer and more random */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-orange-400 rounded-full opacity-30 float-gentle"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${seededRandom(i) * 100}%`,
+              top: `${seededRandom(i + 100) * 100}%`,
             }}
             animate={{
-              y: [0, -15, 0],
+              y: [0, -20, 0],
               opacity: [0.1, 0.6, 0.1],
             }}
             transition={{
-              duration: 6 + Math.random() * 3,
+              duration: 6 + seededRandom(i + 200) * 4,
               repeat: Infinity,
-              delay: Math.random() * 3,
+              delay: seededRandom(i + 300) * 3,
             }}
           />
         ))}
@@ -49,15 +55,17 @@ export function QuizFrame({
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-8">
         <motion.div
-          variants={pageTransitionVariants}
-          initial="initial"
-          animate="in"
-          exit="out"
-          className={`w-full max-w-md mx-auto space-y-6 stream-down ${className}`}
+          variants={staggerContainerVariants}
+          initial="hidden"
+          animate="visible"
+          className={`w-full max-w-sm mx-auto space-y-6 ${className}`}
         >
-          {/* Progress indicator */}
+          {/* Progress indicator with softer animation */}
           {currentStep && totalSteps && (
-            <div className="text-center space-y-3">
+            <motion.div
+              variants={streamDownVariants}
+              className="text-center space-y-3"
+            >
               <div className="flex justify-center space-x-2">
                 {[...Array(totalSteps)].map((_, i) => (
                   <motion.div
@@ -69,48 +77,69 @@ export function QuizFrame({
                     }`}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    transition={{ delay: i * 0.15 }}
+                    transition={{
+                      delay: i * 0.5,
+                      duration: 1.5,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
                   />
                 ))}
               </div>
-              <p className="text-xs text-amber-300">
+              <motion.p
+                variants={fadeInUpVariants}
+                className="text-xs text-amber-300"
+              >
                 {currentStep} / {totalSteps}
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
           )}
 
-          {/* Title section */}
-          <div className="text-center space-y-3">
-            <motion.h1
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent"
-            >
+          {/* Title section with stream down effect */}
+          <motion.div
+            variants={streamDownVariants}
+            className="text-center space-y-3 stream-down"
+          >
+            <motion.h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
               {title}
             </motion.h1>
             {subtitle && (
-              <motion.p
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-base text-amber-200"
-              >
+              <motion.p className="text-base text-amber-200">
                 {subtitle}
               </motion.p>
             )}
-          </div>
+          </motion.div>
 
-          {/* Main content card */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="zip-in"
-          >
-            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 shadow-2xl warm-glow">
-              {children}
-            </Card>
+          {/* Main content card with zip-in effect */}
+          <motion.div variants={zipInVariants} className="zip-in">
+            <motion.div
+              variants={{
+                initial: {
+                  scale: 1,
+                  boxShadow: '0 0 20px rgba(251, 146, 60, 0.3)',
+                },
+                animate: {
+                  scale: [1, 1.02, 1],
+                  boxShadow: [
+                    '0 0 20px rgba(251, 146, 60, 0.3)',
+                    '0 0 30px rgba(251, 146, 60, 0.5)',
+                    '0 0 20px rgba(251, 146, 60, 0.3)',
+                  ],
+                  transition: {
+                    duration: 3,
+                    ease: 'easeInOut',
+                    repeat: Infinity,
+                    repeatDelay: 1,
+                  },
+                },
+              }}
+              initial="initial"
+              //animate="animate"
+              //className="pulse-glow"
+            >
+              <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 shadow-2xl warm-glow">
+                {children}
+              </Card>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
