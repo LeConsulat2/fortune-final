@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUserMemory } from '@/lib/useUserMemory';
-import { type Question } from '@/app/general/general-prompts';
+import type { Question } from '@/lib/types';
 import { Button } from '@/ui/button';
 import { Card } from '@/ui/card';
 import { Progress } from '@/ui/progress';

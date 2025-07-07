@@ -11,5 +11,5 @@ export interface Question {
 export interface FortuneConfig {
   label: { name: string; emoji: string; description: string };
   guidance: string;
-  quiz?: Question[];
+  quiz: Question[];
 }

@@ -1,12 +1,4 @@
-import { type FortuneConfig, type Question } from '@/lib/types';
-
-export { type FortuneConfig, type Question } from '@/lib/types';
-
-export interface QuizOption {
-  value: string;
-  emoji: string;
-  description: string;
-}
+import { type FortuneConfig } from '@/lib/types';
 
 export const mentalHealth: FortuneConfig = {
   label: {
@@ -79,21 +71,7 @@ PRACTICAL WISDOM FOR DAILY LIFE:
 - Address how to maintain mental health during busy or stressful periods
 - Discuss how to find authentic ways to practice self-compassion
 - Address how to handle the gap between who you are and who you want to be
-- Provide guidance on building sustainable mental health practices
-
-OUTPUT:
-Return ONLY valid JSON with this exact schema:
-
-{
-  "overall": {
-    "score": 1-10,
-    "message": "brief, direct summary",
-    "detailed_message": "two short paragraphs about the main theme of their day with specific situations and clear advice",
-    "personalised_insight": "brief observation connecting their quiz answers to a practical life pattern"
-  }
-}
-
-Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
+- Provide guidance on building sustainable mental health practices`,
 
   quiz: [
     {

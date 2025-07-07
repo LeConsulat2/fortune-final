@@ -6,7 +6,7 @@ import {
   fortuneCategories as FortuneCategories,
   fortuneCategoryLabels as FortuneCategoryLabels,
   type FortuneCategory,
-} from '@/lib/fortuneConfig';
+} from '@/lib/fortune-config';
 
 export type ZodiacSign =
   | 'aries'
