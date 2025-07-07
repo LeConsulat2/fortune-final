@@ -8,15 +8,31 @@ import { type Question } from '@/app/general/general-prompts';
 import { Button } from '@/ui/button';
 import { Card } from '@/ui/card';
 import { Progress } from '@/ui/progress';
-import {
-  staggerContainerVariants,
-  streamDownVariants,
-} from '@/lib/animated-flow';
+import Link from 'next/link';
+import { staggerContainerVariants } from '@/lib/animated-flow';
 
 interface QuizClientProps {
   category: string;
   questions: Question[];
 }
+
+// Warm gas effect for the image with persistent subtle glow
+const warmGasImageVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    filter: 'blur(15px) brightness(1.2)',
+  },
+  visible: {
+    opacity: 0.65,
+    scale: 1,
+    filter: 'blur(0px) brightness(1.1)',
+    transition: {
+      duration: 2.5,
+      ease: 'easeOut' as const,
+    },
+  },
+};
 
 export function QuizClient({ category, questions }: QuizClientProps) {
   const router = useRouter();
@@ -25,7 +41,7 @@ export function QuizClient({ category, questions }: QuizClientProps) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const totalQuestions = questions.length;
-  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  const progress = (Object.keys(answers).length / totalQuestions) * 100;
   const currentQuestion = questions[currentQuestionIndex];
 
   const handleSelectOption = (questionId: string, optionValue: string) => {
@@ -53,9 +69,15 @@ export function QuizClient({ category, questions }: QuizClientProps) {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
+            initial={{ y: -60, opacity: 0 }}
             animate={{
-              y: [0, -15, 0],
-              opacity: [0.2, 0.6, 0.2],
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.6,
+                delay: 0.7 + i * 0.1,
+                ease: [0.42, 0, 0.58, 1.0],
+              },
             }}
             transition={{
               duration: 3 + Math.random() * 2,
@@ -67,9 +89,25 @@ export function QuizClient({ category, questions }: QuizClientProps) {
       </div>
 
       <div className="relative z-10 w-full max-w-md">
+        {/* Back Link */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-4"
+        >
+          <Link
+            href="/choice"
+            className="inline-flex items-center text-orange-300 hover:text-orange-200 transition-colors"
+          >
+            ← Back to Choices
+          </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="mb-4 text-center"
         >
           <p className="text-sm font-medium text-orange-300">
@@ -90,36 +128,68 @@ export function QuizClient({ category, questions }: QuizClientProps) {
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
             <Card className="bg-black/20 border border-orange-500/30 rounded-xl p-6 text-white backdrop-blur-sm">
-              <motion.div variants={staggerContainerVariants}>
+              <motion.div
+                variants={staggerContainerVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  staggerChildren: 0.1,
+                  delayChildren: 0.3,
+                }}
+              >
                 <motion.h2
-                  variants={streamDownVariants}
-                  className="mb-6 text-xl font-semibold text-center text-orange-100"
+                  initial={{ y: -60, opacity: 0 }}
+                  animate={{
+                    y: 0,
+                    opacity: 1,
+                    transition: {
+                      duration: 0.6,
+                      delay: 0.5,
+                      ease: [0.42, 0, 0.58, 1.0],
+                    },
+                  }}
+                  className="mb-6 text-xl font-semibold text-center text-orange-100 stream-down"
                 >
                   {currentQuestion.q}
                 </motion.h2>
 
                 <div className="grid grid-cols-1 gap-4">
-                  {currentQuestion.options.map((option) => (
+                  {currentQuestion.options.map((option, index) => (
                     <motion.div
                       key={option.value}
-                      variants={streamDownVariants}
+                      initial={{ y: -60, opacity: 0 }}
+                      animate={{
+                        y: 0,
+                        opacity: 1,
+                        transition: {
+                          duration: 0.6,
+                          delay: 0.7 + index * 0.1,
+                          ease: [0.42, 0, 0.58, 1.0],
+                        },
+                      }}
+                      className="stream-down"
                     >
-                      <Button
-                        onClick={() =>
-                          handleSelectOption(currentQuestion.id, option.value)
-                        }
-                        className="w-full h-auto justify-start whitespace-normal py-4 text-left bg-black/20 border border-orange-500/30 hover:bg-black/30 text-orange-100"
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <span className="mr-4 text-2xl text-orange-400">
-                          {option.emoji}
-                        </span>
-                        <div>
-                          <p className="font-semibold">{option.value}</p>
-                          <p className="text-sm text-orange-200">
-                            {option.description}
-                          </p>
-                        </div>
-                      </Button>
+                        <Button
+                          onClick={() =>
+                            handleSelectOption(currentQuestion.id, option.value)
+                          }
+                          className="w-full h-auto justify-start whitespace-normal py-4 text-left bg-black/20 border border-orange-500/30 hover:bg-black/30 text-orange-100 hover:cursor-pointer transition-all duration-200"
+                        >
+                          <span className="mr-4 text-2xl text-orange-400">
+                            {option.emoji}
+                          </span>
+                          <div>
+                            <p className="font-semibold">{option.value}</p>
+                            <p className="text-sm text-orange-200">
+                              {option.description}
+                            </p>
+                          </div>
+                        </Button>
+                      </motion.div>
                     </motion.div>
                   ))}
                 </div>

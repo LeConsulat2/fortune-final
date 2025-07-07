@@ -9,6 +9,7 @@ import {
   Sparkles,
   ChevronRight,
   Stethoscope,
+  LandPlot,
 } from 'lucide-react';
 import { streamDownVariants, zipInVariants } from '@/lib/animated-flow';
 
@@ -61,7 +62,7 @@ export default function Choice() {
       categoryKey: 'composure',
     },
     {
-      name: 'Job',
+      name: 'Jobs & Interviews',
       icon: <Briefcase size={24} />,
       path: '/quiz/job',
       categoryKey: 'job',
@@ -73,18 +74,24 @@ export default function Choice() {
       categoryKey: 'money',
     },
     {
-      name: 'Assessment',
+      name: 'Exams & Assignments',
       icon: <Brain size={24} />,
       path: '/quiz/assessment',
       categoryKey: 'assessment',
+    },
+    {
+      name: 'Golf',
+      icon: <LandPlot size={24} />,
+      path: '/quiz/golf',
+      categoryKey: 'golf',
     },
   ];
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-start bg-gradient-to-br from-amber-950 via-red-950 to-red-900 py-6 px-4 text-white">
       {/* Progress indicator */}
-      <div className="w-full max-w-md flex justify-between px-2 mb-12">
-        {[...Array(5)].map((_, i) => (
+      <div className="w-full max-w-md flex justify-between px-1 mb-12">
+        {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
             className={`h-1 rounded-full ${
@@ -92,7 +99,7 @@ export default function Choice() {
             }`}
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ delay: i * 0.1, duration: 0.4 }}
+            transition={{ delay: i * 0.2, duration: 0.8 }}
           />
         ))}
       </div>
