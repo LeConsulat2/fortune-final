@@ -8,6 +8,7 @@ const USER_MEMORY_KEY = 'fortune-user-memory';
 const INITIAL_STATE: UserMemory = {
   name: null,
   birthDate: null,
+  gender: null,
   occupation: null,
   zodiacSign: undefined,
   category: undefined,
