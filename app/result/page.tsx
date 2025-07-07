@@ -21,6 +21,38 @@ interface FortunePrediction {
   };
 }
 
+const getCategoryTitles = (category: string) => {
+  if (category === 'general') {
+    return {
+      main: 'Your Fortune Today',
+      score: 'Your Fortune Score',
+      reading: "Today's Reading",
+      insights: 'Personal Insights',
+    };
+  }
+
+  const baseTitle = category
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  if (category === 'love') {
+    return {
+      main: 'Your Love & Romance Fortune Today',
+      score: 'Your Love/Romance Score',
+      reading: 'Love & Romance Reading',
+      insights: 'Love & Romance Insights',
+    };
+  }
+
+  return {
+    main: `Your ${baseTitle} Fortune Today`,
+    score: `Your ${baseTitle} Score`,
+    reading: `${baseTitle} Reading`,
+    insights: `${baseTitle} Insights`,
+  };
+};
+
 export default function ResultPage() {
   const router = useRouter();
   const { userMemory, isLoaded } = useUserMemory();
@@ -90,6 +122,7 @@ export default function ResultPage() {
 
   const today = formatDate(new Date());
   const userName = userMemory?.name || 'User';
+  const { main, score, reading, insights } = getCategoryTitles(category);
 
   // Format the detailed message for display (split paragraphs)
   const detailedParagraphs = fortune.overall.detailed_message.split('\n\n');
@@ -136,7 +169,7 @@ export default function ResultPage() {
             className="text-center mb-8 stream-down"
           >
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent mb-4">
-              Your Fortune Today
+              {main}
             </h1>
             <p className="text-lg text-amber-200 mb-2">{today}</p>
             <div className="flex items-center justify-center space-x-2 text-base">
@@ -156,9 +189,7 @@ export default function ResultPage() {
           >
             <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center stream-down italic">
               <div className="mb-4">
-                <div className="text-2xl font-medium mb-2">
-                  Your Fortune Score
-                </div>
+                <div className="text-2xl font-medium mb-2">{score}</div>
                 <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-yellow-500 to-orange-500 font-semibold"
@@ -191,7 +222,7 @@ export default function ResultPage() {
             className="mb-8"
           >
             <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 italic">
-              <h2 className="text-xl font-bold mb-0">Today&apos;s Reading</h2>
+              <h2 className="text-xl font-bold mb-0">{reading}</h2>
 
               {detailedParagraphs.map((paragraph, index) => (
                 <motion.div
@@ -215,7 +246,7 @@ export default function ResultPage() {
             className="mb-8 stream-down"
           >
             <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 italic">
-              <h2 className="text-xl font-bold mb-0">Personal Insight</h2>
+              <h2 className="text-xl font-bold mb-0">{insights}</h2>
               <p className="text-amber-100 italic leading-loose stream-down">
                 {fortune.overall.personalised_insight}
               </p>
