@@ -155,14 +155,14 @@ export default function Job() {
           <Button
             onClick={handleComplete}
             disabled={!canProceed}
-            className="px-6 w-full bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed:cursor-not-allowed"
+            className="px-6 mb-4 w-full h-12 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed:cursor-not-allowed"
           >
-            Go To My Choices of Forutune Today ✨
+            ✨ Go To Choices of My Fortune Today ✨
           </Button>
           <Button
             onClick={handleBack}
             variant="outline"
-            className="px-6 w-full bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer"
+            className="px-6 w-full bg-sky-500/10 hover:bg-sky-600/10 text-white hover:cursor-pointer"
           >
             ← Previous
           </Button>

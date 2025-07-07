@@ -81,9 +81,8 @@ export default function PersonalInfoPage() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-amber-400 focus:border-orange-400 w-full"
+                  className="bg-white/10 border-white/20 text-amber-400 font-medium placeholder:text-amber-400  w-full"
                   placeholder="Your Name"
-                  autoFocus
                 />
               </div>
             </motion.div>
@@ -132,7 +131,7 @@ export default function PersonalInfoPage() {
                         key={option.value}
                         selected={gender === option.value}
                         onClick={() => handleGenderSelect(option.value)}
-                        className="w-full"
+                        className="w-full h-10 hover:cursor-pointer hover:bg-orange-600 focus:bg-orange-600 flex items-center "
                       >
                         <div className="flex items-center gap-3">
                           <div>
@@ -140,9 +139,6 @@ export default function PersonalInfoPage() {
                               {option.label}
                             </div>
                           </div>
-                        </div>
-                        <div className="text-sm text-amber-300/50 mt-1">
-                          (Optional)
                         </div>
                       </ChoiceItem>
                     </motion.div>

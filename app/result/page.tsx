@@ -154,7 +154,7 @@ export default function ResultPage() {
             transition={{ delay: 0.2 }}
             className="mb-8"
           >
-            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center">
+            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center stream-down italic">
               <div className="mb-4">
                 <div className="text-2xl font-medium mb-2">
                   Your Fortune Score
@@ -167,13 +167,13 @@ export default function ResultPage() {
                 </div>
               </div>
 
-              <div className="flex justify-between text-sm text-amber-300 mb-2">
+              <div className="flex justify-between text-sm text-amber-300 mb-2 ">
                 <span className="font-medium">Shadows Stirring</span>
                 <span className="font-medium">Turning Winds</span>
                 <span className="font-medium">Favorable Currents</span>
               </div>
 
-              <div className="text-2xl font-semibold mb-3 text-white">
+              <div className="text-2xl font-semibold mb-3 text-white ">
                 {fortune.overall.score}/10
               </div>
 
@@ -190,8 +190,8 @@ export default function ResultPage() {
             transition={{ delay: 0.4 }}
             className="mb-8"
           >
-            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20">
-              <h2 className="text-xl font-bold mb-4">Today&apos;s Reading</h2>
+            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 italic">
+              <h2 className="text-xl font-bold mb-0">Today&apos;s Reading</h2>
 
               {detailedParagraphs.map((paragraph, index) => (
                 <motion.div
@@ -212,10 +212,10 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="mb-8"
+            className="mb-8 stream-down"
           >
-            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20">
-              <h2 className="text-xl font-bold mb-2">Personal Insight</h2>
+            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 italic">
+              <h2 className="text-xl font-bold mb-0">Personal Insight</h2>
               <p className="text-amber-100 italic leading-loose stream-down">
                 {fortune.overall.personalised_insight}
               </p>
@@ -231,9 +231,9 @@ export default function ResultPage() {
           >
             <Button
               onClick={() => router.push('/choice')}
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white"
+              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer hover:scale-105 transition-all duration-300 focus:scale-105"
             >
-              Back to Categories
+              Try Other Categories
             </Button>
 
             <Button
@@ -241,7 +241,7 @@ export default function ResultPage() {
                 sessionStorage.removeItem('fortune-result');
                 router.push(`/loading?category=${category}`);
               }}
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white"
+              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer hover:scale-105 transition-all duration-300 focus:scale-105"
             >
               Generate Again
             </Button>

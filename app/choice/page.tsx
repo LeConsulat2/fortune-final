@@ -132,17 +132,17 @@ export default function Choice() {
 
       {/* Navigation buttons */}
       <div className="w-full max-w-md mt-auto pt-8 flex gap-3">
-        <Link href="/" className="w-1/3">
+        <Link href="/start/step-3-job" className="w-full">
           <motion.button
             variants={zipInVariants}
             initial="hidden"
             animate="visible"
-            className="w-full py-3 px-4 bg-black/30 text-orange-200 rounded-lg border border-orange-900/30"
+            className="hover:cursor-pointer hover:bg-black/80 hover:scale-105 w-full py-3 px-4 bg-black/60 text-orange-200 rounded-lg border border-orange-900/30"
           >
             Back
           </motion.button>
         </Link>
-        <Link href="/loading?category=general" className="w-2/3">
+        {/* <Link href="/loading?category=general" className="w-2/3">
           <motion.button
             variants={zipInVariants}
             initial="hidden"
@@ -151,7 +151,7 @@ export default function Choice() {
           >
             Continue
           </motion.button>
-        </Link>
+        </Link> */}
       </div>
 
       {/* Floating particles animation */}
