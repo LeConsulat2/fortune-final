@@ -1,6 +1,6 @@
-import { FortuneCategory } from '@/lib/zodiac-sign-label';
 import { NextResponse } from 'next/server';
-import { PersonalInfo, UserMemory } from '@/lib/common-constants';
+import { general } from '@/app/general/general-prompts';
+import { UserMemory } from '@/lib/common-constants';
 
 interface OpenAIResponse {
   choices: {
@@ -10,69 +10,96 @@ interface OpenAIResponse {
   }[];
 }
 
-interface AIFortuneResponse {
-  overall: {
-    score: number;
-    message: string;
-    detailed_message: string;
-    personal_insight: string;
-  };
-  categories: Record<
-    FortuneCategory,
-    {
-      score: number;
-      message: string;
-      detailed_message: string;
-      advice: string;
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const userMemory: UserMemory = body;
+    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+    if (!OPENAI_API_KEY) {
+      return NextResponse.json(
+        { error: 'API key not configured' },
+        { status: 500 },
+      );
     }
-  >;
-}
 
-export async function Post(request: Request) {
-  const { messages, personalInfo } = await request.json();
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+    // Validate the user data
+    if (!userMemory || !userMemory.name || !userMemory.birthDate) {
+      return NextResponse.json(
+        { error: 'Missing required user information' },
+        { status: 400 },
+      );
+    }
 
-  if (!OPENAI_API_KEY) {
-    return NextResponse.json(
-      {
-        error:
-          'Sorry Our Fortune Service is currently down, please try again later',
+    // Create the system prompt from the general-prompts.ts guidance
+    const systemPrompt = general.guidance;
+
+    // Create a user prompt with the user's information
+    const userPrompt = JSON.stringify({
+      name: userMemory.name,
+      gender: userMemory.gender || 'not specified',
+      zodiacSign: userMemory.zodiacSign || 'not specified',
+      birthDate: userMemory.birthDate,
+      jobTitle: userMemory.jobTitle || 'not specified',
+    });
+
+    // Call OpenAI API
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          {
+            role: 'user',
+            content: `Generate a daily fortune for this person: ${userPrompt}`,
+          },
+        ],
+        temperature: 0.7,
+        max_tokens: 1000,
+        response_format: { type: 'json_object' },
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('OpenAI API error:', errorData);
+      return NextResponse.json(
+        { error: 'Failed to generate fortune' },
+        { status: 500 },
+      );
+    }
+
+    const data: OpenAIResponse = await response.json();
+    const content = data.choices[0]?.message?.content;
+
+    if (!content) {
+      return NextResponse.json(
+        { error: 'No fortune content generated' },
+        { status: 500 },
+      );
+    }
+
+    // Parse the JSON response from OpenAI
+    try {
+      const parsedFortune = JSON.parse(content);
+      return NextResponse.json(parsedFortune);
+    } catch (parseError) {
+      console.error('Failed to parse OpenAI response:', parseError);
+      return NextResponse.json(
+        { error: 'Invalid fortune format received' },
+        { status: 500 },
+      );
+    }
+  } catch (error) {
+    console.error('Error generating fortune:', error);
+    return NextResponse.json(
+      { error: 'Failed to process fortune request' },
       { status: 500 },
     );
   }
-
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      messages: messages,
-      temperature: 0.8,
-      max_tokens: 2000,
-      response_format: { type: 'json_object' },
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Fortune API Error: ${response.status}`);
-  }
-
-  const data: OpenAIResponse = await response.json();
-  const content = data.choices[0]?.message?.content;
-  if (!content) {
-    throw new Error('No Contents have been generated');
-  }
-
-  const parsed = JSON.parse(content) as AIFortuneResponse;
-
-  if (!parsed.overall || !parsed.categories) {
-    throw new Error('Invalid Response Format was received');
-    // TODO: Make a sophisitacted Error message and UI
-  }
-
-  return NextResponse.json(parsed);
 }

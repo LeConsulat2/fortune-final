@@ -28,7 +28,9 @@ export default function GeneralFortunePage() {
     return null;
   }
 
-  const zodiacInfo = ZODIAC_SIGNS_LABELS[userMemory.zodiacSign as ZodiacSign];
+  const zodiacInfo = userMemory.zodiacSign
+    ? ZODIAC_SIGNS_LABELS[userMemory.zodiacSign as ZodiacSign]
+    : { name: '', emoji: '' };
   const today = formatDate(new Date());
 
   const handleCategorySelect = (category: FortuneCategory) => {
@@ -36,7 +38,8 @@ export default function GeneralFortunePage() {
   };
 
   const handleOverallFortune = () => {
-    router.push('/result?category=overall');
+    // Go to loading page first, then to result
+    router.push('/loading?category=general');
   };
 
   return (
