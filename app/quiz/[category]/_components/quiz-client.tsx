@@ -23,7 +23,9 @@ export function QuizClient({ category, questions }: QuizClientProps) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const totalQuestions = questions.length;
-  const progress = (Object.keys(answers).length / totalQuestions) * 100;
+  // Calculate progress based on how many questions we've actually answered
+  const answeredCount = Object.keys(answers).length;
+  const progress = (answeredCount / totalQuestions) * 100;
   const currentQuestion = questions[currentQuestionIndex];
 
   const handleSelectOption = (questionId: string, optionValue: string) => {

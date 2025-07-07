@@ -79,7 +79,7 @@ Return ONLY valid JSON with this exact schema:
 
 {
   "overall": {
-    "score": 1-10,
+    "score": 1-100,
     "message": "brief, direct summary",
     "detailed_message": "two short paragraphs about the main theme of their day with specific situations and clear advice",
     "personalised_insight": "brief observation connecting their quiz answers to a practical life pattern"
@@ -104,9 +104,9 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           description: 'I have a partner',
         },
         {
-          value: 'Crushing',
+          value: 'Like Someone?',
           emoji: '💭',
-          description: "I've got a crush on someone",
+          description: 'Maybe I like someone',
         },
         { value: 'Complicated', emoji: '🌀', description: "It's… complicated" },
       ],
@@ -160,258 +160,413 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       ],
     },
     {
-      id: 'relationshipComplexity',
-      q: 'Which situation feels most familiar to your current love life?',
+      id: 'date',
+      q: 'Are you going on a date today or soon?',
       options: [
         {
-          value: 'Undefined connection',
-          emoji: '🌫️',
-          description:
-            "There's something there, but neither of you has defined it",
-        },
-        {
-          value: 'Timing mismatch',
-          emoji: '⏰',
-          description: 'Right person, but life circumstances are complicated',
-        },
-        {
-          value: 'Communication dance',
-          emoji: '💃',
-          description: "You both care but keep missing each other's signals",
-        },
-        {
-          value: 'Past still present',
-          emoji: '👻',
-          description:
-            'Previous relationship shadows are affecting your present',
-        },
-        {
-          value: 'Clear and steady',
-          emoji: '🛤️',
-          description:
-            'Your romantic situation feels straightforward right now',
-        },
-      ],
-    },
-    {
-      id: 'emotionalPattern',
-      q: 'How do you typically handle romantic uncertainty?',
-      options: [
-        {
-          value: 'Overthink everything',
-          emoji: '🧠',
-          description: 'I analyze every text, every look, every interaction',
-        },
-        {
-          value: 'Protect through distance',
-          emoji: '🏰',
-          description: 'I pull back to avoid getting hurt',
-        },
-        {
-          value: 'Push for clarity',
-          emoji: '🔍',
-          description:
-            "I need to know where I stand, even if it's uncomfortable",
-        },
-        {
-          value: 'Go with the flow',
-          emoji: '🌊',
-          description: 'I try to let things unfold naturally',
-        },
-        {
-          value: 'Seek advice constantly',
-          emoji: '📞',
-          description: "I talk it through with friends until I'm exhausted",
-        },
-      ],
-    },
-    {
-      id: 'prideDynamics',
-      q: 'When it comes to making the first move or being vulnerable:',
-      options: [
-        {
-          value: 'Pride holds me back',
-          emoji: '🦁',
-          description: 'I struggle to show my cards first',
-        },
-        {
-          value: "I'm usually the initiator",
-          emoji: '🚀',
-          description: 'I tend to make the first move',
-        },
-        {
-          value: 'I drop hints and hope',
-          emoji: '💫',
-          description: 'I signal interest but wait for them to be direct',
-        },
-        {
-          value: 'I mirror their energy',
-          emoji: '🪞',
-          description: 'I match whatever level of interest they show',
-        },
-        {
-          value: "I'm direct when I'm sure",
-          emoji: '🎯',
-          description: 'Once I know how I feel, I speak up',
-        },
-      ],
-    },
-    {
-      id: 'connectionStyle',
-      q: 'What kind of romantic connection do you crave most?',
-      options: [
-        {
-          value: 'Intellectual intimacy',
-          emoji: '📚',
-          description: 'Deep conversations and mental connection',
-        },
-        {
-          value: 'Comfortable silence',
-          emoji: '🤫',
-          description: 'Being together without needing to fill every moment',
-        },
-        {
-          value: 'Passionate intensity',
-          emoji: '🔥',
-          description: "Chemistry that's impossible to ignore",
-        },
-        {
-          value: 'Steady partnership',
-          emoji: '🤝',
-          description: 'Someone who builds life alongside you',
-        },
-        {
-          value: 'Playful chemistry',
-          emoji: '🎭',
-          description: 'Someone who brings out your fun, lighter side',
-        },
-      ],
-    },
-    {
-      id: 'relationshipBarriers',
-      q: 'What most often gets in the way of your romantic connections?',
-      options: [
-        {
-          value: 'Fear of judgment',
-          emoji: '👁️',
-          description: 'Worrying what others think about my choices',
-        },
-        {
-          value: 'Different life stages',
-          emoji: '📅',
-          description: 'Timing never seems to align with the right people',
-        },
-        {
-          value: 'Communication styles',
-          emoji: '📡',
-          description: 'We care but speak completely different languages',
-        },
-        {
-          value: 'Past relationship trauma',
-          emoji: '🩹',
-          description: 'Old wounds affecting new possibilities',
-        },
-        {
-          value: 'Practical circumstances',
-          emoji: '🌍',
-          description: 'Distance, work, family obligations',
-        },
-      ],
-    },
-    {
-      id: 'emotionalAvailability',
-      q: 'How ready are you for real intimacy right now?',
-      options: [
-        {
-          value: 'Scared but willing',
-          emoji: '🦋',
-          description: 'Nervous about being hurt but open to connection',
-        },
-        {
-          value: 'Cautiously optimistic',
-          emoji: '🌅',
-          description: 'Ready to try again with better boundaries',
-        },
-        {
-          value: 'Fully open',
-          emoji: '🌸',
-          description: 'Ready to be vulnerable and authentic',
-        },
-        {
-          value: 'Healing in progress',
-          emoji: '🌱',
-          description: 'Working on myself before diving in',
-        },
-        {
-          value: 'Conflicted',
-          emoji: '⚖️',
-          description: 'Want connection but afraid of losing independence',
-        },
-      ],
-    },
-    {
-      id: 'loveLanguageGap',
-      q: 'When someone cares about you, how do you usually recognize it?',
-      options: [
-        {
-          value: 'Their actions toward me',
-          emoji: '🤲',
-          description: 'I notice what they do, not just what they say',
-        },
-        {
-          value: 'How they remember details',
-          emoji: '🧩',
-          description: 'They pay attention to things that matter to me',
-        },
-        {
-          value: 'Their presence and attention',
-          emoji: '👀',
-          description: 'They make me feel seen and prioritized',
-        },
-        {
-          value: 'Physical affection',
-          emoji: '🫂',
-          description: 'Touch and closeness speak louder than words',
-        },
-        {
-          value: 'Words and expression',
-          emoji: '💬',
-          description: 'I need to hear how they feel about me',
-        },
-      ],
-    },
-    {
-      id: 'relationshipTiming',
-      q: "What's your relationship with timing in love?",
-      options: [
-        {
-          value: 'Chronically bad timing',
+          value: 'Yes',
           emoji: '🕰️',
-          description:
-            'I always seem to meet the right people at the wrong moments',
+          description: 'I am going on a date today or soon',
         },
         {
-          value: 'Impatient for clarity',
+          value: 'No',
           emoji: '⚡',
-          description: 'I want to know where things are heading quickly',
+          description: 'I am not going on a date today or soon',
         },
         {
-          value: 'Believer in divine timing',
+          value: 'Maybe',
           emoji: '🌌',
-          description: "I trust that things happen when they're supposed to",
+          description: 'I am not sure if I am going on a date today or soon',
+        },
+      ],
+    },
+    // 5 additional quiz questions for the love fortune
+    {
+      id: 'pastRelationship',
+      q: 'How do you feel about your most recent romantic experience?',
+      options: [
+        {
+          value: 'StillProcessing',
+          emoji: '🌊',
+          description: 'Still working through the emotions',
         },
         {
-          value: 'Practical about timing',
-          emoji: '📊',
-          description: 'I consider life logistics when dating',
+          value: 'GratefulButReady',
+          emoji: '🦋',
+          description: 'Grateful for the lessons, ready to move forward',
         },
         {
-          value: 'Timing is everything',
-          emoji: '🎯',
-          description:
-            'I think timing can make or break even great connections',
+          value: 'Regretful',
+          emoji: '💔',
+          description: 'Wishing things had gone differently',
+        },
+        {
+          value: 'Peaceful',
+          emoji: '🕊️',
+          description: 'At peace with how things ended',
+        },
+      ],
+    },
+    {
+      id: 'communicationStyle',
+      q: 'When it comes to expressing feelings, you tend to:',
+      options: [
+        {
+          value: 'DirectWords',
+          emoji: '💬',
+          description: 'Say exactly what I mean',
+        },
+        {
+          value: 'SubtleActions',
+          emoji: '🎭',
+          description: 'Show through actions rather than words',
+        },
+        {
+          value: 'WriteItOut',
+          emoji: '✍️',
+          description: 'Express myself better in writing',
+        },
+        {
+          value: 'HoldBack',
+          emoji: '🤐',
+          description: 'Keep my feelings to myself',
+        },
+      ],
+    },
+    {
+      id: 'trustLevel',
+      q: 'When someone shows romantic interest in you, your first instinct is:',
+      options: [
+        {
+          value: 'OpenHeart',
+          emoji: '🌸',
+          description: 'Feel excited and open to possibilities',
+        },
+        {
+          value: 'Cautious',
+          emoji: '🔍',
+          description: 'Wonder what they really want',
+        },
+        {
+          value: 'Overwhelmed',
+          emoji: '😳',
+          description: 'Feel nervous and unsure how to respond',
+        },
+        {
+          value: 'Analyze',
+          emoji: '🧩',
+          description: "Try to figure out if we're compatible",
+        },
+      ],
+    },
+    {
+      id: 'intimacyComfort',
+      q: 'What feels most challenging about getting close to someone?',
+      options: [
+        {
+          value: 'Vulnerability',
+          emoji: '🛡️',
+          description: 'Opening up and being seen',
+        },
+        {
+          value: 'Timing',
+          emoji: '⏰',
+          description: 'Knowing when to share deeper feelings',
+        },
+        {
+          value: 'Fear',
+          emoji: '🌙',
+          description: "Worrying they'll lose interest",
+        },
+        {
+          value: 'Independence',
+          emoji: '🗝️',
+          description: 'Not wanting to lose my sense of self',
+        },
+      ],
+    },
+    {
+      id: 'lovePriority',
+      q: 'Right now, what matters most to you in romance?',
+      options: [
+        {
+          value: 'Passion',
+          emoji: '🔥',
+          description: 'Intense chemistry and excitement',
+        },
+        {
+          value: 'Stability',
+          emoji: '🏠',
+          description: 'Security and reliable partnership',
+        },
+        {
+          value: 'Growth',
+          emoji: '🌱',
+          description: 'Someone who challenges me to grow',
+        },
+        {
+          value: 'Understanding',
+          emoji: '🤝',
+          description: 'Deep emotional connection and acceptance',
         },
       ],
     },
   ],
 };
+
+/*
+{
+  id: 'relationshipComplexity',
+  q: 'Which situation feels most familiar to your current love life?',
+  options: [
+    {
+      value: 'Undefined connection',
+      emoji: '🌫️',
+      description:
+        "There's something there, but neither of you has defined it",
+    },
+    {
+      value: 'Timing mismatch',
+      emoji: '⏰',
+      description: 'Right person, but life circumstances are complicated',
+    },
+    {
+      value: 'Communication dance',
+      emoji: '💃',
+      description: "You both care but keep missing each other's signals",
+    },
+    {
+      value: 'Past still present',
+      emoji: '👻',
+      description:
+        'Previous relationship shadows are affecting your present',
+    },
+    {
+      value: 'Clear and steady',
+      emoji: '🛤️',
+      description:
+        'Your romantic situation feels straightforward right now',
+    },
+  ],
+},
+{
+  id: 'emotionalPattern',
+  q: 'How do you typically handle romantic uncertainty?',
+  options: [
+    {
+      value: 'Overthink everything',
+      emoji: '🧠',
+      description: 'I analyze every text, every look, every interaction',
+    },
+    {
+      value: 'Protect through distance',
+      emoji: '🏰',
+      description: 'I pull back to avoid getting hurt',
+    },
+    {
+      value: 'Push for clarity',
+      emoji: '🔍',
+      description:
+        "I need to know where I stand, even if it's uncomfortable",
+    },
+    {
+      value: 'Go with the flow',
+      emoji: '🌊',
+      description: 'I try to let things unfold naturally',
+    },
+    {
+      value: 'Seek advice constantly',
+      emoji: '📞',
+      description: "I talk it through with friends until I'm exhausted",
+    },
+  ],
+},
+{
+  id: 'prideDynamics',
+  q: 'When it comes to making the first move or being vulnerable:',
+  options: [
+    {
+      value: 'Pride holds me back',
+      emoji: '🦁',
+      description: 'I struggle to show my cards first',
+    },
+    {
+      value: "I'm usually the initiator",
+      emoji: '🚀',
+      description: 'I tend to make the first move',
+    },
+    {
+      value: 'I drop hints and hope',
+      emoji: '💫',
+      description: 'I signal interest but wait for them to be direct',
+    },
+    {
+      value: 'I mirror their energy',
+      emoji: '🪞',
+      description: 'I match whatever level of interest they show',
+    },
+    {
+      value: "I'm direct when I'm sure",
+      emoji: '🎯',
+      description: 'Once I know how I feel, I speak up',
+    },
+  ],
+},
+{
+  id: 'connectionStyle',
+  q: 'What kind of romantic connection do you crave most?',
+  options: [
+    {
+      value: 'Intellectual intimacy',
+      emoji: '📚',
+      description: 'Deep conversations and mental connection',
+    },
+    {
+      value: 'Comfortable silence',
+      emoji: '🤫',
+      description: 'Being together without needing to fill every moment',
+    },
+    {
+      value: 'Passionate intensity',
+      emoji: '🔥',
+      description: "Chemistry that's impossible to ignore",
+    },
+    {
+      value: 'Steady partnership',
+      emoji: '🤝',
+      description: 'Someone who builds life alongside you',
+    },
+    {
+      value: 'Playful chemistry',
+      emoji: '🎭',
+      description: 'Someone who brings out your fun, lighter side',
+    },
+  ],
+},
+{
+  id: 'relationshipBarriers',
+  q: 'What most often gets in the way of your romantic connections?',
+  options: [
+    {
+      value: 'Fear of judgment',
+      emoji: '👁️',
+      description: 'Worrying what others think about my choices',
+    },
+    {
+      value: 'Different life stages',
+      emoji: '📅',
+      description: 'Timing never seems to align with the right people',
+    },
+    {
+      value: 'Communication styles',
+      emoji: '📡',
+      description: 'We care but speak completely different languages',
+    },
+    {
+      value: 'Past relationship trauma',
+      emoji: '🩹',
+      description: 'Old wounds affecting new possibilities',
+    },
+    {
+      value: 'Practical circumstances',
+      emoji: '🌍',
+      description: 'Distance, work, family obligations',
+    },
+  ],
+},
+{
+  id: 'emotionalAvailability',
+  q: 'How ready are you for real intimacy right now?',
+  options: [
+    {
+      value: 'Scared but willing',
+      emoji: '🦋',
+      description: 'Nervous about being hurt but open to connection',
+    },
+    {
+      value: 'Cautiously optimistic',
+      emoji: '🌅',
+      description: 'Ready to try again with better boundaries',
+    },
+    {
+      value: 'Fully open',
+      emoji: '🌸',
+      description: 'Ready to be vulnerable and authentic',
+    },
+    {
+      value: 'Healing in progress',
+      emoji: '🌱',
+      description: 'Working on myself before diving in',
+    },
+    {
+      value: 'Conflicted',
+      emoji: '⚖️',
+      description: 'Want connection but afraid of losing independence',
+    },
+  ],
+},
+{
+  id: 'loveLanguageGap',
+  q: 'When someone cares about you, how do you usually recognize it?',
+  options: [
+    {
+      value: 'Their actions toward me',
+      emoji: '🤲',
+      description: 'I notice what they do, not just what they say',
+    },
+    {
+      value: 'How they remember details',
+      emoji: '🧩',
+      description: 'They pay attention to things that matter to me',
+    },
+    {
+      value: 'Their presence and attention',
+      emoji: '👀',
+      description: 'They make me feel seen and prioritized',
+    },
+    {
+      value: 'Physical affection',
+      emoji: '🫂',
+      description: 'Touch and closeness speak louder than words',
+    },
+    {
+      value: 'Words and expression',
+      emoji: '💬',
+      description: 'I need to hear how they feel about me',
+    },
+  ],
+},
+{
+  id: 'relationshipTiming',
+  q: "What's your relationship with timing in love?",
+  options: [
+    {
+      value: 'Chronically bad timing',
+      emoji: '🕰️',
+      description:
+        'I always seem to meet the right people at the wrong moments',
+    },
+    {
+      value: 'Impatient for clarity',
+      emoji: '⚡',
+      description: 'I want to know where things are heading quickly',
+    },
+    {
+      value: 'Believer in divine timing',
+      emoji: '🌌',
+      description: "I trust that things happen when they're supposed to",
+    },
+    {
+      value: 'Practical about timing',
+      emoji: '📊',
+      description: 'I consider life logistics when dating',
+    },
+    {
+      value: 'Timing is everything',
+      emoji: '🎯',
+      description:
+        'I think timing can make or break even great connections',
+    },
+  ],
+},
+*/

@@ -189,10 +189,7 @@ export default function ResultPage() {
           >
             <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center stream-down italic">
               <div className="mb-4">
-                {/* Display numeric score */}
-                <div className="text-2xl font-medium mb-2">
-                  {fortune.overall.score}
-                </div>
+                <div className="text-2xl font-medium mb-2">{score} Today</div>
 
                 {/* Animated progress bar */}
                 <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
