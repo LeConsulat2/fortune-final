@@ -130,6 +130,7 @@ export const personalInfoSchema = z.object({
 
 export interface UserMemory {
   name: string | null;
+  gender: string | null;
   birthDate: string | null;
   occupation: string | null;
   zodiacSign?: ZodiacSign;
