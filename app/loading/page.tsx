@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useUserMemory } from '@/lib/useUserMemory';
 import { Button } from '@/ui/button';
@@ -20,7 +20,17 @@ const LOADING_MESSAGES = [
   'Translating cosmic whispers 🌬️',
 ];
 
-export default function LoadingPage() {
+///// Suspense boundary added for useSearchParams requirement /////
+export default function LoadingPageWithSuspense() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoadingPage />
+    </Suspense>
+  );
+}
+///// End Suspense boundary /////
+
+function LoadingPage() {
   const [progress, setProgress] = useState(0);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
