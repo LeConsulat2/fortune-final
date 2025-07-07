@@ -90,6 +90,76 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
 
   quiz: [
     {
+      id: 'relationshipStatus',
+      q: "What's your current relationship status?",
+      options: [
+        {
+          value: 'Single',
+          emoji: '💫',
+          description: "I'm not dating anyone right now",
+        },
+        {
+          value: 'In a relationship',
+          emoji: '💕',
+          description: 'I have a partner',
+        },
+        {
+          value: 'Crushing',
+          emoji: '💭',
+          description: "I've got a crush on someone",
+        },
+        { value: 'Complicated', emoji: '🌀', description: "It's… complicated" },
+      ],
+    },
+    {
+      id: 'currentMood',
+      q: 'How have you been feeling about romance lately?',
+      options: [
+        {
+          value: 'Excited',
+          emoji: '😊',
+          description: 'Butterflies and happy vibes',
+        },
+        { value: 'Anxious', emoji: '😰', description: 'Uneasy and worried' },
+        {
+          value: 'Lonely',
+          emoji: '😔',
+          description: 'Feeling lonely and down',
+        },
+        {
+          value: 'Content',
+          emoji: '😌',
+          description: 'Pretty satisfied with things',
+        },
+      ],
+    },
+    {
+      id: 'loveGoal',
+      q: 'What do you want most in the love department?',
+      options: [
+        {
+          value: 'MeetSomeoneNew',
+          emoji: '✨',
+          description: 'I’d like to meet someone new',
+        },
+        {
+          value: 'DeepenRelationship',
+          emoji: '💘',
+          description: 'I want to deepen my current relationship',
+        },
+        {
+          value: 'ResolveConflict',
+          emoji: '🤝',
+          description: 'I need to work through conflicts with my partner',
+        },
+        {
+          value: 'SelfLove',
+          emoji: '🌱',
+          description: 'I want to love myself more',
+        },
+      ],
+    },
+    {
       id: 'relationshipComplexity',
       q: 'Which situation feels most familiar to your current love life?',
       options: [
