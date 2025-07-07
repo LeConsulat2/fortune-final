@@ -38,7 +38,7 @@ const selectionVariants = {
 export default function Choice() {
   const fortuneCategories = [
     {
-      name: 'What Would Happen Today?',
+      name: 'My Today',
       icon: <Sparkles size={24} />,
       path: '/general',
     },

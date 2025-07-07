@@ -8,6 +8,7 @@ import {
   ZODIAC_SIGNS_LABELS,
   ALL_FORTUNE_CATEGORIES,
   type FortuneCategory,
+  ZodiacSign,
 } from '@/lib/common-constants';
 
 import { seededRandom } from '@/lib/seeded-random';
@@ -26,11 +27,11 @@ export default function GeneralFortunePage() {
 
   //Redirect to onboarding if user info is not available
   if (!userMemory || !userMemory.birthDate) {
-    router.push('/onboarding/birthdate');
+    router.push('/start/step-2-birthdate');
     return null;
   }
 
-  const zodiacInfo = ZODIAC_SIGNS_LABELS[userMemory.zodiacSign];
+  const zodiacInfo = ZODIAC_SIGNS_LABELS[userMemory.zodiacSign as ZodiacSign];
   const today = formatDate(new Date());
 
   const handleCategorySelect = (category: FortuneCategory) => {

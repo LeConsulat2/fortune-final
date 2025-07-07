@@ -151,11 +151,18 @@ export default function Job() {
           )}
         </QuestionSection>
 
-        <div className="flex justify-between pt-4">
+        <div className="grid grid-cols-1 gap-2 pt-4">
+          <Button
+            onClick={handleComplete}
+            disabled={!canProceed}
+            className="px-6 w-full bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed:cursor-not-allowed"
+          >
+            Go To My Choices of Forutune Today ✨
+          </Button>
           <Button
             onClick={handleBack}
             variant="outline"
-            className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer"
+            className="px-6 w-full bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer"
           >
             ← Previous
           </Button>
@@ -164,15 +171,7 @@ export default function Job() {
             initial={{ opacity: 0 }}
             animate={{ opacity: canProceed ? 1 : 0.5 }}
             transition={{ duration: 0.3 }}
-          >
-            <Button
-              onClick={handleComplete}
-              disabled={!canProceed}
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed:cursor-not-allowed"
-            >
-              Get My Fortune ✨
-            </Button>
-          </motion.div>
+          ></motion.div>
         </div>
 
         <div className="text-center text-xs text-amber-400">
