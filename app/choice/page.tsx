@@ -101,15 +101,16 @@ export default function Choice() {
       </motion.div>
 
       <div className="w-full max-w-md flex flex-col gap-3">
-        {fortuneCategories.map((category, i) => (
+        {fortuneCategories.map((category, index) => (
           <motion.div
             key={category.name}
-            custom={i}
+            custom={index}
             variants={streamDownItemVariants}
             initial="hidden"
             animate="visible"
             whileHover="hover"
             whileTap="tap"
+            className="stream-down"
           >
             <Link href={category.path} className="block w-full">
               <motion.div
