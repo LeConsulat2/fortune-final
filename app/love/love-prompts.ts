@@ -1,6 +1,18 @@
-import { type FortuneConfig } from '@/lib/types';
-
-export { type FortuneConfig, type Question } from '@/lib/types';
+export interface QuizOption {
+  value: string;
+  emoji: string;
+  description: string;
+}
+export interface Question {
+  id: string;
+  q: string;
+  options: QuizOption[];
+}
+export interface FortuneConfig {
+  label: { name: string; emoji: string; description: string };
+  guidance: string;
+  quiz: Question[];
+}
 
 export const love: FortuneConfig = {
   label: {
@@ -128,7 +140,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
         {
           value: 'MeetSomeoneNew',
           emoji: '✨',
-          description: 'I'd like to meet someone new',
+          description: 'I’d like to meet someone new',
         },
         {
           value: 'DeepenRelationship',
