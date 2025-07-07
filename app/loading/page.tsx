@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useUserMemory } from '@/lib/useUserMemory';
+import { Button } from '@/ui/button';
 
 // Fortune generation messages
 const LOADING_MESSAGES = [
@@ -114,12 +115,12 @@ export default function LoadingPage() {
             Fortune Generation Error
           </h1>
           <p className="text-amber-200 mb-6">{error}</p>
-          <button
-            onClick={() => router.push('/general')}
-            className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-md"
+          <Button
+            onClick={() => router.push('/choice')}
+            className="w-full h-full hover:cursor-pointer bg-orange-500 hover:bg-orange-600 text-white rounded-md"
           >
             Try Again
-          </button>
+          </Button>
         </div>
       </div>
     );
