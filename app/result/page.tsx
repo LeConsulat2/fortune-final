@@ -123,9 +123,17 @@ export default function ResultPage() {
         <div className="max-w-md mx-auto">
           {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
+            initial={{ y: -60, opacity: 0 }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.6,
+                delay: 0.7,
+                ease: [0.42, 0, 0.58, 1.0],
+              },
+            }}
+            className="text-center mb-8 stream-down"
           >
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent mb-4">
               Your Fortune Today
@@ -148,19 +156,21 @@ export default function ResultPage() {
           >
             <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center">
               <div className="mb-4">
-                <div className="text-2xl mb-1">Your Fortune Score</div>
+                <div className="text-2xl font-medium mb-2">
+                  Your Fortune Score
+                </div>
                 <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-yellow-500 to-orange-500"
+                    className="h-full bg-gradient-to-r from-yellow-500 to-orange-500 font-semibold"
                     style={{ width: `${(fortune.overall.score / 10) * 100}%` }}
                   />
                 </div>
               </div>
 
               <div className="flex justify-between text-sm text-amber-300 mb-2">
-                <span>Challenging</span>
-                <span>Balanced</span>
-                <span>Favorable</span>
+                <span className="font-medium">Shadows Stirring</span>
+                <span className="font-medium">Turning Winds</span>
+                <span className="font-medium">Favorable Currents</span>
               </div>
 
               <div className="text-2xl font-semibold mb-3 text-white">
@@ -189,7 +199,7 @@ export default function ResultPage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 + index * 0.2 }}
-                  className="text-amber-100 mb-4 leading-relaxed"
+                  className="text-amber-100 mb-4 leading-loose stream-down"
                 >
                   {paragraph}
                 </motion.div>
@@ -206,7 +216,7 @@ export default function ResultPage() {
           >
             <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20">
               <h2 className="text-xl font-bold mb-2">Personal Insight</h2>
-              <p className="text-amber-100 italic">
+              <p className="text-amber-100 italic leading-loose stream-down">
                 {fortune.overall.personalised_insight}
               </p>
             </Card>
