@@ -7,11 +7,11 @@ export const mentalHealth: FortuneConfig = {
     description: 'Mind, emotions, and inner well-being',
   },
   guidance: `
-MENTAL HEALTH & EMOTIONAL WELLNESS FOCUS: Provide nuanced insights into psychological patterns, emotional processing, and mental well-being without clinical language. Each reading should feel like guidance from someone who understands the complex landscape of modern mental health.
+MENTAL HEALTH & EMOTIONAL WELLNESS FOCUS: Provide nuanced insights into psychological patterns and emotional well-being. Each reading should feel like guidance from an emotionally intelligent friend who understands the complex reality of modern mental health.
 
-SOPHISTICATED PSYCHOLOGICAL AWARENESS:
+SOPHISTICATED EMOTIONAL INTELLIGENCE:
 - Recognize the difference between temporary mood shifts and deeper patterns
-- Address how perfectionism and high-functioning anxiety manifest in daily life
+- Address how perfectionism and high-functioning anxiety show up in daily life
 - Explore the psychology of comparison and social media's impact on mental health
 - Examine how childhood patterns influence adult emotional responses
 - Address the complexity of imposter syndrome and self-worth struggles
@@ -20,7 +20,7 @@ SOPHISTICATED PSYCHOLOGICAL AWARENESS:
 - Address how life transitions trigger unexpected emotional responses
 - Examine the difference between healthy solitude and isolation
 
-EMOTIONAL INTELLIGENCE & REGULATION:
+NUANCED MENTAL HEALTH DYNAMICS:
 - Address the challenge of feeling emotions without being overwhelmed by them
 - Explore how to sit with discomfort without immediately trying to fix it
 - Discuss the complexity of being sensitive in a world that often feels harsh
@@ -31,7 +31,17 @@ EMOTIONAL INTELLIGENCE & REGULATION:
 - Explore how to handle criticism without internalized shame
 - Discuss the complexity of healing while still functioning in daily life
 
-MODERN MENTAL HEALTH CHALLENGES:
+AUTHENTIC RESPONSE PATTERNS:
+- Vary sentence structure and opening phrases naturally
+- Use specific, concrete imagery rather than abstract psychological concepts
+- Include references to subtle emotional cues people actually experience
+- Address the internal contradictions people feel about their mental health
+- Acknowledge when healing isn't linear or predictable
+- Include insights about timing that feel realistic, not prescriptive
+- Address how small moments can shift mental health patterns
+- Discuss the difference between what we project and what we actually feel
+
+MODERN MENTAL HEALTH REALITY:
 - Address decision fatigue and the overwhelming nature of modern choices
 - Explore how digital overwhelm affects attention and peace of mind
 - Discuss the pressure to be constantly productive and optimized
@@ -42,28 +52,7 @@ MODERN MENTAL HEALTH CHALLENGES:
 - Explore how to handle success anxiety and fear of failure equally
 - Discuss the complexity of living authentically in performative culture
 
-AUTHENTIC RESPONSE PATTERNS:
-- Avoid therapeutic jargon and clinical terminology
-- Use metaphors and imagery that resonate with emotional experience
-- Address the internal contradictions people feel about their mental health
-- Acknowledge when healing isn't linear or predictable
-- Include insights about the relationship between mental health and creativity
-- Address how seasonal changes, hormonal cycles, and life phases affect mood
-- Discuss the difference between what we project and what we actually feel
-- Include recognition of high-functioning struggles that others might not see
-
-NUANCED COPING & GROWTH:
-- Address how to build resilience without toxic positivity
-- Explore how to accept help without feeling like a burden
-- Discuss the challenge of maintaining boundaries with family patterns
-- Address how to find therapists and support that actually fit
-- Explore how to handle medication decisions and treatment complexity
-- Discuss how to maintain mental health during major life changes
-- Address the challenge of loving someone with mental health struggles
-- Explore how to support others without losing yourself
-- Discuss how to recognize when professional help is needed
-
-PRACTICAL WISDOM FOR DAILY LIFE:
+PRACTICAL WISDOM WITHOUT CLINICAL LANGUAGE:
 - Provide specific guidance on managing morning anxiety or evening rumination
 - Address how to create mental space in overstimulated environments
 - Discuss how to handle social situations when you're struggling internally
@@ -71,7 +60,21 @@ PRACTICAL WISDOM FOR DAILY LIFE:
 - Address how to maintain mental health during busy or stressful periods
 - Discuss how to find authentic ways to practice self-compassion
 - Address how to handle the gap between who you are and who you want to be
-- Provide guidance on building sustainable mental health practices`,
+- Provide guidance on building sustainable mental health practices
+
+OUTPUT:
+Return ONLY valid JSON with this exact schema:
+
+{
+  "overall": {
+    "score": 1-100,
+    "message": "brief, direct summary",
+    "detailed_message": "two short paragraphs about the main theme of their mental health with specific situations and clear guidance",
+    "personalised_insight": "brief observation connecting their quiz answers to a practical mental health pattern"
+  }
+}
+
+Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 
   quiz: [
     {
@@ -106,178 +109,54 @@ PRACTICAL WISDOM FOR DAILY LIFE:
       ],
     },
     {
-      id: 'emotionalRegulation',
-      q: 'How do you typically process difficult emotions?',
+      id: 'dailyMentalState',
+      q: 'How do you typically start your mornings?',
       options: [
         {
-          value: 'Analyze and intellectualize',
-          emoji: '🔍',
-          description: 'I try to think my way through feelings',
+          value: 'Anxious awakening',
+          emoji: '⏰',
+          description: 'I wake up with worry or dread about the day',
         },
         {
-          value: 'Feel fully then move on',
-          emoji: '🌊',
-          description: 'I let myself experience emotions completely',
+          value: 'Slow to surface',
+          emoji: '🌅',
+          description: 'It takes me a while to feel mentally clear',
         },
         {
-          value: 'Distract until it passes',
-          emoji: '📱',
-          description: 'I stay busy to avoid sitting with difficult feelings',
+          value: 'Optimistic energy',
+          emoji: '☀️',
+          description: 'I generally feel hopeful and ready',
         },
         {
-          value: 'Talk it out with others',
-          emoji: '💬',
-          description: 'I process by sharing with trusted people',
+          value: 'Neutral processing',
+          emoji: '🤖',
+          description: 'I feel emotionally flat or disconnected',
         },
         {
-          value: 'Body-based processing',
-          emoji: '🏃',
-          description: 'I move, breathe, or use physical practices',
-        },
-      ],
-    },
-    {
-      id: 'anxietyTriggers',
-      q: 'What tends to trigger your anxiety or stress most?',
-      options: [
-        {
-          value: 'Uncertainty about future',
-          emoji: '🔮',
-          description: "Not knowing what's coming next unsettles me",
-        },
-        {
-          value: 'Social performance pressure',
-          emoji: '🎪',
-          description: 'Feeling like I need to be "on" around others',
-        },
-        {
-          value: 'Perfectionism and control',
-          emoji: '🎯',
-          description: "When things don't go according to plan",
-        },
-        {
-          value: 'Comparison and inadequacy',
-          emoji: '📊',
-          description: "Measuring myself against others' success",
-        },
-        {
-          value: 'Conflict and confrontation',
-          emoji: '⚔️',
-          description: 'Disagreements or tension with others',
-        },
-      ],
-    },
-    {
-      id: 'mentalHealthSupport',
-      q: 'How do you currently support your mental health?',
-      options: [
-        {
-          value: 'Professional therapy',
-          emoji: '🛋️',
-          description: 'I work with a therapist regularly',
-        },
-        {
-          value: 'Medication and monitoring',
-          emoji: '💊',
-          description: 'I use medication as part of my mental health care',
-        },
-        {
-          value: 'Self-directed practices',
-          emoji: '📚',
-          description: 'I use books, apps, or personal practices',
-        },
-        {
-          value: 'Friend and family support',
-          emoji: '👥',
-          description: 'I rely on my personal support network',
-        },
-        {
-          value: 'Still figuring it out',
-          emoji: '🧩',
-          description: "I'm exploring what works for me",
-        },
-      ],
-    },
-    {
-      id: 'selfCompassion',
-      q: "How do you treat yourself when you're struggling?",
-      options: [
-        {
-          value: 'Harsh internal critic',
-          emoji: '⚖️',
-          description: "I'm harder on myself than I would be on others",
-        },
-        {
-          value: 'Gentle but realistic',
-          emoji: '🌸',
-          description: 'I try to be kind while acknowledging reality',
-        },
-        {
-          value: 'Avoidance and numbing',
-          emoji: '🌫️',
-          description: 'I tend to escape or distract from difficult feelings',
-        },
-        {
-          value: 'Practical problem-solving',
-          emoji: '🛠️',
-          description: 'I focus on what I can do to improve things',
-        },
-        {
-          value: 'Inconsistent compassion',
+          value: 'Mood lottery',
           emoji: '🎲',
-          description: "Sometimes I'm kind, sometimes I'm cruel to myself",
-        },
-      ],
-    },
-    {
-      id: 'mentalHealthGoals',
-      q: 'What would most improve your mental health right now?',
-      options: [
-        {
-          value: 'Better anxiety management',
-          emoji: '🧘',
-          description: 'Tools to handle worry and overwhelm',
-        },
-        {
-          value: 'Improved self-worth',
-          emoji: '💎',
-          description: 'Feeling more confident and secure in myself',
-        },
-        {
-          value: 'Healthier relationships',
-          emoji: '🤝',
-          description: 'Better boundaries and communication skills',
-        },
-        {
-          value: 'Life direction clarity',
-          emoji: '🧭',
-          description: 'Feeling more purposeful and aligned',
-        },
-        {
-          value: 'Emotional stability',
-          emoji: '⚖️',
-          description: 'Less extreme mood swings and more balance',
+          description: 'It varies completely from day to day',
         },
       ],
     },
     {
       id: 'stressResponse',
-      q: "When you're overwhelmed, what happens to you?",
+      q: 'When you hit your emotional limit, what happens?',
       options: [
         {
-          value: 'Shutdown and withdraw',
+          value: 'Shutdown mode',
           emoji: '🏠',
-          description: 'I isolate and need space to recharge',
+          description: 'I withdraw and need complete solitude',
         },
         {
-          value: 'Hyperactive and scattered',
+          value: 'Scattered energy',
           emoji: '🌪️',
-          description: "I become restless and can't focus",
+          description: "I become restless and can't focus on anything",
         },
         {
-          value: 'Irritable and reactive',
+          value: 'Irritable reactor',
           emoji: '🌋',
-          description: 'Small things trigger disproportionate responses',
+          description: 'Small things trigger big emotional responses',
         },
         {
           value: 'Physical symptoms',
@@ -292,33 +171,157 @@ PRACTICAL WISDOM FOR DAILY LIFE:
       ],
     },
     {
-      id: 'mentalHealthAwareness',
-      q: 'How aware are you of your mental health patterns?',
+      id: 'socialBattery',
+      q: 'How do social situations affect your mental energy?',
       options: [
         {
-          value: 'Highly self-aware',
+          value: 'Energizing connection',
+          emoji: '⚡',
+          description: 'Being around people generally lifts my mood',
+        },
+        {
+          value: 'Selective socializing',
           emoji: '🔍',
-          description: 'I notice patterns and triggers clearly',
+          description: 'Only certain people or situations feel good',
         },
         {
-          value: 'Learning to recognize',
-          emoji: '👁️',
-          description: "I'm developing better self-awareness",
+          value: 'Performance anxiety',
+          emoji: '🎪',
+          description: 'I worry about how I come across to others',
         },
         {
-          value: 'Others notice first',
+          value: 'Draining but necessary',
+          emoji: '🔋',
+          description: 'I need social time but it exhausts me',
+        },
+        {
+          value: 'Overwhelming crowds',
+          emoji: '🌊',
+          description: 'Too many people make me feel lost or anxious',
+        },
+      ],
+    },
+    {
+      id: 'selfTalk',
+      q: 'What does your inner voice sound like lately?',
+      options: [
+        {
+          value: 'Harsh critic',
+          emoji: '⚖️',
+          description: "I'm harder on myself than I'd be on others",
+        },
+        {
+          value: 'Gentle guide',
+          emoji: '🌸',
+          description: 'I try to be kind and encouraging to myself',
+        },
+        {
+          value: 'Anxious narrator',
+          emoji: '📢',
+          description: 'Constantly pointing out what could go wrong',
+        },
+        {
+          value: 'Confused observer',
+          emoji: '❓',
+          description: "I'm not sure what I think or feel about things",
+        },
+        {
+          value: 'Inconsistent companion',
+          emoji: '🎭',
+          description: 'Sometimes supportive, sometimes cruel',
+        },
+      ],
+    },
+    {
+      id: 'copingMechanism',
+      q: 'When you need to feel better, what do you reach for?',
+      options: [
+        {
+          value: 'Movement and nature',
+          emoji: '🚶',
+          description: 'Physical activity or time outdoors',
+        },
+        {
+          value: 'Creative expression',
+          emoji: '🎨',
+          description: 'Art, music, writing, or other creative outlets',
+        },
+        {
+          value: 'Social connection',
+          emoji: '🤗',
+          description: 'Talking with friends or family',
+        },
+        {
+          value: 'Comfort behaviors',
+          emoji: '🛋️',
+          description: 'Food, screens, shopping, or other soothing habits',
+        },
+        {
+          value: 'Solitude and reflection',
+          emoji: '🧘',
+          description: 'Quiet time alone to process and recharge',
+        },
+      ],
+    },
+    {
+      id: 'mentalHealthGoals',
+      q: 'What would most improve your mental health right now?',
+      options: [
+        {
+          value: 'Anxiety management',
+          emoji: '🧘',
+          description: 'Better tools for handling worry and overwhelm',
+        },
+        {
+          value: 'Self-worth boost',
+          emoji: '💎',
+          description: 'Feeling more confident and secure in myself',
+        },
+        {
+          value: 'Relationship skills',
+          emoji: '🤝',
+          description: 'Better boundaries and communication',
+        },
+        {
+          value: 'Life direction',
+          emoji: '🧭',
+          description: 'Feeling more purposeful and aligned',
+        },
+        {
+          value: 'Emotional stability',
+          emoji: '⚖️',
+          description: 'Less extreme mood swings and more balance',
+        },
+      ],
+    },
+    {
+      id: 'mentalHealthSupport',
+      q: 'How do you currently take care of your mental health?',
+      options: [
+        {
+          value: 'Professional help',
+          emoji: '🛋️',
+          description: 'Therapy, counseling, or medical support',
+        },
+        {
+          value: 'Self-directed practices',
+          emoji: '📚',
+          description: 'Books, apps, meditation, or personal routines',
+        },
+        {
+          value: 'Friend network',
           emoji: '👥',
-          description: 'Friends or family point out changes before I do',
+          description: 'I rely on my personal support system',
         },
         {
-          value: 'Hindsight clarity',
-          emoji: '🪞',
-          description: "I understand patterns only after they've passed",
+          value: 'Trial and error',
+          emoji: '🧩',
+          description: "I'm still figuring out what works for me",
         },
         {
-          value: 'Still discovering',
-          emoji: '🗺️',
-          description: "I'm just beginning to understand my mental health",
+          value: 'Minimal attention',
+          emoji: '🤷',
+          description: "I don't actively focus on my mental health much",
         },
       ],
     },

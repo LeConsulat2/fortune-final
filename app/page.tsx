@@ -100,10 +100,10 @@ export default function Home() {
           <motion.div variants={warmGasImageVariants} className="my-4 relative">
             <div className="absolute inset-0 bg-orange-300/10 rounded-xl blur-md warm-glow"></div>
             <Image
-              src="/thumbnail-nextjs.png"
+              src="/fortune.png"
               alt="Fortune"
-              width={500}
-              height={500}
+              width={400}
+              height={400}
               className="rounded-xl shadow-2xl w-full h-full relative z-10"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-red-500/5 rounded-xl mix-blend-overlay"></div>

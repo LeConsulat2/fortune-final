@@ -94,7 +94,22 @@ export const composure: FortuneConfig = {
   - Address how seasonal changes, life phases, and external pressures affect inner stability
   - Discuss the difference between what others see and what you carry
   - Include recognition of the ongoing nature of building and maintaining composure
-  - Address the moments when composure feels like a burden rather than a gift`,
+  - Address the moments when composure feels like a burden rather than a gift
+  
+  
+  OUTPUT:
+Return ONLY valid JSON with this exact schema:
+
+{
+  "overall": {
+    "score": 1-100,
+    "message": "brief, direct summary",
+    "detailed_message": "two short paragraphs about the main theme of their composure with specific situations and clear guidance",
+    "personalised_insight": "brief observation connecting their quiz answers to a practical composure pattern"
+  }
+}
+
+Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 
   quiz: [
     {
