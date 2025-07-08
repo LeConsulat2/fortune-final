@@ -124,12 +124,12 @@ export default function Home() {
               variants={pulseGlowVariants}
               initial="initial"
               animate="animate"
-              className="inline-block pulse-glow"
+              className="inline-block pulse-glow border-none"
             >
               <Button
                 asChild
                 size="lg"
-                className="hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 border-none shadow-2xl"
+                className="hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700shadow-2xl"
               >
                 <Link href="/start/step-1-personal-info">
                   ✨{''} Explore Your Fortune {''}✨
