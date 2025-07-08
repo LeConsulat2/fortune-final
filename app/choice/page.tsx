@@ -64,7 +64,7 @@ export default function Choice() {
     {
       name: 'Jobs & Interviews',
       icon: <Briefcase size={24} />,
-      path: '/quiz/job',
+      path: '/job',
       categoryKey: 'job',
     },
     {

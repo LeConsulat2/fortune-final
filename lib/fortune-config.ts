@@ -6,6 +6,7 @@ import { job } from '@/app/job/job-prompts';
 import { money } from '@/app/money/money-prompts';
 import { composure } from '@/app/composure/composure-prompts';
 import { assessment } from '@/app/assessment/assessment-prompts';
+import { interview } from '@/app/interview/interview-prompts';
 
 export type FortuneCategory = keyof typeof fortuneCategories;
 
@@ -20,6 +21,7 @@ export const fortuneCategoryLabels: Record<
   'mental-health': mentalHealth.label,
   composure: composure.label,
   assessment: assessment.label,
+  interview: interview.label,
 };
 
 export const fortuneCategories = {
@@ -30,6 +32,7 @@ export const fortuneCategories = {
   'mental-health': mentalHealth,
   composure,
   assessment,
+  interview,
 };
 
 export const getFortuneConfig = (category: string): FortuneConfig | null => {
