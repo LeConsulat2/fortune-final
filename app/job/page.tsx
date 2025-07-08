@@ -1,4 +1,6 @@
 // app/job/page.tsx
+'use client';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
@@ -66,16 +68,16 @@ export default function JobSelector() {
             className="absolute w-1 h-1 bg-orange-400 rounded-full"
             style={{
               left: `${seededRandom(i) * 100}%`,
-              top: `${seededRandom(i) * 100}%`,
+              top: `${seededRandom(i + 100) * 100}%`, // use a different seed for top
             }}
             animate={{
               y: [0, -15, 0],
               opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 3 + seededRandom(i + 200) * 2, // deterministic duration
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: seededRandom(i + 300) * 2, // deterministic delay
             }}
           />
         ))}

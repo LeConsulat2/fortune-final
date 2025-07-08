@@ -115,6 +115,30 @@ export default function BirthdatePage() {
                   calendarStartDay={1} // Monday
                   popperPlacement="bottom"
                   popperClassName="z-50"
+                  onChangeRaw={(event) => {
+                    if (!event?.target) return;
+                    const input = event.target as HTMLInputElement;
+                    const rawValue = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+
+                    if (rawValue.length === 8) {
+                      const formatted = `${rawValue.slice(
+                        0,
+                        2,
+                      )}/${rawValue.slice(2, 4)}/${rawValue.slice(4, 8)}`;
+                      input.value = formatted;
+
+                      const parsedDate = DateTime.fromFormat(
+                        formatted,
+                        'dd/MM/yyyy',
+                      );
+                      if (parsedDate.isValid) {
+                        setBirthDate(parsedDate.toJSDate());
+                      } else {
+                        console.warn('Invalid date format');
+                      }
+                    }
+                  }}
+
                   // You can add more props for accessibility if needed
                 />
                 {/* ///// End DatePicker ///// */}

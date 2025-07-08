@@ -1,4 +1,6 @@
-import { Briefcase, Clipboard } from 'lucide-react';
+//app/job/job-constants.ts
+
+import { Briefcase, ClipboardList } from 'lucide-react';
 
 export const jobOptions = [
   {
@@ -9,7 +11,7 @@ export const jobOptions = [
   },
   {
     name: 'Job Interview',
-    icon: Clipboard, // ✅
+    icon: ClipboardList, // ✅
     path: '/quiz/interview',
     description: 'Guidance for interviews and preparation',
   },
