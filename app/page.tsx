@@ -102,8 +102,9 @@ export default function Home() {
             <Image
               src="/fortune.png"
               alt="Fortune"
-              width={400}
-              height={400}
+              width={320}
+              height={320}
+              sizes="(min-width: 768px) 320px, 220px"
               className="rounded-xl shadow-2xl w-full h-full relative z-10"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-red-500/5 rounded-xl mix-blend-overlay"></div>
