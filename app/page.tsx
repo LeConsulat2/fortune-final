@@ -97,17 +97,22 @@ export default function Home() {
           </motion.div>
 
           {/* Image with warm gas effect and subtle glow */}
-          <motion.div variants={warmGasImageVariants} className="my-4 relative">
-            <div className="absolute inset-0 bg-orange-300/10 rounded-xl blur-md warm-glow"></div>
-            <Image
-              src="/thumbnail-nextjs.png"
-              alt="Fortune"
-              width={320}
-              height={320}
-              sizes="(min-width: 768px) 320px, 220px"
-              className="rounded-xl shadow-2xl max-w-full relative z-10"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-red-500/5 rounded-xl mix-blend-overlay"></div>
+          <motion.div
+            variants={warmGasImageVariants}
+            className="my-2 flex justify-center w-full"
+          >
+            <div className="relative w-full max-w-[320px] h-auto">
+              <div className="absolute inset-0 bg-orange-300/10 rounded-xl blur-md warm-glow"></div>
+              <Image
+                src="/thumbnail-nextjs.png"
+                alt="Fortune"
+                width={320}
+                height={320}
+                className="rounded-xl shadow-2xl object-contain relative z-10"
+                sizes="(min-width: 768px) 320px, 220px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-red-500/5 rounded-xl mix-blend-overlay"></div>
+            </div>
           </motion.div>
 
           {/* Description */}
