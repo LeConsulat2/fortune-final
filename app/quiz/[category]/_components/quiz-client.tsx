@@ -177,6 +177,31 @@ export function QuizClient({ category, questions }: QuizClientProps) {
                     </motion.div>
                   ))}
                 </div>
+
+                {currentQuestionIndex > 0 && (
+                  <motion.div
+                    initial={{ y: -60, opacity: 0 }}
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        duration: 0.6,
+                        delay: 0.7 + currentQuestion.options.length * 0.1,
+                        ease: [0.42, 0, 0.58, 1.0],
+                      },
+                    }}
+                    className="stream-down mt-4"
+                  >
+                    <Button
+                      onClick={() =>
+                        setCurrentQuestionIndex(currentQuestionIndex - 1)
+                      }
+                      className="w-full h-auto justify-center py-3 bg-black/10 border border-orange-500/30 hover:bg-black/20 text-orange-300 transition-all duration-200"
+                    >
+                      ← Back
+                    </Button>
+                  </motion.div>
+                )}
               </motion.div>
             </Card>
           </motion.div>
