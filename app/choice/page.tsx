@@ -76,7 +76,7 @@ export default function Choice() {
     {
       name: 'Exams & Assignments',
       icon: <Brain size={24} />,
-      path: '/quiz/assessment',
+      path: '/assessment',
       categoryKey: 'assessment',
     },
     {
