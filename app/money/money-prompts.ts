@@ -6,169 +6,357 @@ export const money: FortuneConfig = {
     emoji: '💰',
     description: 'Financial stability, income, and wealth',
   },
-  guidance: `FINANCIAL & ABUNDANCE FOCUS: Explore the deeper psychology of money, abundance mindset, and financial decision-making patterns.
+  guidance: `
+PRACTICAL MONEY REALITY FOCUS: Provide grounded, relatable insights about actual money decisions and spending patterns. Each reading should feel like guidance from a friend who understands real financial pressures and the psychology behind everyday money choices.
 
-SPECIFIC GUIDANCE:
-- Address relationship with money and underlying financial beliefs
-- Include insights about scarcity vs. abundance mindset patterns
-- Provide guidance on financial decision-making and risk assessment
-- Address how emotional states influence spending and saving habits
-- Include wisdom about recognizing genuine financial opportunities
-- Address the psychology of financial security vs. financial growth
-- Provide insights about money as energy exchange and value creation
-- Include guidance on balancing financial prudence with generous giving
-- Address how family money patterns influence current financial choices
+TANGIBLE FINANCIAL SITUATIONS:
+- Address specific spending decisions people are actually contemplating
+- Explore the gap between what people want to buy and what they actually need
+- Discuss the psychology of "treating yourself" versus genuine necessity
+- Address how social media and advertising influence purchasing decisions
+- Examine the relationship between emotional states and impulse spending
+- Explore the challenge of distinguishing between wants and needs in modern life
+- Address how peer pressure and social comparison drive financial choices
+- Discuss the reality of living paycheck to paycheck versus having financial cushion
+- Examine how small daily expenses add up to significant monthly costs
 
-INVESTMENT & OPPORTUNITY:
-- Acknowledge the balance between conservative and aggressive financial strategies
-- Address timing for financial decisions and market awareness
-- Include insights about recognizing undervalued opportunities
-- Provide guidance on diversification and risk management psychology
-- Address how to distinguish between genuine opportunities and get-rich-quick schemes
-- Include wisdom about building sustainable wealth vs. quick gains
+REAL MONEY PSYCHOLOGY:
+- Address the mental gymnastics people do to justify purchases
+- Explore how people rationalize expensive items they don't really need
+- Discuss the temporary satisfaction of buying something new
+- Address the guilt and regret that often follows impulse purchases
+- Examine how people use shopping as emotional regulation
+- Explore the difference between spending on experiences versus material items
+- Address the pressure to keep up with others' financial lifestyle
+- Discuss how childhood money experiences influence adult spending patterns
+- Examine the relationship between self-worth and spending power
 
-FINANCIAL PSYCHOLOGY:
-- Address perfectionism around money management and financial decisions
-- Include insights about money shame, guilt, or anxiety patterns
-- Provide guidance on financial communication with partners or family
-- Address how self-worth connects to financial success or struggles
-- Include wisdom about money as a tool vs. money as identity
-- Address the relationship between financial stress and overall life satisfaction
+PRACTICAL SPENDING WISDOM:
+- Address the "sleep on it" rule for non-essential purchases
+- Explore the value of calculating cost per use for expensive items
+- Discuss the importance of emergency funds versus immediate gratification
+- Address how to evaluate whether upgrades are actually necessary
+- Examine the psychology of sales, discounts, and "limited time" offers
+- Explore strategies for distinguishing between marketing hype and genuine value
+- Address the challenge of budgeting when income is irregular
+- Discuss how to make financial decisions that align with long-term goals
+- Examine the balance between being frugal and being overly restrictive
 
-PRACTICAL FINANCIAL WISDOM:
-- Provide specific guidance on budgeting and expense prioritization
-- Include insights about negotiation and value advocacy
-- Address how to research and evaluate financial decisions thoroughly
-- Provide guidance on building multiple income streams and financial security
-- Include wisdom about financial planning that aligns with personal values`,
+MODERN MONEY CHALLENGES:
+- Address subscription fatigue and recurring payment awareness
+- Explore the challenge of digital spending and contactless payments
+- Discuss the psychology of "free" shipping and minimum order requirements
+- Address how online shopping makes spending feel less real
+- Examine the pressure of constant sales and promotional offers
+- Explore the difficulty of tracking spending across multiple platforms
+- Address the temptation of buy-now-pay-later services
+- Discuss the challenge of saving when everything seems to cost more
+- Examine how inflation affects daily money decisions
+
+RELATABLE MONEY SITUATIONS:
+- Address the internal debate before making a purchase
+- Explore the feeling of finding a great deal versus genuine need
+- Discuss the psychology of window shopping and browsing
+- Address the pressure to buy gifts for others when money is tight
+- Examine how to handle financial advice from well-meaning friends
+- Explore the challenge of dining out versus cooking at home
+- Address the psychology of spending on hobbies and interests
+- Discuss the balance between saving for the future and enjoying the present
+- Examine how to make financial decisions without constant second-guessing
+
+PRACTICAL FINANCIAL GUIDANCE:
+- Address specific strategies for reducing unnecessary spending
+- Explore how to identify and eliminate money leaks in your budget
+- Discuss the importance of tracking where money actually goes
+- Address how to negotiate better deals on regular expenses
+- Examine the value of generic versus brand-name products
+- Explore strategies for handling unexpected expenses
+- Address how to build savings habits that actually stick
+- Discuss the psychology of earning versus spending money
+- Examine how to make financial goals feel achievable and realistic
+
+AUTHENTIC RESPONSE PATTERNS:
+- Use specific, concrete examples of real purchasing decisions
+- Address the internal contradictions people feel about money
+- Acknowledge the difference between financial logic and emotional spending
+- Include insights about timing and seasonal spending patterns
+- Address how external pressures influence financial choices
+- Discuss the difference between short-term and long-term financial thinking
+- Include recognition of the ongoing challenge of financial discipline
+- Address the moments when spending feels justified versus impulsive
+
+OUTPUT:
+Return ONLY valid JSON with this exact schema:
+
+{
+  "overall": {
+    "score": 1-100,
+    "message": "brief, direct summary",
+    "detailed_message": "two short paragraphs about the main theme of their money situation with specific situations and clear guidance",
+    "personalised_insight": "brief observation connecting their quiz answers to a practical money pattern"
+  }
+}
+
+Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
+
   quiz: [
     {
-      id: 'financialMindset',
-      q: 'How do you generally feel about money?',
+      id: 'plannedPurchase',
+      q: 'Are you planning to buy something right now?',
       options: [
         {
-          value: 'Confident manager',
-          emoji: '💪',
-          description: 'I feel in control of my finances',
+          value: 'Yes, this week',
+          emoji: '🛒',
+          description: 'I have something specific in mind to buy soon',
         },
         {
-          value: 'Anxious worrier',
-          emoji: '😰',
-          description: 'Money stress keeps me up at night',
+          value: 'Yes, this month',
+          emoji: '📅',
+          description: 'Planning a purchase but not urgently',
         },
         {
-          value: 'Optimistic dreamer',
-          emoji: '🌟',
-          description: 'I believe abundance is possible',
+          value: 'Maybe, browsing',
+          emoji: '👀',
+          description: 'Looking around but not committed',
         },
         {
-          value: 'Practical planner',
-          emoji: '📊',
-          description: 'I focus on realistic financial goals',
+          value: 'No, not at the moment',
+          emoji: '🚫',
+          description: 'Not planning any purchases right now',
+        },
+        {
+          value: 'Trying not to',
+          emoji: '🤐',
+          description: 'Want to buy things but restraining myself',
         },
       ],
     },
     {
-      id: 'spendingStyle',
-      q: 'What best describes your spending habits?',
+      id: 'whatToBuy',
+      q: 'What are you most tempted to spend money on lately?',
       options: [
         {
-          value: 'Careful saver',
-          emoji: '🐷',
-          description: 'I prioritize saving over spending',
+          value: 'New phone/laptop',
+          emoji: '📱',
+          description: "Tech upgrade that I probably don't need yet",
         },
         {
-          value: 'Strategic investor',
-          emoji: '📈',
-          description: 'I spend money to make money',
+          value: 'Clothes/shoes',
+          emoji: '👗',
+          description: 'Fashion items for my wardrobe',
         },
         {
-          value: 'Experience seeker',
-          emoji: '🎭',
-          description: 'I value experiences over things',
+          value: 'Food/dining out',
+          emoji: '🍕',
+          description: 'Restaurants, takeout, or fancy groceries',
         },
         {
-          value: 'Impulse buyer',
-          emoji: '🛍️',
-          description: 'I sometimes buy without planning',
+          value: 'Hobbies/entertainment',
+          emoji: '🎮',
+          description: 'Games, books, streaming services, or hobby gear',
+        },
+        {
+          value: 'Home stuff',
+          emoji: '🏠',
+          description: 'Furniture, decorations, or household items',
+        },
+        {
+          value: 'Beauty/self-care',
+          emoji: '💄',
+          description: 'Skincare, makeup, or wellness products',
         },
       ],
     },
     {
-      id: 'moneyGoal',
-      q: "What's your primary financial focus right now?",
+      id: 'needVsWant',
+      q: 'Be honest - do you actually NEED the thing you want to buy?',
       options: [
         {
-          value: 'Building emergency fund',
-          emoji: '🛡️',
-          description: 'Creating financial security and safety net',
+          value: 'Definitely need it',
+          emoji: '✅',
+          description: "It's actually necessary and I can justify it",
         },
         {
-          value: 'Paying off debt',
-          emoji: '🔗',
-          description: 'Eliminating financial obligations',
-        },
-        {
-          value: 'Growing investments',
-          emoji: '🌱',
-          description: 'Building wealth for the future',
-        },
-        {
-          value: 'Increasing income',
-          emoji: '⬆️',
-          description: 'Finding ways to earn more money',
-        },
-      ],
-    },
-    {
-      id: 'financialChallenge',
-      q: 'What money challenge affects you most?',
-      options: [
-        {
-          value: 'Making ends meet',
-          emoji: '⚖️',
-          description: 'Struggling with basic expenses',
-        },
-        {
-          value: 'Saving consistently',
-          emoji: '💧',
-          description: 'Having trouble putting money aside',
-        },
-        {
-          value: 'Investment decisions',
+          value: 'Probably need it',
           emoji: '🤔',
-          description: 'Uncertain about where to invest',
+          description: "I can convince myself it's necessary",
         },
         {
-          value: 'Money conversations',
-          emoji: '💬',
-          description: 'Discussing finances with family/partners',
+          value: 'Want it badly',
+          emoji: '😍',
+          description: "I just really want it even if I don't need it",
+        },
+        {
+          value: "It's complicated",
+          emoji: '🤷',
+          description: 'The line between want and need is blurry',
+        },
+        {
+          value: 'Total want',
+          emoji: '🛍️',
+          description: "It's pure desire, not necessity",
         },
       ],
     },
     {
-      id: 'financialOpportunity',
-      q: 'How do you usually approach financial opportunities?',
+      id: 'spendingTrigger',
+      q: 'What usually makes you spend money impulsively?',
       options: [
         {
-          value: 'Research thoroughly',
-          emoji: '🔍',
-          description: 'I investigate before making decisions',
+          value: 'Feeling stressed',
+          emoji: '😵',
+          description: 'Shopping helps me feel better temporarily',
         },
         {
-          value: 'Trust my instincts',
-          emoji: '💫',
-          description: 'I go with my gut feeling',
+          value: 'Seeing a good deal',
+          emoji: '🏷️',
+          description: 'Sales and discounts are hard to resist',
         },
         {
-          value: 'Seek expert advice',
+          value: 'Genuinely need it',
+          emoji: '🤔',
+          description:
+            'I genuinely need it and having been thinking to purchase it for a while',
+        },
+        {
+          value: 'Social pressure',
           emoji: '👥',
-          description: 'I consult with knowledgeable people',
+          description: 'Friends buying things or social media influence',
         },
         {
-          value: 'Start small and test',
-          emoji: '🧪',
-          description: 'I try things on a smaller scale first',
+          value: 'Celebrating something',
+          emoji: '🎉',
+          description: 'Rewarding myself for accomplishments',
+        },
+        {
+          value: 'Just because',
+          emoji: '🤪',
+          description: 'Sometimes I buy things for no real reason',
+        },
+      ],
+    },
+    {
+      id: 'moneyAnxiety',
+      q: 'How do you feel about your current money situation?',
+      options: [
+        {
+          value: 'Pretty comfortable',
+          emoji: '😌',
+          description: 'I can buy most things I want without worry',
+        },
+        {
+          value: 'Tight but manageable',
+          emoji: '😅',
+          description: "I have to be careful but I'm okay",
+        },
+        {
+          value: 'Constantly worried',
+          emoji: '😰',
+          description: 'Money stress affects my daily decisions',
+        },
+        {
+          value: 'Unpredictable',
+          emoji: '🎢',
+          description: 'Sometimes flush, sometimes broke',
+        },
+        {
+          value: 'Avoiding thinking about it',
+          emoji: '🙈',
+          description: 'I prefer not to look at my bank account',
+        },
+      ],
+    },
+    {
+      id: 'savingHabits',
+      q: 'What happens to your money between paychecks?',
+      options: [
+        {
+          value: 'Save first, spend later',
+          emoji: '🏦',
+          description: 'I put money aside before I can spend it',
+        },
+        {
+          value: 'Spend first, save leftover',
+          emoji: '💸',
+          description: 'I save whatever is left at the end',
+        },
+        {
+          value: 'Spend it all',
+          emoji: '🎯',
+          description: 'Money comes and goes, nothing left over',
+        },
+        {
+          value: 'Emergency savings only',
+          emoji: '🚨',
+          description: 'I only save for unexpected expenses',
+        },
+        {
+          value: 'What savings?',
+          emoji: '🤷',
+          description: 'I live paycheck to paycheck',
+        },
+      ],
+    },
+    {
+      id: 'purchaseRegret',
+      q: 'How often do you regret buying something?',
+      options: [
+        {
+          value: 'Rarely regret',
+          emoji: '👍',
+          description: 'I usually make good purchasing decisions',
+        },
+        {
+          value: 'Sometimes regret',
+          emoji: '😬',
+          description: "Occasionally buyer's remorse kicks in",
+        },
+        {
+          value: 'Often regret',
+          emoji: '🤦',
+          description: "I frequently wish I hadn't bought things",
+        },
+        {
+          value: 'Always second-guess',
+          emoji: '🔄',
+          description: 'I question every purchase after I make it',
+        },
+        {
+          value: 'Immediate regret',
+          emoji: '😱',
+          description: 'I often regret purchases right after buying',
+        },
+      ],
+    },
+    {
+      id: 'moneyAdvice',
+      q: 'What money advice do you need to hear right now?',
+      options: [
+        {
+          value: 'Just buy it',
+          emoji: '🛒',
+          description: 'Stop overthinking and treat yourself',
+        },
+        {
+          value: 'Sleep on it',
+          emoji: '😴',
+          description: 'Wait before making any big purchases',
+        },
+        {
+          value: 'Make more money',
+          emoji: '💪',
+          description:
+            'Focus on increasing income instead of restricting spending',
+        },
+        {
+          value: 'Track your spending',
+          emoji: '📊',
+          description: 'Actually know where your money goes',
+        },
+        {
+          value: "You're doing fine",
+          emoji: '👌',
+          description: 'Stop stressing about money so much',
         },
       ],
     },
