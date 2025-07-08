@@ -9,23 +9,32 @@ import { ZODIAC_SIGNS_LABELS } from '@/lib/common-constants';
 import { QuizFrame } from '@/ui/quiz-frame';
 import { QuestionSection } from '@/ui/section';
 import { Button } from '@/ui/button';
-import { Input } from '@/ui/input';
 import { Label } from '@/ui/label';
 import { staggerContainerVariants, zipInVariants } from '@/lib/animated-flow';
+
+///// react-datepicker and Luxon integration for birthdate /////
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { DateTime } from 'luxon';
+///// End react-datepicker and Luxon integration /////
 
 export default function BirthdatePage() {
   const router = useRouter();
   const { updateUserMemory } = useUserMemory();
-  const [birthDate, setBirthDate] = useState('');
+  // Replace string state with Date object for react-datepicker
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [isValid, setIsValid] = useState(false);
   const [zodiacSign, setZodiacSign] = useState<string>('');
 
   useEffect(() => {
     if (birthDate) {
-      const valid = isValidBirthDate(birthDate);
+      // Convert to Pacific/Auckland and format as yyyy-MM-dd for validation
+      const dt = DateTime.fromJSDate(birthDate, { zone: 'Pacific/Auckland' });
+      const iso = dt.toISODate();
+      const valid = isValidBirthDate(iso!);
       setIsValid(valid);
       if (valid) {
-        const sign = calculateZodiacSign(birthDate);
+        const sign = calculateZodiacSign(iso!);
         const signInfo = ZODIAC_SIGNS_LABELS[sign];
         setZodiacSign(`${signInfo.name} ${signInfo.emoji}`);
       } else {
@@ -39,7 +48,9 @@ export default function BirthdatePage() {
 
   const handleNext = () => {
     if (isValid && birthDate) {
-      updateUserMemory({ birthDate });
+      // Store as ISO string in Pacific/Auckland
+      const dt = DateTime.fromJSDate(birthDate, { zone: 'Pacific/Auckland' });
+      updateUserMemory({ birthDate: dt.toISODate() });
       router.push('/start/step-3-job');
     }
   };
@@ -48,10 +59,7 @@ export default function BirthdatePage() {
     router.push('/start/step-1-personal-info');
   };
 
-  // Auto-focus and format input
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBirthDate(e.target.value);
-  };
+  // Remove handleDateChange
 
   return (
     <QuizFrame
@@ -92,15 +100,24 @@ export default function BirthdatePage() {
                 <Label htmlFor="birthdate" className="text-white">
                   Date of Birth
                 </Label>
-                <Input
+                {/* ///// Replaced Input with DatePicker ///// */}
+                <DatePicker
                   id="birthdate"
-                  type="date"
-                  value={birthDate}
-                  onChange={handleDateChange}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-orange-400"
-                  placeholder="YYYY-MM-DD"
-                  max={new Date().toISOString().split('T')[0]}
+                  selected={birthDate}
+                  onChange={(date) => setBirthDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  showYearDropdown
+                  showMonthDropdown
+                  dropdownMode="select"
+                  maxDate={new Date()}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-orange-400 w-full px-3 py-2 rounded-md"
+                  placeholderText="DD/MM/YYYY"
+                  calendarStartDay={1} // Monday
+                  popperPlacement="bottom"
+                  popperClassName="z-50"
+                  // You can add more props for accessibility if needed
                 />
+                {/* ///// End DatePicker ///// */}
               </div>
             </motion.div>
 
