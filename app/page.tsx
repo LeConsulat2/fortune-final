@@ -118,7 +118,7 @@ export default function Home() {
           {/* Description */}
           {/* <motion.p
             variants={streamDownItemVariants}
-            className="text-sm md:text-lg text-amber-200 leading-relaxed mt-6"
+            className="text-sm md:text-md text-amber-200 leading-relaxed mt-6"
           >
             Explore your fortune for the day, while you create your own!
           </motion.p> */}
