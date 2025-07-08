@@ -41,7 +41,21 @@ PRACTICAL INTERVIEW WISDOM:
 - Projecting clarity and priority setting
 - Handling tough questions or challenging interviewers
 - Presentation skills and communication
-- Managing energy and avoiding burnout during the process`,
+- Managing energy and avoiding burnout during the process
+
+OUTPUT:
+Return ONLY valid JSON with this exact schema:
+
+{
+  "overall": {
+    "score": A float between 1 and 100,
+    "message": "brief, direct summary",
+    "detailed_message": "two short paragraphs about the main theme of their day with specific situations and clear advice",
+    "personalised_insight": "brief observation connecting their profession to a practical life pattern"
+  },
+
+  Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.
+`,
   quiz: [
     {
       id: 'interviewStage',

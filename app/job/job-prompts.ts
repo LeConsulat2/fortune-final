@@ -41,7 +41,21 @@ PRACTICAL WORKPLACE WISDOM:
 - Include insights about project management and priority setting
 - Address how to handle workplace conflicts or challenging colleagues
 - Provide guidance on presentation skills and professional communication
-- Include wisdom about managing energy and avoiding burnout`,
+- Include wisdom about managing energy and avoiding burnout
+
+OUTPUT:
+Return ONLY valid JSON with this exact schema:
+
+{
+  "overall": {
+    "score": A float between 1 and 100,
+    "message": "brief, direct summary",
+    "detailed_message": "two short paragraphs about the main theme of their day with specific situations and clear advice",
+    "personalised_insight": "brief observation connecting their profession to a practical life pattern"
+  },
+
+  Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.
+`,
   quiz: [
     {
       id: 'careerStage',
