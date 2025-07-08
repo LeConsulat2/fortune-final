@@ -79,7 +79,7 @@ export default function Home() {
       </div>
 
       {/* Main content */}
-      <div className="min-h-screen flex flex-col items-center justify-center px-6">
+      <div className="min-h-screen flex flex-col items-center justify-center mx-auto px-2 sm:px-0">
         <motion.div
           variants={staggerContainerVariants}
           initial="hidden"
@@ -105,7 +105,7 @@ export default function Home() {
               width={320}
               height={320}
               sizes="(min-width: 768px) 320px, 220px"
-              className="rounded-xl shadow-2xl w-full h-full relative z-10"
+              className="rounded-xl shadow-2xl max-w-full relative z-10"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-red-500/5 rounded-xl mix-blend-overlay"></div>
           </motion.div>
