@@ -140,6 +140,32 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       ],
     },
     {
+      id: 'innerNarrative',
+      q: 'Lately, what’s the main story running through your head?',
+      options: [
+        {
+          value: 'Trying to Keep Up',
+          emoji: '🏃',
+          description: 'I feel like I’m constantly behind or catching up',
+        },
+        {
+          value: 'What’s the Point?',
+          emoji: '🌀',
+          description: 'I keep questioning the purpose of it all',
+        },
+        {
+          value: 'I Should Be Better',
+          emoji: '🧭',
+          description: 'There’s a quiet pressure to “improve” myself',
+        },
+        {
+          value: 'Small Wins Matter',
+          emoji: '🌼',
+          description: 'I’m learning to value tiny moments of progress',
+        },
+      ],
+    },
+    {
       id: 'stressResponse',
       q: 'When you hit your emotional limit, what happens?',
       options: [
@@ -229,6 +255,32 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           value: 'Inconsistent companion',
           emoji: '🎭',
           description: 'Sometimes supportive, sometimes cruel',
+        },
+      ],
+    },
+    {
+      id: 'emotionalLoneliness',
+      q: 'When you feel low, what’s the hardest part?',
+      options: [
+        {
+          value: 'Feeling Invisible',
+          emoji: '👻',
+          description: 'Like no one notices or truly sees me',
+        },
+        {
+          value: 'Feeling Unreachable',
+          emoji: '📡',
+          description: 'Even when people care, I feel far away from them',
+        },
+        {
+          value: 'Feeling Too Much',
+          emoji: '🌊',
+          description: 'I wish I could feel less deeply — it’s exhausting',
+        },
+        {
+          value: 'Not Feeling Anything',
+          emoji: '🧊',
+          description: 'Emotional flatness that feels like numbness',
         },
       ],
     },
