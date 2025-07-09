@@ -58,132 +58,276 @@ Return ONLY valid JSON with this exact schema:
 `,
   quiz: [
     {
-      id: 'interviewStage',
-      q: 'What stage of the interview process are you in?',
+      id: 'applicationIntent',
+      q: 'Why did you apply for this role?',
       options: [
         {
-          value: 'First round',
-          emoji: '1️⃣',
-          description: 'Initial screening or phone interview',
-        },
-        {
-          value: 'Second round',
-          emoji: '2️⃣',
-          description: 'In-depth or technical interview',
-        },
-        {
-          value: 'Final round',
-          emoji: '🏁',
-          description: 'Final interview or offer stage',
-        },
-        {
-          value: 'Just preparing',
-          emoji: '📝',
-          description: 'Getting ready for upcoming interviews',
-        },
-      ],
-    },
-    {
-      id: 'interviewMotivation',
-      q: 'What matters most to you in this interview?',
-      options: [
-        {
-          value: 'Showcasing skills',
-          emoji: '💡',
-          description: 'Demonstrating my abilities',
-        },
-        {
-          value: 'Cultural fit',
-          emoji: '🤝',
-          description: 'Finding the right team and environment',
-        },
-        {
-          value: 'Landing the offer',
+          value: 'Clear Fit',
           emoji: '🎯',
-          description: 'Securing the job',
+          description:
+            'I knew what the role was and it fits what I’ve been looking for',
         },
         {
-          value: 'Learning experience',
-          emoji: '📚',
-          description: 'Gaining interview practice and feedback',
-        },
-      ],
-    },
-    {
-      id: 'interviewStyle',
-      q: 'How do you approach interviews?',
-      options: [
-        {
-          value: 'Confident and direct',
-          emoji: '🦁',
-          description: 'I present myself boldly',
+          value: 'Curious but Unsure',
+          emoji: '🔍',
+          description:
+            'It looked interesting, but I’m still figuring out if it really fits me',
         },
         {
-          value: 'Thoughtful and reflective',
-          emoji: '🧠',
-          description: 'I take time to consider my answers',
+          value: 'Let’s Be Real',
+          emoji: '💸',
+          description:
+            'I saw the title, skimmed the description, checked the salary — applied',
         },
         {
-          value: 'Conversational',
-          emoji: '💬',
-          description: 'I treat it as a two-way dialogue',
-        },
-        {
-          value: 'Adaptive',
-          emoji: '🌈',
-          description: 'I adjust my style to the situation',
+          value: 'Applied in Flow',
+          emoji: '📤',
+          description:
+            'I was in a job-search rhythm and this one felt “worth a shot”',
         },
       ],
     },
     {
-      id: 'interviewChallenge',
-      q: "What's your biggest interview challenge?",
+      id: 'roleUnderstanding',
+      q: 'How well do you actually understand the role you’re interviewing for?',
       options: [
         {
-          value: 'Nerves and anxiety',
-          emoji: '😬',
-          description: 'Managing stress and staying calm',
+          value: 'Very Clearly',
+          emoji: '🧭',
+          description:
+            'I’ve done my research and can describe it better than the ad did',
         },
         {
-          value: 'Tough questions',
-          emoji: '❓',
-          description: 'Handling unexpected or difficult topics',
+          value: 'Somewhat',
+          emoji: '🗺️',
+          description:
+            'I get the general direction, but I’ll know more once we talk',
         },
         {
-          value: 'Standing out',
-          emoji: '🌟',
-          description: 'Differentiating myself from other candidates',
+          value: 'Still Fuzzy',
+          emoji: '🌫️',
+          description:
+            'I’m hoping the interview gives me more clarity than the posting did',
         },
         {
-          value: 'Building rapport',
-          emoji: '🤗',
-          description: 'Connecting with interviewers',
+          value: 'Basically Guessing',
+          emoji: '🎲',
+          description:
+            'I’m just connecting the dots based on the title and vibes',
         },
       ],
     },
     {
-      id: 'interviewGoal',
-      q: 'What would feel like a win in this interview?',
+      id: 'energyBeforeInterview',
+      q: 'How are you usually feeling in the 10 minutes before an interview?',
       options: [
         {
-          value: 'Clear communication',
+          value: 'Locked In',
+          emoji: '🔒',
+          description: 'Notes reviewed, camera checked, inner monologue calm',
+        },
+        {
+          value: 'Managing Nerves',
+          emoji: '🌊',
+          description: 'Breathing through it, trying not to overthink',
+        },
+        {
+          value: 'Almost Too Chill',
+          emoji: '🛋️',
+          description: 'Weirdly relaxed — maybe too much?',
+        },
+        {
+          value: 'Caffeine-Panic Combo',
+          emoji: '☕😬',
+          description: 'Running on last-minute prep and adrenaline',
+        },
+      ],
+    },
+    {
+      id: 'questionStyle',
+      q: 'When it’s your turn to ask questions, what’s your usual approach?',
+      options: [
+        {
+          value: 'Insightful and Strategic',
+          emoji: '📈',
+          description: 'I prep thoughtful questions that show how I think',
+        },
+        {
+          value: 'Genuine Curiosity',
+          emoji: '🧃',
+          description: 'I ask what I actually want to know',
+        },
+        {
+          value: 'Vibe Checker',
+          emoji: '🎭',
+          description:
+            'I ask questions just to feel out their personality and energy',
+        },
+        {
+          value: 'Scrambling for One',
+          emoji: '🌀',
+          description: 'Sometimes I blank and end up asking something basic',
+        },
+      ],
+    },
+    {
+      id: 'storyStrength',
+      q: 'What type of story do you feel most confident telling in interviews?',
+      options: [
+        {
+          value: 'Problem Solving',
+          emoji: '🧩',
+          description:
+            'I shine when I walk through how I fixed or built something',
+        },
+        {
+          value: 'Team Dynamics',
+          emoji: '🤝',
+          description:
+            'I can talk about collaboration, conflict, and people stuff',
+        },
+        {
+          value: 'Growth Arc',
+          emoji: '🌱',
+          description: 'Stories about how I’ve grown or changed over time',
+        },
+        {
+          value: 'None Really',
+          emoji: '😶',
+          description: 'Still figuring out how to package my experiences',
+        },
+      ],
+    },
+    {
+      id: 'truthLevel',
+      q: 'How much of your real self do you show in interviews?',
+      options: [
+        {
+          value: '80% Me',
+          emoji: '🔓',
+          description: 'I stay authentic but filter with care',
+        },
+        {
+          value: 'Just Enough',
+          emoji: '🔍',
+          description: 'I give what I need to, and protect the rest',
+        },
+        {
+          value: 'All Polished',
+          emoji: '🧼',
+          description: 'This is a professional performance, fully edited',
+        },
+        {
+          value: 'Almost Too Honest',
+          emoji: '🫣',
+          description: 'I sometimes overshare when I drop my guard',
+        },
+      ],
+    },
+    {
+      id: 'interviewFocus',
+      q: 'Where does most of your mental focus go during interviews?',
+      options: [
+        {
+          value: 'Delivering Clearly',
           emoji: '🗣️',
-          description: 'Expressing myself well',
+          description: 'Trying to communicate ideas clearly and calmly',
         },
         {
-          value: 'Positive connection',
-          emoji: '😊',
-          description: 'Good rapport with interviewers',
+          value: 'Reading the Room',
+          emoji: '🧠',
+          description: 'Watching how they’re reacting to everything I say',
         },
         {
-          value: 'Learning something new',
-          emoji: '📖',
-          description: 'Gaining insight or feedback',
+          value: 'Remembering Talking Points',
+          emoji: '📝',
+          description: 'Running through things I need to mention',
         },
         {
-          value: 'Moving to next stage',
-          emoji: '➡️',
-          description: 'Progressing in the process',
+          value: 'Staying Grounded',
+          emoji: '🧘',
+          description: 'Trying to breathe, listen, and not overperform',
+        },
+      ],
+    },
+    {
+      id: 'companyFamiliarity',
+      q: 'How familiar are you with the company?',
+      options: [
+        {
+          value: 'Well-Acquainted',
+          emoji: '🏢',
+          description:
+            'I know their product, culture, and why I’d want to work here',
+        },
+        {
+          value: 'Enough to Talk',
+          emoji: '📚',
+          description:
+            'I read through their site and recent news — I’m prepared',
+        },
+        {
+          value: 'Not Much',
+          emoji: '👀',
+          description: 'I know the name, but not much else yet',
+        },
+        {
+          value: 'Just Found Out',
+          emoji: '🆕',
+          description: 'This was my first real look at them',
+        },
+      ],
+    },
+    {
+      id: 'interviewOutcomeExpectation',
+      q: 'What outcome are you realistically expecting from this interview?',
+      options: [
+        {
+          value: 'Hopeful',
+          emoji: '🌤️',
+          description: 'I think it went/will go well',
+        },
+        {
+          value: 'No Idea Yet',
+          emoji: '🎲',
+          description: 'Can’t tell — depends how they interpreted me',
+        },
+        {
+          value: 'Neutral',
+          emoji: '🪵',
+          description:
+            'Just treating it as practice unless it turns into something',
+        },
+        {
+          value: 'Probably Not This One',
+          emoji: '📪',
+          description: 'I showed up, but I don’t expect it to go anywhere',
+        },
+      ],
+    },
+    {
+      id: 'whatYouWantOutOfIt',
+      q: 'What do you honestly want out of this interview?',
+      options: [
+        {
+          value: 'Alignment',
+          emoji: '🧭',
+          description: 'To know if this is a place I could belong',
+        },
+        {
+          value: 'Breakthrough',
+          emoji: '💥',
+          description: 'A role that takes me into the next phase',
+        },
+        {
+          value: 'Validation',
+          emoji: '✅',
+          description: 'To be seen as capable and worth investing in',
+        },
+        {
+          value: 'Options',
+          emoji: '🌱',
+          description: 'Even if it’s not “the one,” I want more possibilities',
         },
       ],
     },
