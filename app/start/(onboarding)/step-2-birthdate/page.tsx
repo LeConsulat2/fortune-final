@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useUserMemory } from '@/lib/useUserMemory';
@@ -11,24 +11,145 @@ import { QuestionSection } from '@/ui/section';
 import { Button } from '@/ui/button';
 import { Label } from '@/ui/label';
 import { staggerContainerVariants, zipInVariants } from '@/lib/animated-flow';
-
-///// react-datepicker and Luxon integration for birthdate /////
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { DateTime } from 'luxon';
-///// End react-datepicker and Luxon integration /////
 
+///// Custom Date Input Component /////
+interface CustomDateInputProps {
+  value?: Date | null;
+  onChange: (date: Date | null) => void;
+  placeholder?: string;
+  className?: string;
+  maxDate?: Date;
+  id?: string;
+}
+
+const CustomDateInput: React.FC<CustomDateInputProps> = ({
+  value,
+  onChange,
+  placeholder = 'DD/MM/YYYY',
+  className = '',
+  maxDate = new Date(),
+  id,
+}) => {
+  const [displayValue, setDisplayValue] = useState(() =>
+    value ? DateTime.fromJSDate(value).toFormat('dd/MM/yyyy') : '',
+  );
+  const [error, setError] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (value) {
+      setDisplayValue(DateTime.fromJSDate(value).toFormat('dd/MM/yyyy'));
+    } else {
+      setDisplayValue('');
+    }
+  }, [value]);
+
+  const formatDateInput = (input: string): string => {
+    const numbers = input.replace(/\D/g, '');
+
+    if (numbers.length <= 2) {
+      return numbers;
+    } else if (numbers.length <= 4) {
+      return `${numbers.slice(0, 2)}/${numbers.slice(2)}`;
+    } else {
+      return `${numbers.slice(0, 2)}/${numbers.slice(2, 4)}/${numbers.slice(
+        4,
+        8,
+      )}`;
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value;
+    const isDeleting = rawValue.length < displayValue.length;
+
+    if (isDeleting) {
+      setDisplayValue(rawValue);
+      setError('');
+
+      if (rawValue.length === 10) {
+        const parsedDate = DateTime.fromFormat(rawValue, 'dd/MM/yyyy');
+        if (parsedDate.isValid) {
+          const jsDate = parsedDate.toJSDate();
+          if (jsDate <= maxDate) {
+            onChange(jsDate);
+          } else {
+            setError('Date cannot be in the future');
+            onChange(null);
+          }
+        } else {
+          onChange(null);
+        }
+      } else {
+        onChange(null);
+      }
+    } else {
+      const formatted = formatDateInput(rawValue);
+      setDisplayValue(formatted);
+      setError('');
+
+      if (formatted.length === 10) {
+        const parsedDate = DateTime.fromFormat(formatted, 'dd/MM/yyyy');
+        if (parsedDate.isValid) {
+          const jsDate = parsedDate.toJSDate();
+          if (jsDate <= maxDate) {
+            onChange(jsDate);
+          } else {
+            setError('Date cannot be in the future');
+            onChange(null);
+          }
+        } else {
+          setError('Please enter a valid date');
+          onChange(null);
+        }
+      } else {
+        onChange(null);
+      }
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if ([8, 9, 27, 13, 46, 37, 38, 39, 40].includes(e.keyCode)) return;
+    if (e.ctrlKey && [65, 67, 86, 88].includes(e.keyCode)) return;
+    if (
+      (e.keyCode >= 48 && e.keyCode <= 57) ||
+      (e.keyCode >= 96 && e.keyCode <= 105)
+    )
+      return;
+
+    e.preventDefault();
+  };
+
+  return (
+    <div className="space-y-2">
+      <input
+        ref={inputRef}
+        id={id}
+        type="text"
+        value={displayValue}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        className={`${className} ${error ? 'border-red-500' : ''}`}
+        maxLength={10}
+      />
+      {error && <div className="text-red-400 text-sm">{error}</div>}
+    </div>
+  );
+};
+///// End Custom Date Input Component /////
+
+///// BirthdatePage Component /////
 export default function BirthdatePage() {
   const router = useRouter();
   const { updateUserMemory } = useUserMemory();
-  // Replace string state with Date object for react-datepicker
   const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [isValid, setIsValid] = useState(false);
   const [zodiacSign, setZodiacSign] = useState<string>('');
 
   useEffect(() => {
     if (birthDate) {
-      // Convert to Pacific/Auckland and format as yyyy-MM-dd for validation
       const dt = DateTime.fromJSDate(birthDate, { zone: 'Pacific/Auckland' });
       const iso = dt.toISODate();
       const valid = isValidBirthDate(iso!);
@@ -48,7 +169,6 @@ export default function BirthdatePage() {
 
   const handleNext = () => {
     if (isValid && birthDate) {
-      // Store as ISO string in Pacific/Auckland
       const dt = DateTime.fromJSDate(birthDate, { zone: 'Pacific/Auckland' });
       updateUserMemory({ birthDate: dt.toISODate() });
       router.push('/start/step-3-job');
@@ -58,8 +178,6 @@ export default function BirthdatePage() {
   const handleBack = () => {
     router.push('/start/step-1-personal-info');
   };
-
-  // Remove handleDateChange
 
   return (
     <QuizFrame
@@ -100,52 +218,16 @@ export default function BirthdatePage() {
                 <Label htmlFor="birthdate" className="text-white">
                   Date of Birth
                 </Label>
-                {/* ///// Replaced Input with DatePicker ///// */}
-                <DatePicker
+                <CustomDateInput
                   id="birthdate"
-                  selected={birthDate}
+                  value={birthDate}
                   onChange={(date) => setBirthDate(date)}
-                  dateFormat="dd/MM/yyyy"
-                  showYearDropdown
-                  showMonthDropdown
-                  dropdownMode="select"
-                  maxDate={new Date()}
                   className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-orange-400 w-full px-3 py-2 rounded-md"
-                  placeholderText="DD/MM/YYYY"
-                  calendarStartDay={1} // Monday
-                  popperPlacement="bottom"
-                  popperClassName="z-50"
-                  onChangeRaw={(event) => {
-                    if (!event?.target) return;
-                    const input = event.target as HTMLInputElement;
-                    const rawValue = input.value.replace(/\D/g, ''); // Remove non-numeric characters
-
-                    if (rawValue.length === 8) {
-                      const formatted = `${rawValue.slice(
-                        0,
-                        2,
-                      )}/${rawValue.slice(2, 4)}/${rawValue.slice(4, 8)}`;
-                      input.value = formatted;
-
-                      const parsedDate = DateTime.fromFormat(
-                        formatted,
-                        'dd/MM/yyyy',
-                      );
-                      if (parsedDate.isValid) {
-                        setBirthDate(parsedDate.toJSDate());
-                      } else {
-                        console.warn('Invalid date format');
-                      }
-                    }
-                  }}
-
-                  // You can add more props for accessibility if needed
+                  placeholder="DD/MM/YYYY"
                 />
-                {/* ///// End DatePicker ///// */}
               </div>
             </motion.div>
 
-            {/* Zodiac sign preview */}
             {zodiacSign && (
               <motion.div
                 variants={zipInVariants}
@@ -157,7 +239,6 @@ export default function BirthdatePage() {
               </motion.div>
             )}
 
-            {/* Validation message */}
             {birthDate && !isValid && (
               <motion.div
                 initial={{ opacity: 0 }}
