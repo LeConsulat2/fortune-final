@@ -293,6 +293,32 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       ],
     },
     {
+      id: 'patternAwareness',
+      q: 'Do you notice certain patterns in your relationships or attractions?',
+      options: [
+        {
+          value: 'Yes, and I’m working on them',
+          emoji: '🛠️',
+          description: 'I see the cycles and I try to grow from them',
+        },
+        {
+          value: 'Yes, but they’re hard to change',
+          emoji: '♻️',
+          description: 'Old habits are hard to break',
+        },
+        {
+          value: 'Not sure yet',
+          emoji: '🔍',
+          description: 'Still trying to figure out what patterns I fall into',
+        },
+        {
+          value: 'No, every connection feels different',
+          emoji: '🎲',
+          description: 'Each relationship has been its own thing',
+        },
+      ],
+    },
+    {
       id: 'lovePriority',
       q: 'Right now, what matters most to you in love?',
       options: [
