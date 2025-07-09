@@ -38,17 +38,48 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
 
   quiz: [
     {
+      id: 'prepTimeline',
+      q: 'How much have you honestly prepared for this?',
+      options: [
+        {
+          value: 'Early Bird',
+          emoji: '📅',
+          description: 'I started from early in the semester or term',
+        },
+        {
+          value: 'Solid Head Start',
+          emoji: '🗂️',
+          description: 'I began , but not super early',
+        },
+        {
+          value: 'Midpoint Hustler',
+          emoji: '⏳',
+          description: 'Started around just before the halfway mark',
+        },
+        {
+          value: 'Late Push',
+          emoji: '🌘',
+          description: 'Started preparing pretty late',
+        },
+        {
+          value: 'Just Now, Honestly',
+          emoji: '🫣',
+          description: 'I’m basically cramming as we speak',
+        },
+      ],
+    },
+    {
       id: 'examType',
       q: 'What type of exam are you preparing for?',
       options: [
+        {
+          value: 'Pass or Fail',
+          emoji: '🎓',
+          description: 'Pass or Fail test ',
+        },
+        { value: 'Quiz', emoji: '📝', description: 'Short quiz or test' },
         { value: 'Midterm', emoji: '📖', description: 'Midterm exam' },
         { value: 'Final', emoji: '🏁', description: 'Final exam' },
-        { value: 'Quiz', emoji: '📝', description: 'Short quiz or test' },
-        {
-          value: 'Standardized',
-          emoji: '🎓',
-          description: 'Standardized test (SAT, ACT, etc.)',
-        },
       ],
     },
     {
@@ -63,7 +94,13 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
         {
           value: 'Nervous',
           emoji: '😬',
-          description: 'A bit anxious or stressed',
+          description:
+            'No matter how much prepare, it doens not change my anxiety',
+        },
+        {
+          value: 'Unsure',
+          emoji: '🤔',
+          description: 'Not sure if I am ready or not',
         },
         {
           value: 'Overwhelmed',
@@ -73,7 +110,76 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
         {
           value: 'Motivated',
           emoji: '💪',
-          description: 'Pumped to do my best',
+          description:
+            'Pumped to do my best, although they tell me humble is the key',
+        },
+      ],
+    },
+    {
+      id: 'energyManagement',
+      q: 'How are you managing your physical energy while studying?',
+      options: [
+        {
+          value: 'Well-Rested',
+          emoji: '😴',
+          description:
+            'Getting solid sleep. Recovery is the best source for my memory',
+        },
+        {
+          value: 'Caffeine-Boosted',
+          emoji: '☕',
+          description:
+            "Caffeine x 1000. I'm not sure if it's helping or not at this point",
+        },
+        {
+          value: 'Trying to Stay Balanced',
+          emoji: '🍵',
+          description:
+            'Trying to keep a good rhythm, need to still work part-time and workout!',
+        },
+        {
+          value: 'Running on Empty',
+          emoji: '🔋',
+          description:
+            'Somehow pushing through, I mean, I have no choice right now',
+        },
+        {
+          value: 'On Edge',
+          emoji: '📉',
+          description: 'Restless, jittery — stress is showing up in my body',
+        },
+      ],
+    },
+    {
+      id: 'mentalBlock',
+      q: 'What tends to block your focus the most when studying?',
+      options: [
+        {
+          value: 'Phone or Distraction',
+          emoji: '📱',
+          description: 'I keep checking my phone or doing something else',
+        },
+        {
+          value: 'Stress Spiral',
+          emoji: '🌀',
+          description:
+            'I overthink or imagine about no questions coming out from what I have studied',
+        },
+        {
+          value: 'Near No Idea',
+          emoji: '❓',
+          description: 'Not sure what or how to study  ',
+        },
+        {
+          value: 'Motivation Dips',
+          emoji: '😩',
+          description:
+            'I just can’t find the will to focus, I normally focus the best near towards last minute',
+        },
+        {
+          value: 'None in Particular',
+          emoji: '🧘',
+          description: 'I’ve been able to focus fairly well',
         },
       ],
     },
@@ -82,24 +188,25 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       q: 'What would feel like a win for you in this exam?',
       options: [
         {
-          value: 'HighScore',
+          value: 'Highest Score',
           emoji: '🌟',
-          description: 'Achieving a top grade',
+          description: 'Achieving the highest score possible',
         },
         {
-          value: 'PersonalBest',
+          value: 'Personal Best',
           emoji: '🏅',
           description: 'Beating my own record',
         },
         {
-          value: 'StayCalm',
+          value: 'Stay Calm',
           emoji: '🧘',
-          description: 'Staying calm and focused',
+          description:
+            'Staying calm. Focus on context of what I learnt and just execute in the exam',
         },
         {
-          value: 'FinishOnTime',
+          value: 'Minimum Pass',
           emoji: '⏰',
-          description: 'Completing all questions in time',
+          description: 'C- or 49.5% is goal at this point',
         },
       ],
     },
