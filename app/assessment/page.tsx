@@ -7,13 +7,13 @@ import { seededRandom } from '@/lib/seeded-random';
 
 const options = [
   {
-    name: 'Exam Fortune',
+    name: 'Exam',
     icon: FileText,
     path: '/quiz/exam',
     description: 'Exam mindset, preparation, and performance',
   },
   {
-    name: 'Assignment Fortune',
+    name: 'Assignment',
     icon: BookOpen,
     path: '/quiz/assignment',
     description: 'Assignment focus, productivity, and deadlines',

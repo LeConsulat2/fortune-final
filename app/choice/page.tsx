@@ -56,10 +56,10 @@ export default function Choice() {
       categoryKey: 'mental-health',
     },
     {
-      name: 'Composure',
-      icon: <Stethoscope size={24} />,
-      path: '/quiz/composure',
-      categoryKey: 'composure',
+      name: 'Exams & Assignments',
+      icon: <Brain size={24} />,
+      path: '/assessment',
+      categoryKey: 'assessment',
     },
     {
       name: 'Jobs & Interviews',
@@ -68,17 +68,19 @@ export default function Choice() {
       categoryKey: 'job',
     },
     {
+      name: 'Composure',
+      icon: <Stethoscope size={24} />,
+      path: '/quiz/composure',
+      categoryKey: 'composure',
+    },
+
+    {
       name: 'Money',
       icon: <CircleDollarSign size={24} />,
       path: '/quiz/money',
       categoryKey: 'money',
     },
-    {
-      name: 'Exams & Assignments',
-      icon: <Brain size={24} />,
-      path: '/assessment',
-      categoryKey: 'assessment',
-    },
+
     {
       name: 'Golf',
       icon: <LandPlot size={24} />,

@@ -58,132 +58,309 @@ Return ONLY valid JSON with this exact schema:
 `,
   quiz: [
     {
-      id: 'careerStage',
-      q: 'Where are you in your career journey right now?',
+      id: 'todayMood',
+      q: 'What’s your general vibe about work today?',
       options: [
         {
-          value: 'Starting out',
-          emoji: '🚀',
-          description: 'Early in my career, learning and growing',
+          value: 'Let’s Do This',
+          emoji: '💪',
+          description: 'Feeling ready to take things on',
         },
         {
-          value: 'Building momentum',
-          emoji: '📈',
-          description: 'Gaining experience and seeking advancement',
+          value: 'Caffeine and Hope',
+          emoji: '☕',
+          description: 'Running on nervous energy and habit',
         },
         {
-          value: 'Established professional',
-          emoji: '🏆',
-          description: 'Experienced and looking for new challenges',
+          value: 'Just Survive It',
+          emoji: '🫠',
+          description: 'Mentally clocked out, physically present',
         },
         {
-          value: 'Considering change',
-          emoji: '🔄',
-          description: 'Thinking about switching paths or roles',
+          value: 'Meh',
+          emoji: '😐',
+          description: 'Just doing what needs to be done — no more, no less',
+        },
+        {
+          value: 'Quietly Optimistic',
+          emoji: '🌤️',
+          description: 'Hopeful something small will go well',
         },
       ],
     },
     {
-      id: 'workMotivation',
-      q: 'What drives you most in your professional life?',
+      id: 'howYouThinkOthersSeeYou',
+      q: 'How do you *think* you come across at work?',
       options: [
         {
-          value: 'Creative expression',
-          emoji: '🎨',
-          description: 'Using my talents and imagination',
+          value: 'Reliable',
+          emoji: '📦',
+          description: 'I get things done quietly and consistently',
         },
         {
-          value: 'Financial security',
-          emoji: '💰',
-          description: 'Building stable financial future',
+          value: 'Competent but Distant',
+          emoji: '🪟',
+          description: 'I do good work, but I’m not that “chatty”',
         },
         {
-          value: 'Making an impact',
-          emoji: '🌍',
-          description: 'Contributing to something meaningful',
+          value: 'Underestimated',
+          emoji: '🫥',
+          description: 'I feel like people don’t fully see what I bring',
         },
         {
-          value: 'Personal growth',
+          value: 'Helpful and Kind',
+          emoji: '🧃',
+          description: 'I try to make things smoother for others',
+        },
+        {
+          value: 'Wildcard',
+          emoji: '🎲',
+          description: 'It really depends on the day',
+        },
+      ],
+    },
+    {
+      id: 'motivationLoop',
+      q: 'What’s your current motivation loop at work?',
+      options: [
+        {
+          value: 'Up and Down',
+          emoji: '↕️',
+          description: 'Some days I’m on fire, others… not so much',
+        },
+        {
+          value: 'Steady Push',
+          emoji: '🚶',
+          description: 'Not dramatic, just showing up and doing it',
+        },
+        {
+          value: 'Last-Minute Hustle',
+          emoji: '🔥',
+          description: 'Deadlines are the only thing that move me',
+        },
+        {
+          value: 'Just Do It',
+          emoji: '💪',
+          description:
+            'Same, no matter what, I figure out what needs to be done and make it happen',
+        },
+        {
+          value: 'Dragging Feet',
+          emoji: '🪨',
+          description: 'It’s a struggle to get momentum going',
+        },
+        {
+          value: 'Starting to Shift',
           emoji: '🌱',
-          description: 'Continuous learning and development',
+          description: 'Something in me is stirring — maybe change is coming',
         },
       ],
     },
     {
-      id: 'workStyle',
-      q: 'How do you work best?',
+      id: 'boundaryHabits',
+      q: 'How are your work boundaries lately?',
       options: [
         {
-          value: 'Collaborative team player',
-          emoji: '🤝',
-          description: 'I thrive working with others',
+          value: 'Chair Slouch Mode',
+          emoji: '💺',
+          description:
+            'I’m basically lying down in this chair but still replying to emails',
         },
         {
-          value: 'Independent self-starter',
+          value: 'Trying to Protect Space',
+          emoji: '🪵',
+          description: 'Blocking time off, even if I feel slightly guilty',
+        },
+        {
+          value: 'Depends on the Week',
+          emoji: '🌗',
+          description: 'Some weeks I’m solid, others I cave',
+        },
+        {
+          value: 'Pretty Healthy',
+          emoji: '🧘',
+          description: 'I know when to stop and protect my time',
+        },
+      ],
+    },
+    {
+      id: 'feedbackFeelings',
+      q: 'How do you usually feel after getting feedback?',
+      options: [
+        {
+          value: 'Hyper-Critical',
+          emoji: '🕵️',
+          description: 'I obsess over what I could’ve done better',
+        },
+        {
+          value: 'Quietly Encouraged',
+          emoji: '📎',
+          description: 'Even small praise helps me keep going',
+        },
+        {
+          value: "Don't Care",
+          emoji: '🤷',
+          description: 'I know the job better than the person giving feedback',
+        },
+        {
+          value: 'Detached',
+          emoji: '🌬️',
+          description: 'I hear it, but don’t feel much about it',
+        },
+        {
+          value: 'Energized',
           emoji: '🎯',
-          description: 'I prefer autonomy and initiative',
-        },
-        {
-          value: 'Structured and organized',
-          emoji: '📋',
-          description: 'I like clear plans and systems',
-        },
-        {
-          value: 'Flexible and adaptive',
-          emoji: '🌊',
-          description: 'I adjust well to changing situations',
+          description: 'I take feedback and think as positive as possible',
         },
       ],
     },
     {
-      id: 'careerChallenge',
-      q: "What's your biggest professional challenge lately?",
+      id: 'conflictStyle',
+      q: 'When work conflict shows up, how do you usually handle it?',
       options: [
         {
-          value: 'Work-life balance',
-          emoji: '⚖️',
-          description: 'Managing personal and professional demands',
+          value: 'Avoid & Simmer',
+          emoji: '🥄',
+          description: 'I keep it in and vent later',
         },
         {
-          value: 'Skill development',
+          value: 'Talk It Out ',
+          emoji: '📞',
+          description: 'Only way to resolve it really eventually',
+        },
+        {
+          value: 'Here We Go Again',
+          emoji: '🔁',
+          description: 'Here comes the drama again',
+        },
+        {
+          value: 'Address Immediately',
+          emoji: '🚨',
+          description: 'I can’t stand tension — I speak up quickly',
+        },
+        {
+          value: 'Let It Go',
+          emoji: '🍃',
+          description: 'If it’s not serious, I genuinely move on',
+        },
+      ],
+    },
+    {
+      id: 'hiddenStrength',
+      q: 'Which of these is one of your quiet superpowers at work?',
+      options: [
+        {
+          value: 'Staying Calm',
+          emoji: '🧊',
+          description: 'Even in chaos, I keep a level head',
+        },
+        {
+          value: 'Reading People',
+          emoji: '🧠',
+          description: 'I notice moods and dynamics quickly',
+        },
+        {
+          value: 'Detail Memory',
           emoji: '📚',
-          description: 'Keeping up with industry changes',
+          description: 'I remember the things others forget',
         },
         {
-          value: 'Workplace relationships',
-          emoji: '👥',
-          description: 'Navigating office dynamics and politics',
-        },
-        {
-          value: 'Career direction',
-          emoji: '🧭',
-          description: 'Figuring out my next professional steps',
+          value: 'Making People Feel Safe',
+          emoji: '🌿',
+          description: 'People feel steadier around me',
         },
       ],
     },
     {
-      id: 'professionalGoal',
-      q: 'What would feel like a win at work today?',
+      id: 'workIdentity',
+      q: 'If your current job disappeared tomorrow, what would you feel first?',
       options: [
         {
-          value: 'Completing important project',
-          emoji: '✅',
-          description: 'Making solid progress on key tasks',
+          value: 'Relief',
+          emoji: '😮‍💨',
+          description: 'Honestly… I’d feel lighter',
         },
         {
-          value: 'Positive team interaction',
-          emoji: '😊',
-          description: 'Good collaboration and communication',
+          value: 'Fear',
+          emoji: '😬',
+          description: 'I’d worry about what’s next',
         },
         {
-          value: 'Learning something new',
-          emoji: '💡',
-          description: 'Gaining knowledge or skills',
+          value: 'Excitement',
+          emoji: '🚀',
+          description: 'A blank slate sounds amazing',
         },
         {
-          value: 'Recognition for efforts',
+          value: 'Loss of Self',
+          emoji: '👤',
+          description: 'So much of my identity is tied to this',
+        },
+      ],
+    },
+    {
+      id: 'energyRhythm',
+      q: 'When do you usually feel most productive?',
+      options: [
+        {
+          value: 'Mornings',
+          emoji: '🌅',
+          description: 'Fresh mind, quiet hours, clean slate',
+        },
+        {
+          value: 'Head Start',
+          emoji: '🚀',
+          description: 'I start early and have a head start',
+        },
+        {
+          value: 'Afternoons',
+          emoji: '🌞',
+          description: 'I warm up slowly but then lock in',
+        },
+        {
+          value: 'Evenings',
+          emoji: '🌙',
+          description: 'Quiet + pressure = focus',
+        },
+        {
+          value: 'Random Spurts',
+          emoji: '🌪️',
+          description: 'No pattern, just sprints when it hits',
+        },
+      ],
+    },
+    {
+      id: 'whatYouWantNext',
+      q: 'What do you secretly hope comes next in your career?',
+      options: [
+        {
+          value: 'Recognition',
           emoji: '🌟',
-          description: 'Having my work acknowledged',
+          description: 'For people to actually see what I’ve built',
+        },
+        {
+          value: 'Better Balance',
+          emoji: '🧘‍♂️',
+          description: 'Work that respects the rest of my life',
+        },
+        {
+          value: 'Creative Freedom',
+          emoji: '🎨',
+          description: 'More space to make, shape, or lead my way',
+        },
+        {
+          value: 'A Clean Exit',
+          emoji: '🚪',
+          description: 'A graceful way out when the time is right',
+        },
+        {
+          value: 'More Money',
+          emoji: '💰',
+          description: 'More money, more money, more money',
+        },
+        {
+          value: 'Better Manager',
+          emoji: '🧑‍💼',
+          description: 'A manager who knows what they are doing',
         },
       ],
     },

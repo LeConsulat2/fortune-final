@@ -38,72 +38,205 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
 
   quiz: [
     {
+      id: 'timelineStatus',
+      q: 'Where are you in your assignment timeline?',
+      options: [
+        {
+          value: 'Just Started',
+          emoji: '🌱',
+          description:
+            'Fresh start - outline phase, gathering ideas and resources',
+        },
+        {
+          value: 'Making Progress',
+          emoji: '🔄',
+          description:
+            'Steady momentum - working through the main content consistently',
+        },
+        {
+          value: 'Halfway Through',
+          emoji: '⚡',
+          description: 'Midpoint grind - pushing through the bulk of the work',
+        },
+        {
+          value: 'Final Push',
+          emoji: '🏃',
+          description: 'Sprint mode - wrapping up, editing, and polishing',
+        },
+        {
+          value: 'Crunch Time',
+          emoji: '🚨',
+          description:
+            'Last-minute hustle - deadline is breathing down my neck',
+        },
+      ],
+    },
+    {
       id: 'assignmentType',
-      q: 'What kind of assignment are you working on?',
+      q: 'What kind of assignment are you wrestling with?',
       options: [
-        { value: 'Essay', emoji: '📝', description: 'Essay or written report' },
         {
-          value: 'Project',
-          emoji: '📊',
-          description: 'Project or presentation',
+          value: 'Research Paper',
+          emoji: '📄',
+          description: 'Deep dive essay or research report requiring analysis',
         },
-        { value: 'Lab', emoji: '🔬', description: 'Lab or experiment' },
         {
-          value: 'Homework',
-          emoji: '📚',
-          description: 'Homework or problem set',
+          value: 'Creative Project',
+          emoji: '🎨',
+          description: 'Presentation, design work, or creative portfolio piece',
+        },
+        {
+          value: 'Problem Sets',
+          emoji: '🧮',
+          description:
+            'Math problems, coding assignments, or technical exercises',
+        },
+        {
+          value: 'Lab Work',
+          emoji: '🔬',
+          description:
+            'Experiments, data collection, or hands-on practical work',
         },
       ],
     },
     {
-      id: 'assignmentMood',
-      q: 'How do you feel about your assignment progress?',
+      id: 'currentMood',
+      q: 'How are you feeling about this assignment right now?',
       options: [
         {
-          value: 'OnTrack',
-          emoji: '✅',
-          description: 'Making steady progress',
+          value: 'In the Zone',
+          emoji: '🎯',
+          description:
+            'Flow state activated - ideas are connecting, words are flowing',
         },
         {
-          value: 'Behind',
-          emoji: '⏳',
-          description: 'Falling behind schedule',
+          value: 'Grinding It Out',
+          emoji: '💪',
+          description:
+            'Not inspired, but pushing through with discipline and effort',
         },
         {
-          value: 'Stressed',
-          emoji: '😰',
-          description: 'Feeling stressed or overwhelmed',
+          value: 'Hitting Walls',
+          emoji: '🧱',
+          description:
+            'Stuck on concepts, struggling to find the right approach',
         },
         {
-          value: 'Motivated',
-          emoji: '🚀',
-          description: 'Motivated to finish strong',
+          value: 'Stress Spiral',
+          emoji: '🌪️',
+          description:
+            'Overwhelmed by scope, paralyzed by perfectionism or time pressure',
+        },
+        {
+          value: 'Procrastination Loop',
+          emoji: '🔄',
+          description:
+            'Avoiding it entirely - scrolling, cleaning, doing literally anything else',
         },
       ],
     },
     {
-      id: 'assignmentGoal',
-      q: 'What would feel like a win for you on this assignment?',
+      id: 'workStyle',
+      q: 'What describes your natural work rhythm?',
       options: [
         {
-          value: 'FinishEarly',
-          emoji: '⏰',
-          description: 'Finishing ahead of deadline',
+          value: 'Steady Pacer',
+          emoji: '🐢',
+          description:
+            'Consistent daily progress - slow and steady wins the race',
         },
         {
-          value: 'HighQuality',
-          emoji: '🌟',
-          description: 'Producing high-quality work',
+          value: 'Burst Worker',
+          emoji: '⚡',
+          description:
+            'Intense focused sessions followed by breaks or other tasks',
         },
         {
-          value: 'LearnSomething',
-          emoji: '💡',
-          description: 'Learning something new',
+          value: 'Night Owl',
+          emoji: '🦉',
+          description:
+            'Peak productivity happens after everyone else is asleep',
         },
         {
-          value: 'Teamwork',
+          value: 'Deadline Warrior',
+          emoji: '⚔️',
+          description:
+            'Pressure creates diamonds - I do my best work under time constraints',
+        },
+        {
+          value: 'Collaborative Spirit',
           emoji: '🤝',
-          description: 'Great collaboration with others',
+          description:
+            'Bounce ideas off others, work better with accountability partners',
+        },
+      ],
+    },
+    {
+      id: 'biggestChallenge',
+      q: "What's your biggest obstacle right now?",
+      options: [
+        {
+          value: 'Getting Started',
+          emoji: '🚀',
+          description: 'Blank page syndrome - the hardest part is beginning',
+        },
+        {
+          value: 'Staying Focused',
+          emoji: '🎯',
+          description:
+            'Distractions everywhere - phone, social media, random thoughts',
+        },
+        {
+          value: 'Understanding Material',
+          emoji: '🤔',
+          description: 'Complex concepts that need more time to click',
+        },
+        {
+          value: 'Time Management',
+          emoji: '⏰',
+          description:
+            'Balancing this with other responsibilities and commitments',
+        },
+        {
+          value: 'Perfectionism',
+          emoji: '🔍',
+          description:
+            'Getting stuck tweaking details instead of moving forward',
+        },
+      ],
+    },
+    {
+      id: 'successVision',
+      q: 'What would make this assignment feel like a genuine win?',
+      options: [
+        {
+          value: 'Personal Growth',
+          emoji: '🌱',
+          description:
+            'Learning something that genuinely expands my understanding',
+        },
+        {
+          value: 'Quality Work',
+          emoji: '💎',
+          description:
+            "Producing something I'm actually proud to put my name on",
+        },
+        {
+          value: 'Efficient Process',
+          emoji: '⚡',
+          description:
+            'Finishing without burnout, maintaining balance and sanity',
+        },
+        {
+          value: 'Grade Achievement',
+          emoji: '🎯',
+          description: 'Hitting the grade target I need for my academic goals',
+        },
+        {
+          value: 'Just Surviving',
+          emoji: '🏥',
+          description:
+            'Getting it done and submitted - any passing grade is victory',
         },
       ],
     },
