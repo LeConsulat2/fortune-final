@@ -87,7 +87,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
         {
           value: 'In a relationship',
           emoji: '💕',
-          description: 'I have a partner',
+          description: 'I am in a relationship',
         },
         {
           value: 'Like Someone?',
@@ -108,6 +108,11 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
         },
         { value: 'Anxious', emoji: '😰', description: 'Uneasy and worried' },
         {
+          value: 'In Between',
+          emoji: '🕊️',
+          description: 'For what once was or could’ve been',
+        },
+        {
           value: 'Lonely',
           emoji: '😔',
           description: 'Feeling lonely and down',
@@ -120,26 +125,31 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       ],
     },
     {
-      id: 'loveGoal',
-      q: 'What do you want most in the love department?',
+      id: 'love',
+      q: 'What do you want or desire the most? ',
       options: [
         {
-          value: 'MeetSomeoneNew',
+          value: 'Meet Someone New',
           emoji: '✨',
           description: 'I’d like to meet someone new',
         },
         {
-          value: 'DeepenRelationship',
+          value: 'Deepen Relationship',
           emoji: '💘',
           description: 'I want to deepen my current relationship',
         },
         {
-          value: 'ResolveConflict',
+          value: 'Resolve Conflict',
           emoji: '🤝',
           description: 'I need to work through conflicts with my partner',
         },
         {
-          value: 'SelfLove',
+          value: 'Navigate',
+          emoji: '🌀',
+          description: 'I need to navigate the complexities of my love life',
+        },
+        {
+          value: 'Self Love',
           emoji: '🌱',
           description: 'I want to love myself more',
         },
@@ -164,6 +174,11 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🌌',
           description: 'I am not sure if I am going on a date today or soon',
         },
+        {
+          value: 'Not Even Thinking About It',
+          emoji: '💔',
+          description: 'I am not even thinking about a date today or soon',
+        },
       ],
     },
     // 5 additional quiz questions for the love fortune
@@ -172,24 +187,29 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       q: 'How do you feel about your most recent romantic experience?',
       options: [
         {
-          value: 'StillProcessing',
-          emoji: '🌊',
+          value: 'Still Processing',
+          emoji: '💔',
           description: 'Still working through the emotions',
         },
         {
-          value: 'GratefulButReady',
+          value: 'Grateful But Ready',
           emoji: '🦋',
           description: 'Grateful for the lessons, ready to move forward',
         },
         {
+          value: 'Wistful',
+          emoji: '🕊️',
+          description: 'A soft, quiet, almost unspoken longing',
+        },
+        {
           value: 'Regretful',
-          emoji: '💔',
-          description: 'Wishing things had gone differently',
+          emoji: '😣',
+          description: "Wish I didn't even started it",
         },
         {
           value: 'Peaceful',
           emoji: '🕊️',
-          description: 'At peace with how things ended',
+          description: 'At peace in general carrying no resentment',
         },
       ],
     },
@@ -198,22 +218,22 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       q: 'When it comes to expressing feelings, you tend to:',
       options: [
         {
-          value: 'DirectWords',
+          value: 'Direct Words',
           emoji: '💬',
           description: 'Say exactly what I mean',
         },
         {
-          value: 'SubtleActions',
+          value: 'Subtle Actions',
           emoji: '🎭',
           description: 'Show through actions rather than words',
         },
         {
-          value: 'WriteItOut',
+          value: 'Write It Out',
           emoji: '✍️',
           description: 'Express myself better in writing',
         },
         {
-          value: 'HoldBack',
+          value: 'Hold Back',
           emoji: '🤐',
           description: 'Keep my feelings to myself',
         },
@@ -224,7 +244,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
       q: 'When someone shows romantic interest in you, your first instinct is:',
       options: [
         {
-          value: 'OpenHeart',
+          value: 'Open Heart',
           emoji: '🌸',
           description: 'Feel excited and open to possibilities',
         },
@@ -236,12 +256,13 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
         {
           value: 'Overwhelmed',
           emoji: '😳',
-          description: 'Feel nervous and unsure how to respond',
+          description: 'Feel nervous and unsure how to respond or proceed',
         },
         {
           value: 'Analyze',
           emoji: '🧩',
-          description: "Try to figure out if we're compatible",
+          description:
+            'Try to figure out if I would be compatible with someone or that person',
         },
       ],
     },
@@ -273,7 +294,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     },
     {
       id: 'lovePriority',
-      q: 'Right now, what matters most to you in romance?',
+      q: 'Right now, what matters most to you in love?',
       options: [
         {
           value: 'Passion',
@@ -283,12 +304,13 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
         {
           value: 'Stability',
           emoji: '🏠',
-          description: 'Security and reliable partnership',
+          description: 'Security and reliability',
         },
         {
           value: 'Growth',
           emoji: '🌱',
-          description: 'Someone who challenges me to grow',
+          description:
+            'Someone who would be the missing complement of me, as well as me being the missing complement of them',
         },
         {
           value: 'Understanding',
