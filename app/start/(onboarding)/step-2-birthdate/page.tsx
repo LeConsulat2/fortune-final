@@ -12,6 +12,7 @@ import { Button } from '@/ui/button';
 import { Label } from '@/ui/label';
 import { staggerContainerVariants, zipInVariants } from '@/lib/animated-flow';
 import { DateTime } from 'luxon';
+import { Calendar } from '@/ui/calendar';
 
 ///// Custom Date Input Component /////
 interface CustomDateInputProps {
@@ -226,6 +227,15 @@ export default function BirthdatePage() {
                   placeholder="DD/MM/YYYY"
                 />
               </div>
+
+              <Calendar
+                mode="single"
+                selected={birthDate ?? undefined}
+                required={true}
+                captionLayout="dropdown"
+                onSelect={setBirthDate}
+                className="calendar-dropdown mt-4 bg-white/10 border-white/20 text-white/50 placeholder:text-slate-400 focus:border-orange-400 w-full px-3 py-2 rounded-md"
+              />
             </motion.div>
 
             {zodiacSign && (
