@@ -38,11 +38,15 @@ const CustomDateInput: React.FC<CustomDateInputProps> = ({
   const [error, setError] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Fix: Update display value whenever the value prop changes
   useEffect(() => {
     if (value) {
-      setDisplayValue(DateTime.fromJSDate(value).toFormat('dd/MM/yyyy'));
+      const formatted = DateTime.fromJSDate(value).toFormat('dd/MM/yyyy');
+      setDisplayValue(formatted);
+      setError(''); // Clear any existing errors
     } else {
       setDisplayValue('');
+      setError('');
     }
   }, [value]);
 
@@ -168,6 +172,15 @@ export default function BirthdatePage() {
     }
   }, [birthDate]);
 
+  // Fix: Handle calendar selection properly
+  const handleCalendarSelect = (date: Date | undefined) => {
+    if (date) {
+      setBirthDate(date);
+    } else {
+      setBirthDate(null);
+    }
+  };
+
   const handleNext = () => {
     if (isValid && birthDate) {
       const dt = DateTime.fromJSDate(birthDate, { zone: 'Pacific/Auckland' });
@@ -233,7 +246,7 @@ export default function BirthdatePage() {
                 selected={birthDate ?? undefined}
                 required={true}
                 captionLayout="dropdown"
-                onSelect={setBirthDate}
+                onSelect={handleCalendarSelect}
                 className="calendar-dropdown mt-4 bg-white/10 border-white/20 text-white/50 placeholder:text-slate-400 focus:border-orange-400 w-full px-3 py-2 rounded-md"
               />
             </motion.div>
