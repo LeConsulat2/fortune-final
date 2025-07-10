@@ -60,6 +60,10 @@ export const love: FortuneConfig = {
   - Discuss how to handle rejection without closing your heart
   - Address how to love someone without losing yourself in the process
 
+  LANGUAGE INSTRUCTION:
+  Write your entire response in the language selected by the user in the quiz.
+
+
 OUTPUT:
 Return ONLY valid JSON with this exact schema:
 
@@ -342,6 +346,32 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           value: 'Understanding',
           emoji: '🤝',
           description: 'Deep emotional connection and acceptance',
+        },
+      ],
+    },
+    {
+      id: 'language',
+      q: 'What language did you want the fortuner to respond to you?',
+      options: [
+        {
+          value: 'English',
+          emoji: '🇬🇧',
+          description: 'English',
+        },
+        {
+          value: 'Korean',
+          emoji: '🇰🇷',
+          description: 'Korean',
+        },
+        {
+          value: 'Japanese',
+          emoji: '🇯🇵',
+          description: 'Japanese',
+        },
+        {
+          value: 'Chinese',
+          emoji: '🇨🇳',
+          description: 'Chinese',
         },
       ],
     },

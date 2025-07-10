@@ -62,6 +62,9 @@ PRACTICAL WISDOM WITHOUT CLINICAL LANGUAGE:
 - Address how to handle the gap between who you are and who you want to be
 - Provide guidance on building sustainable mental health practices
 
+LANGUAGE INSTRUCTION:
+Write your entire response in the language selected by the user in the quiz.
+
 OUTPUT:
 Return ONLY valid JSON with this exact schema:
 
@@ -374,6 +377,32 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           value: 'Minimal attention',
           emoji: '🤷',
           description: "I don't actively focus on my mental health much",
+        },
+      ],
+    },
+    {
+      id: 'language',
+      q: 'What language did you want the fortuner to respond to you?',
+      options: [
+        {
+          value: 'English',
+          emoji: '🇬🇧',
+          description: 'English',
+        },
+        {
+          value: 'Korean',
+          emoji: '🇰🇷',
+          description: 'Korean',
+        },
+        {
+          value: 'Japanese',
+          emoji: '🇯🇵',
+          description: 'Japanese',
+        },
+        {
+          value: 'Chinese',
+          emoji: '🇨🇳',
+          description: 'Chinese',
         },
       ],
     },

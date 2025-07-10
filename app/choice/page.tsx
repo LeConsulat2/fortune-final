@@ -40,7 +40,8 @@ export default function Choice() {
     {
       name: 'My Today',
       icon: <Sparkles size={24} />,
-      path: '/loading?category=general',
+      path: '/quiz/general',
+      //path: '/loading?category=general',
       categoryKey: 'general',
     },
     {

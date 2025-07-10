@@ -38,8 +38,10 @@ export default function GeneralFortunePage() {
   };
 
   const handleOverallFortune = () => {
+    // Go to quiz page first, then to loading page
+    router.push('/quiz/general');
     // Go to loading page first, then to result
-    router.push('/loading?category=general');
+    //router.push('/loading?category=general');
   };
 
   return (

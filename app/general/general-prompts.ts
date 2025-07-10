@@ -33,6 +33,9 @@ Your task is to create readings that feel both universal and personally meaningf
 - Create a sense of gentle urgency - today matters, but not in an overwhelming way
 - Create a sense of curiosity - what will happen today?
 
+◆ LANGUAGE INSTRUCTION:
+Write your entire response in the language selected by the user in the quiz.
+
 OUTPUT:
 Return ONLY valid JSON with this exact schema:
 
@@ -46,5 +49,32 @@ Return ONLY valid JSON with this exact schema:
 }
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
-  quiz: [],
+  quiz: [
+    {
+      id: 'language',
+      q: 'What language did you want the fortuner to respond to you?',
+      options: [
+        {
+          value: 'English',
+          emoji: '🇬🇧',
+          description: 'English',
+        },
+        {
+          value: 'Korean',
+          emoji: '🇰🇷',
+          description: 'Korean',
+        },
+        {
+          value: 'Japanese',
+          emoji: '🇯🇵',
+          description: 'Japanese',
+        },
+        {
+          value: 'Chinese',
+          emoji: '🇨🇳',
+          description: 'Chinese',
+        },
+      ],
+    },
+  ],
 };
