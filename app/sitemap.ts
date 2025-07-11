@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || 'https://fortune-final.vercel.app';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://yourfortune.cool';
 
 const staticPaths = [
   '/',
