@@ -61,7 +61,7 @@ export function QuizClient({ category, questions }: QuizClientProps) {
     // If it's the last question, save and navigate
     if (currentQuestionIndex === totalQuestions - 1) {
       updateUserMemory({
-        quizAnswers: newAnswers,
+        quizAnswers: newAnswers as Record<string, string>,
         category,
       });
       router.push(`/loading?category=${category}`);
@@ -73,7 +73,10 @@ export function QuizClient({ category, questions }: QuizClientProps) {
 
   const goToNextQuestion = () => {
     if (currentQuestionIndex === totalQuestions - 1) {
-      updateUserMemory({ quizAnswers: answers, category });
+      updateUserMemory({
+        quizAnswers: answers as Record<string, string>,
+        category,
+      });
       router.push(`/loading?category=${category}`);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
