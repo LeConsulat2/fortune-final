@@ -242,3 +242,7 @@
   background-color: #1e293b; /* slate-800 or your preferred color */
   color: #fff;
 }
+
+a {
+  @apply text-amber-300 hover:text-amber-200 transition-colors;
+}

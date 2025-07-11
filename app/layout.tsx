@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import AdsenseInit from '@/components/adsense-init';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,10 +28,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-1474915913713685" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-gray-100`}
       >
-        {children}
+        <AdsenseInit />
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader />
+          <main className="flex-grow">{children}</main>
+          <SiteFooter />
+        </div>
+
         {/* Global floating Home button */}
         <Link
           href="/"
