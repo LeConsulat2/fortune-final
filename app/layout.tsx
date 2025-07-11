@@ -30,6 +30,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="google-adsense-account" content="ca-pub-1474915913713685" />
+        <title>Your Daily Fortune | yourfortune.cool</title>
+        <meta
+          name="description"
+          content="Personalized AI-generated daily fortunes that respect your privacy. Discover insights on love, career, money and more at yourfortune.cool."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/fortune.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/fortune.png" />
+        <meta name="theme-color" content="#ff7c1a" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-gray-100`}
