@@ -16,7 +16,7 @@ import { staggerContainerVariants, zipInVariants } from '@/lib/animated-flow';
 export default function PersonalInfoPage() {
   const router = useRouter();
   const { updateUserMemory } = useUserMemory();
-  const [name, setName] = useState('');
+  const [name, setName] = useState('Anonymous');
   const [gender, setGender] = useState<Gender | undefined>(undefined);
 
   const handleGenderSelect = (selectedGender: Gender) => {
