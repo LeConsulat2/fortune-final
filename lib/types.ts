@@ -6,6 +6,7 @@ export interface QuizOption {
 export interface Question {
   id: string;
   q: string;
+  multiSelect?: boolean;
   options: QuizOption[];
 }
 export interface FortuneConfig {

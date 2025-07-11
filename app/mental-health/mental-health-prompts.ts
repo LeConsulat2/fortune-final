@@ -62,8 +62,14 @@ PRACTICAL WISDOM WITHOUT CLINICAL LANGUAGE:
 - Address how to handle the gap between who you are and who you want to be
 - Provide guidance on building sustainable mental health practices
 
+MULTI-SELECT INSTRUCTION:
+For quiz questions with multiple selections, you will receive an array of values. For each selected value, reference the quiz schema to find the corresponding emoji and description. Consider ALL selected options equally in your response - weave them together to create a comprehensive picture rather than treating them as separate issues.
+
+ANSWER LOOKUP INSTRUCTION:
+For each quiz answer you receive, use the value to find the matching emoji and description from the quiz schema above. Incorporate all three elements (value, emoji, description) to make your response more nuanced and specific. The emoji should feel natural within the text, not forced.
+
 LANGUAGE INSTRUCTION:
-Write your entire response in the language selected by the user in the quiz.
+Write your entire response in the language selected by the user in the quiz. 
 
 OUTPUT:
 Return ONLY valid JSON with this exact schema:
@@ -83,6 +89,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'mentalHealthPattern',
       q: 'Which pattern best describes your mental health experience lately?',
+      multiSelect: true,
       options: [
         {
           value: 'High-functioning struggle',
@@ -109,11 +116,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🪶',
           description: "I'm doing okay but feel like I could tip easily",
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'dailyMentalState',
       q: 'How do you typically start your mornings?',
+      multiSelect: true,
       options: [
         {
           value: 'Anxious awakening',
@@ -140,11 +153,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🎲',
           description: 'It varies completely from day to day',
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'innerNarrative',
       q: 'Lately, what’s the main story running through your head?',
+      multiSelect: true,
       options: [
         {
           value: 'Trying to Keep Up',
@@ -166,11 +185,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🌼',
           description: 'I’m learning to value tiny moments of progress',
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'stressResponse',
       q: 'When you hit your emotional limit, what happens?',
+      multiSelect: true,
       options: [
         {
           value: 'Shutdown mode',
@@ -197,11 +222,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🧊',
           description: 'I disconnect from feelings entirely',
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'socialBattery',
       q: 'How do social situations affect your mental energy?',
+      multiSelect: true,
       options: [
         {
           value: 'Energizing connection',
@@ -228,11 +259,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🌊',
           description: 'Too many people make me feel lost or anxious',
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'selfTalk',
       q: 'What does your inner voice sound like lately?',
+      multiSelect: true,
       options: [
         {
           value: 'Harsh critic',
@@ -259,11 +296,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🎭',
           description: 'Sometimes supportive, sometimes cruel',
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'emotionalLoneliness',
       q: 'When you feel low, what’s the hardest part?',
+      multiSelect: true,
       options: [
         {
           value: 'Feeling Invisible',
@@ -285,11 +328,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🧊',
           description: 'Emotional flatness that feels like numbness',
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'copingMechanism',
       q: 'When you need to feel better, what do you reach for?',
+      multiSelect: true,
       options: [
         {
           value: 'Movement and nature',
@@ -316,11 +365,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🧘',
           description: 'Quiet time alone to process and recharge',
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'mentalHealthGoals',
       q: 'What would most improve your mental health right now?',
+      multiSelect: true,
       options: [
         {
           value: 'Anxiety management',
@@ -352,6 +407,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'mentalHealthSupport',
       q: 'How do you currently take care of your mental health?',
+      multiSelect: true,
       options: [
         {
           value: 'Professional help',
@@ -378,11 +434,17 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🤷',
           description: "I don't actively focus on my mental health much",
         },
+        {
+          value: 'Multiple patterns apply',
+          emoji: '🧩',
+          description: 'More than one of these feels true for me right now',
+        },
       ],
     },
     {
       id: 'language',
       q: 'What language did you want the fortuner to respond to you?',
+      // left as single-select
       options: [
         {
           value: 'English',
