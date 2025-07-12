@@ -67,7 +67,7 @@ export default function SampleResultsPage() {
         <div className="text-center mt-10">
           <a
             href="/start/step-1-personal-info"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Begin Your Personal Fortune
           </a>
