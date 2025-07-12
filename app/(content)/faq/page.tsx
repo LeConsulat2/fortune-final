@@ -18,9 +18,10 @@ export default function FaqPage() {
               How are my fortunes generated?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              We combine your on-device profile and quiz responses with
-              OpenAI&apos;s GPT-4o-mini model via a stateless Edge Function. No
-              personal data is stored on our servers.
+              Your fortune is created based on your quiz responses and emotional
+              profile, interpreted in real time using a stateless AI function.
+              No personal information is stored — everything lives only in your
+              browser while the tab is open.
             </p>
           </details>
 
@@ -128,8 +129,9 @@ export default function FaqPage() {
               How often do you update the prompts and models?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              We review prompts monthly and upgrade to newer OpenAI models as
-              they become stable to ensure fortunes remain fresh and insightful.
+              We review prompts monthly and refine the system regularly to
+              ensure your fortunes stay thoughtful, relevant, and emotionally
+              tuned.
             </p>
           </details>
         </div>
