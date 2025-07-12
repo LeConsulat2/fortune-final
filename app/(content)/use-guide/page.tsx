@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'Fortune-Final User Guide 2025 | Your Daily AI Fortune Experience',
+  title: 'Your-Fortune User Guide 2025 | Your Daily AI Fortune Experience',
   description:
-    'Complete guide to using Fortune-Final for personalized AI-generated daily fortunes. Learn about privacy, categories, and maximizing your fortune experience.',
+    'Complete guide to using Your-Fortune for personalized AI-generated daily fortunes. Learn about privacy, categories, and maximizing your fortune experience.',
 };
 
 export default function FortuneUserGuidePage() {
@@ -9,7 +9,7 @@ export default function FortuneUserGuidePage() {
     <main className="prose prose-invert max-w-4xl mx-auto p-6 text-gray-100">
       <div className="bg-gray-800/50 rounded-lg p-8 border border-gray-700">
         <h1 className="text-4xl font-bold text-white mb-6">
-          Fortune-Final User Guide 2025
+          Your-Fortune User Guide 2025
         </h1>
         <p className="text-xl text-gray-300 mb-8 leading-relaxed">
           Your comprehensive guide to getting the most personalized and
@@ -19,10 +19,10 @@ export default function FortuneUserGuidePage() {
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Why Fortune-Final is Different
+            Why Your-Fortuneis Different
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            Unlike generic horoscope apps, Fortune-Final creates truly
+            Unlike generic horoscope apps, Your-Fortune creates truly
             personalized fortunes using advanced AI technology. By combining
             your personal details with sophisticated prompts, we generate unique
             insights tailored specifically to your life circumstances, goals,
@@ -41,7 +41,7 @@ export default function FortuneUserGuidePage() {
             Getting Started: The Three-Step Setup
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            Fortune-Final uses a simple three-step onboarding process to
+            Your-Fortune uses a simple three-step onboarding process to
             understand who you are and what kind of guidance you&apos;re
             seeking. Each step builds on the last to create a complete picture
             for personalized fortune generation.
@@ -267,7 +267,7 @@ export default function FortuneUserGuidePage() {
             Technical Requirements & Troubleshooting
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            Fortune-Final works on all modern browsers and devices. Here&apos;s
+            Your-Fortune works on all modern browsers and devices. Here&apos;s
             what you need to know:
           </p>
 
@@ -312,7 +312,7 @@ export default function FortuneUserGuidePage() {
             Understanding the AI Behind Your Fortunes
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            Fortune-Final combines the quiz answers + sophisitcated prompts that
+            Your-Fortune combines the quiz answers + sophisitcated prompts that
             allows AI model to dynamically give user a meaningful fortunes and
             insights for the day. The AI combines your personal information with
             carefully crafted prompts that incorporate wisdom from various
@@ -353,7 +353,7 @@ export default function FortuneUserGuidePage() {
             Ready to Discover Your Fortune?
           </h2>
           <p className="text-gray-300 leading-relaxed mb-6">
-            Start your journey with Fortune-Final today. Our AI-powered system
+            Start your journey with Your-Fortune today. Our AI-powered system
             will create a personalized fortune experience that respects your
             privacy while delivering meaningful insights. Choose your path and
             begin your fortune adventure.
@@ -374,7 +374,7 @@ export default function FortuneUserGuidePage() {
             Important Disclaimer
           </h2>
           <p className="text-gray-300 leading-relaxed text-sm">
-            Fortune-Final is designed for entertainment and self-reflection
+            Your-Fortune is designed for entertainment and self-reflection
             purposes. Our AI-generated fortunes should not be considered
             professional advice for medical, legal, financial, or other serious
             life decisions. Always consult qualified professionals for important
