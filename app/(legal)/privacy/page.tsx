@@ -132,7 +132,8 @@ export default function PrivacyPage() {
           <p className="text-gray-300 mt-4 leading-relaxed">
             <strong>Important:</strong> No emails, payment details, or
             persistent identifiers are collected. All data is stored using the
-            browser's sessionStorage API under the key "fortune-user-memory".
+            browser&apos;s sessionStorage API under the key
+            &quot;fortune-user-memory&quot;.
           </p>
         </section>
 
@@ -146,8 +147,8 @@ export default function PrivacyPage() {
             </h3>
             <p className="text-gray-300 leading-relaxed">
               When you generate a fortune, your data is sent to our Edge API
-              function, which immediately processes it with OpenAI's GPT-4o-mini
-              and returns your personalized fortune.{' '}
+              function, which immediately processes it with help of AI model and
+              returns your personalized fortune.{' '}
               <strong>No data is logged, stored, or retained</strong> by our
               servers during this process.
             </p>
@@ -253,13 +254,15 @@ export default function PrivacyPage() {
             <li className="leading-relaxed">
               <strong>
                 Third-party vendors, including Google, will use cookies to serve
-                ads based on a user's prior visits to this or other websites.
+                ads based on a user&apos;s prior visits to this or other
+                websites.
               </strong>
             </li>
             <li className="leading-relaxed">
               <strong>
-                Google's use of cookies enables it and its partners to serve ads
-                to users based on their visit to this and/or other sites.
+                Google&apos;s use of cookies enables it and its partners to
+                serve ads to users based on their visit to this and/or other
+                sites.
               </strong>
             </li>
             <li className="leading-relaxed">
@@ -358,12 +361,12 @@ export default function PrivacyPage() {
               close the tab
             </li>
             <li>
-              • <strong>Start over:</strong> Clear your browser's session
+              • <strong>Start over:</strong> Clear your browser&apos;s session
               storage
             </li>
             <li>
-              • <strong>Opt-out of cookies:</strong> Use the "Cookie Settings"
-              link (when implemented)
+              • <strong>Opt-out of cookies:</strong> Use the &quot;Cookie
+              Settings&quot; link (when implemented)
             </li>
             <li>
               • <strong>Contact us:</strong> Email us with any privacy concerns
@@ -390,10 +393,10 @@ export default function PrivacyPage() {
           </h2>
           <p className="text-gray-300 leading-relaxed">
             We may update this privacy policy from time to time. Any changes
-            will be reflected in the "Last updated" date at the top of this
-            page. We encourage you to review this policy periodically. Continued
-            use of Fortune-Final after changes constitutes acceptance of the
-            updated policy.
+            will be reflected in the &quot;Last updated&quot; date at the top of
+            this page. We encourage you to review this policy periodically.
+            Continued use of Fortune-Final after changes constitutes acceptance
+            of the updated policy.
           </p>
         </section>
 

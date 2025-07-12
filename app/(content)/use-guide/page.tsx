@@ -42,9 +42,9 @@ export default function FortuneUserGuidePage() {
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
             Fortune-Final uses a simple three-step onboarding process to
-            understand who you are and what kind of guidance you're seeking.
-            Each step builds on the last to create a complete picture for
-            personalized fortune generation.
+            understand who you are and what kind of guidance you&apos;re
+            seeking. Each step builds on the last to create a complete picture
+            for personalized fortune generation.
           </p>
 
           <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-600 mb-6">
@@ -149,10 +149,10 @@ export default function FortuneUserGuidePage() {
             The Interactive Quiz Experience
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            After selecting your fortune category, you'll complete a brief
+            After selecting your fortune category, you&apos;ll complete a brief
             interactive quiz designed to capture your current mindset, specific
-            concerns, and what type of guidance you're seeking. Each category
-            has its own specialized questions.
+            concerns, and what type of guidance you&apos;re seeking. Each
+            category has its own specialized questions.
           </p>
 
           <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-600 mb-6">
@@ -166,14 +166,14 @@ export default function FortuneUserGuidePage() {
               </li>
               <li>
                 2. <strong>Think about your immediate concerns</strong> - Focus
-                on what's relevant to your day or week
+                on what&apos;s relevant to your day or week
               </li>
               <li>
                 3. <strong>Consider your goals</strong> - What kind of guidance
                 would be most helpful right now?
               </li>
               <li>
-                4. <strong>Don't overthink it</strong> - Go with your first
+                4. <strong>Don&apos;t overthink it</strong> - Go with your first
                 instinct for more authentic results
               </li>
             </ol>
@@ -185,8 +185,8 @@ export default function FortuneUserGuidePage() {
             Privacy & Data Protection
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            Your privacy is our absolute priority. Here's exactly what happens
-            to your information:
+            Your privacy is our absolute priority. Here&apos;s exactly what
+            happens to your information:
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -205,7 +205,7 @@ export default function FortuneUserGuidePage() {
 
             <div className="bg-red-900/20 p-4 rounded-lg border border-red-500/30">
               <h3 className="text-lg font-semibold text-red-400 mb-2">
-                What We DON'T Do
+                What We DON&apos;T Do
               </h3>
               <ul className="space-y-1 text-gray-300 text-sm">
                 <li>• Store data on our servers</li>
@@ -231,7 +231,7 @@ export default function FortuneUserGuidePage() {
               <p className="text-gray-300 leading-relaxed">
                 For best results, generate your fortune when you have a few
                 minutes to reflect. Morning sessions work well for daily
-                guidance, while evening sessions can help process the day's
+                guidance, while evening sessions can help process the day&apos;s
                 events and prepare for tomorrow.
               </p>
             </div>
@@ -253,10 +253,10 @@ export default function FortuneUserGuidePage() {
                 Frequency and Variety
               </h3>
               <p className="text-gray-300 leading-relaxed">
-                Try different categories based on what's most relevant to your
-                current situation. You might use Career fortunes on weekdays,
-                Love fortunes when relationship questions arise, and General
-                fortunes for overall life guidance.
+                Try different categories based on what&apos;s most relevant to
+                your current situation. You might use Career fortunes on
+                weekdays, Love fortunes when relationship questions arise, and
+                General fortunes for overall life guidance.
               </p>
             </div>
           </div>
@@ -267,8 +267,8 @@ export default function FortuneUserGuidePage() {
             Technical Requirements & Troubleshooting
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            Fortune-Final works on all modern browsers and devices. Here's what
-            you need to know:
+            Fortune-Final works on all modern browsers and devices. Here&apos;s
+            what you need to know:
           </p>
 
           <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-600 mb-6">
@@ -312,9 +312,10 @@ export default function FortuneUserGuidePage() {
             Understanding the AI Behind Your Fortunes
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
-            Fortune-Final uses OpenAI's GPT-4o-mini, one of the most advanced
-            language models available. The AI combines your personal information
-            with carefully crafted prompts that incorporate wisdom from various
+            Fortune-Final combines the quiz answers + sophisitcated prompts that
+            allows AI model to dynamically give user a meaningful fortunes and
+            insights for the day. The AI combines your personal information with
+            carefully crafted prompts that incorporate wisdom from various
             traditions, psychological insights, and practical life guidance.
           </p>
 
