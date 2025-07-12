@@ -17,8 +17,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Daily-Fortune',
-  description: 'Your Daily Fortune',
+  title: 'Fortune-Final | yourfortune.cool',
+  description:
+    'Personalized AI-generated daily fortunes that respect your privacy. Discover insights on love, career, money and more at yourfortune.cool.',
+  icons: {
+    icon: '/fortune.png',
+    apple: '/fortune.png',
+  },
+  themeColor: '#ff7c1a',
+  other: {
+    'google-adsense-account': 'ca-pub-1474915913713685',
+  },
 };
 
 export default function RootLayout({
@@ -28,18 +37,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta name="google-adsense-account" content="ca-pub-1474915913713685" />
-        <title>Your Daily Fortune | yourfortune.cool</title>
-        <meta
-          name="description"
-          content="Personalized AI-generated daily fortunes that respect your privacy. Discover insights on love, career, money and more at yourfortune.cool."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/fortune.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/fortune.png" />
-        <meta name="theme-color" content="#ff7c1a" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-gray-100`}
       >
@@ -50,13 +47,12 @@ export default function RootLayout({
           <SiteFooter />
         </div>
 
-        {/* Global floating Home button */}
+        {/* Floating Home button */}
         <Link
           href="/"
           className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-orange-500 text-2xl text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
         >
-          🏠
-          <span className="sr-only">Home</span>
+          🏠<span className="sr-only">Home</span>
         </Link>
       </body>
     </html>
