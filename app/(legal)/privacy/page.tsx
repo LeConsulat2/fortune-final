@@ -18,8 +18,9 @@ export default function PrivacyPage() {
             1. Who we are
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            your-fortune ("we", "our") is a privacy-first fortune experience
-            operated from Auckland, New Zealand. Contact:&nbsp;
+            your-fortune (&quot;we&quot;, &quot;our&quot;) is a privacy-first
+            fortune experience operated from Auckland, New Zealand.
+            Contact:&nbsp;
             <a
               href="mailto:fortune@example.com"
               className="text-purple-400 hover:text-purple-300"
