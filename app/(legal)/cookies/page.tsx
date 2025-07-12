@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'Cookie Policy | Fortune-Final',
+  title: 'Cookie Policy | your-fortune',
   description:
-    'Learn how Fortune-Final uses cookies, including future implementation of Google AdSense cookies.',
+    'Learn how your-fortune uses cookies, including future plans for optional advertising cookies.',
 };
 
 export default function CookiesPage() {
@@ -18,62 +18,59 @@ export default function CookiesPage() {
             1. What are cookies?
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Cookies are small text files placed on your device to store data.
-            They help websites remember your preferences and improve your user
-            experience.
+            Cookies are small text files stored on your device to help websites
+            remember things — like your preferences or whether you’ve agreed to
+            terms.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            2. How Fortune-Final uses cookies
+            2. Does your-fortune use cookies?
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Fortune-Final is designed to work <strong>without</strong> cookies
-            by default. However, we plan to introduce optional cookies for
-            Google AdSense to keep the service free. These advertising cookies
-            will load <strong>only after</strong> you grant consent through our
-            EU-compliant banner.
+            By default, <strong>your-fortune does not use any cookies</strong>.
+            Your experience works entirely without tracking or persistent
+            storage. In the future, we may introduce optional cookies to support
+            non-intrusive ads — but only after clear consent.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            3. Types of cookies we may use
+            3. Possible future cookies
           </h2>
           <ul className="space-y-2 text-gray-300">
             <li>
-              • <strong>Essential Cookies:</strong> Strictly necessary for core
-              site functionality, e.g.&nbsp;cookie-consent status.
+              • <strong>Essential cookies:</strong> Used only to remember your
+              cookie preferences (if consent is given).
             </li>
             <li>
-              • <strong>Performance Cookies:</strong> Anonymous analytics to
-              measure loading times and improve performance (none at the
-              moment).
+              • <strong>Performance cookies:</strong> May be used to help us
+              improve speed and responsiveness (not active now).
             </li>
             <li>
-              • <strong>Advertising Cookies:</strong> Google AdSense &amp;
-              partners to deliver relevant ads once enabled.
+              • <strong>Advertising cookies:</strong> If introduced, they will
+              power contextual ads and load <strong>only after opt-in</strong>.
             </li>
           </ul>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            4. Managing your cookie preferences
+            4. Managing your preferences
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            You can manage or delete cookies in your browser settings at any
-            time. When we launch AdSense, you will also see a &quot;Cookie
-            Settings&quot; link that lets you opt-in or opt-out of advertising
-            cookies.
+            You can delete or block cookies anytime via your browser settings.
+            If and when ads are added, a &quot;Cookie Settings&quot; button will
+            appear so you can choose what — if anything — to allow.
           </p>
         </section>
 
-        <section>
+        <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">5. Contact</h2>
           <p className="text-gray-300 leading-relaxed">
-            Questions? Email&nbsp;
+            Have questions or concerns? Email us at&nbsp;
             <a
               href="mailto:privacy@example.com"
               className="text-purple-400 hover:text-purple-300"
@@ -83,15 +80,15 @@ export default function CookiesPage() {
             .
           </p>
         </section>
-        <section className="mb-8">
+
+        <section>
           <h2 className="text-2xl font-semibold text-white mb-4">
-            6. Changes to this Cookie Policy
+            6. Updates to this policy
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We may update this policy to reflect changes in technology or
-            legislation. Any amendments will be announced via an in-app banner,
-            and the &quot;Last updated&quot; date at the top of this page will
-            change accordingly.
+            We’ll update this page if anything changes. When we do, you’ll see a
+            banner letting you know — and the date at the top will reflect the
+            latest version.
           </p>
         </section>
       </div>

@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'FAQ | Fortune-Final',
+  title: 'FAQ | Your-Fortune',
   description:
-    'Frequently asked questions about Fortune-Final and AI-generated fortunes.',
+    'Frequently asked questions about Your-Fortune and AI-generated fortunes.',
 };
 
 export default function FaqPage() {
@@ -27,12 +27,12 @@ export default function FaqPage() {
 
           <details className="bg-gray-900/50 p-4 rounded-lg border border-gray-600">
             <summary className="cursor-pointer text-lg text-white font-semibold">
-              Is Fortune-Final free?
+              Is Your-Fortune free?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Yes. The core experience is free. We plan to sustain development
-              through unobtrusive Google AdSense ads shown only after you grant
-              consent.
+              Yes — Your-Fortune is free to use. We believe in making
+              thoughtful, emotionally aware tools accessible to everyone,
+              without barriers or hidden catches.
             </p>
           </details>
 
@@ -72,7 +72,7 @@ export default function FaqPage() {
               Which browsers and devices do you support?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Fortune-Final works in all modern browsers (Chrome, Firefox,
+              your fortune works in all modern browsers (Chrome, Firefox,
               Safari, Edge) on desktop and mobile. A stable internet connection
               and JavaScript support are required.
             </p>

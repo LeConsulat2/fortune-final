@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'Terms & Conditions | Fortune-Final',
+  title: 'Terms & Conditions | your-fortune',
   description:
-    'Read the terms and conditions governing your use of the Fortune-Final application.',
+    'Read the terms and conditions governing your use of the your-fortune application.',
 };
 
 export default function TermsPage() {
@@ -20,9 +20,9 @@ export default function TermsPage() {
             1. Acceptance of Terms
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            By accessing or using Fortune-Final (&quot;Service&quot;), you agree
-            to be bound by these Terms &amp; Conditions (&quot;Terms&quot;). If
-            you do not agree, please refrain from using the Service.
+            By accessing or using your-fortune (“the Service”), you agree to be
+            bound by these Terms &amp; Conditions (“Terms”). If you do not
+            accept these Terms in full, you may not use the Service.
           </p>
         </section>
 
@@ -31,17 +31,28 @@ export default function TermsPage() {
             2. Eligibility
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            You must be at least 13&nbsp;years old to use the Service. By using
-            Fortune-Final, you affirm that you meet this age requirement and
-            have the legal capacity to enter into these Terms.
+            The Service is designed for individuals aged 13 years and older. If
+            you are under 13, you may only use the Service under the supervision
+            and consent of a parent or legal guardian. While the app does
+            request a birth date to determine zodiac signs, this information is
+            never stored or transmitted, and no personally identifiable
+            information is collected or retained.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">3. Privacy</h2>
           <p className="text-gray-300 leading-relaxed">
-            Our Privacy Policy explains how we handle your data. By using the
-            Service, you agree to the practices described therein.
+            Your use of the Service is also governed by our{' '}
+            <a
+              href="/privacy"
+              className="text-purple-400 hover:text-purple-300"
+            >
+              Privacy Policy
+            </a>
+            , which outlines how we handle session data and browser-based
+            storage. By using your-fortune, you acknowledge and accept our
+            privacy practices.
           </p>
         </section>
 
@@ -50,9 +61,12 @@ export default function TermsPage() {
             4. Intellectual Property
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            All content and software associated with Fortune-Final, excluding
-            AI-generated fortunes, are the property of Fortune-Final Ltd. and
-            protected by copyright, trademark, and other laws.
+            All software, branding, design assets, and written content
+            associated with your-fortune are the intellectual property of its
+            creators and are protected under international copyright and
+            trademark laws. AI-generated fortune content is ephemeral and
+            user-specific and does not constitute published intellectual
+            property.
           </p>
         </section>
 
@@ -62,15 +76,16 @@ export default function TermsPage() {
           </h2>
           <ul className="space-y-2 text-gray-300">
             <li>
-              • You agree not to use the Service for any unlawful purpose.
+              • You agree not to use the Service for any unlawful, harmful, or
+              abusive purpose.
             </li>
             <li>
-              • You agree not to attempt to reverse-engineer or disrupt the
-              Service.
+              • You may not attempt to access, copy, reverse-engineer, or
+              exploit any part of the Service or its underlying architecture.
             </li>
             <li>
-              • You agree not to use automated scripts to collect content
-              without permission.
+              • Automated scraping, cloning, or replication of generated content
+              or API endpoints is strictly prohibited.
             </li>
           </ul>
         </section>
@@ -80,9 +95,11 @@ export default function TermsPage() {
             6. Disclaimer
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Fortunes are generated for entertainment and self-reflection only.
-            Fortune-Final Ltd. provides no guarantees of accuracy and accepts no
-            liability for decisions made based on AI-generated content.
+            The Service provides AI-generated content solely for purposes of
+            entertainment, reflection, and personal insight. It is not intended
+            as a substitute for professional advice of any kind — including
+            medical, psychological, legal, or financial guidance. Your use of
+            such content is entirely at your own discretion and risk.
           </p>
         </section>
 
@@ -91,9 +108,11 @@ export default function TermsPage() {
             7. Limitation of Liability
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            To the maximum extent permitted by law, Fortune-Final Ltd. shall not
-            be liable for any indirect, incidental, or consequential damages
-            arising out of your use of the Service.
+            To the fullest extent permitted by law, your-fortune and its
+            operators shall not be liable for any direct, indirect, incidental,
+            special, or consequential damages arising from your use of the
+            Service — including reliance on any generated content, technical
+            malfunctions, or interruptions in access.
           </p>
         </section>
 
@@ -102,15 +121,31 @@ export default function TermsPage() {
             8. Modification of Terms
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We may revise these Terms from time to time. Continued use after an
-            update constitutes acceptance of the revised Terms.
+            We reserve the right to revise these Terms at any time. Updated
+            versions will be posted to this page, and the date above will
+            reflect the latest revision. Your continued use of the Service
+            constitutes acceptance of any changes.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            9. Governing Law
+          </h2>
+          <p className="text-gray-300 leading-relaxed">
+            These Terms and any disputes arising from them shall be governed by
+            the laws of New Zealand. You agree to submit to the exclusive
+            jurisdiction of the courts located in Auckland, New Zealand.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-white mb-4">9. Contact</h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            10. Contact
+          </h2>
           <p className="text-gray-300 leading-relaxed">
-            Questions about these Terms? Email&nbsp;
+            If you have questions about these Terms or wish to clarify any part
+            of your rights, please email us at&nbsp;
             <a
               href="mailto:legal@example.com"
               className="text-purple-400 hover:text-purple-300"
@@ -118,17 +153,6 @@ export default function TermsPage() {
               legal@example.com
             </a>
             .
-          </p>
-        </section>
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            10. Governing Law
-          </h2>
-          <p className="text-gray-300 leading-relaxed">
-            These Terms are governed by the laws of New&nbsp;Zealand, without
-            regard to conflict-of-law principles. You consent to the exclusive
-            jurisdiction of the courts in Auckland for any dispute arising out
-            of these Terms or your use of the Service.
           </p>
         </section>
       </div>

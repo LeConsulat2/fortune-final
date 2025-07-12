@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'About Us | Fortune-Final',
+  title: 'About Us | your-fortune',
   description:
-    'Learn about Fortune-Final: mission, vision, privacy-first philosophy, and the team behind your daily AI-powered fortunes.',
+    'Learn about your-fortune: mission, vision, privacy-first philosophy, and the team behind your daily AI-powered fortunes.',
 };
 
 export default function AboutPage() {
@@ -9,7 +9,7 @@ export default function AboutPage() {
     <main className="prose prose-invert max-w-4xl mx-auto p-6 text-gray-100">
       <div className="bg-gray-800/50 rounded-lg p-8 border border-gray-700">
         <h1 className="text-4xl font-bold text-white mb-6">
-          About Fortune-Final
+          About your-fortune
         </h1>
 
         <section className="mb-10">
@@ -17,10 +17,9 @@ export default function AboutPage() {
             Our Mission
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Fortune-Final&apos;s mission is to deliver personalised, empowering
-            guidance each day by combining artificial intelligence with
-            time-honoured wisdom — all while safeguarding user privacy at every
-            step.
+            your-fortune exists to offer thoughtful, personalized guidance
+            through a blend of language intelligence, quiet reflection, and
+            digital design — all while honoring your privacy at every step.
           </p>
         </section>
 
@@ -29,11 +28,11 @@ export default function AboutPage() {
             Why We Exist
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Most astrology and fortune apps either recycle generic text or
-            require invasive sign-ups that compromise privacy. We believed there
-            had to be a better way — an experience that feels tailor-made yet
-            keeps every byte of personal data under the user&apos;s control.
-            Fortune-Final was born from that belief.
+            Most fortune or astrology apps either feel generic or ask for far
+            too much personal access. We believed there had to be a calmer, more
+            intentional alternative — one that feels meaningful without
+            compromising your boundaries. your-fortune was built on that
+            principle.
           </p>
         </section>
 
@@ -43,19 +42,20 @@ export default function AboutPage() {
           </h2>
           <ul className="space-y-2 text-gray-300">
             <li>
-              • <strong>Privacy First:</strong> Zero server-side storage, ever.
+              • <strong>Privacy First:</strong> No accounts. No tracking. No
+              storage.
             </li>
             <li>
-              • <strong>Inclusivity:</strong> Guidance for every culture,
-              identity, and background.
+              • <strong>Inclusivity:</strong> Built for all backgrounds,
+              identities, and belief systems.
             </li>
             <li>
-              • <strong>Transparency:</strong> We explain exactly how, when, and
-              why we process data.
+              • <strong>Transparency:</strong> Clear about how everything works,
+              always.
             </li>
             <li>
-              • <strong>Quality:</strong> Continuous iteration based on research
-              and community feedback.
+              • <strong>Depth:</strong> Emotional realism over fluff — we aim
+              for meaningful resonance.
             </li>
           </ul>
         </section>
@@ -65,11 +65,11 @@ export default function AboutPage() {
             Technology Stack
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Our application is built with Next.js&nbsp;15, React&nbsp;19, the
-            Vercel AI SDK, Shadcn&nbsp;UI, Radix&nbsp;UI, MagicUI, and
-            Tailwind&nbsp;CSS. We run privacy-preserving Edge Functions on
-            Vercel&apos;s global network and leverage OpenAI&apos;s GPT-4o-mini
-            model for content generation.
+            your-fortune is built with Next.js&nbsp;15, React&nbsp;19,
+            Tailwind&nbsp;CSS, Shadcn&nbsp;UI, MagicUI, and Radix&nbsp;UI. Our
+            stateless Edge Functions process everything in-memory with zero
+            backend storage. We continuously refine our language engine to keep
+            responses thoughtful and emotionally grounded.
           </p>
         </section>
 
@@ -78,21 +78,21 @@ export default function AboutPage() {
             Meet the Team
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We&apos;re a small remote team headquartered in Auckland,
-            New&nbsp;Zealand, with contributors across the globe. Our collective
-            expertise spans psychology, software engineering, creative writing,
-            and user experience design — providing the perfect mix to craft
-            authentic, empathetic fortunes.
+            We&apos;re a small, remote team based in Auckland, New Zealand, with
+            collaborators around the globe. Our combined skills span psychology,
+            software development, creative writing, and user experience — all
+            shaped into a single intention: helping people feel a little more
+            seen.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">Roadmap</h2>
           <p className="text-gray-300 leading-relaxed">
-            Looking ahead, we plan to add multi-language support, deeper tarot
-            integrations, and optional account sync (opt-in only). We will also
-            roll out Google AdSense in a privacy-respecting manner to keep the
-            core experience free.
+            Our future includes multi-language support, tarot mode, optional
+            journaling tools, and gently suggested upgrades — all opt-in, never
+            required. We&apos;re committed to keeping the core experience free,
+            human, and dignified.
           </p>
         </section>
 
@@ -101,21 +101,21 @@ export default function AboutPage() {
             How We Protect Your Privacy
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We architected Fortune-Final to be <em>stateless by design</em>. All
-            personal inputs live exclusively inside your browser&apos;s
-            sessionStorage and are purged automatically. No external analytics,
-            no tracking pixels, no hidden cookies — ever.
+            your-fortune is stateless by design. Your answers live only inside
+            your browser while you&apos;re here — not on our servers. No
+            analytics scripts. No pixels. No hidden data collection. When you
+            close the tab, it all disappears.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Sustainability &amp; Carbon Footprint
+            Sustainability
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Running on Vercel&apos;s green-optimised edge network means we
-            minimise latency <em>and</em> emissions. We purchase certified
-            carbon offsets for all compute minutes consumed by our AI endpoints.
+            We run on green-optimized infrastructure and purchase certified
+            carbon offsets for our minimal compute usage. Performance and
+            conscience — both matter.
           </p>
         </section>
 
@@ -124,8 +124,9 @@ export default function AboutPage() {
             Community Involvement
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We donate 1% of our annual revenue to mental-health nonprofits and
-            invite users to vote on featured charities each quarter.
+            1% of any future revenue will go to nonprofits supporting emotional
+            health and resilience. We’ll let our community vote on where it
+            goes, every quarter.
           </p>
         </section>
 
@@ -134,7 +135,7 @@ export default function AboutPage() {
             Get in Touch
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Have feedback or want to collaborate? Email us at&nbsp;
+            Questions? Thoughts? Want to collaborate? Email us anytime at&nbsp;
             <a
               href="mailto:fortune@example.com"
               className="text-purple-400 hover:text-purple-300"
