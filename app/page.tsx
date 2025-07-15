@@ -91,7 +91,7 @@ export default function Home() {
             variants={streamDownVariants}
             className="space-y-4 pb-10 stream-down  "
           >
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
+            <h1 className="text-5xl italic md:text-6xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
               Your Daily Fortune
             </h1>
           </motion.div>
@@ -134,7 +134,7 @@ export default function Home() {
               <Button
                 asChild
                 size="lg"
-                className="hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700shadow-2xl"
+                className="italic hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700shadow-2xl"
               >
                 <Link href="/start/step-1-personal-info">
                   ✨{''} Explore Your Fortune {''}✨
