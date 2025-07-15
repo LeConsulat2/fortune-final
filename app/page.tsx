@@ -104,7 +104,7 @@ export default function Home() {
             <div className="relative w-full max-w-[320px] h-auto">
               <div className="absolute inset-0 bg-orange-300/10 rounded-xl blur-md warm-glow"></div>
               <Image
-                src="/life-fortune.png"
+                src="/life-fortune-2.png"
                 alt="Fortune"
                 width={320}
                 height={320}
