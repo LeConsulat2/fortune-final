@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   themeColor: '#ff7c1a',
   other: {
-    'google-adsense-account': 'ca-pub-1474915913713685',
+    'google-adsense-account': 'pub-1474915913713685',
   },
 };
 
@@ -42,7 +42,7 @@ export default function RootLayout({
         <Script
           id="adsense-script-head"
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1474915913713685"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-1474915913713685"
           crossOrigin="anonymous"
         />
       </head>
