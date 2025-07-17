@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
@@ -25,10 +25,13 @@ export const metadata: Metadata = {
     icon: '/fortune.png',
     apple: '/fortune.png',
   },
-  themeColor: '#ff7c1a',
   other: {
     'google-adsense-account': 'pub-1474915913713685',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#ff7c1a',
 };
 
 export default function RootLayout({
