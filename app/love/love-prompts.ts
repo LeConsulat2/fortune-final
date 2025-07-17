@@ -60,8 +60,14 @@ export const love: FortuneConfig = {
   - Discuss how to handle rejection without closing your heart
   - Address how to love someone without losing yourself in the process
 
-  LANGUAGE INSTRUCTION:
-  Write your entire response in the language selected by the user in the quiz.
+MULTI-SELECT INSTRUCTION:
+For quiz questions with multiple selections, you will receive an array of values. For each selected value, reference the quiz schema to find the corresponding emoji and description. Consider ALL selected options equally in your response - weave them together to create a comprehensive picture rather than treating them as separate issues.
+
+ANSWER LOOKUP INSTRUCTION:
+For each quiz answer you receive, use the value to find the matching emoji and description from the quiz schema above. Incorporate all three elements (value, emoji, description) to make your response more nuanced and specific. The emoji should feel natural within the text, not forced.
+
+LANGUAGE INSTRUCTION:
+Write your entire response in the language selected by the user in the quiz. 
 
 
 OUTPUT:
@@ -104,6 +110,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'currentMood',
       q: 'How have you been feeling about romance lately?',
+      multiSelect: true,
       options: [
         {
           value: 'Excited',
@@ -131,6 +138,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'love',
       q: 'What do you want or desire the most? ',
+      multiSelect: true,
       options: [
         {
           value: 'Meet Someone New',
@@ -189,6 +197,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'pastRelationship',
       q: 'How do you feel about your most recent romantic experience?',
+      multiSelect: true,
       options: [
         {
           value: 'Still Processing',
@@ -220,6 +229,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'communicationStyle',
       q: 'When it comes to expressing feelings, you tend to:',
+      multiSelect: true,
       options: [
         {
           value: 'Direct Words',
@@ -246,6 +256,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'trustLevel',
       q: 'When someone shows romantic interest in you, your first instinct is:',
+      multiSelect: true,
       options: [
         {
           value: 'Open Heart',
@@ -273,6 +284,7 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
     {
       id: 'intimacyComfort',
       q: 'What feels most challenging about getting close to someone?',
+      multiSelect: true,
       options: [
         {
           value: 'Vulnerability',
