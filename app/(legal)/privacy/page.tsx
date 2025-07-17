@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       <div className="bg-gray-800/50 rounded-lg p-8 border border-gray-700">
         <h1 className="text-3xl font-bold text-white mb-6">Privacy Policy</h1>
         <p className="text-gray-300 mb-8">
-          <strong>Last updated:</strong> July 17, 2025
+          <strong>Last updated:</strong> July 11, 2025
         </p>
 
         <section className="mb-8">
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
               <tbody>
                 <tr>
                   <td className="border border-gray-600 p-3">
-                    Name (optional, default as &quot;Anonymous&quot;)
+                    Name (optional)
                   </td>
                   <td className="border border-gray-600 p-3">
                     Fortune personalization
@@ -213,46 +213,13 @@ export default function PrivacyPage() {
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            6. Advertising and cookies
+            6. Cookies and future advertising
           </h2>
-          <div className="bg-orange-900/20 p-4 rounded-lg border border-orange-500/30 mb-4">
-            <h3 className="text-lg font-semibold text-orange-400 mb-2">
-              Google AdSense
-            </h3>
-            <p className="text-gray-300 leading-relaxed mb-3">
-              We use Google AdSense to display advertisements on our website.
-              Google AdSense uses cookies and similar technologies to:
-            </p>
-            <ul className="text-gray-300 space-y-1 ml-4">
-              <li>• Show personalized ads based on your interests</li>
-              <li>• Measure ad performance and engagement</li>
-              <li>• Prevent fraud and improve ad quality</li>
-            </ul>
-            <p className="text-gray-300 leading-relaxed mt-3">
-              You can control ad personalization through your{' '}
-              <a
-                href="https://adssettings.google.com/"
-                className="text-orange-400 hover:text-orange-300"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Google Ads Settings
-              </a>{' '}
-              or opt out of personalized advertising entirely.
-            </p>
-          </div>
-
-          <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
-            <h3 className="text-lg font-semibold text-gray-200 mb-2">
-              Cookie Usage
-            </h3>
-            <p className="text-gray-300 leading-relaxed">
-              We use cookies for advertising purposes through Google AdSense.
-              These cookies help deliver relevant ads and measure their
-              effectiveness. You can manage your cookie preferences through your
-              browser settings or our cookie consent banner.
-            </p>
-          </div>
+          <p className="text-gray-300 leading-relaxed">
+            We do not use any tracking or advertising cookies today. If we
+            introduce ads in the future, they will be shown only after you grant
+            clear, explicit consent — never by default.
+          </p>
         </section>
 
         <section className="mb-8">
@@ -286,11 +253,9 @@ export default function PrivacyPage() {
           </h2>
           <p className="text-gray-300 leading-relaxed">
             Your data may be temporarily processed by our third-party services
-            (OpenAI, Vercel, Google AdSense) which operate globally, including
-            in the United States. Since no personal data is permanently stored,
-            there are no lasting international transfers or data residency
-            concerns. However, advertising cookies may be processed
-            internationally according to Google&apos;s privacy policies.
+            (OpenAI, Vercel) which operate globally, including in the United
+            States. Since no data is permanently stored, there are no lasting
+            international transfers or data residency concerns.
           </p>
         </section>
 
@@ -304,14 +269,6 @@ export default function PrivacyPage() {
             </li>
             <li>
               • <strong>Start fresh:</strong> Clear browser sessionStorage
-            </li>
-            <li>
-              • <strong>Manage ad preferences:</strong> Use Google Ads Settings
-              to control personalization
-            </li>
-            <li>
-              • <strong>Cookie control:</strong> Manage cookies through your
-              browser or our consent banner
             </li>
             <li>
               • <strong>Ask anything:</strong> Contact us at any time with
