@@ -19,11 +19,11 @@ export default function AboutPage() {
             What This Is
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Your-Fortune is a free AI-powered fortune service that gives you
-            personalized insights across different areas of your life. Instead
-            of just entering your birth date and getting generic horoscopes, you
-            get tailored fortunes for specific categories like work, love life,
-            exams, mental health, and more.
+            Your-Fortune offers a free, interactive way to gain personalized
+            insights into your life. Rather than generic horoscopes from just a
+            birth date, we use your unique details and responses to thoughtful
+            prompts to generate tailored fortunes for specific categories like
+            work, love life, exams, mental health, and more.
           </p>
         </section>
 
