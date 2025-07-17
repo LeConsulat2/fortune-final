@@ -9,7 +9,7 @@ import {
   Sparkles,
   ChevronRight,
   Stethoscope,
-  LandPlot,
+  //LandPlot,
 } from 'lucide-react';
 import { streamDownVariants, zipInVariants } from '@/lib/animated-flow';
 
