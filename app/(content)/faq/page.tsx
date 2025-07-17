@@ -1,3 +1,5 @@
+//app/(content)/faq/page.tsx
+
 export const metadata = {
   title: 'FAQ | Your-Fortune',
   description:
@@ -18,12 +20,11 @@ export default function FaqPage() {
               How are my fortunes generated?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Your fortune is shaped by the answers you provide in the
-              quiz—capturing your current mindset, emotions, and perspective.
-              From there, a lightweight system interprets those patterns to
-              offer reflections that feel timely and personal. Nothing is saved
-              or sent—everything happens within your browser while the page is
-              open.
+              Your fortune is shaped by the answers you provide—capturing your
+              current mindset, emotions, and perspective. From there, a
+              lightweight system interprets those patterns to offer reflections
+              that feel timely and personal. Nothing is saved or sent—everything
+              happens within your browser while the page is open.
             </p>
           </details>
 
@@ -32,9 +33,9 @@ export default function FaqPage() {
               Is Your-Fortune free?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Yes — Your-Fortune is free to use. We believe in making
-              thoughtful, emotionally aware tools accessible to everyone,
-              without barriers or hidden catches.
+              Yes — Your-Fortune is completely free to use. We believe
+              thoughtful, emotionally aware tools should be accessible to
+              everyone, with no hidden costs or surprises.
             </p>
           </details>
 
@@ -43,8 +44,9 @@ export default function FaqPage() {
               Do you store my personal information?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              No. All data resides in your browser&apos;s sessionStorage and
-              disappears when you close or refresh the tab.
+              No. All of your responses live temporarily in your browser&apos;s
+              session storage. Once you close or refresh the tab, everything
+              disappears automatically.
             </p>
           </details>
 
@@ -53,8 +55,8 @@ export default function FaqPage() {
               Can I reset or delete my data?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Absolutely. Simply refresh the page, close the tab, or clear your
-              browser data to start over.
+              Absolutely. Just refresh the page, close the tab, or clear your
+              browser data to start fresh.
             </p>
           </details>
 
@@ -63,9 +65,9 @@ export default function FaqPage() {
               How accurate are the fortunes?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Fortunes are intended for entertainment and self-reflection. While
-              we strive for relevance, they should not replace professional
-              advice.
+              The fortunes are designed for reflection and emotional clarity—not
+              prediction. While we aim for relevance and insight, they&apos;re
+              not a substitute for professional advice.
             </p>
           </details>
 
@@ -74,9 +76,9 @@ export default function FaqPage() {
               Which browsers and devices do you support?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              your fortune works in all modern browsers (Chrome, Firefox,
-              Safari, Edge) on desktop and mobile. A stable internet connection
-              and JavaScript support are required.
+              Your-Fortune works smoothly on all modern browsers (Chrome,
+              Firefox, Safari, Edge), across both desktop and mobile devices. A
+              stable internet connection and JavaScript support are required.
             </p>
           </details>
 
@@ -85,10 +87,9 @@ export default function FaqPage() {
               Will you translate fortunes into other languages?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Multi-language support is on our roadmap. Stay tuned! At the end
-              of the quiz, it is currently giving you the option to get the
-              fortune insights in English, Korean, Japanese, Chinese and
-              Vietnamese.
+              Multi-language support is part of our roadmap. Currently, you can
+              choose to receive fortunes in English, Korean, Japanese, Chinese,
+              or Vietnamese at the end of the quiz.
             </p>
           </details>
 
@@ -97,14 +98,14 @@ export default function FaqPage() {
               How can I report an issue or suggest a feature?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Email&nbsp;
+              We&apos;d love to hear from you. Email&nbsp;
               <a
-                href="mailto:support@example.com"
+                href="mailto:wecreate5000@gmail.com"
                 className="text-purple-400 hover:text-purple-300"
               >
                 wecreate5000@gmail.com
               </a>
-              &nbsp;with details. We value community feedback.
+              &nbsp;with your feedback or suggestions.
             </p>
           </details>
 
@@ -115,9 +116,8 @@ export default function FaqPage() {
             <p className="mt-2 text-gray-300 leading-relaxed">
               Absolutely. You’re welcome to share your fortune by taking a
               screenshot and posting it to your social platforms. Since nothing
-              is stored on our end, your result disappears if you refresh, close
-              the tab, or navigate away—so if it resonates with you, be sure to
-              save it while it lasts.
+              is stored, your result will be lost if you close or refresh the
+              page—so if it resonates with you, save it while you can.
             </p>
           </details>
 
@@ -126,8 +126,9 @@ export default function FaqPage() {
               Do you offer a dark-mode toggle?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              The app is designed dark-first for OLED friendliness. A light-mode
-              option is coming soon in Settings.
+              The app is designed dark-first to reduce eye strain and suit OLED
+              displays. A light-mode toggle is planned and will be added soon in
+              Settings.
             </p>
           </details>
 
@@ -136,9 +137,8 @@ export default function FaqPage() {
               How often do you update the prompts and models?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              We review prompts monthly and refine the system regularly to
-              ensure your fortunes stay thoughtful, relevant, and emotionally
-              tuned.
+              We review prompts and tune the system monthly to keep the
+              experience fresh, grounded, and emotionally relevant.
             </p>
           </details>
         </div>

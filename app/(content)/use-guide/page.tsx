@@ -361,7 +361,7 @@ export default function FortuneUserGuidePage() {
 
           <div className="text-center">
             <a
-              href="/start"
+              href="/start/step-1-personal-info"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Start Your Fortune Journey
