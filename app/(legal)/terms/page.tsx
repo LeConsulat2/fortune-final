@@ -1,5 +1,4 @@
-//app/(legal)/terms/page.tsx
-
+// app/(legal)/terms/page.tsx - REVISED DATE ONLY
 export const metadata = {
   title: 'Terms & Conditions | your-fortune',
   description:
@@ -14,7 +13,8 @@ export default function TermsPage() {
           Terms &amp; Conditions
         </h1>
         <p className="text-gray-300 mb-8">
-          <strong>Last updated:</strong> July&nbsp;11,&nbsp;2025
+          <strong>Last updated:</strong> July&nbsp;17,&nbsp;2025{' '}
+          {/* Updated date */}
         </p>
 
         <section className="mb-8">
@@ -100,9 +100,9 @@ export default function TermsPage() {
           <p className="text-gray-300 leading-relaxed">
             The Service provides AI-generated content solely for purposes of
             entertainment, reflection, and personal insight. It is not intended
-            as a substitute for professional advice of any kind — including
-            medical, psychological, legal, or financial guidance. Your use of
-            such content is entirely at your own discretion and risk.
+            as a substitute for professional advice of any kind &mdash;
+            including medical, psychological, legal, or financial guidance. Your
+            use of such content is entirely at your own discretion and risk.
           </p>
         </section>
 
@@ -114,8 +114,8 @@ export default function TermsPage() {
             To the fullest extent permitted by law, your-fortune and its
             operators shall not be liable for any direct, indirect, incidental,
             special, or consequential damages arising from your use of the
-            Service — including reliance on any generated content, technical
-            malfunctions, or interruptions in access.
+            Service &mdash; including reliance on any generated content,
+            technical malfunctions, or interruptions in access.
           </p>
         </section>
 
