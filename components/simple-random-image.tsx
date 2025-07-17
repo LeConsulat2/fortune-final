@@ -19,6 +19,10 @@ const IMAGE_FILES = [
   'noexperience-theme-8.png',
   'youtellmusic-theme-9.png',
   'lifemoments-theme.png',
+  'timeerase-theme.png',
+  'somelater-theme.png',
+  'answerstime-theme.png',
+  'slowdown-theme.png',
 ];
 
 export function SimpleRandomImage() {
