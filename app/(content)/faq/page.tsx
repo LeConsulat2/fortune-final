@@ -114,7 +114,7 @@ export default function FaqPage() {
               Can I share my fortune on social media?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Absolutely. You’re welcome to share your fortune by taking a
+              Absolutely. You&apos;re welcome to share your fortune by taking a
               screenshot and posting it to your social platforms. Since nothing
               is stored, your result will be lost if you close or refresh the
               page—so if it resonates with you, save it while you can.
