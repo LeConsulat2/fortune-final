@@ -45,7 +45,7 @@ export default function SampleResultsPage() {
       <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
         <h1 className="text-3xl font-bold text-white mb-6">Sample Fortunes</h1>
         <p className="text-gray-300 mb-8 leading-relaxed">
-          Curious what a Fortune-Final reading looks like? Here are a few
+          Curious what a Your-Fortune reading looks like? Here are a few
           anonymised examples. Every fortune you receive will be unique to your
           profile and current mindset.
         </p>

@@ -22,7 +22,7 @@ export function SiteHeader() {
     <header className="bg-gradient-to-b from-amber-950 via-orange-950 to-red-900/80 backdrop-blur text-white sticky top-0 z-40 shadow-md">
       <div className="mx-auto flex items-center justify-between px-4 py-3 md:max-w-5xl md:px-6">
         <Link href="/" className="text-lg font-semibold">
-          Fortune-Final
+          Your-Fortune
         </Link>
         <button
           type="button"
