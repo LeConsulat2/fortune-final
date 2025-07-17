@@ -1,9 +1,9 @@
 //app/(legal)/cookies/page.tsx
 
 export const metadata = {
-  title: 'Cookie Policy | your-fortune',
+  title: 'Cookie Policy | yourfortune.cool',
   description:
-    'Cookie policy explaining how we use cookies and your consent choices.',
+    'Cookie policy explaining how we use cookies, including Google AdSense, and your consent choices.',
 };
 
 export default function CookiesPage() {
@@ -12,12 +12,12 @@ export default function CookiesPage() {
       <div className="bg-gray-800/50 rounded-lg p-8 border border-gray-700">
         <h1 className="text-3xl font-bold text-white mb-6">Cookie Policy</h1>
         <p className="text-gray-300 mb-8">
-          <strong>Last updated:</strong> July&nbsp;11,&nbsp;2025
+          <strong>Last updated:</strong> 15 July 2025
         </p>
 
         <div className="space-y-6 text-gray-300">
           <p className="leading-relaxed text-lg">
-            We use two categories of cookies:
+            We use the following categories of cookies:
           </p>
 
           <section>
@@ -33,21 +33,55 @@ export default function CookiesPage() {
 
           <section>
             <h2 className="text-xl font-semibold text-white mb-3">
-              2. Advertising Cookies
+              2. Advertising Cookies (Google AdSense)
             </h2>
             <p className="leading-relaxed">
-              Currently not used. If introduced in the future, these would serve
-              personalized ads <strong>only after</strong> explicit consent.
-              These would help us keep the service free by showing relevant
-              advertisements.
+              We use Google AdSense to display ads. Google and its partners use
+              cookies such as <code>__Secure-3PAPISID</code>,{' '}
+              <code>__Secure-3PSID</code>, <code>IDE</code>, and others to
+              personalize ads and measure their effectiveness. These cookies may
+              track your activity across this and other sites.
             </p>
+            <ul className="list-disc ml-6 mt-2">
+              <li>
+                <strong>Personalized advertising:</strong> Cookies are used to
+                show you more relevant ads based on your interests and previous
+                visits.
+              </li>
+              <li>
+                <strong>Opt-out:</strong> You can opt out of personalized ads in{' '}
+                <a
+                  href="https://adssettings.google.com"
+                  className="text-orange-400 hover:text-orange-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Google Ads Settings
+                </a>{' '}
+                or at{' '}
+                <a
+                  href="https://www.aboutads.info"
+                  className="text-orange-400 hover:text-orange-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://www.aboutads.info
+                </a>
+                .
+              </li>
+              <li>
+                <strong>Consent:</strong> Advertising cookies are only set after
+                you provide consent via our cookie banner.
+              </li>
+            </ul>
           </section>
 
           <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-600 mt-6">
             <p className="text-gray-300 leading-relaxed">
               <strong>
-                No analytics, tracking, or behavioral cookies are currently set
-                by us.
+                No analytics, tracking, or behavioral cookies are set by us
+                directly. Only Google AdSense cookies are used for advertising
+                purposes.
               </strong>
             </p>
           </div>
@@ -57,10 +91,9 @@ export default function CookiesPage() {
               Your Control
             </h2>
             <p className="leading-relaxed">
-              You can manage cookies through your browser settings. If
-              advertising cookies are introduced, you&apos;ll be able to
-              withdraw consent anytime via &quot;Cookie Settings&quot; in the
-              footer.
+              You can manage cookies through your browser settings. To change
+              your advertising cookie preferences, use the &quot;Cookie
+              Settings&quot; link in the footer.
             </p>
           </section>
 
@@ -72,7 +105,7 @@ export default function CookiesPage() {
               For more details about our data practices, please see our{' '}
               <a
                 href="/privacy"
-                className="text-purple-400 hover:text-purple-300"
+                className="text-orange-400 hover:text-orange-300"
               >
                 Privacy Policy
               </a>
@@ -86,7 +119,7 @@ export default function CookiesPage() {
               Questions about our cookie usage? Email us at{' '}
               <a
                 href="mailto:wecreate5000@gmail.com"
-                className="text-purple-400 hover:text-purple-300"
+                className="text-orange-400 hover:text-orange-300"
               >
                 wecreate5000@gmail.com
               </a>

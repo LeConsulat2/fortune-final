@@ -1,9 +1,9 @@
 //app/(legal)/privacy/page.tsx
 
 export const metadata = {
-  title: 'Privacy Policy | your-fortune',
+  title: 'Privacy Policy | yourfortune.cool',
   description:
-    'Privacy policy for your-fortune — how we handle your data, session storage, and AI processing.',
+    'Privacy policy for yourfortune.cool – how we handle your data, AI processing, and advertising cookies.',
 };
 
 export default function PrivacyPage() {
@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       <div className="bg-gray-800/50 rounded-lg p-8 border border-gray-700">
         <h1 className="text-3xl font-bold text-white mb-6">Privacy Policy</h1>
         <p className="text-gray-300 mb-8">
-          <strong>Last updated:</strong> July 11, 2025
+          <strong>Last updated:</strong> 15 January 2025
         </p>
 
         <section className="mb-8">
@@ -20,12 +20,12 @@ export default function PrivacyPage() {
             1. Who we are
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            your-fortune (&quot;we&quot;, &quot;our&quot;) is a privacy-first
-            fortune experience operated from Auckland, New Zealand.
-            Contact:&nbsp;
+            yourfortune.cool (&quot;we&quot;, &quot;our&quot;) is a
+            privacy-first fortune experience operated from Auckland, New
+            Zealand. Contact:{' '}
             <a
               href="mailto:wecreate5000@gmail.com"
-              className="text-purple-400 hover:text-purple-300"
+              className="text-orange-400 hover:text-orange-300"
             >
               wecreate5000@gmail.com
             </a>
@@ -34,289 +34,146 @@ export default function PrivacyPage() {
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            2. Our Privacy-First Approach
-          </h2>
-          <div className="bg-green-900/20 p-4 rounded-lg border border-green-500/30 mb-4">
-            <p className="text-green-400 font-semibold mb-2">
-              Zero Server Storage Guarantee
-            </p>
-            <p className="text-gray-300 leading-relaxed">
-              your-fortune stores <strong>no personal data</strong> on our
-              servers. Everything stays within your browser session and
-              disappears automatically when you close the tab or refresh the
-              page.
-            </p>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            3. What data we collect and process
+            2. What data we collect
           </h2>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-gray-600 text-sm">
+            <table className="w-full border-collapse border border-gray-600 bg-gray-900/50">
               <thead>
                 <tr className="bg-gray-700">
-                  <th className="border border-gray-600 p-3 text-left">
-                    Data Type
+                  <th className="border border-gray-600 p-3 text-left text-white">
+                    Data
                   </th>
-                  <th className="border border-gray-600 p-3 text-left">
+                  <th className="border border-gray-600 p-3 text-left text-white">
                     Purpose
                   </th>
-                  <th className="border border-gray-600 p-3 text-left">
+                  <th className="border border-gray-600 p-3 text-left text-white">
                     Storage
-                  </th>
-                  <th className="border border-gray-600 p-3 text-left">
-                    Retention
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-600 p-3">
-                    Name (optional)
+                  <td className="border border-gray-600 p-3 text-gray-300">
+                    Name (optional), birth date, gender, occupation, quiz
+                    responses
                   </td>
-                  <td className="border border-gray-600 p-3">
-                    Fortune personalization
+                  <td className="border border-gray-600 p-3 text-gray-300">
+                    Generate personalized AI fortunes
                   </td>
-                  <td className="border border-gray-600 p-3">
-                    Browser session only
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Tab close/refresh
+                  <td className="border border-gray-600 p-3 text-gray-300">
+                    Browser session only; cleared on tab close/refresh
                   </td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-600 p-3">Birth date</td>
-                  <td className="border border-gray-600 p-3">
-                    Zodiac sign calculation
+                  <td className="border border-gray-600 p-3 text-gray-300">
+                    IP address, browser info, usage data
                   </td>
-                  <td className="border border-gray-600 p-3">
-                    Browser session only
+                  <td className="border border-gray-600 p-3 text-gray-300">
+                    Site functionality and advertising (Google AdSense)
                   </td>
-                  <td className="border border-gray-600 p-3">
-                    Tab close/refresh
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-600 p-3">
-                    Gender (optional)
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Fortune customization
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Browser session only
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Tab close/refresh
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-600 p-3">
-                    Occupation (optional)
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Career-related insights
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Browser session only
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Tab close/refresh
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-600 p-3">Quiz responses</td>
-                  <td className="border border-gray-600 p-3">
-                    Personalized fortunes
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Browser session only
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Tab close/refresh
+                  <td className="border border-gray-600 p-3 text-gray-300">
+                    Temporary processing by third parties
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            4. How we process your data
-          </h2>
-          <div className="bg-blue-900/20 p-4 rounded-lg border border-blue-500/30 mb-4">
-            <h3 className="text-lg font-semibold text-blue-400 mb-2">
-              Stateless Processing
-            </h3>
-            <p className="text-gray-300 leading-relaxed">
-              When you generate a fortune, your data is sent to a serverless
-              function, which instantly returns your result.
-              <strong>Nothing is logged or saved</strong> in the process.
-            </p>
-          </div>
-
-          <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
-            <h3 className="text-lg font-semibold text-gray-200 mb-2">
-              Data Flow
-            </h3>
-            <div className="text-sm text-gray-300">
-              <p className="mb-2">
-                1. You enter information → Stored in browser session
-              </p>
-              <p className="mb-2">
-                2. You request fortune → Data sent to our AI processing function
-              </p>
-              <p className="mb-2">
-                3. AI generates response → Returned to your browser
-              </p>
-              <p>4. You close tab/refresh → All data automatically deleted</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            5. Third-party processing
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-4">
-            To provide AI-generated fortunes, we use external services that
-            temporarily process your data:
+          <p className="text-gray-300 mt-4 leading-relaxed">
+            No personal data is permanently stored on our servers. Everything is
+            processed temporarily and cleared automatically.
           </p>
-          <div className="bg-yellow-900/20 p-4 rounded-lg border border-yellow-500/30">
-            <h3 className="text-lg font-semibold text-yellow-400 mb-2">
-              AI Processing
-            </h3>
-            <p className="text-gray-300 leading-relaxed">
-              Your session data and responses are sent to{' '}
-              <strong>OpenAI&apos;s API</strong>
-              (US-based) to generate personalized fortunes. OpenAI processes
-              this data according to their own privacy policy but does not store
-              it for training purposes when accessed through our API
-              integration.
-            </p>
-          </div>
-          <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600 mt-4">
-            <h3 className="text-lg font-semibold text-gray-200 mb-2">
-              Hosting & Infrastructure
-            </h3>
-            <p className="text-gray-300 leading-relaxed">
-              Our application is hosted on <strong>Vercel</strong> (US-based)
-              using edge functions for global performance. No personal data is
-              stored on Vercel servers - only the application code and temporary
-              request processing.
-            </p>
-          </div>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            6. Cookies and future advertising
+            3. Advertising cookies
+          </h2>
+          <ul className="space-y-3 text-gray-300">
+            <li className="leading-relaxed">
+              <strong>
+                Third-party vendors, including Google, use cookies to serve ads
+                based on a user&apos;s prior visits to this or other websites.
+              </strong>
+            </li>
+            <li className="leading-relaxed">
+              <strong>
+                Google&apos;s use of cookies enables it and its partners to
+                serve ads to users based on their visit to this and/or other
+                sites.
+              </strong>
+            </li>
+            <li className="leading-relaxed">
+              <strong>
+                Users can opt-out of personalised advertising in{' '}
+                <a
+                  href="https://adssettings.google.com"
+                  className="text-orange-400 hover:text-orange-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Google Ads Settings
+                </a>{' '}
+                or at{' '}
+                <a
+                  href="https://www.aboutads.info"
+                  className="text-orange-400 hover:text-orange-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://www.aboutads.info
+                </a>
+                .
+              </strong>
+            </li>
+          </ul>
+          <p className="text-gray-300 mt-4 leading-relaxed">
+            Advertising cookies load <strong>only after consent</strong> via our
+            EU-compliant banner.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            4. No child-directed data
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We do not use any tracking or advertising cookies today. If we
-            introduce ads in the future, they will be shown only after you grant
-            clear, explicit consent — never by default.
+            This site is not directed to children under 13. We have set AdSense
+            to <em>Not child-directed</em> and do not knowingly collect data
+            from children under 13.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            7. Data security and session management
+            5. International transfers
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            All communication is encrypted using HTTPS. Your session data lives
-            in your browser only and is wiped when you refresh, close the tab,
-            or clear storage. Our infrastructure is stateless — meaning no
-            information is remembered or retained between requests.
+            Ad servers and AI providers may operate outside New Zealand. Google
+            LLC participates in the EU-US Data Privacy Framework.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            8. Age recommendations
-          </h2>
-          <p className="text-gray-300 leading-relaxed">
-            While your-fortune is suitable for all ages, we recommend that users
-            under 13 use the Service under parental guidance. We do not
-            knowingly collect personally identifiable information from children,
-            and all data processing is temporary and session-based regardless of
-            user age.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            9. International data processing
-          </h2>
-          <p className="text-gray-300 leading-relaxed">
-            Your data may be temporarily processed by our third-party services
-            (OpenAI, Vercel) which operate globally, including in the United
-            States. Since no data is permanently stored, there are no lasting
-            international transfers or data residency concerns.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            10. Your control and rights
+            6. Your choices
           </h2>
           <ul className="space-y-2 text-gray-300">
             <li>
-              • <strong>Delete your data:</strong> Just close the tab or refresh
+              • Click &quot;Cookie Settings&quot; in the footer to change
+              consent.
             </li>
-            <li>
-              • <strong>Start fresh:</strong> Clear browser sessionStorage
-            </li>
-            <li>
-              • <strong>Ask anything:</strong> Contact us at any time with
-              concerns
-            </li>
-            <li>
-              • <strong>Data portability:</strong> Since no data is stored,
-              there&apos;s nothing to export
-            </li>
+            <li>• Opt-out links above for personalized advertising.</li>
+            <li>• Delete your data: Just close the tab or refresh the page.</li>
+            <li>• Email us at any time with concerns about data practices.</li>
           </ul>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            11. AI-generated content disclaimer
-          </h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">7. Changes</h2>
           <p className="text-gray-300 leading-relaxed">
-            All fortunes are generated by artificial intelligence for
-            entertainment, reflection, and personal insight — not as
-            professional advice. Please use discretion and common sense when
-            interpreting any AI-generated content.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            12. Updates to this policy
-          </h2>
-          <p className="text-gray-300 leading-relaxed">
-            We&apos;ll update this policy if anything changes. You can always
-            find the latest version on this page. Continued use of your-fortune
-            means you accept the most recent version.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            13. Contact
-          </h2>
-          <p className="text-gray-300 leading-relaxed">
-            Questions about privacy or data practices? Email us at&nbsp;
-            <a
-              href="mailto:wecreate5000@gmail.com"
-              className="text-purple-400 hover:text-purple-300"
-            >
-              wecreate5000@gmail.com
-            </a>
-            .
+            We may update this policy; the date above will change accordingly.
+            Continued use of yourfortune.cool means you accept the most recent
+            version.
           </p>
         </section>
       </div>

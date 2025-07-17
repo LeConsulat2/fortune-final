@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yourfortune.cool/api/sitemap 
