@@ -1,4 +1,4 @@
-// components/cookie-consent-banner.tsx
+// components/cookie-consent-banner.tsx - REVISED
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -11,7 +11,9 @@ export default function CookieConsentBanner() {
   useEffect(() => {
     setMounted(true);
     // Check if user has already acknowledged the cookie policy
-    const hasAcknowledged = localStorage.getItem('cookie-policy-acknowledged');
+    const hasAcknowledged = localStorage.getItem(
+      'cookie-policy-acknowledged-v2',
+    ); // Added v2 for this specific version
     if (!hasAcknowledged) {
       setShowBanner(true);
     }
@@ -19,9 +21,11 @@ export default function CookieConsentBanner() {
 
   const handleAcknowledge = () => {
     // User acknowledges they've seen the policy for essential cookies
-    localStorage.setItem('cookie-policy-acknowledged', 'true');
+    localStorage.setItem('cookie-policy-acknowledged-v2', 'true');
     setShowBanner(false);
-    // IMPORTANT: No AdSense script loading here, as per your current policy
+    // IMPORTANT: Still NO AdSense script loading here, as per your current policy
+    // If you introduce AdSense, this logic will need to change to
+    // load AdSense ONLY if 'accepted'
   };
 
   const handleLearnMore = () => {
@@ -43,10 +47,10 @@ export default function CookieConsentBanner() {
               Our Cookie Policy
             </h3>
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
-              We use only essential technical cookies to ensure our website
-              functions correctly. We do not use any advertising or tracking
-              cookies. If we introduce advertising in the future, we will ask
-              for your explicit consent first. You can learn more in our{' '}
+              We use essential cookies to make our site work. We currently do
+              NOT use advertising or tracking cookies, but if we introduce them
+              in the future (e.g., Google AdSense), we will ask for your
+              explicit consent first. Learn more in our{' '}
               <a
                 href="/cookies"
                 className="text-purple-400 hover:text-purple-300 underline"

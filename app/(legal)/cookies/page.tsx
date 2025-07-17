@@ -1,9 +1,8 @@
-//app/(legal)/cookies/page.tsx
-
+// app/(legal)/cookies/page.tsx - REVISED
 export const metadata = {
   title: 'Cookie Policy | your-fortune',
   description:
-    'Learn how your-fortune uses cookies, including technical cookies and future plans.',
+    'Learn how your-fortune uses cookies, including technical cookies and future plans for advertising cookies with your consent.',
 };
 
 export default function CookiesPage() {
@@ -20,108 +19,87 @@ export default function CookiesPage() {
             1. What are cookies?
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Cookies are small text files stored on your device to help websites
-            function properly and remember information between visits.
+            Cookies are small text files stored on your device that help
+            websites function properly and remember information between visits.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            2. Current cookie usage
+            2. Categories of Cookies We Use
           </h2>
+          <p className="leading-relaxed text-lg text-gray-300 mb-4">
+            We use two categories of cookies:
+          </p>
+
           <div className="bg-blue-900/20 p-4 rounded-lg border border-blue-500/30 mb-4">
             <h3 className="text-lg font-semibold text-blue-400 mb-2">
-              Technical Cookies (Essential)
+              Essential/Technical Cookies
             </h3>
             <p className="text-gray-300 leading-relaxed">
-              Our Next.js application may automatically create technical cookies
-              necessary for basic functionality, such as session management and
-              server-side rendering. These are essential for the site to work
-              properly.
+              These cookies are necessary for the website to function properly.
+              They enable basic functionalities like session management and
+              server-side rendering, and may include remembering your consent
+              choice. These cannot be switched off as the site would not work
+              without them.
             </p>
           </div>
 
-          <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
-            <h3 className="text-lg font-semibold text-gray-200 mb-2">
-              No Tracking Cookies
+          <div className="bg-yellow-900/20 p-4 rounded-lg border border-yellow-500/30">
+            <h3 className="text-lg font-semibold text-yellow-400 mb-2">
+              Advertising Cookies (Future)
             </h3>
             <p className="text-gray-300 leading-relaxed">
-              We do not use any analytics, advertising, or tracking cookies.
-              Your browsing behavior is not monitored or stored.
+              **Currently, we do NOT use advertising cookies.** However, if we
+              introduce advertising in the future (e.g., via Google AdSense),
+              these cookies would be served to provide personalized ads. They
+              would help us keep the service free by showing relevant
+              advertisements. **These cookies will only be set AFTER you give
+              explicit consent.**
+            </p>
+          </div>
+
+          <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600 mt-6">
+            <p className="text-gray-300 leading-relaxed">
+              <strong>
+                We do NOT use any analytics or behavioural tracking cookies set
+                by us.
+              </strong>
             </p>
           </div>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            3. Types of cookies we may use
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-gray-600 text-sm">
-              <thead>
-                <tr className="bg-gray-700">
-                  <th className="border border-gray-600 p-3 text-left">
-                    Cookie Type
-                  </th>
-                  <th className="border border-gray-600 p-3 text-left">
-                    Purpose
-                  </th>
-                  <th className="border border-gray-600 p-3 text-left">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-gray-600 p-3">
-                    Technical/Essential
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    Site functionality, session management
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    <span className="text-green-400">Active</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-600 p-3">Analytics</td>
-                  <td className="border border-gray-600 p-3">
-                    Usage statistics, performance
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    <span className="text-red-400">Not used</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-600 p-3">Advertising</td>
-                  <td className="border border-gray-600 p-3">
-                    Targeted ads, preferences
-                  </td>
-                  <td className="border border-gray-600 p-3">
-                    <span className="text-yellow-400">
-                      Future (opt-in only)
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            4. Future advertising cookies
+            3. Your Control
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            If we introduce advertising in the future, any advertising cookies
-            will only be set after you give explicit consent. You&apos;ll see a
-            clear consent banner and can choose to accept or decline.
+            If we introduce advertising cookies, you will have clear control.
+            You will be able to withdraw your consent at any time via a
+            &quot;Cookie Settings&quot; option (e.g., in the footer). This will
+            stop advertising cookies from loading on future page visits.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            5. Managing cookies
+            4. More Information
+          </h2>
+          <p className="text-gray-300 leading-relaxed">
+            For more details about our data handling practices, please see our{' '}
+            <a
+              href="/privacy"
+              className="text-purple-400 hover:text-purple-300"
+            >
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            5. Managing cookies through your browser
           </h2>
           <p className="text-gray-300 leading-relaxed mb-4">
             You can control cookies through your browser settings:
@@ -152,9 +130,9 @@ export default function CookiesPage() {
             6. Data retention
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Technical cookies are temporary and expire when you close your
-            browser or after a short period. We do not store personal data in
-            cookies.
+            Essential technical cookies are temporary and expire when you close
+            your browser or after a short period. We do not store personal data
+            in cookies.
           </p>
         </section>
 
