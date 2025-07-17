@@ -6,6 +6,7 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import AdsenseInit from '@/components/adsense-init';
 import Script from 'next/script';
+import CookieConsentBanner from '@/components/cookie-consent-banner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -66,6 +67,7 @@ export default function RootLayout({
         >
           🏠<span className="sr-only">Home</span>
         </Link>
+        <CookieConsentBanner />
       </body>
     </html>
   );
