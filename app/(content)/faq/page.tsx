@@ -18,10 +18,12 @@ export default function FaqPage() {
               How are my fortunes generated?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Your fortune is created based on your quiz responses and emotional
-              profile, interpreted in real time using a stateless AI function.
-              No personal information is stored — everything lives only in your
-              browser while the tab is open.
+              Your fortune is shaped by the answers you provide in the
+              quiz—capturing your current mindset, emotions, and perspective.
+              From there, a lightweight system interprets those patterns to
+              offer reflections that feel timely and personal. Nothing is saved
+              or sent—everything happens within your browser while the page is
+              open.
             </p>
           </details>
 
@@ -111,9 +113,11 @@ export default function FaqPage() {
               Can I share my fortune on social media?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Yes — every fortune includes a &quot;Share&quot; button that
-              copies a shareable image to your clipboard (no personal info
-              included).
+              Absolutely. You’re welcome to share your fortune by taking a
+              screenshot and posting it to your social platforms. Since nothing
+              is stored on our end, your result disappears if you refresh, close
+              the tab, or navigate away—so if it resonates with you, be sure to
+              save it while it lasts.
             </p>
           </details>
 
