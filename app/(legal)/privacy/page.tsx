@@ -74,7 +74,7 @@ export default function PrivacyPage() {
               <tbody>
                 <tr>
                   <td className="border border-gray-600 p-3">
-                    Name (optional)
+                    Name (optional, default as &quot;Anonymous&quot;)
                   </td>
                   <td className="border border-gray-600 p-3">
                     Fortune personalization
@@ -113,9 +113,7 @@ export default function PrivacyPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-600 p-3">
-                    Occupation (optional)
-                  </td>
+                  <td className="border border-gray-600 p-3">Occupation</td>
                   <td className="border border-gray-600 p-3">
                     Career-related insights
                   </td>
