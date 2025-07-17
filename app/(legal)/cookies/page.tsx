@@ -1,3 +1,5 @@
+//app/(legal)/cookies/page.tsx
+
 export const metadata = {
   title: 'Cookie Policy | your-fortune',
   description:

@@ -1,7 +1,9 @@
+//app/(info)/contact/page.tsx
+
 export const metadata = {
-  title: 'Contact | Fortune-Final',
+  title: 'Contact | Your-Fortune',
   description:
-    'Contact information for Fortune-Final support, media, or partnerships.',
+    'Contact information for Your-Fortune support, media, or partnerships.',
 };
 
 export default function ContactPage() {

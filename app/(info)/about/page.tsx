@@ -1,3 +1,5 @@
+//app/(info)/about/page.tsx
+
 export const metadata = {
   title: 'About Us | your-fortune',
   description:
