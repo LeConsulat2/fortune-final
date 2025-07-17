@@ -82,12 +82,12 @@ export default function Choice() {
       categoryKey: 'money',
     },
 
-    {
-      name: 'Golf',
-      icon: <LandPlot size={24} />,
-      path: '/quiz/golf',
-      categoryKey: 'golf',
-    },
+    // {
+    //   name: 'Golf',
+    //   icon: <LandPlot size={24} />,
+    //   path: '/quiz/golf',
+    //   categoryKey: 'golf',
+    // },
   ];
 
   return (
