@@ -1,3 +1,5 @@
+//app/(legal)/terms/page.tsx
+
 export const metadata = {
   title: 'Terms & Conditions | your-fortune',
   description:
@@ -20,23 +22,24 @@ export default function TermsPage() {
             1. Acceptance of Terms
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            By accessing or using your-fortune (“the Service”), you agree to be
-            bound by these Terms &amp; Conditions (“Terms”). If you do not
-            accept these Terms in full, you may not use the Service.
+            By accessing or using your-fortune (&quot;the Service&quot;), you
+            agree to be bound by these Terms &amp; Conditions
+            (&quot;Terms&quot;). If you do not accept these Terms in full, you
+            may not use the Service.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            2. Eligibility
+            2. Age and Supervision
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            The Service is designed for individuals aged 13 years and older. If
-            you are under 13, you may only use the Service under the supervision
-            and consent of a parent or legal guardian. While the app does
-            request a birth date to determine zodiac signs, this information is
-            never stored or transmitted, and no personally identifiable
-            information is collected or retained.
+            While the Service is suitable for all ages, we recommend that users
+            under 13 years old use the Service under the guidance and
+            supervision of a parent or legal guardian. The Service requests
+            birth date information solely to determine zodiac signs for
+            personalized content generation, and this information is processed
+            temporarily without storage or retention.
           </p>
         </section>
 
@@ -147,10 +150,10 @@ export default function TermsPage() {
             If you have questions about these Terms or wish to clarify any part
             of your rights, please email us at&nbsp;
             <a
-              href="mailto:legal@example.com"
+              href="mailto:wecreate5000@gmail.com"
               className="text-purple-400 hover:text-purple-300"
             >
-              legal@example.com
+              wecreate5000@gmail.com
             </a>
             .
           </p>

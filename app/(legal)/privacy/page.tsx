@@ -1,3 +1,5 @@
+//app/(legal)/privacy/page.tsx
+
 export const metadata = {
   title: 'Privacy Policy | your-fortune',
   description:
@@ -22,10 +24,10 @@ export default function PrivacyPage() {
             fortune experience operated from Auckland, New Zealand.
             Contact:&nbsp;
             <a
-              href="mailto:fortune@example.com"
+              href="mailto:wecreate5000@gmail.com"
               className="text-purple-400 hover:text-purple-300"
             >
-              fortune@example.com
+              wecreate5000@gmail.com
             </a>
           </p>
         </section>
@@ -51,7 +53,94 @@ export default function PrivacyPage() {
           <h2 className="text-2xl font-semibold text-white mb-4">
             3. What data we collect and process
           </h2>
-          {/* ... keep your data table as-is — it's good ... */}
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-gray-600 text-sm">
+              <thead>
+                <tr className="bg-gray-700">
+                  <th className="border border-gray-600 p-3 text-left">
+                    Data Type
+                  </th>
+                  <th className="border border-gray-600 p-3 text-left">
+                    Purpose
+                  </th>
+                  <th className="border border-gray-600 p-3 text-left">
+                    Storage
+                  </th>
+                  <th className="border border-gray-600 p-3 text-left">
+                    Retention
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-600 p-3">
+                    Name (optional)
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Fortune personalization
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Browser session only
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Tab close/refresh
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-600 p-3">Birth date</td>
+                  <td className="border border-gray-600 p-3">
+                    Zodiac sign calculation
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Browser session only
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Tab close/refresh
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-600 p-3">
+                    Gender (optional)
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Fortune customization
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Browser session only
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Tab close/refresh
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-600 p-3">
+                    Occupation (optional)
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Career-related insights
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Browser session only
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Tab close/refresh
+                  </td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-600 p-3">Quiz responses</td>
+                  <td className="border border-gray-600 p-3">
+                    Personalized fortunes
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Browser session only
+                  </td>
+                  <td className="border border-gray-600 p-3">
+                    Tab close/refresh
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section className="mb-8">
@@ -69,18 +158,57 @@ export default function PrivacyPage() {
             </p>
           </div>
 
-          {/* Optional: update Data Flow if you'd like to remove OpenAI mention */}
+          <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
+            <h3 className="text-lg font-semibold text-gray-200 mb-2">
+              Data Flow
+            </h3>
+            <div className="text-sm text-gray-300">
+              <p className="mb-2">
+                1. You enter information → Stored in browser session
+              </p>
+              <p className="mb-2">
+                2. You request fortune → Data sent to our AI processing function
+              </p>
+              <p className="mb-2">
+                3. AI generates response → Returned to your browser
+              </p>
+              <p>4. You close tab/refresh → All data automatically deleted</p>
+            </div>
+          </div>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
             5. Third-party processing
           </h2>
-          <p className="text-gray-300 leading-relaxed">
-            Our backend providers process temporary request data to deliver
-            results. None of them receive or store identifiable user
-            information.
+          <p className="text-gray-300 leading-relaxed mb-4">
+            To provide AI-generated fortunes, we use external services that
+            temporarily process your data:
           </p>
+          <div className="bg-yellow-900/20 p-4 rounded-lg border border-yellow-500/30">
+            <h3 className="text-lg font-semibold text-yellow-400 mb-2">
+              AI Processing
+            </h3>
+            <p className="text-gray-300 leading-relaxed">
+              Your session data and responses are sent to{' '}
+              <strong>OpenAI&apos;s API</strong>
+              (US-based) to generate personalized fortunes. OpenAI processes
+              this data according to their own privacy policy but does not store
+              it for training purposes when accessed through our API
+              integration.
+            </p>
+          </div>
+          <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600 mt-4">
+            <h3 className="text-lg font-semibold text-gray-200 mb-2">
+              Hosting & Infrastructure
+            </h3>
+            <p className="text-gray-300 leading-relaxed">
+              Our application is hosted on <strong>Vercel</strong> (US-based)
+              using edge functions for global performance. No personal data is
+              stored on Vercel servers - only the application code and temporary
+              request processing.
+            </p>
+          </div>
         </section>
 
         <section className="mb-8">
@@ -108,23 +236,26 @@ export default function PrivacyPage() {
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            8. Age restrictions
+            8. Age recommendations
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            your-fortune is intended for users aged 13 and up. We do not
-            knowingly collect or store data from anyone under 13. If you believe
-            this has occurred, please contact us immediately.
+            While your-fortune is suitable for all ages, we recommend that users
+            under 13 use the Service under parental guidance. We do not
+            knowingly collect personally identifiable information from children,
+            and all data processing is temporary and session-based regardless of
+            user age.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            9. International data
+            9. International data processing
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Our cloud and processing infrastructure may span multiple regions
-            depending on availability and performance. However, since no data is
-            permanently stored, there are no lasting international transfers.
+            Your data may be temporarily processed by our third-party services
+            (OpenAI, Vercel) which operate globally, including in the United
+            States. Since no data is permanently stored, there are no lasting
+            international transfers or data residency concerns.
           </p>
         </section>
 
@@ -137,11 +268,15 @@ export default function PrivacyPage() {
               • <strong>Delete your data:</strong> Just close the tab or refresh
             </li>
             <li>
-              • <strong>Start fresh:</strong> Clear sessionStorage
+              • <strong>Start fresh:</strong> Clear browser sessionStorage
             </li>
             <li>
               • <strong>Ask anything:</strong> Contact us at any time with
               concerns
+            </li>
+            <li>
+              • <strong>Data portability:</strong> Since no data is stored,
+              there&apos;s nothing to export
             </li>
           </ul>
         </section>
@@ -151,9 +286,10 @@ export default function PrivacyPage() {
             11. AI-generated content disclaimer
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            All fortunes are generated for reflection and emotional exploration
-            — not as professional advice. Please use discretion and common sense
-            when reading or sharing content created by our system.
+            All fortunes are generated by artificial intelligence for
+            entertainment, reflection, and personal insight — not as
+            professional advice. Please use discretion and common sense when
+            interpreting any AI-generated content.
           </p>
         </section>
 
@@ -162,9 +298,9 @@ export default function PrivacyPage() {
             12. Updates to this policy
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We’ll update this policy if anything changes. You can always find
-            the latest version on this page. Continued use of your-fortune means
-            you accept the most recent version.
+            We&apos;ll update this policy if anything changes. You can always
+            find the latest version on this page. Continued use of your-fortune
+            means you accept the most recent version.
           </p>
         </section>
 
@@ -175,10 +311,10 @@ export default function PrivacyPage() {
           <p className="text-gray-300 leading-relaxed">
             Questions about privacy or data practices? Email us at&nbsp;
             <a
-              href="mailto:fortune@example.com"
+              href="mailto:wecreate5000@gmail.com"
               className="text-purple-400 hover:text-purple-300"
             >
-              fortune@example.com
+              wecreate5000@gmail.com
             </a>
             .
           </p>

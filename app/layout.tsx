@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Fortune-Final | yourfortune.cool',
+  title: 'Fortune Daily | yourfortune.cool',
   description:
     'Personalized AI-generated daily fortunes that respect your privacy. Discover insights on love, career, money and more at yourfortune.cool.',
   icons: {

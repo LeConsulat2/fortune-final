@@ -83,7 +83,10 @@ export default function FaqPage() {
               Will you translate fortunes into other languages?
             </summary>
             <p className="mt-2 text-gray-300 leading-relaxed">
-              Multi-language support is on our roadmap. Stay tuned!
+              Multi-language support is on our roadmap. Stay tuned! At the end
+              of the quiz, it is currently giving you the option to get the
+              fortune insights in English, Korean, Japanese, Chinese and
+              Vietnamese.
             </p>
           </details>
 
@@ -97,7 +100,7 @@ export default function FaqPage() {
                 href="mailto:support@example.com"
                 className="text-purple-400 hover:text-purple-300"
               >
-                support@example.com
+                wecreate5000@gmail.com
               </a>
               &nbsp;with details. We value community feedback.
             </p>

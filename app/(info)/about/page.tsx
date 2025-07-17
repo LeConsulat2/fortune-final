@@ -1,7 +1,7 @@
 export const metadata = {
   title: 'About Us | your-fortune',
   description:
-    'Learn about your-fortune: mission, vision, privacy-first philosophy, and the team behind your daily AI-powered fortunes.',
+    'Learn about your-fortune: a privacy-focused AI fortune service inspired by Korean fortune sites.',
 };
 
 export default function AboutPage() {
@@ -14,133 +14,111 @@ export default function AboutPage() {
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Our Mission
+            What This Is
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            your-fortune exists to offer thoughtful, personalized guidance
-            through a blend of language intelligence, quiet reflection, and
-            digital design — all while honoring your privacy at every step.
+            Your-Fortune is a free AI-powered fortune service that gives you
+            personalized insights across different areas of your life. Instead
+            of just entering your birth date and getting generic horoscopes, you
+            get tailored fortunes for specific categories like work, love life,
+            exams, mental health, and more.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Why We Exist
+            Inspiration
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            Most fortune or astrology apps either feel generic or ask for far
-            too much personal access. We believed there had to be a calmer, more
-            intentional alternative — one that feels meaningful without
-            compromising your boundaries. your-fortune was built on that
-            principle.
+            Unlike traditional fortune platforms that rely solely on your
+            birthdate to deliver generic predictions, this experience invites
+            you to choose the category that matters most to you today—like, how
+            your today might unfold, love, work, or wellbeing—and answer a
+            thoughtfully designed quiz. Your responses guide an AI that
+            doesn&apos;t just guess, but reflects: generating fortune readings
+            with emotional depth, subtle nuance, and insights that feel
+            uncannily personal.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Core Values
-          </h2>
-          <ul className="space-y-2 text-gray-300">
-            <li>
-              • <strong>Privacy First:</strong> No accounts. No tracking. No
-              storage.
-            </li>
-            <li>
-              • <strong>Inclusivity:</strong> Built for all backgrounds,
-              identities, and belief systems.
-            </li>
-            <li>
-              • <strong>Transparency:</strong> Clear about how everything works,
-              always.
-            </li>
-            <li>
-              • <strong>Depth:</strong> Emotional realism over fluff — we aim
-              for meaningful resonance.
-            </li>
-          </ul>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            Technology Stack
+            How It Works
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            your-fortune is built with Next.js&nbsp;15, React&nbsp;19,
-            Tailwind&nbsp;CSS, Shadcn&nbsp;UI, MagicUI, and Radix&nbsp;UI. Our
-            stateless Edge Functions process everything in-memory with zero
-            backend storage. We continuously refine our language engine to keep
-            responses thoughtful and emotionally grounded.
+            You choose a category that matters to you and answer a few
+            meaningful questions based on your current state of mind. From
+            there, a quiet system helps piece together a reflection—rooted in
+            your answers, shaped to feel relevant and grounded. Everything runs
+            entirely in your browser—no logins, no data storage, no tracking.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Meet the Team
+            Privacy Approach
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We&apos;re a small, remote team based in Auckland, New Zealand, with
-            collaborators around the globe. Our combined skills span psychology,
-            software development, creative writing, and user experience — all
-            shaped into a single intention: helping people feel a little more
-            seen.
+            Built with privacy in mind. Your data isn&apos;t stored on servers,
+            there&apos;s no user tracking, and everything disappears when you
+            close the tab. Simple and clean.
           </p>
         </section>
 
         <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-white mb-4">Roadmap</h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">Categories</h2>
           <p className="text-gray-300 leading-relaxed">
-            Our future includes multi-language support, tarot mode, optional
-            journaling tools, and gently suggested upgrades — all opt-in, never
-            required. We&apos;re committed to keeping the core experience free,
-            human, and dignified.
-          </p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            How We Protect Your Privacy
-          </h2>
-          <p className="text-gray-300 leading-relaxed">
-            your-fortune is stateless by design. Your answers live only inside
-            your browser while you&apos;re here — not on our servers. No
-            analytics scripts. No pixels. No hidden data collection. When you
-            close the tab, it all disappears.
+            Current categories include your general day, work life,
+            relationships, academic performance, and mental wellness. The
+            service is designed to expand to more specific areas like sports
+            performance, creative projects, or other life aspects.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Sustainability
+            Technical Details
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            We run on green-optimized infrastructure and purchase certified
-            carbon offsets for our minimal compute usage. Performance and
-            conscience — both matter.
+            Built with Next.js 15, React 19, and Tailwind CSS. Uses stateless
+            Edge Functions for processing with zero backend storage. The AI
+            integration provides contextual responses based on your inputs.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Community Involvement
+            The Project
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            1% of any future revenue will go to nonprofits supporting emotional
-            health and resilience. We’ll let our community vote on where it
-            goes, every quarter.
+            This is a side project built in my spare time, offered as a free
+            service. It&apos;s operated from Auckland, New Zealand, with the
+            goal of providing something useful without the complexity of
+            accounts or data collection.
+          </p>
+        </section>
+
+        <section className="mb-10">
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            Future Plans
+          </h2>
+          <p className="text-gray-300 leading-relaxed">
+            Potential expansions include more fortune categories, different
+            cultural fortune-telling styles, and multi-language support. All
+            additions will maintain the same privacy-first, no-registration
+            approach.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            Get in Touch
-          </h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">Contact</h2>
           <p className="text-gray-300 leading-relaxed">
-            Questions? Thoughts? Want to collaborate? Email us anytime at&nbsp;
+            Questions or feedback? Email&nbsp;
             <a
-              href="mailto:fortune@example.com"
+              href="mailto:wecreate5000@gmail.com"
               className="text-purple-400 hover:text-purple-300"
             >
-              fortune@example.com
+              wecreate5000@gmail.com
             </a>
             .
           </p>
