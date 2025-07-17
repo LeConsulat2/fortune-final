@@ -74,6 +74,11 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           emoji: '🇨🇳',
           description: 'Chinese',
         },
+        {
+          value: 'Vietnamese',
+          emoji: '🇻🇳',
+          description: 'Vietnamese',
+        },
       ],
     },
   ],

@@ -43,6 +43,13 @@ PRACTICAL WORKPLACE WISDOM:
 - Provide guidance on presentation skills and professional communication
 - Include wisdom about managing energy and avoiding burnout
 
+ANSWER LOOKUP INSTRUCTION:
+For each quiz answer you receive, use the value to find the matching emoji and description from the quiz schema above. Incorporate all three elements (value, emoji, description) to make your response more nuanced and specific. The emoji should feel natural within the text, not forced.
+
+LANGUAGE INSTRUCTION:
+Write your entire response in the language selected by the user in the quiz. 
+
+
 OUTPUT:
 Return ONLY valid JSON with this exact schema:
 
@@ -361,6 +368,37 @@ Return ONLY valid JSON with this exact schema:
           value: 'Better Manager',
           emoji: '🧑‍💼',
           description: 'A manager who knows what they are doing',
+        },
+      ],
+    },
+    {
+      id: 'language',
+      q: 'What language did you want the fortuner to respond to you?',
+      options: [
+        {
+          value: 'English',
+          emoji: '🇬🇧',
+          description: 'English',
+        },
+        {
+          value: 'Korean',
+          emoji: '🇰🇷',
+          description: 'Korean',
+        },
+        {
+          value: 'Japanese',
+          emoji: '🇯🇵',
+          description: 'Japanese',
+        },
+        {
+          value: 'Chinese',
+          emoji: '🇨🇳',
+          description: 'Chinese',
+        },
+        {
+          value: 'Vietnamese',
+          emoji: '🇻🇳',
+          description: 'Vietnamese',
         },
       ],
     },

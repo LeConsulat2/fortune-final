@@ -85,6 +85,12 @@ AUTHENTIC RESPONSE PATTERNS:
 - Include recognition of the ongoing challenge of financial discipline
 - Address the moments when spending feels justified versus impulsive
 
+ANSWER LOOKUP INSTRUCTION:
+For each quiz answer you receive, use the value to find the matching emoji and description from the quiz schema above. Incorporate all three elements (value, emoji, description) to make your response more nuanced and specific. The emoji should feel natural within the text, not forced.
+
+LANGUAGE INSTRUCTION:
+Write your entire response in the language selected by the user in the quiz. 
+
 OUTPUT:
 Return ONLY valid JSON with this exact schema:
 
@@ -357,6 +363,33 @@ Do not include any fields beyond those listed. Do not add explanatory text outsi
           value: "You're doing fine",
           emoji: '👌',
           description: 'Stop stressing about money so much',
+        },
+      ],
+    },
+    {
+      id: 'language',
+      q: 'What language did you want the fortuner to respond to you?',
+      // left as single-select
+      options: [
+        {
+          value: 'English',
+          emoji: '🇬🇧',
+          description: 'English',
+        },
+        {
+          value: 'Korean',
+          emoji: '🇰🇷',
+          description: 'Korean',
+        },
+        {
+          value: 'Japanese',
+          emoji: '🇯🇵',
+          description: 'Japanese',
+        },
+        {
+          value: 'Chinese',
+          emoji: '🇨🇳',
+          description: 'Chinese',
         },
       ],
     },

@@ -43,6 +43,12 @@ PRACTICAL INTERVIEW WISDOM:
 - Presentation skills and communication
 - Managing energy and avoiding burnout during the process
 
+ANSWER LOOKUP INSTRUCTION:
+For each quiz answer you receive, use the value to find the matching emoji and description from the quiz schema above. Incorporate all three elements (value, emoji, description) to make your response more nuanced and specific. The emoji should feel natural within the text, not forced.
+
+LANGUAGE INSTRUCTION:
+Write your entire response in the language selected by the user in the quiz. 
+
 OUTPUT:
 Return ONLY valid JSON with this exact schema:
 
@@ -328,6 +334,38 @@ Return ONLY valid JSON with this exact schema:
           value: 'Options',
           emoji: '🌱',
           description: 'Even if it’s not “the one,” I want more possibilities',
+        },
+      ],
+    },
+    {
+      id: 'language',
+      q: 'What language did you want the fortuner to respond to you?',
+      // left as single-select
+      options: [
+        {
+          value: 'English',
+          emoji: '🇬🇧',
+          description: 'English',
+        },
+        {
+          value: 'Korean',
+          emoji: '🇰🇷',
+          description: 'Korean',
+        },
+        {
+          value: 'Japanese',
+          emoji: '🇯🇵',
+          description: 'Japanese',
+        },
+        {
+          value: 'Chinese',
+          emoji: '🇨🇳',
+          description: 'Chinese',
+        },
+        {
+          value: 'Vietnamese',
+          emoji: '🇻🇳',
+          description: 'Vietnamese',
         },
       ],
     },
