@@ -1,3 +1,27 @@
+# robots.txt for yourfortune.cool
+
 User-agent: *
 Allow: /
-Sitemap: https://yourfortune.cool/api/sitemap 
+
+# Sitemap
+Sitemap: https://yourfortune.cool/sitemap.xml
+
+# Allow Google AdSense crawlers
+User-agent: Mediapartners-Google
+Allow: /
+
+# Allow Google AdSense verification
+User-agent: AdsBot-Google
+Allow: /
+
+# Disallow crawling of API routes (optional)
+User-agent: *
+Disallow: /api/
+
+# Allow all other content for SEO
+User-agent: *
+Allow: /about
+Allow: /privacy
+Allow: /terms
+Allow: /cookies
+Allow: /contact
