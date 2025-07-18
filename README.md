@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fortune-Final: AI-Powered Fortune Application
 
-## Getting Started
+## Executive Summary
 
-First, run the development server:
+Fortune-Final is a privacy-focused web application that generates personalized daily fortunes through AI-powered insights. Built with Next.js 15 and leveraging Google's Gemini 1.5 Flash API, the application prioritizes user privacy by utilizing session-only storage and stateless processing.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Technical Architecture
+
+### Core Technology Stack
+
+- **Framework**: Next.js 15.3.3 (App Router, Edge Runtime)
+- **UI Framework**: React 19 with TypeScript (strict mode)
+- **Styling**: Tailwind CSS v4 with ShadCN/Radix UI primitives
+- **AI Integration**: Google Gemini 1.5 Flash via Google AI SDK
+- **Animation**: MagicUI micro-components for enhanced UX
+
+### System Architecture
+
+The application follows a stateless, privacy-first architecture:
+
+```
+User Input → Session Storage → Edge API → Google Gemini → Response
+     ↓              ↓            ↓         ↓        ↓
+  Browser Only   Temporary    No Logging  External  Display Only
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run this application, you'll need to set up the following environment variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Google AI API Key (get from https://makersuite.google.com/app/apikey)
+GOOGLE_AI_API_KEY=your_google_ai_api_key_here
 
-## Learn More
+# Optional: OpenAI API Key (if you want to switch back)
+OPENAI_API_KEY=your_openai_api_key_here
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Switching AI Providers
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application is designed to easily switch between AI providers. Currently configured for Google Gemini 1.5 Flash (fastest and most cost-effective), but can be switched to OpenAI or other providers.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Google Gemini API (Current)
 
-## Deploy on Vercel
+- **Model**: `gemini-1.5-flash`
+- **Speed**: Very fast
+- **Cost**: Most cost-effective
+- **Features**: JSON response support, multilingual
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### OpenAI API (Alternative)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Model**: `gpt-4o-mini`
+- **Speed**: Fast
+- **Cost**: Competitive
+- **Features**: Excellent JSON formatting
+
+The switch is as simple as changing the API route implementation - all other code remains the same!
