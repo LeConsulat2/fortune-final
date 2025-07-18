@@ -7,7 +7,9 @@ import { type UserMemory } from '@/lib/common-constants';
 export const runtime = 'edge';
 // Initialize OpenAI client with API key from environment variables
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  //apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.GEMINI_API_KEY,
+  baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
 });
 /**
  * Builds a comprehensive system prompt by combining guidance with user information
@@ -59,7 +61,8 @@ export async function POST(req: NextRequest) {
     const systemPrompt = buildSystemPrompt(config.guidance, userMemory);
     // Create OpenAI chat completion with streaming enabled
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'gemini-2.5-flash-lite-preview-06-17', //gemini-2.5-flash-lite-preview-06-17
+      reasoning_effort: 'low',
       stream: false, // No streaming
       response_format: { type: 'json_object' },
       messages: [
@@ -73,6 +76,8 @@ export async function POST(req: NextRequest) {
             'Based on my information, generate my fortune for today. Ensure you follow the system instructions precisely.',
         },
       ],
+      // Max Tokens
+      max_tokens: 2000,
     });
     const content = response.choices[0].message.content;
     if (!content) {
