@@ -192,11 +192,12 @@ export default function PrivacyPage() {
             </h3>
             <p className="text-gray-300 leading-relaxed">
               Your session data and responses are sent to{' '}
-              <strong>OpenAI&apos;s API</strong>
-              (US-based) to generate personalized fortunes. OpenAI processes
-              this data according to their own privacy policy but does not store
-              it for training purposes when accessed through our API
-              integration.
+              <strong>Google&apos;s Gemini API</strong> (US-based) to generate
+              personalized fortunes. Google processes this data according to
+              their own privacy policy but does not store it for training
+              purposes when accessed through our API integration.
+              {/* Optional: You could add a link here to Google's AI privacy terms if desired */}
+              {/* For example: (<a href="https://policies.google.com/privacy" className="text-purple-400 hover:text-purple-300" target="_blank" rel="noopener noreferrer">See Google's Privacy Policy</a>) */}
             </p>
           </div>
           <div className="bg-gray-700/50 p-4 rounded-lg border border-gray-600 mt-4">
