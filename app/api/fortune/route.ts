@@ -1,7 +1,6 @@
 // app/api/fortune/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-// Fixed import - StreamingTextResponse is from 'ai' package
 import { getFortuneConfig } from '@/lib/fortune-config';
 import { type UserMemory } from '@/lib/common-constants';
 // Enable edge runtime for better performance
