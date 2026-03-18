@@ -2,26 +2,16 @@
 
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /loading
+Disallow: /start/
 
-# Sitemap
-Sitemap: https://yourfortune.cool/sitemap.xml
-
-# Allow Google AdSense crawlers
+# Google AdSense crawlers
 User-agent: Mediapartners-Google
 Allow: /
 
-# Allow Google AdSense verification
 User-agent: AdsBot-Google
 Allow: /
 
-# Disallow crawling of API routes (optional)
-User-agent: *
-Disallow: /api/
-
-# Allow all other content for SEO
-User-agent: *
-Allow: /about
-Allow: /privacy
-Allow: /terms
-Allow: /cookies
-Allow: /contact
+# Sitemap
+Sitemap: https://www.yourfortune.cool/sitemap.xml

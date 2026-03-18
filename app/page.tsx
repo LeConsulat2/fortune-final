@@ -2,182 +2,88 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/ui/button';
-import {
-  streamDownVariants,
-  pulseGlowVariants,
-  staggerContainerVariants,
-  zipInVariants,
-} from '@/lib/animated-flow';
-import { seededRandom } from '@/lib/seeded-random';
 import { useUserMemory } from '@/lib/useUserMemory';
-
 import { SimpleRandomImage } from '@/components/simple-random-image';
-
-// Custom variants for streaming down effect
-const streamDownItemVariants = {
-  hidden: { y: -50, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 50,
-      damping: 15,
-    },
-  },
-};
-
-// Warm gas effect for the image with persistent subtle glow
-const warmGasImageVariants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.8,
-    filter: 'blur(15px) brightness(1.2)',
-  },
-  visible: {
-    opacity: 0.65,
-    scale: 1,
-    filter: 'blur(0px) brightness(1.1)',
-    transition: {
-      duration: 2.5,
-      ease: 'easeOut' as const,
-    },
-  },
-};
+import TrueFocus from '@/components/TrueFocus';
 
 export default function Home() {
   const { isLoaded, isComplete } = useUserMemory();
   const destination = isLoaded && isComplete ? '/general' : '/start/step-1-personal-info';
-  const ctaText = isLoaded && isComplete ? 'Check Today\'s Fortune' : 'Explore Your Fortune';
+  const ctaText = isLoaded && isComplete ? 'See Today\'s Fortune' : 'Begin';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white overflow-hidden relative">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3 }}
-          className="absolute top-20 left-20 w-2 h-2 bg-yellow-400 rounded-full warm-glow"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3, delay: 0.8 }}
-          className="absolute top-40 right-32 w-1 h-1 bg-orange-400 rounded-full float-gentle"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3, delay: 1.5 }}
-          className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-amber-400 rounded-full warm-glow"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3, delay: 2 }}
-          className="absolute bottom-20 right-20 w-1 h-1 bg-red-400 rounded-full float-gentle"
-        />
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+      {/* Subtle ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Main content */}
-      <div className="min-h-screen flex flex-col items-center justify-center mx-auto px-2 sm:px-0">
+      <div className="max-w-lg md:max-w-xl w-full text-center space-y-10">
+        {/* Image */}
         <motion.div
-          variants={staggerContainerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-md mx-auto text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 0.7, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.2 }}
+          className="flex justify-center"
         >
-          {/* Hero text */}
-          <motion.div
-            variants={streamDownVariants}
-            className="space-y-4 pb-10 stream-down  "
-          >
-            <h1 className="text-5xl italic md:text-6xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
-              Your Daily Fortune
-            </h1>
-          </motion.div>
-
-          {/* Image with warm gas effect and subtle glow */}
-          <motion.div
-            variants={warmGasImageVariants}
-            className="my-2 flex justify-center w-full"
-          >
-            <div className="relative w-full max-w-[320px] h-auto">
-              <div className="absolute inset-0 bg-orange-300/10 rounded-xl blur-md warm-glow"></div>
-              <SimpleRandomImage />
-              <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-red-500/5 rounded-xl mix-blend-overlay"></div>
-            </div>
-          </motion.div>
-
-          {/* Description */}
-          {/* <motion.p
-            variants={streamDownItemVariants}
-            className="text-sm md:text-md text-amber-200 leading-relaxed mt-6"
-          >
-            Explore your fortune for the day, while you create your own!
-          </motion.p> */}
-
-          {/* Main CTA */}
-          <motion.div variants={zipInVariants} className="pt-6 zip-in">
-            <motion.div
-              variants={pulseGlowVariants}
-              initial="initial"
-              animate="animate"
-              className="inline-block pulse-glow border-none"
-            >
-              <Button
-                asChild
-                size="lg"
-                className="italic hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700shadow-2xl"
-              >
-                <Link href={destination}>
-                  ✨{''} {ctaText} {''}✨
-                </Link>
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Footer text */}
-          <motion.div
-            variants={streamDownItemVariants}
-            className="pt-8 text-center text-orange-300 text-sm"
-          >
-            <span className="text-sm md:text-md">
-              ✨ This is only for an entertainment purposes, You create your own
-              fortune! ✨
-            </span>
-          </motion.div>
+          <div className="relative w-full max-w-[280px] md:max-w-[320px]">
+            <div className="absolute inset-0 bg-primary/8 rounded-2xl blur-xl" />
+            <SimpleRandomImage />
+          </div>
         </motion.div>
-      </div>
 
-      {/* Floating particles animation */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 4 }}
-      >
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-orange-400 rounded-full"
-            style={{
-              left: `${seededRandom(i) * 100}%`,
-              top: `${seededRandom(i + 100) * 100}%`,
-            }}
-            animate={{
-              y: [0, -25, 0],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: 5 + seededRandom(i + 200) * 3,
-              repeat: Infinity,
-              delay: seededRandom(i + 300) * 3,
-            }}
-          />
-        ))}
-      </motion.div>
+        {/* Title with TrueFocus */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className="text-foreground">
+            <TrueFocus
+              sentence="Your Fortune"
+              manualMode={false}
+              blurAmount={3}
+              borderColor="oklch(0.645 0.246 16.439)"
+              glowColor="oklch(0.645 0.246 16.439 / 0.4)"
+              animationDuration={0.6}
+              pauseBetweenAnimations={1.5}
+            />
+          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="text-muted-foreground mt-5 text-base md:text-lg"
+          >
+            What does today hold for you?
+          </motion.p>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="max-w-sm mx-auto"
+        >
+          <Button
+            asChild
+            size="lg"
+            className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20"
+          >
+            <Link href={destination}>
+              {ctaText}
+            </Link>
+          </Button>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="text-muted-foreground/50 text-xs"
+        >
+          For entertainment. You create your own fortune.
+        </motion.p>
+      </div>
     </div>
   );
 }

@@ -39,15 +39,12 @@ export function Section({
       {(title || subtitle) && (
         <div className="space-y-2">
           {title && (
-            <motion.h2
-              variants={streamDownVariants}
-              className="text-xl font-semibold text-white"
-            >
+            <motion.h2 variants={streamDownVariants} className="text-xl font-semibold text-foreground">
               {title}
             </motion.h2>
           )}
           {subtitle && (
-            <motion.p variants={fadeInUpVariants} className="text-slate-400">
+            <motion.p variants={fadeInUpVariants} className="text-muted-foreground">
               {subtitle}
             </motion.p>
           )}
@@ -81,32 +78,19 @@ export function QuestionSection({
       variants={staggerContainerVariants}
       initial="hidden"
       animate="visible"
-      className={`space-y-6 ${className}`}
-      transition={{
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      }}
+      className={`space-y-5 ${className}`}
+      transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
     >
-      <motion.div
-        variants={streamDownVariants}
-        className="text-center space-y-3 stream-down"
-      >
-        <motion.h3 className="text-lg font-medium text-white leading-relaxed">
-          {question}
-        </motion.h3>
+      <motion.div variants={streamDownVariants} className="text-center space-y-2">
+        <h3 className="text-base font-medium text-foreground leading-relaxed">{question}</h3>
         {description && (
-          <motion.p className="text-sm text-slate-400 max-w-md mx-auto">
-            {description}
-          </motion.p>
+          <p className="text-sm text-muted-foreground max-w-md mx-auto">{description}</p>
         )}
       </motion.div>
       <motion.div
         variants={staggerContainerVariants}
         className="space-y-3"
-        transition={{
-          delayChildren: 0.4,
-          staggerChildren: 0.15,
-        }}
+        transition={{ delayChildren: 0.3, staggerChildren: 0.1 }}
       >
         {children}
       </motion.div>
@@ -132,32 +116,28 @@ export function ChoiceItem({
   return (
     <motion.button
       variants={zipInVariants}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
       className={`
-        w-full p-4 rounded-lg border transition-all duration-300 text-left
+        w-full p-3 rounded-lg border transition-all text-left
         ${
           selected
-            ? 'bg-orange-600/20 border-orange-400 shadow-lg shadow-orange-400/20'
-            : 'bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/30'
+            ? 'bg-primary/10 border-primary/30'
+            : 'bg-card border-border hover:bg-muted/50'
         }
         ${className}
       `}
     >
       <div className="flex items-center space-x-3">
-        {emoji && <span className="text-2xl">{emoji}</span>}
-        <span className="text-white">{children}</span>
+        {emoji && <span className="text-xl">{emoji}</span>}
+        <span className="text-foreground">{children}</span>
         {selected && (
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{
-              type: 'spring',
-              stiffness: 300,
-              damping: 20,
-            }}
-            className="ml-auto w-2 h-2 bg-purple-400 rounded-full"
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="ml-auto w-2 h-2 bg-primary rounded-full"
           />
         )}
       </div>

@@ -24,10 +24,7 @@ export default function PersonalInfoPage() {
   };
 
   const handleNext = () => {
-    updateUserMemory({
-      name: name.trim(),
-      gender: gender,
-    });
+    updateUserMemory({ name: name.trim(), gender: gender });
     router.push('/start/step-2-birthdate');
   };
 
@@ -38,145 +35,74 @@ export default function PersonalInfoPage() {
   const canContinue = name.trim().length > 0;
 
   return (
-    <QuizFrame
-      title="Your name"
-      subtitle="Let's begin personalizing your fortune 🎉"
-      currentStep={1}
-      totalSteps={3}
-    >
-      <div className="space-y-8">
-        <QuestionSection
-          question="What shall Fortuner call you?"
-          description="Let Fortuner know who you are to personalize your fortune reading"
-        >
+    <QuizFrame title="Your name" subtitle="Let's personalize your fortune" currentStep={1} totalSteps={3}>
+      <div className="space-y-6">
+        <QuestionSection question="What shall we call you?" description="This helps personalize your readings">
           <motion.div
             variants={staggerContainerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-6"
-            transition={{
-              staggerChildren: 0.3,
-              delayChildren: 0.4,
-            }}
+            className="space-y-5"
+            transition={{ staggerChildren: 0.2, delayChildren: 0.3 }}
           >
             <motion.div
-              initial={{ y: -60, opacity: 0 }}
-              animate={{
-                y: 0,
-                opacity: 1,
-                transition: {
-                  duration: 0.6,
-                  delay: 0.7,
-                  ease: [0.42, 0, 0.58, 1.0],
-                },
-              }}
-              className="stream-down"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
             >
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-white">
-                  Name
-                </Label>
-                <Input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-white/10 border-white/20 text-amber-400 font-medium placeholder:text-amber-400  w-full"
-                  placeholder="Your Name"
-                />
-              </div>
+              <Label htmlFor="name" className="text-foreground text-sm">Name</Label>
+              <Input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="mt-1 bg-input border-border text-foreground placeholder:text-muted-foreground"
+                placeholder="Your Name"
+              />
             </motion.div>
 
             <motion.div
-              initial={{ y: -60, opacity: 0 }}
-              animate={{
-                y: 0,
-                opacity: 1,
-                transition: {
-                  duration: 0.6,
-                  delay: 0.8,
-                  ease: [0.42, 0, 0.58, 1.0],
-                },
-              }}
-              className="stream-down"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
             >
-              <div className="space-y-3">
-                <Label className="text-white">Gender (Optional)</Label>
-                <motion.div
-                  variants={staggerContainerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="grid grid-cols-1 gap-2 w-full"
-                  transition={{
-                    staggerChildren: 0.15,
-                    delayChildren: 0.1,
-                  }}
-                >
-                  {GENDER_OPTIONS.map((option, index) => (
-                    <motion.div
-                      key={option.value}
-                      initial={{ y: -40, opacity: 0 }}
-                      animate={{
-                        y: 0,
-                        opacity: 1,
-                        transition: {
-                          duration: 0.6,
-                          delay: 0.9 + index * 0.1,
-                          ease: [0.42, 0, 0.58, 1.0],
-                        },
-                      }}
-                      className="w-full"
-                    >
-                      <ChoiceItem
-                        key={option.value}
-                        selected={gender === option.value}
-                        onClick={() => handleGenderSelect(option.value)}
-                        className="w-full h-10 hover:cursor-pointer hover:bg-orange-600 focus:bg-orange-600 flex items-center "
-                      >
-                        <div className="flex items-center gap-3">
-                          <div>
-                            <div className="font-medium text-amber-300">
-                              {option.label}
-                            </div>
-                          </div>
-                        </div>
-                      </ChoiceItem>
-                    </motion.div>
-                  ))}
-                </motion.div>
+              <Label className="text-foreground text-sm">Gender (Optional)</Label>
+              <div className="grid grid-cols-1 gap-2 mt-2">
+                {GENDER_OPTIONS.map((option) => (
+                  <ChoiceItem
+                    key={option.value}
+                    selected={gender === option.value}
+                    onClick={() => handleGenderSelect(option.value)}
+                    className="hover:cursor-pointer"
+                  >
+                    <span className="font-medium text-sm">{option.label}</span>
+                  </ChoiceItem>
+                ))}
               </div>
             </motion.div>
 
-            {/* Preview */}
-            {name && (
+            {name && name !== 'Anonymous' && (
               <motion.div
                 variants={zipInVariants}
                 initial="hidden"
                 animate="visible"
-                className="text-center p-4 bg-orange-600/20 rounded-lg border border-orange-400/30 zip-in"
+                className="text-center p-4 rounded-lg bg-primary/10 border border-primary/20"
               >
-                <div className="text-lg font-medium text-white mb-1">
-                  Hello, {name}! 👋
-                </div>
-                <p className="text-sm text-amber-200">
-                  Great! You have begun your personalized fortune! 🎉
-                </p>
+                <p className="text-base font-medium text-foreground">Hello, {name}!</p>
+                <p className="text-xs text-muted-foreground mt-1">Let&apos;s get your fortune ready</p>
               </motion.div>
             )}
           </motion.div>
         </QuestionSection>
 
-        <div className="flex justify-between pt-4">
-          <Button
-            onClick={handleBack}
-            className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer"
-          >
-            ← Previous
+        <div className="flex justify-between pt-2">
+          <Button onClick={handleBack} variant="outline" className="border-border text-foreground hover:bg-muted cursor-pointer">
+            ← Back
           </Button>
           <Button
             onClick={handleNext}
             disabled={!canContinue}
-            className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50 cursor-pointer"
           >
             Next →
           </Button>

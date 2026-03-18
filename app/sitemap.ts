@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.yourfortune.cool/'; // Update this to your actual domain
-  const currentDate = new Date('2025-07-17'); // Set to today's date
+  const baseUrl = 'https://www.yourfortune.cool';
+  const currentDate = new Date('2025-07-17');
 
   return [
     // Main pages - High priority
@@ -13,19 +13,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${baseUrl}/general`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/sample-results`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/result`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
 
-    // Fortune categories - High priority
+    // Fortune category landing pages - High priority
     {
       url: `${baseUrl}/love`,
       lastModified: currentDate,
@@ -51,12 +51,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/general`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
       url: `${baseUrl}/composure`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
@@ -69,13 +63,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/interview`,
+      url: `${baseUrl}/golf`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
 
-    // Quiz system
+    // Quiz pages
     {
       url: `${baseUrl}/quiz/love`,
       lastModified: currentDate,
@@ -113,7 +107,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/quiz/assessment`,
+      url: `${baseUrl}/quiz/exam`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,
@@ -124,48 +118,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
-
-    // Onboarding flow - Medium priority
     {
-      url: `${baseUrl}/start`,
+      url: `${baseUrl}/quiz/assignment`,
       lastModified: currentDate,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
+
+    // Result page
     {
-      url: `${baseUrl}/start/step-1-personal-info`, // Corrected typo
+      url: `${baseUrl}/result`,
       lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/start/step-2-birthdate`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/start/step-3`, // Corrected incomplete path
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
 
-    // Choice and loading pages
-    {
-      url: `${baseUrl}/choice`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/loading`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
-
-    // Content pages - Medium priority
+    // Content pages
     {
       url: `${baseUrl}/faq`,
       lastModified: currentDate,
@@ -179,7 +147,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
 
-    // Info pages - Lower priority
+    // Info pages
     {
       url: `${baseUrl}/about`,
       lastModified: currentDate,
@@ -193,7 +161,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.4,
     },
 
-    // Legal pages - Lowest priority
+    // Legal pages
     {
       url: `${baseUrl}/privacy`,
       lastModified: currentDate,

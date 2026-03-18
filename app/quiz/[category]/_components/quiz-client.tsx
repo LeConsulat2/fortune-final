@@ -5,17 +5,15 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUserMemory } from '@/lib/useUserMemory';
 import { Button } from '@/ui/button';
-import { Card } from '@/ui/card';
 import { Progress } from '@/ui/progress';
 import Link from 'next/link';
 import { staggerContainerVariants } from '@/lib/animated-flow';
 import { QuizOption } from '@/lib/types';
 
-// Updated Question interface
 export interface Question {
   id: string;
   q: string;
-  multiSelect?: boolean; // Default: false (single select)
+  multiSelect?: boolean;
   options: QuizOption[];
 }
 
@@ -31,7 +29,6 @@ export function QuizClient({ category, questions }: QuizClientProps) {
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [answersInitialized, setAnswersInitialized] = useState(false);
 
-  // Pre-fill answers from saved memory when loaded
   useEffect(() => {
     if (isLoaded && !answersInitialized) {
       if (userMemory.quizAnswers && Object.keys(userMemory.quizAnswers).length > 0) {
@@ -39,9 +36,7 @@ export function QuizClient({ category, questions }: QuizClientProps) {
         const saved = Object.fromEntries(
           Object.entries(userMemory.quizAnswers).filter(([id]) => questionIds.has(id)),
         );
-        if (Object.keys(saved).length > 0) {
-          setAnswers(saved as Record<string, string | string[]>);
-        }
+        if (Object.keys(saved).length > 0) setAnswers(saved as Record<string, string | string[]>);
       }
       setAnswersInitialized(true);
     }
@@ -59,26 +54,16 @@ export function QuizClient({ category, questions }: QuizClientProps) {
   };
 
   const totalQuestions = questions.length;
-  // Calculate progress based on current question index
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const currentQuestion = questions[currentQuestionIndex];
 
-  // Multi-select logic
   const multiSelect = (questionId: string, optionValue: string) => {
     setAnswers((prev) => {
       const prevSelected = (prev[questionId] as string[]) || [];
       if (prevSelected.includes(optionValue)) {
-        // Deselect
-        return {
-          ...prev,
-          [questionId]: prevSelected.filter(
-            (prevOption: string) => prevOption !== optionValue,
-          ),
-        };
-      } else {
-        // Select
-        return { ...prev, [questionId]: [...prevSelected, optionValue] };
+        return { ...prev, [questionId]: prevSelected.filter((v) => v !== optionValue) };
       }
+      return { ...prev, [questionId]: [...prevSelected, optionValue] };
     });
   };
 
@@ -86,25 +71,17 @@ export function QuizClient({ category, questions }: QuizClientProps) {
     const newAnswers = { ...answers, [questionId]: optionValue };
     setAnswers(newAnswers);
 
-    // If it's the last question, save and navigate
     if (currentQuestionIndex === totalQuestions - 1) {
-      updateUserMemory({
-        quizAnswers: newAnswers as Record<string, string>,
-        category,
-      });
+      updateUserMemory({ quizAnswers: newAnswers as Record<string, string>, category });
       router.push(`/loading?category=${category}`);
     } else {
-      // Otherwise, move to the next question
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
 
   const goToNextQuestion = () => {
     if (currentQuestionIndex === totalQuestions - 1) {
-      updateUserMemory({
-        quizAnswers: answers as Record<string, string>,
-        category,
-      });
+      updateUserMemory({ quizAnswers: answers as Record<string, string>, category });
       router.push(`/loading?category=${category}`);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -113,66 +90,33 @@ export function QuizClient({ category, questions }: QuizClientProps) {
 
   const isCurrentQuestionAnswered = () => {
     const answer = answers[currentQuestion.id];
-    if (currentQuestion.multiSelect) {
-      return Array.isArray(answer) && answer.length > 0;
-    } else {
-      return answer && answer !== '';
-    }
+    return currentQuestion.multiSelect
+      ? Array.isArray(answer) && answer.length > 0
+      : answer && answer !== '';
   };
 
   const isOptionSelected = (optionValue: string) => {
     const answer = answers[currentQuestion.id];
-    if (currentQuestion.multiSelect) {
-      return Array.isArray(answer) && answer.includes(optionValue);
-    } else {
-      return answer === optionValue;
-    }
+    return currentQuestion.multiSelect
+      ? Array.isArray(answer) && answer.includes(optionValue)
+      : answer === optionValue;
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-amber-950 via-red-950 to-red-900 p-4 text-white">
-      {/* Animated background particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-orange-400 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            initial={{ y: -60, opacity: 0 }}
-            animate={{
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 0.6,
-                delay: 0.7 + i * 0.1,
-                ease: [0.42, 0, 0.58, 1.0],
-              },
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative">
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-primary/4 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-md">
-        {/* Back Link */}
+        {/* Back */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
           className="mb-4"
         >
-          <Link
-            href="/choice"
-            className="inline-flex items-center text-orange-300 hover:text-orange-200 transition-colors"
-          >
-            ← Back to Choices
+          <Link href="/general" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            ← Back
           </Link>
         </motion.div>
 
@@ -181,203 +125,118 @@ export function QuizClient({ category, questions }: QuizClientProps) {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            transition={{ delay: 0.3 }}
             className="mb-4"
           >
             <button
               onClick={handleUseSavedAnswers}
-              className="w-full py-3 px-4 bg-orange-500/20 border border-orange-400/60 rounded-xl text-orange-100 text-sm font-medium hover:bg-orange-500/30 transition-all duration-200"
+              className="w-full py-3 px-4 rounded-xl bg-primary/10 border border-primary/20 text-sm font-medium text-foreground hover:bg-primary/15 transition-all"
             >
-              ✨ Continue with your last answers →
+              Continue with your last answers →
             </button>
           </motion.div>
         )}
 
-        {/* Progress indicator */}
+        {/* Progress */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
           className="mb-4 text-center"
         >
-          <p className="text-sm font-medium text-orange-300">
-            Question {currentQuestionIndex + 1} of {totalQuestions}
+          <p className="text-xs text-muted-foreground mb-2">
+            {currentQuestionIndex + 1} of {totalQuestions}
           </p>
           <Progress
             value={progress}
-            className="mt-2 h-1 bg-black/20 border border-orange-500/30 [&>div]:bg-orange-500"
+            className="h-1 bg-muted [&>div]:bg-primary"
           />
         </motion.div>
 
-        {/* Question Card */}
+        {/* Question */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentQuestionIndex}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.35 }}
           >
-            <Card className="bg-black/20 border border-orange-500/30 rounded-xl p-6 text-white backdrop-blur-sm">
+            <div className="rounded-xl bg-card border border-border p-6">
               <motion.div
                 variants={staggerContainerVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{
-                  staggerChildren: 0.1,
-                  delayChildren: 0.3,
-                }}
+                transition={{ staggerChildren: 0.08, delayChildren: 0.2 }}
               >
-                {/* Question Title */}
-                <motion.h2
-                  initial={{ y: -60, opacity: 0 }}
-                  animate={{
-                    y: 0,
-                    opacity: 1,
-                    transition: {
-                      duration: 0.6,
-                      delay: 0.5,
-                      ease: [0.42, 0, 0.58, 1.0],
-                    },
-                  }}
-                  className="mb-6 text-xl font-semibold text-center text-orange-100 stream-down"
-                >
+                <h2 className="mb-5 text-lg font-semibold text-center text-foreground">
                   {currentQuestion.q}
-                </motion.h2>
+                </h2>
 
-                {/* Multi-select indicator */}
                 {currentQuestion.multiSelect && (
-                  <motion.p
-                    initial={{ y: -60, opacity: 0 }}
-                    animate={{
-                      y: 0,
-                      opacity: 1,
-                      transition: {
-                        duration: 0.6,
-                        delay: 0.6,
-                        ease: [0.42, 0, 0.58, 1.0],
-                      },
-                    }}
-                    className="text-sm font-bold text-orange-300 text-center mb-4"
-                  >
+                  <p className="text-xs text-muted-foreground text-center mb-4">
                     Select all that apply
-                  </motion.p>
+                  </p>
                 )}
 
-                {/* Options */}
-                <div className="grid grid-cols-1 gap-4">
-                  {currentQuestion.options.map((option, index) => {
+                <div className="space-y-2.5">
+                  {currentQuestion.options.map((option) => {
                     const selected = isOptionSelected(option.value);
-
                     return (
                       <motion.div
                         key={option.value}
-                        initial={{ y: -60, opacity: 0 }}
-                        animate={{
-                          y: 0,
-                          opacity: 1,
-                          transition: {
-                            duration: 0.6,
-                            delay: 0.7 + index * 0.1,
-                            ease: [0.42, 0, 0.58, 1.0],
-                          },
-                        }}
-                        className="stream-down"
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <motion.div
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
+                        <Button
+                          onClick={() => {
+                            if (currentQuestion.multiSelect) {
+                              multiSelect(currentQuestion.id, option.value);
+                            } else {
+                              singleSelect(currentQuestion.id, option.value);
+                            }
+                          }}
+                          className={`w-full h-auto justify-start whitespace-normal py-3 px-4 text-left border transition-all ${
+                            selected
+                              ? 'bg-primary/10 border-primary/40 text-foreground'
+                              : 'bg-transparent border-border hover:bg-muted/50 text-foreground'
+                          }`}
                         >
-                          <Button
-                            onClick={() => {
-                              if (currentQuestion.multiSelect) {
-                                multiSelect(currentQuestion.id, option.value);
-                              } else {
-                                singleSelect(currentQuestion.id, option.value);
-                              }
-                            }}
-                            className={`w-full h-auto justify-start whitespace-normal py-4 text-left border transition-all duration-200 ${
-                              selected
-                                ? 'bg-orange-500/20 border-orange-400 text-orange-100 shadow-lg'
-                                : 'bg-black/20 border-orange-500/30 hover:bg-black/30 text-orange-100 hover:border-orange-400'
-                            }`}
-                          >
-                            <span className="mr-4 text-2xl text-orange-400">
-                              {option.emoji}
-                            </span>
-                            <div className="flex-1">
-                              <p className="font-semibold">{option.value}</p>
-                              <p className="text-sm text-orange-200">
-                                {option.description}
-                              </p>
-                            </div>
-                            {selected && currentQuestion.multiSelect && (
-                              <span className="ml-2 text-orange-400">✓</span>
-                            )}
-                          </Button>
-                        </motion.div>
+                          <span className="mr-3 text-xl">{option.emoji}</span>
+                          <div className="flex-1">
+                            <p className="font-medium text-sm">{option.value}</p>
+                            <p className="text-xs text-muted-foreground">{option.description}</p>
+                          </div>
+                          {selected && currentQuestion.multiSelect && (
+                            <span className="ml-2 text-primary">✓</span>
+                          )}
+                        </Button>
                       </motion.div>
                     );
                   })}
 
-                  {/* Next button for multi-select questions */}
                   {currentQuestion.multiSelect && (
-                    <motion.div
-                      initial={{ y: -60, opacity: 0 }}
-                      animate={{
-                        y: 0,
-                        opacity: 1,
-                        transition: {
-                          duration: 0.6,
-                          delay: 0.7 + currentQuestion.options.length * 0.1,
-                          ease: [0.42, 0, 0.58, 1.0],
-                        },
-                      }}
-                      className="stream-down"
+                    <Button
+                      onClick={goToNextQuestion}
+                      disabled={!isCurrentQuestionAnswered()}
+                      className="w-full mt-2 h-11 bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-40"
                     >
-                      <Button
-                        onClick={goToNextQuestion}
-                        className="w-full h-auto justify-center py-3 bg-orange-500/20 border border-orange-400 hover:bg-orange-500/30 text-orange-100 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
-                        disabled={!isCurrentQuestionAnswered()}
-                      >
-                        {currentQuestionIndex === totalQuestions - 1
-                          ? 'Complete Quiz'
-                          : 'Next Question'}
-                      </Button>
-                    </motion.div>
+                      {currentQuestionIndex === totalQuestions - 1 ? 'Complete' : 'Next'}
+                    </Button>
                   )}
                 </div>
 
-                {/* Back button */}
                 {currentQuestionIndex > 0 && (
-                  <motion.div
-                    initial={{ y: -60, opacity: 0 }}
-                    animate={{
-                      y: 0,
-                      opacity: 1,
-                      transition: {
-                        duration: 0.6,
-                        delay:
-                          0.7 +
-                          currentQuestion.options.length * 0.1 +
-                          (currentQuestion.multiSelect ? 0.1 : 0),
-                        ease: [0.42, 0, 0.58, 1.0],
-                      },
-                    }}
-                    className="stream-down mt-4"
+                  <Button
+                    onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
+                    variant="ghost"
+                    className="w-full mt-3 text-muted-foreground hover:text-foreground"
                   >
-                    <Button
-                      onClick={() =>
-                        setCurrentQuestionIndex(currentQuestionIndex - 1)
-                      }
-                      className="w-full h-auto justify-center py-3 bg-black/10 border border-orange-500/30 hover:bg-black/20 text-orange-300 transition-all duration-200"
-                    >
-                      ← Previous Question
-                    </Button>
-                  </motion.div>
+                    ← Previous
+                  </Button>
                 )}
               </motion.div>
-            </Card>
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>

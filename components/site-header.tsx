@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const LINKS = [
   { href: '/use-guide', label: 'User Guide' },
@@ -19,18 +19,18 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-gradient-to-b from-amber-950 via-orange-950 to-red-900/80 backdrop-blur text-white sticky top-0 z-40 shadow-md">
+    <header className="bg-card/80 backdrop-blur-md text-card-foreground sticky top-0 z-40 border-b border-border">
       <div className="mx-auto flex items-center justify-between px-4 py-3 md:max-w-5xl md:px-6">
-        <Link href="/" className="text-lg font-semibold">
+        <Link href="/" className="text-lg font-semibold text-primary hover:text-primary/80 transition-colors">
           Your-Fortune
         </Link>
         <button
           type="button"
-          className="md:hidden focus:outline-none"
+          className="md:hidden focus:outline-none text-muted-foreground hover:text-foreground"
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Toggle navigation"
         >
-          <Menu size={24} />
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
         {/* Desktop nav */}
         <nav className="hidden gap-6 md:flex">
@@ -38,7 +38,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-amber-300 hover:text-amber-200 transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </Link>
@@ -48,13 +48,13 @@ export function SiteHeader() {
 
       {/* Mobile menu */}
       {open && (
-        <nav className="md:hidden bg-gray-800 border-t border-gray-700">
+        <nav className="md:hidden bg-card border-t border-border">
           <ul className="flex flex-col px-4 py-3 space-y-2">
             {LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="block text-amber-300 py-1.5 hover:text-amber-200"
+                  className="block text-muted-foreground py-1.5 hover:text-foreground transition-colors"
                   onClick={() => setOpen(false)}
                 >
                   {link.label}

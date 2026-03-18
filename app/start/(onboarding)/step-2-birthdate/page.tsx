@@ -14,7 +14,6 @@ import { staggerContainerVariants, zipInVariants } from '@/lib/animated-flow';
 import { DateTime } from 'luxon';
 import { Calendar } from '@/ui/calendar';
 
-///// Custom Date Input Component /////
 interface CustomDateInputProps {
   value?: Date | null;
   onChange: (date: Date | null) => void;
@@ -38,12 +37,10 @@ const CustomDateInput: React.FC<CustomDateInputProps> = ({
   const [error, setError] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Fix: Update display value whenever the value prop changes
   useEffect(() => {
     if (value) {
-      const formatted = DateTime.fromJSDate(value).toFormat('dd/MM/yyyy');
-      setDisplayValue(formatted);
-      setError(''); // Clear any existing errors
+      setDisplayValue(DateTime.fromJSDate(value).toFormat('dd/MM/yyyy'));
+      setError('');
     } else {
       setDisplayValue('');
       setError('');
@@ -52,17 +49,9 @@ const CustomDateInput: React.FC<CustomDateInputProps> = ({
 
   const formatDateInput = (input: string): string => {
     const numbers = input.replace(/\D/g, '');
-
-    if (numbers.length <= 2) {
-      return numbers;
-    } else if (numbers.length <= 4) {
-      return `${numbers.slice(0, 2)}/${numbers.slice(2)}`;
-    } else {
-      return `${numbers.slice(0, 2)}/${numbers.slice(2, 4)}/${numbers.slice(
-        4,
-        8,
-      )}`;
-    }
+    if (numbers.length <= 2) return numbers;
+    if (numbers.length <= 4) return `${numbers.slice(0, 2)}/${numbers.slice(2)}`;
+    return `${numbers.slice(0, 2)}/${numbers.slice(2, 4)}/${numbers.slice(4, 8)}`;
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,57 +61,31 @@ const CustomDateInput: React.FC<CustomDateInputProps> = ({
     if (isDeleting) {
       setDisplayValue(rawValue);
       setError('');
-
       if (rawValue.length === 10) {
         const parsedDate = DateTime.fromFormat(rawValue, 'dd/MM/yyyy');
         if (parsedDate.isValid) {
           const jsDate = parsedDate.toJSDate();
-          if (jsDate <= maxDate) {
-            onChange(jsDate);
-          } else {
-            setError('Date cannot be in the future');
-            onChange(null);
-          }
-        } else {
-          onChange(null);
-        }
-      } else {
-        onChange(null);
-      }
+          if (jsDate <= maxDate) { onChange(jsDate); } else { setError('Date cannot be in the future'); onChange(null); }
+        } else { onChange(null); }
+      } else { onChange(null); }
     } else {
       const formatted = formatDateInput(rawValue);
       setDisplayValue(formatted);
       setError('');
-
       if (formatted.length === 10) {
         const parsedDate = DateTime.fromFormat(formatted, 'dd/MM/yyyy');
         if (parsedDate.isValid) {
           const jsDate = parsedDate.toJSDate();
-          if (jsDate <= maxDate) {
-            onChange(jsDate);
-          } else {
-            setError('Date cannot be in the future');
-            onChange(null);
-          }
-        } else {
-          setError('Please enter a valid date');
-          onChange(null);
-        }
-      } else {
-        onChange(null);
-      }
+          if (jsDate <= maxDate) { onChange(jsDate); } else { setError('Date cannot be in the future'); onChange(null); }
+        } else { setError('Please enter a valid date'); onChange(null); }
+      } else { onChange(null); }
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if ([8, 9, 27, 13, 46, 37, 38, 39, 40].includes(e.keyCode)) return;
     if (e.ctrlKey && [65, 67, 86, 88].includes(e.keyCode)) return;
-    if (
-      (e.keyCode >= 48 && e.keyCode <= 57) ||
-      (e.keyCode >= 96 && e.keyCode <= 105)
-    )
-      return;
-
+    if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) return;
     e.preventDefault();
   };
 
@@ -136,16 +99,14 @@ const CustomDateInput: React.FC<CustomDateInputProps> = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className={`${className} ${error ? 'border-red-500' : ''}`}
+        className={`${className} ${error ? 'border-destructive' : ''}`}
         maxLength={10}
       />
-      {error && <div className="text-red-400 text-sm">{error}</div>}
+      {error && <div className="text-destructive text-sm">{error}</div>}
     </div>
   );
 };
-///// End Custom Date Input Component /////
 
-///// BirthdatePage Component /////
 export default function BirthdatePage() {
   const router = useRouter();
   const { updateUserMemory } = useUserMemory();
@@ -163,22 +124,12 @@ export default function BirthdatePage() {
         const sign = calculateZodiacSign(iso!);
         const signInfo = ZODIAC_SIGNS_LABELS[sign];
         setZodiacSign(`${signInfo.name} ${signInfo.emoji}`);
-      } else {
-        setZodiacSign('');
-      }
-    } else {
-      setIsValid(false);
-      setZodiacSign('');
-    }
+      } else { setZodiacSign(''); }
+    } else { setIsValid(false); setZodiacSign(''); }
   }, [birthDate]);
 
-  // Fix: Handle calendar selection properly
   const handleCalendarSelect = (date: Date | undefined) => {
-    if (date) {
-      setBirthDate(date);
-    } else {
-      setBirthDate(null);
-    }
+    setBirthDate(date ?? null);
   };
 
   const handleNext = () => {
@@ -189,57 +140,26 @@ export default function BirthdatePage() {
     }
   };
 
-  const handleBack = () => {
-    router.push('/start/step-1-personal-info');
-  };
-
   return (
-    <QuizFrame
-      title="Your Birth Information"
-      subtitle="We will automatically calculate your zodiac sign for you"
-      currentStep={2}
-      totalSteps={3}
-    >
-      <div className="space-y-8">
-        <QuestionSection
-          question="When were you born?"
-          description="We calculate your zodiac sign based on your birthdate and provide personalized fortune readings"
-        >
+    <QuizFrame title="Your Birthday" subtitle="We'll calculate your zodiac sign" currentStep={2} totalSteps={3}>
+      <div className="space-y-6">
+        <QuestionSection question="When were you born?" description="Your zodiac sign personalizes your readings">
           <motion.div
             variants={staggerContainerVariants}
             initial="hidden"
             animate="visible"
             className="space-y-4"
-            transition={{
-              staggerChildren: 0.3,
-              delayChildren: 0.4,
-            }}
+            transition={{ staggerChildren: 0.2, delayChildren: 0.3 }}
           >
-            <motion.div
-              initial={{ y: -60, opacity: 0 }}
-              animate={{
-                y: 0,
-                opacity: 1,
-                transition: {
-                  duration: 0.6,
-                  delay: 0.7,
-                  ease: [0.42, 0, 0.58, 1.0],
-                },
-              }}
-              className="stream-down"
-            >
-              <div className="space-y-2">
-                <Label htmlFor="birthdate" className="text-white">
-                  Date of Birth
-                </Label>
-                <CustomDateInput
-                  id="birthdate"
-                  value={birthDate}
-                  onChange={(date) => setBirthDate(date)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus:border-orange-400 w-full px-3 py-2 rounded-md"
-                  placeholder="DD/MM/YYYY"
-                />
-              </div>
+            <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+              <Label htmlFor="birthdate" className="text-foreground text-sm">Date of Birth</Label>
+              <CustomDateInput
+                id="birthdate"
+                value={birthDate}
+                onChange={(date) => setBirthDate(date)}
+                className="mt-1 bg-input border border-border text-foreground placeholder:text-muted-foreground w-full px-3 py-2 rounded-md focus:border-primary focus:outline-none"
+                placeholder="DD/MM/YYYY"
+              />
 
               <Calendar
                 mode="single"
@@ -247,7 +167,7 @@ export default function BirthdatePage() {
                 required={true}
                 captionLayout="dropdown"
                 onSelect={handleCalendarSelect}
-                className="calendar-dropdown mt-4 bg-white/10 border-white/20 text-white/50 placeholder:text-slate-400 focus:border-orange-400 w-full px-3 py-2 rounded-md"
+                className="calendar-dropdown mt-4 bg-card border border-border text-foreground w-full px-3 py-2 rounded-md"
               />
             </motion.div>
 
@@ -256,45 +176,29 @@ export default function BirthdatePage() {
                 variants={zipInVariants}
                 initial="hidden"
                 animate="visible"
-                className="text-center p-4 bg-orange-600/20 rounded-lg border border-orange-400/30 zip-in"
+                className="text-center p-4 rounded-lg bg-primary/10 border border-primary/20"
               >
-                <div className="text-2xl text-white mb-2">{zodiacSign} ✨</div>
+                <div className="text-xl text-foreground">{zodiacSign}</div>
               </motion.div>
             )}
 
             {birthDate && !isValid && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-red-400 text-sm text-center"
-              >
-                Please enter a valid date of birth
-              </motion.div>
+              <p className="text-destructive text-sm text-center">Please enter a valid date of birth</p>
             )}
           </motion.div>
         </QuestionSection>
 
-        <div className="flex justify-between pt-4">
-          <Button
-            onClick={handleBack}
-            className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer"
-          >
-            ← Previous
+        <div className="flex justify-between pt-2">
+          <Button onClick={() => router.push('/start/step-1-personal-info')} variant="outline" className="border-border text-foreground hover:bg-muted cursor-pointer">
+            ← Back
           </Button>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isValid ? 1 : 0.5 }}
-            transition={{ duration: 0.3 }}
+          <Button
+            onClick={handleNext}
+            disabled={!isValid}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50 cursor-pointer"
           >
-            <Button
-              onClick={handleNext}
-              disabled={!isValid}
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Next →
-            </Button>
-          </motion.div>
+            Next →
+          </Button>
         </div>
       </div>
     </QuizFrame>

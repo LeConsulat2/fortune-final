@@ -1,18 +1,15 @@
 'use client';
 
 import { useEffect, useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 import { useUserMemory } from '@/lib/useUserMemory';
 import { ZODIAC_SIGNS_LABELS, ZodiacSign } from '@/lib/common-constants';
-import { Card } from '@/ui/card';
 import { Button } from '@/ui/button';
 import { formatDate } from '@/lib/zodiac';
-import { seededRandom } from '@/lib/seeded-random';
 import { NumberTicker } from '@/ui/number-ticker';
+import AnimatedContent from '@/components/AnimatedContent';
 
-// Fortune prediction interface
 interface FortuneArea {
   name: string;
   score: number;
@@ -20,72 +17,37 @@ interface FortuneArea {
 }
 
 interface FortunePrediction {
-  overall: {
-    score: number;
-    message: string;
-    detail: string;
-  };
+  overall: { score: number; message: string; detail: string };
   areas?: FortuneArea[];
   caution?: string;
   opportunity?: string;
-  lucky?: {
-    color: string;
-    number: number;
-    time: string;
-  };
+  lucky?: { color: string; number: number; time: string };
   personalised_insight?: string;
 }
 
-const getCategoryTitles = (category: string) => {
-  if (category === 'general') {
-    return {
-      main: 'Your Fortune Today',
-      score: 'Your Fortune Score',
-      reading: "Today's Reading",
-      insights: 'Personal Insights',
-    };
-  }
-
-  const baseTitle = category
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-
-  if (category === 'love') {
-    return {
-      main: 'Your Love & Romance Fortune Today',
-      score: 'Your Love/Romance Score',
-      reading: 'Love & Romance Reading',
-      insights: 'Love & Romance Insights',
-    };
-  }
-
-  if (category === 'golf') {
-    return {
-      main: "Today's Golf Fortune",
-      score: "Today's Predicted Score",
-      reading: "Today's Round Reading",
-      insights: 'Course Insights',
-    };
-  }
-
-  return {
-    main: `Your ${baseTitle} Fortune Today`,
-    score: `Your ${baseTitle} Score`,
-    reading: `${baseTitle} Reading`,
-    insights: `${baseTitle} Insights`,
+const getCategoryTitle = (category: string) => {
+  const titles: Record<string, string> = {
+    general: 'Today\'s Fortune',
+    love: 'Love & Romance',
+    job: 'Career',
+    interview: 'Interview',
+    exam: 'Exam',
+    assignment: 'Assignment',
+    money: 'Money',
+    composure: 'Composure',
+    'mental-health': 'Mental Health',
+    golf: 'Golf',
   };
+  return titles[category] || category;
 };
 
-///// Suspense boundary added for useSearchParams requirement /////
 export default function ResultPageWithSuspense() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={null}>
       <ResultPage />
     </Suspense>
   );
 }
-///// End Suspense boundary /////
 
 function ResultPage() {
   const router = useRouter();
@@ -93,57 +55,40 @@ function ResultPage() {
   const searchParams = useSearchParams();
   const category = searchParams?.get('category') || 'general';
   const [fortune, setFortune] = useState<FortunePrediction | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isLoaded) return;
-
-    if (!userMemory || !userMemory.name || !userMemory.birthDate) {
+    if (!userMemory?.name || !userMemory?.birthDate) {
       router.push('/start/step-1-personal-info');
       return;
     }
-
-    // Try to get the fortune from sessionStorage
     try {
-      const storedFortune = sessionStorage.getItem('fortune-result');
-      if (storedFortune) {
-        const parsedFortune = JSON.parse(storedFortune) as FortunePrediction;
-        setFortune(parsedFortune);
+      const stored = sessionStorage.getItem('fortune-result');
+      if (stored) {
+        setFortune(JSON.parse(stored) as FortunePrediction);
       } else {
-        // If no fortune is found, redirect to the loading page
         router.push(`/loading?category=${category}`);
         return;
       }
-    } catch (error) {
-      setError('Failed to load your fortune. Please try again.');
-      console.error('Error loading fortune:', error);
+    } catch {
+      setError('Failed to load your fortune.');
     } finally {
-      setIsLoading(false);
+      setReady(true);
     }
   }, [isLoaded, userMemory, router, category]);
 
-  if (!isLoaded || isLoading) {
-    return null;
-  }
+  if (!isLoaded || !ready) return null;
 
-  // Show error state if needed
   if (error || !fortune) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white flex flex-col items-center justify-center p-6">
-        <div className="max-w-md mx-auto w-full text-center">
-          <div className="mb-8 text-5xl">😕</div>
-          <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent mb-4">
-            Fortune Display Error
-          </h1>
-          <p className="text-amber-200 mb-6">
-            {error || "Couldn't load your fortune"}
-          </p>
-          <Button
-            onClick={() => router.push('/general')}
-            className="px-6 bg-orange-500 hover:bg-orange-600 text-white"
-          >
-            Back to Categories
+      <div className="min-h-screen flex items-center justify-center p-6">
+        <div className="text-center space-y-4">
+          <p className="text-xl font-bold text-foreground">Something went wrong</p>
+          <p className="text-sm text-muted-foreground">{error}</p>
+          <Button onClick={() => router.push('/general')} className="bg-primary text-primary-foreground">
+            Go back
           </Button>
         </div>
       </div>
@@ -153,261 +98,215 @@ function ResultPage() {
   const zodiacInfo = userMemory?.zodiacSign
     ? ZODIAC_SIGNS_LABELS[userMemory.zodiacSign as ZodiacSign]
     : { name: '', emoji: '' };
-
   const today = formatDate(new Date());
-  const userName = userMemory?.name || 'User';
-  const { main, score, reading, insights } = getCategoryTitles(category);
-
+  const isGolf = category === 'golf';
   const detailParagraphs = (fortune.overall.detail ?? '').split('\n\n').filter(Boolean);
 
   const scoreColor = (s: number) => {
-    if (s >= 70) return 'from-yellow-500 to-orange-400';
-    if (s >= 45) return 'from-orange-500 to-amber-500';
-    return 'from-red-600 to-orange-600';
+    if (s >= 70) return 'bg-emerald-500';
+    if (s >= 45) return 'bg-amber-500';
+    return 'bg-red-500';
   };
 
-  const isGolf = category === 'golf';
-
   return (
-    <div className={`flex min-h-screen w-full flex-col items-center justify-start py-6 px-4 text-white ${isGolf ? 'bg-gradient-to-br from-green-950 via-emerald-950 to-teal-950' : 'bg-gradient-to-br from-amber-950 via-red-950 to-red-900'}`}>
-      {/* Background particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-1 h-1 rounded-full opacity-30 float-gentle ${isGolf ? 'bg-emerald-400' : 'bg-orange-400'}`}
-            style={{
-              left: `${seededRandom(i) * 100}%`,
-              top: `${seededRandom(i + 100) * 100}%`,
-            }}
-            animate={{ y: [0, -20, 0], opacity: [0.1, 0.7, 0.1] }}
-            transition={{
-              duration: 6 + seededRandom(i + 200) * 3,
-              repeat: Infinity,
-              delay: seededRandom(i + 300) * 3,
-            }}
-          />
-        ))}
-      </div>
+    <div className="min-h-screen px-4 py-8 md:py-12 relative">
+      {/* Ambient glow */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 px-6 py-12 w-full">
-        <div className="max-w-md mx-auto">
+      <div className="relative z-10 max-w-md md:max-w-2xl lg:max-w-3xl mx-auto">
 
-          {/* Header */}
-          <motion.div
-            initial={{ y: -60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1, transition: { duration: 0.6, delay: 0.5, ease: [0.42, 0, 0.58, 1.0] } }}
-            className="text-center mb-8"
-          >
-            <h1 className={`text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent mb-3 ${isGolf ? 'from-green-300 via-emerald-300 to-teal-300' : 'from-yellow-300 via-orange-300 to-red-300'}`}>
-              {main}
-            </h1>
-            <p className={`text-lg mb-1 ${isGolf ? 'text-emerald-200' : 'text-amber-200'}`}>{today}</p>
-            <div className="flex items-center justify-center space-x-2 text-base">
-              <span>{userName} · {zodiacInfo.name}</span>
-              <span className="text-xl">{zodiacInfo.emoji}</span>
-            </div>
-          </motion.div>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-6"
+        >
+          <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-[0.2em] mb-1">
+            {getCategoryTitle(category)}
+          </p>
+          <p className="text-xs text-muted-foreground/60">
+            {userMemory?.name} · {zodiacInfo.name} {zodiacInfo.emoji} · {today}
+          </p>
+        </motion.div>
 
-          {/* Overall score */}
+        {/* GOLF: Show score as hero */}
+        {isGolf && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-6"
+            transition={{ duration: 0.5, delay: 0.15, type: 'spring', damping: 20 }}
+            className="text-center py-8"
           >
-            {category === 'golf' ? (
-              <Card className="p-6 bg-black/30 backdrop-blur-sm border-emerald-500/30 text-center">
-                <div className="text-sm font-medium text-emerald-400 mb-2">{score}</div>
-                <div className="flex items-end justify-center gap-1 mb-1">
-                  <NumberTicker
-                    value={99}
-                    startValue={fortune.overall.score}
-                    direction="down"
-                    delay={0.3}
-                    className={`text-7xl font-bold tabular-nums ${
-                      fortune.overall.score <= 74
-                        ? 'text-emerald-400'
-                        : fortune.overall.score <= 85
-                        ? 'text-amber-400'
-                        : 'text-red-400'
-                    }`}
-                  />
-                </div>
-                <div className="text-xs text-emerald-500 mb-3">lower score = better round</div>
-                <p className="text-emerald-100 font-medium italic">{fortune.overall.message}</p>
-              </Card>
-            ) : (
-              <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center">
-                <div className="text-sm font-medium text-amber-300 mb-1">{score}</div>
-                <div className="text-5xl font-bold text-white mb-3">{fortune.overall.score}<span className="text-2xl text-amber-300">/100</span></div>
-                <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden mb-3">
-                  <motion.div
-                    className={`h-full bg-gradient-to-r ${scoreColor(fortune.overall.score)}`}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${fortune.overall.score}%` }}
-                    transition={{ duration: 1.2, ease: 'easeOut' }}
-                  />
-                </div>
-                <div className="flex justify-between text-xs text-amber-400 mb-4">
-                  <span>Shadows Stirring</span>
-                  <span>Turning Winds</span>
-                  <span>Favorable Currents</span>
-                </div>
-                <p className="text-amber-100 font-medium italic">{fortune.overall.message}</p>
-              </Card>
-            )}
+            <NumberTicker
+              value={99}
+              startValue={fortune.overall.score}
+              direction="down"
+              delay={0.3}
+              className={`text-8xl md:text-9xl font-bold tabular-nums ${
+                fortune.overall.score <= 74 ? 'text-emerald-400'
+                : fortune.overall.score <= 85 ? 'text-amber-400'
+                : 'text-red-400'
+              }`}
+            />
+            <p className="text-xs text-muted-foreground mt-2">predicted score (lower = better)</p>
           </motion.div>
+        )}
 
-          {/* Detailed reading */}
+        {/* NON-GOLF: Hero message — the main event */}
+        {!isGolf && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="mb-6"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-center py-6 md:py-10 mb-4"
           >
-            <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20">
-              <h2 className="text-lg font-bold mb-3 text-amber-200">{reading}</h2>
-              {detailParagraphs.map((paragraph, index) => (
-                <p key={index} className="text-amber-100 mb-3 leading-relaxed italic">
-                  {paragraph}
-                </p>
-              ))}
-            </Card>
+            <p className="text-2xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-snug md:leading-tight tracking-tight px-2 md:px-8">
+              &ldquo;{fortune.overall.message}&rdquo;
+            </p>
           </motion.div>
+        )}
 
-          {/* Areas grid */}
-          {fortune.areas && fortune.areas.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 }}
-              className="mb-6"
-            >
-              <h2 className="text-lg font-bold text-amber-200 mb-3">Today&apos;s Breakdown</h2>
-              <div className="grid grid-cols-2 gap-3">
-                {fortune.areas.map((area, index) => (
+        {/* Golf: also show the one-line message */}
+        {isGolf && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-center text-base md:text-lg font-medium text-foreground/90 italic mb-8 px-2"
+          >
+            &ldquo;{fortune.overall.message}&rdquo;
+          </motion.p>
+        )}
+
+        {/* Detailed reading — larger, more readable text */}
+        <AnimatedContent distance={30} duration={0.6} delay={0.1} threshold={0.05}>
+          <div className="mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50">
+            <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4">Today&apos;s Reading</h2>
+            {detailParagraphs.map((p, i) => (
+              <p key={i} className="text-base md:text-lg text-foreground/85 mb-4 leading-relaxed md:leading-loose last:mb-0">
+                {p}
+              </p>
+            ))}
+          </div>
+        </AnimatedContent>
+
+        {/* Areas */}
+        {fortune.areas && fortune.areas.length > 0 && (
+          <AnimatedContent distance={30} duration={0.6} delay={0.15} threshold={0.05}>
+            <div className="mb-8 md:mb-10">
+              <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4 px-1">Breakdown</h2>
+              <div className={`grid gap-3 ${isGolf ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-1 md:grid-cols-2'}`}>
+                {fortune.areas.map((area, i) => (
                   <motion.div
                     key={area.name}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + index * 0.08 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 + i * 0.08 }}
+                    className="p-4 md:p-5 rounded-xl bg-card/50 border border-border/50"
                   >
-                    <Card className="p-4 bg-white/10 backdrop-blur-sm border-white/20 h-full">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-xs font-semibold text-amber-300 uppercase tracking-wide">{area.name}</span>
-                        <span className="text-sm font-bold text-white">{area.score}</span>
-                      </div>
-                      <div className="w-full bg-white/10 rounded-full h-1.5 overflow-hidden mb-2">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-semibold text-foreground">{area.name}</span>
+                      {isGolf && <span className="text-sm font-bold text-foreground">{area.score}</span>}
+                    </div>
+                    {isGolf && (
+                      <div className="w-full h-1 rounded-full bg-muted overflow-hidden mb-2">
                         <motion.div
-                          className={`h-full bg-gradient-to-r ${scoreColor(area.score)}`}
+                          className={`h-full rounded-full ${scoreColor(area.score)}`}
                           initial={{ width: 0 }}
                           animate={{ width: `${area.score}%` }}
-                          transition={{ duration: 1, ease: 'easeOut', delay: 0.5 + index * 0.08 }}
+                          transition={{ duration: 0.8, delay: 0.6 + i * 0.08 }}
                         />
                       </div>
-                      <p className="text-amber-100 text-xs leading-relaxed">{area.insight}</p>
-                    </Card>
+                    )}
+                    <p className="text-sm md:text-base text-foreground/70 leading-relaxed">{area.insight}</p>
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
-          )}
+            </div>
+          </AnimatedContent>
+        )}
 
-          {/* Caution + Opportunity */}
-          {(fortune.caution || fortune.opportunity) && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="mb-6 grid grid-cols-2 gap-3"
-            >
+        {/* Caution & Opportunity */}
+        {(fortune.caution || fortune.opportunity) && (
+          <AnimatedContent distance={30} duration={0.6} delay={0.2} threshold={0.05}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8 md:mb-10">
               {fortune.caution && (
-                <Card className="p-4 bg-red-950/40 backdrop-blur-sm border-red-500/30">
-                  <div className="text-xs font-bold text-red-300 uppercase tracking-wide mb-2">⚠ Watch Out</div>
-                  <p className="text-amber-100 text-sm leading-relaxed">{fortune.caution}</p>
-                </Card>
+                <div className="p-5 md:p-6 rounded-xl bg-red-500/5 border border-red-500/10">
+                  <p className="text-[11px] font-bold text-red-400 uppercase tracking-[0.15em] mb-2">Watch out</p>
+                  <p className="text-sm md:text-base text-foreground/70 leading-relaxed">{fortune.caution}</p>
+                </div>
               )}
               {fortune.opportunity && (
-                <Card className="p-4 bg-emerald-950/40 backdrop-blur-sm border-emerald-500/30">
-                  <div className="text-xs font-bold text-emerald-300 uppercase tracking-wide mb-2">✦ Seize This</div>
-                  <p className="text-amber-100 text-sm leading-relaxed">{fortune.opportunity}</p>
-                </Card>
-              )}
-            </motion.div>
-          )}
-
-          {/* Lucky elements */}
-          {fortune.lucky && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.68 }}
-              className="mb-6"
-            >
-              <Card className="p-4 bg-white/10 backdrop-blur-sm border-white/20">
-                <div className="text-xs font-bold text-amber-300 uppercase tracking-wide mb-3">Today&apos;s Lucky Elements</div>
-                <div className="flex justify-around text-center">
-                  <div>
-                    <div className="text-xl mb-1">🎨</div>
-                    <div className="text-xs text-amber-400">Color</div>
-                    <div className="text-sm font-medium text-white capitalize">{fortune.lucky.color}</div>
-                  </div>
-                  <div>
-                    <div className="text-xl mb-1">{category === 'golf' ? '⛳' : '🔢'}</div>
-                    <div className="text-xs text-amber-400">{category === 'golf' ? 'Lucky Hole' : 'Number'}</div>
-                    <div className="text-sm font-medium text-white">{category === 'golf' ? `Hole ${fortune.lucky.number}` : fortune.lucky.number}</div>
-                  </div>
-                  <div>
-                    <div className="text-xl mb-1">⏰</div>
-                    <div className="text-xs text-amber-400">Best Time</div>
-                    <div className="text-sm font-medium text-white capitalize">{fortune.lucky.time}</div>
-                  </div>
+                <div className="p-5 md:p-6 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
+                  <p className="text-[11px] font-bold text-emerald-400 uppercase tracking-[0.15em] mb-2">Seize this</p>
+                  <p className="text-sm md:text-base text-foreground/70 leading-relaxed">{fortune.opportunity}</p>
                 </div>
-              </Card>
-            </motion.div>
-          )}
+              )}
+            </div>
+          </AnimatedContent>
+        )}
 
-          {/* Personal insight */}
-          {fortune.personalised_insight && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75 }}
-              className="mb-8"
-            >
-              <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20">
-                <h2 className="text-lg font-bold mb-2 text-amber-200">{insights}</h2>
-                <p className="text-amber-100 italic leading-relaxed">{fortune.personalised_insight}</p>
-              </Card>
-            </motion.div>
-          )}
+        {/* Lucky elements */}
+        {fortune.lucky && (
+          <AnimatedContent distance={20} duration={0.5} delay={0.25} threshold={0.05}>
+            <div className="mb-8 md:mb-10 p-5 md:p-6 rounded-xl bg-card/50 border border-border/50">
+              <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4">Lucky elements</p>
+              <div className="flex justify-around text-center">
+                <div>
+                  <div className="text-xl mb-1">🎨</div>
+                  <div className="text-xs text-muted-foreground/60 mb-0.5">Color</div>
+                  <div className="text-sm md:text-base font-medium text-foreground capitalize">{fortune.lucky.color}</div>
+                </div>
+                <div>
+                  <div className="text-xl mb-1">{isGolf ? '⛳' : '🔢'}</div>
+                  <div className="text-xs text-muted-foreground/60 mb-0.5">{isGolf ? 'Hole' : 'Number'}</div>
+                  <div className="text-sm md:text-base font-medium text-foreground">{isGolf ? `#${fortune.lucky.number}` : fortune.lucky.number}</div>
+                </div>
+                <div>
+                  <div className="text-xl mb-1">⏰</div>
+                  <div className="text-xs text-muted-foreground/60 mb-0.5">Time</div>
+                  <div className="text-sm md:text-base font-medium text-foreground capitalize">{fortune.lucky.time}</div>
+                </div>
+              </div>
+            </div>
+          </AnimatedContent>
+        )}
 
-          {/* Actions */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.85 }}
-            className="flex justify-between"
+        {/* Personal insight */}
+        {fortune.personalised_insight && (
+          <AnimatedContent distance={20} duration={0.5} delay={0.3} threshold={0.05}>
+            <div className="mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50">
+              <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4">Personal insight</h2>
+              <p className="text-base md:text-lg text-foreground/80 italic leading-relaxed md:leading-loose">{fortune.personalised_insight}</p>
+            </div>
+          </AnimatedContent>
+        )}
+
+        {/* Actions */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="flex gap-3 max-w-md mx-auto"
+        >
+          <Button
+            onClick={() => router.push('/general')}
+            variant="outline"
+            className="flex-1 h-12 border-border text-foreground hover:bg-card cursor-pointer"
           >
-            <Button
-              onClick={() => router.push('/choice')}
-              className="px-6 bg-red-500 hover:bg-orange-600 text-white hover:cursor-pointer hover:scale-105 transition-all duration-300"
-            >
-              Try Other Categories
-            </Button>
-            <Button
-              onClick={() => {
-                sessionStorage.removeItem('fortune-result');
-                router.push(`/loading?category=${category}`);
-              }}
-              className="px-6 bg-orange-500 hover:bg-orange-600 text-white hover:cursor-pointer hover:scale-105 transition-all duration-300"
-            >
-              Generate Again
-            </Button>
-          </motion.div>
+            Categories
+          </Button>
+          <Button
+            onClick={() => {
+              sessionStorage.removeItem('fortune-result');
+              router.push(`/loading?category=${category}`);
+            }}
+            className="flex-1 h-12 bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer"
+          >
+            Try again
+          </Button>
+        </motion.div>
 
-        </div>
       </div>
     </div>
   );
