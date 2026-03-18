@@ -19,15 +19,15 @@ interface CategoryItem {
 }
 
 const CATEGORIES: CategoryItem[] = [
-  { key: 'love', name: 'Love', emoji: '❤️', tagline: 'Romance & connections', quizPath: '/quiz/love' },
-  { key: 'job', name: 'Job', emoji: '💼', tagline: 'Workplace & career', quizPath: '/quiz/job' },
-  { key: 'exam', name: 'Exam', emoji: '📝', tagline: 'Test performance', quizPath: '/quiz/exam' },
-  { key: 'money', name: 'Money', emoji: '💰', tagline: 'Financial outlook', quizPath: '/quiz/money' },
-  { key: 'mental-health', name: 'Mental', emoji: '🧠', tagline: 'Wellbeing & mood', quizPath: '/quiz/mental-health' },
+  { key: 'love', name: 'Love / Romance', emoji: '❤️', tagline: 'Romance & connections', quizPath: '/quiz/love' },
+  { key: 'job', name: 'Work / Job', emoji: '💼', tagline: 'Workplace & career', quizPath: '/quiz/job' },
+  { key: 'exam', name: 'Exams', emoji: '📝', tagline: 'Test performance', quizPath: '/quiz/exam' },
+  { key: 'money', name: 'Money / Finance', emoji: '💰', tagline: 'Financial outlook', quizPath: '/quiz/money' },
+  { key: 'mental-health', name: 'Mental Health', emoji: '🧠', tagline: 'Wellbeing & mood', quizPath: '/quiz/mental-health' },
   { key: 'composure', name: 'Composure', emoji: '🧘', tagline: 'Inner calm', quizPath: '/quiz/composure' },
   { key: 'interview', name: 'Interview', emoji: '🎤', tagline: 'Preparation tips', quizPath: '/quiz/interview' },
-  { key: 'assignment', name: 'Assignment', emoji: '📚', tagline: 'Focus & deadlines', quizPath: '/quiz/assignment' },
-  { key: 'golf', name: 'Golf', emoji: '⛳', tagline: 'Predict your round', quizPath: '/golf' },
+  { key: 'assignment', name: 'Assignment', emoji: '💻📙', tagline: 'Focus & deadlines', quizPath: '/quiz/assignment' },
+  { key: 'golf', name: 'Golf', emoji: '⛳🚩', tagline: 'Predict your round', quizPath: '/golf' },
 ];
 
 export default function GeneralFortunePage() {
