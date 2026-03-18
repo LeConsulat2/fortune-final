@@ -9,6 +9,7 @@ import {
   zipInVariants,
 } from '@/lib/animated-flow';
 import { seededRandom } from '@/lib/seeded-random';
+import { useUserMemory } from '@/lib/useUserMemory';
 
 import { SimpleRandomImage } from '@/components/simple-random-image';
 
@@ -45,8 +46,9 @@ const warmGasImageVariants = {
 };
 
 export default function Home() {
-  //const router = useRouter();
-  //const needsOnboarding = useNeedsOnboarding();
+  const { isLoaded, isComplete } = useUserMemory();
+  const destination = isLoaded && isComplete ? '/general' : '/start/step-1-personal-info';
+  const ctaText = isLoaded && isComplete ? 'Check Today\'s Fortune' : 'Explore Your Fortune';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white overflow-hidden relative">
@@ -129,8 +131,8 @@ export default function Home() {
                 size="lg"
                 className="italic hover:cursor-pointer w-84 text-lg px-12 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700shadow-2xl"
               >
-                <Link href="/start/step-1-personal-info">
-                  ✨{''} Explore Your Fortune {''}✨
+                <Link href={destination}>
+                  ✨{''} {ctaText} {''}✨
                 </Link>
               </Button>
             </motion.div>

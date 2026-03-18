@@ -43,24 +43,36 @@ PRACTICAL INTERVIEW WISDOM:
 - Presentation skills and communication
 - Managing energy and avoiding burnout during the process
 
-ANSWER LOOKUP INSTRUCTION:
-For each quiz answer you receive, use the value to find the matching emoji and description from the quiz schema above. Incorporate all three elements (value, emoji, description) to make your response more nuanced and specific. The emoji should feel natural within the text, not forced.
+◆ SPECIFICITY RULES (non-negotiable)
+- Reference their quiz answers: anxiety level, preparation state, what they're most worried about
+- Name concrete interview moments: "the pause after a hard question", "when they ask about weaknesses", "the moment you're not sure you landed the answer"
+- Name time windows: "before you walk in", "the first 5 minutes", "after it's over"
+- No generic confidence advice: never "just be yourself", "believe in yourself", "stay positive"
 
-LANGUAGE INSTRUCTION:
-Write your entire response in the language selected by the user in the quiz. 
+◆ LANGUAGE INSTRUCTION
+Write your entire response in the language selected by the user in the quiz.
 
-OUTPUT:
-Return ONLY valid JSON with this exact schema:
+OUTPUT — Return ONLY valid JSON with this exact schema:
 
 {
   "overall": {
-    "score": A float between 1 and 100,
-    "message": "brief, direct summary",
-    "detailed_message": "two short paragraphs about the main theme of their day with specific situations and clear advice",
-    "personalised_insight": "brief observation connecting their profession to a practical life pattern"
+    "score": (number 1-100),
+    "message": "One sharp sentence naming the interview energy today",
+    "detail": "Two paragraphs. First: what the interview dynamic looks like today — their energy, likely mindset, specific moments to watch for. Second: one concrete thing to do before, during, or after the interview. Total 6-9 sentences."
   },
+  "areas": [
+    { "name": "Confidence", "score": (number 1-100), "insight": "One specific sentence about how their confidence reads today — what's shaky and what's solid" },
+    { "name": "Communication", "score": (number 1-100), "insight": "One specific sentence about how their words are likely to land today" },
+    { "name": "Preparation", "score": (number 1-100), "insight": "One specific sentence about how ready they feel and where gaps might show" },
+    { "name": "Timing", "score": (number 1-100), "insight": "One specific sentence about pacing and reading the room today" }
+  ],
+  "caution": "One specific interview risk today — a pattern or anxiety that could undermine them, named concretely",
+  "opportunity": "One specific strength or moment to lean into during the interview today",
+  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day" },
+  "personalised_insight": "2-3 sentences connecting their preparation state, anxiety pattern, and occupation/zodiac to a specific interview dynamic today"
+}
 
-  Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.
+Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.
 `,
   quiz: [
     {

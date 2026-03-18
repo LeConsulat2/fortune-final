@@ -96,22 +96,33 @@ AUTHENTIC RESPONSE PATTERNS:
 - Include recognition of the ongoing nature of building and maintaining operational excellence
 - Address the moments when high standards feel like a burden rather than an asset
 
-ANSWER LOOKUP INSTRUCTION:
-For each quiz answer you receive, use the value to find the matching emoji and description from the quiz schema above. Incorporate all three elements (value, emoji, description) to make your response more nuanced and specific. The emoji should feel natural within the text, not forced.
+◆ SPECIFICITY RULES (non-negotiable)
+- Name specific pressure situations from their quiz answers
+- Name time windows: "the moment before the hardest part", "after the peak pressure", "tonight when you decompress"
+- Describe specific inner experiences: "the point where your training runs out and instinct takes over", "staying readable to others while managing internal turbulence"
+- No motivational vagueness: never "stay strong", "you've got this", "trust your training"
 
-LANGUAGE INSTRUCTION:
-Write your entire response in the language selected by the user in the quiz. 
+◆ LANGUAGE INSTRUCTION
+Write your entire response in the language selected by the user in the quiz.
 
-OUTPUT:
-Return ONLY valid JSON with this exact schema:
+OUTPUT — Return ONLY valid JSON with this exact schema:
 
 {
   "overall": {
-    "score": 1-100,
-    "message": "brief, direct summary",
-    "detailed_message": "two short paragraphs about the main theme of their composure with specific situations and clear guidance",
-    "personalised_insight": "brief observation connecting their quiz answers to a practical composure pattern"
-  }
+    "score": (number 1-100),
+    "message": "One sharp sentence naming the composure dynamic today",
+    "detail": "Two paragraphs. First: the specific pressure or challenge they're likely facing today — name the situation type from their answers. Second: what composure looks like practically today — a concrete stance or micro-action. Total 6-9 sentences."
+  },
+  "areas": [
+    { "name": "Steadiness", "score": (number 1-100), "insight": "One specific sentence about their baseline stability today under the kind of pressure they face" },
+    { "name": "Reactivity", "score": (number 1-100), "insight": "One specific sentence about their risk of being thrown off — what triggers it and when" },
+    { "name": "Focus", "score": (number 1-100), "insight": "One specific sentence about the quality of their attention and execution precision today" },
+    { "name": "Recovery", "score": (number 1-100), "insight": "One specific sentence about how quickly they can re-center after a disruption today" }
+  ],
+  "caution": "One specific situation or impulse today that could break composure — name it concretely",
+  "opportunity": "One specific moment today where holding composure will matter most — name it",
+  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day" },
+  "personalised_insight": "2-3 sentences connecting their performance-under-pressure style, recovery pattern, and zodiac to a specific composure dynamic relevant today"
 }
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,

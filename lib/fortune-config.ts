@@ -9,6 +9,7 @@ import { composure } from '@/app/composure/composure-prompts';
 import { interview } from '@/app/interview/interview-prompts';
 import { exam } from '@/app/assessment/exam-prompts';
 import { assignment } from '@/app/assessment/assignment-prompts';
+import { golf } from '@/app/golf/golf-prompts';
 
 export type FortuneCategory = keyof typeof fortuneCategories;
 
@@ -26,6 +27,7 @@ export const fortuneCategoryLabels: Record<
   interview: interview.label,
   exam: exam.label,
   assignment: assignment.label,
+  golf: golf.label,
 };
 
 export const fortuneCategories = {
@@ -39,6 +41,7 @@ export const fortuneCategories = {
   interview,
   exam,
   assignment,
+  golf,
 };
 
 export const getFortuneConfig = (category: string): FortuneConfig | null => {

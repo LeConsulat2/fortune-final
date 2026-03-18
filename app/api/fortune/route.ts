@@ -7,8 +7,7 @@ import { type UserMemory } from '@/lib/common-constants';
 export const runtime = 'edge';
 // Initialize OpenAI client with API key from environment variables
 const openai = new OpenAI({
-  //apiKey: process.env.OPENAI_API_KEY,
-  apiKey: process.env.GEMINI_API_KEY,
+  apiKey: process.env.GEMINI_API_KEY ?? '',
   baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
 });
 /**
@@ -61,9 +60,8 @@ export async function POST(req: NextRequest) {
     const systemPrompt = buildSystemPrompt(config.guidance, userMemory);
     // Create OpenAI chat completion with streaming enabled
     const response = await openai.chat.completions.create({
-      model: 'gemini-2.5-flash-lite-preview-06-17', //gemini-2.5-flash-lite-preview-06-17
-      reasoning_effort: 'low',
-      stream: false, // No streaming
+      model: 'gemini-2.5-flash-lite',
+      stream: false,
       response_format: { type: 'json_object' },
       messages: [
         {
@@ -72,12 +70,10 @@ export async function POST(req: NextRequest) {
         },
         {
           role: 'user',
-          content:
-            'Based on my information, generate my fortune for today. Ensure you follow the system instructions precisely.',
+          content: `Based on my information, generate my fortune for today (${new Date().toISOString().split('T')[0]}). Today's luck roll is ${Math.floor(Math.random() * 10) + 1}/10 — let this genuinely shift the outcome, even if it contradicts the inputs. A low roll means things go wrong despite good conditions; a high roll means surprising upside despite bad ones. Do not smooth this out. Ensure you follow the system instructions precisely.`,
         },
       ],
-      // Max Tokens
-      max_tokens: 2000,
+      max_tokens: 4000,
     });
     const content = response.choices[0].message.content;
     if (!content) {

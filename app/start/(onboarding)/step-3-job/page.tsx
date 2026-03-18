@@ -170,8 +170,7 @@ export default function Job() {
         </div>
 
         <div className="text-center text-xs text-amber-400">
-          * Your information is used only for fortune generation and is deleted
-          once you refresh or finish the quiz.
+          * Saved privately on your device. Never shared or stored on our servers.
         </div>
       </div>
     </QuizFrame>

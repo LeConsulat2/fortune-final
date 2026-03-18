@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUserMemory } from '@/lib/useUserMemory';
@@ -26,9 +26,37 @@ interface QuizClientProps {
 
 export function QuizClient({ category, questions }: QuizClientProps) {
   const router = useRouter();
-  const { updateUserMemory } = useUserMemory();
+  const { updateUserMemory, userMemory, isLoaded } = useUserMemory();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
+  const [answersInitialized, setAnswersInitialized] = useState(false);
+
+  // Pre-fill answers from saved memory when loaded
+  useEffect(() => {
+    if (isLoaded && !answersInitialized) {
+      if (userMemory.quizAnswers && Object.keys(userMemory.quizAnswers).length > 0) {
+        const questionIds = new Set(questions.map((q) => q.id));
+        const saved = Object.fromEntries(
+          Object.entries(userMemory.quizAnswers).filter(([id]) => questionIds.has(id)),
+        );
+        if (Object.keys(saved).length > 0) {
+          setAnswers(saved as Record<string, string | string[]>);
+        }
+      }
+      setAnswersInitialized(true);
+    }
+  }, [isLoaded, userMemory.quizAnswers, answersInitialized, questions]);
+
+  const questionIds = new Set(questions.map((q) => q.id));
+  const savedAnswerCount = userMemory.quizAnswers
+    ? Object.keys(userMemory.quizAnswers).filter((id) => questionIds.has(id)).length
+    : 0;
+  const hasSavedAnswers = isLoaded && savedAnswerCount > 0;
+
+  const handleUseSavedAnswers = () => {
+    updateUserMemory({ quizAnswers: answers as Record<string, string>, category });
+    router.push(`/loading?category=${category}`);
+  };
 
   const totalQuestions = questions.length;
   // Calculate progress based on current question index
@@ -147,6 +175,23 @@ export function QuizClient({ category, questions }: QuizClientProps) {
             ← Back to Choices
           </Link>
         </motion.div>
+
+        {/* Saved answers shortcut */}
+        {hasSavedAnswers && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="mb-4"
+          >
+            <button
+              onClick={handleUseSavedAnswers}
+              className="w-full py-3 px-4 bg-orange-500/20 border border-orange-400/60 rounded-xl text-orange-100 text-sm font-medium hover:bg-orange-500/30 transition-all duration-200"
+            >
+              ✨ Continue with your last answers →
+            </button>
+          </motion.div>
+        )}
 
         {/* Progress indicator */}
         <motion.div

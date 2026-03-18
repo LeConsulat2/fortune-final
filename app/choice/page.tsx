@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useUserMemory } from '@/lib/useUserMemory';
 import { motion } from 'framer-motion';
 import {
   Heart,
@@ -9,7 +10,7 @@ import {
   Sparkles,
   ChevronRight,
   Stethoscope,
-  //LandPlot,
+  LandPlot,
 } from 'lucide-react';
 import { streamDownVariants, zipInVariants } from '@/lib/animated-flow';
 
@@ -36,6 +37,9 @@ const selectionVariants = {
 };
 
 export default function Choice() {
+  const { isLoaded, isComplete } = useUserMemory();
+  const backDest = isLoaded && isComplete ? '/general' : '/start/step-3-job';
+
   const fortuneCategories = [
     {
       name: 'My Today',
@@ -81,13 +85,12 @@ export default function Choice() {
       path: '/quiz/money',
       categoryKey: 'money',
     },
-
-    // {
-    //   name: 'Golf',
-    //   icon: <LandPlot size={24} />,
-    //   path: '/quiz/golf',
-    //   categoryKey: 'golf',
-    // },
+    {
+      name: 'Golf',
+      icon: <LandPlot size={24} />,
+      path: '/golf',
+      categoryKey: 'golf',
+    },
   ];
 
   return (
@@ -150,7 +153,7 @@ export default function Choice() {
 
       {/* Navigation buttons */}
       <div className="w-full max-w-md mt-auto pt-8 flex gap-3">
-        <Link href="/start/step-3-job" className="w-full">
+        <Link href={backDest} className="w-full">
           <motion.button
             variants={zipInVariants}
             initial="hidden"

@@ -4,6 +4,7 @@ import { type UserMemory, calculateZodiacSign } from '@/lib/common-constants';
 import { useState, useEffect, useCallback } from 'react';
 
 const USER_MEMORY_KEY = 'fortune-user-memory';
+const STORAGE = typeof window !== 'undefined' ? localStorage : null;
 
 const INITIAL_STATE: UserMemory = {
   name: null,
@@ -30,28 +31,28 @@ export function useUserMemory(): UseUserMemoryReturn {
   const [userMemory, setUserMemory] = useState<UserMemory>(INITIAL_STATE);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load from sessionStorage on mount
+  // Load from localStorage on mount
   useEffect(() => {
     try {
-      const storedMemory = sessionStorage.getItem(USER_MEMORY_KEY);
+      const storedMemory = STORAGE?.getItem(USER_MEMORY_KEY);
       if (storedMemory) {
         const parsed = JSON.parse(storedMemory) as UserMemory;
         setUserMemory(parsed);
       }
     } catch (error) {
-      console.warn('Error loading user memory from sessionStorage', error);
+      console.warn('Error loading user memory from localStorage', error);
     } finally {
       setIsLoaded(true);
     }
   }, []);
 
-  // Save to sessionStorage whenever userMemory changes
+  // Save to localStorage whenever userMemory changes
   useEffect(() => {
     if (isLoaded) {
       try {
-        sessionStorage.setItem(USER_MEMORY_KEY, JSON.stringify(userMemory));
+        STORAGE?.setItem(USER_MEMORY_KEY, JSON.stringify(userMemory));
       } catch (error) {
-        console.warn('Error saving user memory to sessionStorage', error);
+        console.warn('Error saving user memory to localStorage', error);
       }
     }
   }, [userMemory, isLoaded]);
@@ -79,9 +80,9 @@ export function useUserMemory(): UseUserMemoryReturn {
   const clearUserMemory = useCallback(() => {
     setUserMemory(INITIAL_STATE);
     try {
-      sessionStorage.removeItem(USER_MEMORY_KEY);
+      STORAGE?.removeItem(USER_MEMORY_KEY);
     } catch (error) {
-      console.warn('Error clearing user memory from sessionStorage', error);
+      console.warn('Error clearing user memory from localStorage', error);
     }
   }, []);
 
