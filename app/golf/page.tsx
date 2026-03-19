@@ -11,12 +11,12 @@ type Answers = Record<string, string>;
 
 export default function GolfQuizPage() {
   const router = useRouter();
-  const { userMemory, isLoaded, updateUserMemory } = useUserMemory();
+  const { userMemory, isLoaded, isComplete, updateUserMemory } = useUserMemory();
   const [answers, setAnswers] = useState<Answers>({});
 
   useEffect(() => {
     if (!isLoaded) return;
-    if (!userMemory.name || !userMemory.birthDate) {
+    if (!isComplete) {
       router.push('/start/step-1-personal-info');
     }
   }, [isLoaded, userMemory, router]);

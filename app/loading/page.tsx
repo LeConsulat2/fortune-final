@@ -26,7 +26,7 @@ function LoadingPage() {
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { userMemory, isLoaded } = useUserMemory();
+  const { userMemory, isLoaded, isComplete } = useUserMemory();
   const category = searchParams?.get('category') || 'general';
 
   const categoryEmoji: Record<string, string> = {
@@ -40,7 +40,7 @@ function LoadingPage() {
   useEffect(() => {
     if (!isLoaded) return;
 
-    if (!userMemory || !userMemory.name || !userMemory.birthDate) {
+    if (!isComplete) {
       router.push('/start/step-1-personal-info');
       return;
     }
@@ -84,7 +84,7 @@ function LoadingPage() {
       isMounted = false;
       clearInterval(msgInterval);
     };
-  }, [isLoaded, userMemory, router, category]);
+  }, [isLoaded, isComplete, userMemory, router, category]);
 
   if (error) {
     return (

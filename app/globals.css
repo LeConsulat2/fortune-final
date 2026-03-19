@@ -246,3 +246,8 @@
 a:where(:not([class*="text-primary-foreground"])) {
   @apply text-primary/80 hover:text-primary transition-colors;
 }
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}

@@ -136,6 +136,7 @@ export interface UserMemory {
   zodiacSign?: ZodiacSign;
   category?: string;
   quizAnswers?: Record<string, string>;
+  onboardingSkipped?: boolean;
 }
 
 export interface CategoryFortune {

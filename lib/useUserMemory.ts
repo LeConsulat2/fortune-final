@@ -22,6 +22,7 @@ interface UseUserMemoryReturn {
   updateUserMemory: (updates: Partial<UserMemory>) => void;
   clearUserMemory: () => void;
   isComplete: boolean;
+  isPersonalised: boolean;
 }
 
 //Hook for managing user memory in sessionStorage
@@ -86,8 +87,8 @@ export function useUserMemory(): UseUserMemoryReturn {
     }
   }, []);
 
-  // check if essential info is complete (gender, birthDate, name)
-  const isComplete = Boolean(userMemory.name && userMemory.birthDate);
+  const isPersonalised = Boolean(userMemory.name && userMemory.birthDate);
+  const isComplete = isPersonalised || Boolean(userMemory.onboardingSkipped);
 
   return {
     userMemory,
@@ -95,6 +96,7 @@ export function useUserMemory(): UseUserMemoryReturn {
     updateUserMemory,
     clearUserMemory,
     isComplete,
+    isPersonalised,
   };
 }
 

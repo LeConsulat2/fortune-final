@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/ui/button';
 import { useUserMemory } from '@/lib/useUserMemory';
@@ -7,9 +8,13 @@ import { SimpleRandomImage } from '@/components/simple-random-image';
 import TrueFocus from '@/components/TrueFocus';
 
 export default function Home() {
-  const { isLoaded, isComplete } = useUserMemory();
-  const destination = isLoaded && isComplete ? '/general' : '/start/step-1-personal-info';
-  const ctaText = isLoaded && isComplete ? 'See Today\'s Fortune' : 'Begin';
+  const { isLoaded, isComplete, updateUserMemory } = useUserMemory();
+  const router = useRouter();
+
+  const handleQuickFortune = () => {
+    updateUserMemory({ onboardingSkipped: true });
+    router.push('/general');
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
@@ -62,17 +67,42 @@ export default function Home() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="max-w-sm mx-auto"
+          className="max-w-sm mx-auto space-y-3"
         >
-          <Button
-            asChild
-            size="lg"
-            className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20"
-          >
-            <Link href={destination}>
-              {ctaText}
-            </Link>
-          </Button>
+          {isLoaded && isComplete ? (
+            /* Returning user — single CTA */
+            <Button
+              asChild
+              size="lg"
+              className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20"
+            >
+              <Link href="/general">See Today&apos;s Fortune</Link>
+            </Button>
+          ) : (
+            /* New user — two paths */
+            <>
+              <Button
+                size="lg"
+                onClick={handleQuickFortune}
+                className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20"
+              >
+                Today&apos;s Fortune
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="w-full text-base h-12"
+              >
+                <Link href="/start/step-1-personal-info">
+                  Personalise My Fortune
+                </Link>
+              </Button>
+              <p className="text-muted-foreground/60 text-xs pt-1">
+                Personalised fortunes use your name, date of birth &amp; more for tailored guidance
+              </p>
+            </>
+          )}
         </motion.div>
 
         <motion.p

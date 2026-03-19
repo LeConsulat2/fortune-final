@@ -32,11 +32,11 @@ const CATEGORIES: CategoryItem[] = [
 
 export default function GeneralFortunePage() {
   const router = useRouter();
-  const { userMemory, isLoaded } = useUserMemory();
+  const { userMemory, isLoaded, isComplete } = useUserMemory();
 
   if (!isLoaded) return null;
 
-  if (!userMemory || !userMemory.name) {
+  if (!isComplete) {
     router.push('/start/step-1-personal-info');
     return null;
   }
@@ -59,9 +59,11 @@ export default function GeneralFortunePage() {
           className="flex items-center justify-between mb-8 md:mb-12"
         >
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground">{userMemory.name}</h1>
+            {userMemory.name && (
+              <h1 className="text-2xl md:text-3xl font-bold text-foreground">{userMemory.name}</h1>
+            )}
             <p className="text-sm md:text-base text-muted-foreground">
-              {zodiacInfo.name} {zodiacInfo.emoji} · {today}
+              {zodiacInfo.name && `${zodiacInfo.name} ${zodiacInfo.emoji} · `}{today}
             </p>
           </div>
         </motion.div>
