@@ -60,10 +60,10 @@ export default function Home() {
           <TiltedCard
             imageSrc={imageSrc}
             altText="Fortune image"
-            containerWidth="280px"
-            containerHeight="280px"
-            imageWidth="280px"
-            imageHeight="280px"
+            containerWidth="min(320px, 75vw)"
+            containerHeight="min(320px, 75vw)"
+            imageWidth="min(320px, 75vw)"
+            imageHeight="min(320px, 75vw)"
             scaleOnHover={1.05}
             rotateAmplitude={12}
             showMobileWarning={false}
