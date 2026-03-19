@@ -4,9 +4,10 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /loading
+Disallow: /result
 Disallow: /start/
 
-# Google AdSense crawlers
+# Google AdSense crawlers — allow full access for ad relevance scanning
 User-agent: Mediapartners-Google
 Allow: /
 

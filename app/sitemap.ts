@@ -2,25 +2,26 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.yourfortune.cool';
-  const currentDate = new Date('2025-07-17');
+  const recentDate = new Date('2026-03-19');  // last major content update
+  const stableDate = new Date('2025-07-17');  // pages unchanged since launch
 
   return [
     // Main pages - High priority
     {
       url: baseUrl,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
       url: `${baseUrl}/general`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/sample-results`,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'monthly',
       priority: 0.9,
     },
@@ -28,43 +29,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Fortune category landing pages - High priority
     {
       url: `${baseUrl}/love`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/money`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/mental-health`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/job`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/composure`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/assessment`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/golf`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -72,77 +73,69 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Quiz pages
     {
       url: `${baseUrl}/quiz/love`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/quiz/money`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/quiz/mental-health`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/quiz/job`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/quiz/general`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/quiz/composure`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/quiz/exam`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/quiz/interview`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/quiz/assignment`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'weekly',
       priority: 0.7,
-    },
-
-    // Result page
-    {
-      url: `${baseUrl}/result`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
     },
 
     // Content pages
     {
       url: `${baseUrl}/faq`,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/use-guide`,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
@@ -150,13 +143,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Info pages
     {
       url: `${baseUrl}/about`,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'yearly',
       priority: 0.5,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: currentDate,
+      lastModified: stableDate,
       changeFrequency: 'yearly',
       priority: 0.4,
     },
@@ -164,19 +157,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Legal pages
     {
       url: `${baseUrl}/privacy`,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
       url: `${baseUrl}/cookies`,
-      lastModified: currentDate,
+      lastModified: recentDate,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
