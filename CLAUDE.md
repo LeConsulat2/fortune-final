@@ -60,8 +60,39 @@ The API endpoint (`app/api/fortune/route.ts`) is edge-runtime, uses Google Gemin
 - **No scores displayed except golf** — fortune results are text-focused with emphasis on readability and typography
 - **Golf exception**: shows NumberTicker score (63–95, lower = better) as the hero element
 - **Non-golf result hero**: the `overall.message` is displayed as large-format pull quote (2xl–5xl responsive)
-- **Scroll-revealed sections**: result page uses `AnimatedContent` for staggered section entrances
 - **Responsive layouts**: all main pages scale from `max-w-md` on mobile to `max-w-2xl`/`max-w-3xl`/`max-w-4xl` on desktop
+
+### Result Page Card Architecture (`app/result/page.tsx`)
+
+The result page uses a **3D carousel** of fortune cards with Framer Motion.
+
+**Card structure:**
+- Fixed width `w-[min(440px,88vw)]`, max height `68vh`, `overflow-y-auto` with hidden scrollbar (`scrollbar-hide` class from globals.css)
+- **Sticky header** (`sticky top-0 z-10`): emoji + category title, stays visible as card content scrolls. Uses `bg-card/95 backdrop-blur-sm` for a frosted glass effect over scrolling content
+- **Content area** (`px-6 py-6 space-y-6`): overall message quote → "Today's Reading" label → reading paragraphs → bottom padding
+- Golf cards additionally show a `NumberTicker` score hero above the message
+
+**Carousel mechanics (Framer Motion):**
+- Cards are absolutely positioned, animated with `x` offset, `rotateY`, `scale`, and `opacity` based on distance from active index
+- `perspective: 1200` on the container for 3D depth
+- Supports swipe drag on active card (`drag="x"`) and click-to-navigate on adjacent cards
+- Multi-card navigation: dot indicators + arrow buttons + swipe
+
+**Text highlights (CSS-based, not rough-notation):**
+- The AI returns a `highlights` array with `{ text, type }` where type is `"caution"` or `"seize"`
+- `ReadingParagraph` component finds exact substring matches and wraps them in `<mark>` elements
+- Caution = red text + wavy red underline; Seize = emerald text + solid emerald underline
+- **Why not rough-notation/Highlighter:** The `rough-notation` library draws SVG overlays positioned absolutely relative to the page. Inside a scrollable container (`overflow-y-auto`), the SVG highlights detach from the text and "follow the scroll" — a fundamental incompatibility. CSS underlines/colors are inline with the text flow and always stay fixed to their content. The `ui/highlighter.tsx` component still exists but is NOT used on the result page for this reason.
+
+**Action buttons (sticky bottom bar):**
+- Positioned outside the carousel as a `sticky bottom-0` bar with gradient fade from background
+- "Back" button (with `ArrowLeft` icon) navigates to `/general`
+- "Try again" button (with `RotateCcw` icon) clears session and re-fetches fortune
+- Buttons must remain outside the card — placing them inside the scrollable card area makes them scroll out of view
+
+**API variance seed:**
+- The user message includes an "internal variance seed" (random 1–10) to shift fortune tone
+- The prompt explicitly says "Do not mention this seed or any numeric rating in the reading text" — otherwise the AI echoes "X/10" scores in the prose
 
 ### Fortune Output Schema
 
@@ -98,10 +129,11 @@ Every category prompt must include a **SPECIFICITY RULES** section instructing t
 
 ### API Configuration
 
-- **Model:** `gemini-2.5-flash-lite` (via OpenAI-compatible endpoint)
-- **max_tokens:** 4000 (richer schema requires more — do not reduce below 3500)
+- **Model:** `gpt-5-nano` by default (`USE_GPT=false` in .env.local falls back to `gemini-2.5-flash-lite` via OpenAI-compatible endpoint)
+- **max_completion_tokens:** 10000
 - **response_format:** `{ type: 'json_object' }`
 - **User message** includes today's date (`new Date().toISOString().split('T')[0]`) for daily variance
+- **Variance seed:** random 1–10 integer in user message shifts tone; prompt instructs AI not to echo it in reading text
 
 ### Adding a New Fortune Category
 
