@@ -1,9 +1,17 @@
 import { MetadataRoute } from 'next';
+import { ZODIAC_SIGNS } from '@/lib/common-constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.yourfortune.cool';
   const recentDate = new Date('2026-03-19');  // last major content update
   const stableDate = new Date('2025-07-17');  // pages unchanged since launch
+
+  const zodiacPages: MetadataRoute.Sitemap = ZODIAC_SIGNS.map((sign) => ({
+    url: `${baseUrl}/zodiac/${sign}`,
+    lastModified: recentDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
 
   return [
     // Main pages - High priority
@@ -15,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/general`,
-      lastModified: stableDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
@@ -125,6 +133,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+
+    // Zodiac guide pages
+    {
+      url: `${baseUrl}/zodiac`,
+      lastModified: recentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    ...zodiacPages,
 
     // Content pages
     {

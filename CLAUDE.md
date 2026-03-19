@@ -16,7 +16,7 @@ No test framework is configured. Known build quirk on Windows: `.next/trace` can
 ## Environment Variables
 
 ```
-GEMINI_API_KEY=   # Google Gemini API key (required) — store in .env.local, never .env
+OPENAI_API_KEY=   # OpenAI API key (required) — store in .env.local, never .env
 ```
 
 ## Architecture
@@ -36,7 +36,7 @@ Quiz answers are pre-filled from saved memory; a "Continue with saved answers" b
 
 The fortune result (`fortune-result`) is stored in **sessionStorage** separately — ephemeral, fresh each visit.
 
-The API endpoint (`app/api/fortune/route.ts`) is edge-runtime, uses Google Gemini 2.5 Flash Lite via an OpenAI-compatible wrapper, and returns a rich JSON fortune object.
+The API endpoint (`app/api/fortune/route.ts`) is edge-runtime, uses the OpenAI API (`gpt-5-nano` by default), and returns a rich JSON fortune object.
 
 ### Key Modules
 
@@ -45,15 +45,18 @@ The API endpoint (`app/api/fortune/route.ts`) is edge-runtime, uses Google Gemin
 | `lib/useUserMemory.ts` | Hook managing user profile in localStorage. Returns `userMemory`, `isLoaded`, `isComplete`, `updateUserMemory`, `clearUserMemory` |
 | `lib/fortune-config.ts` | Registry mapping category slugs → prompt config. `getFortuneConfig(category)` used by the API |
 | `lib/common-constants.ts` | `UserMemory` type, zodiac data, zodiac calculation |
-| `app/api/fortune/route.ts` | Edge API: builds system prompt from `fortune-config` + `userMemory`, calls Gemini, returns JSON |
+| `app/api/fortune/route.ts` | Edge API: builds system prompt from `fortune-config` + `userMemory`, calls OpenAI, returns JSON |
 | `app/start/(onboarding)/` | 3-step onboarding: name/gender → birthdate → occupation. Only shown to new users |
-| `app/page.tsx` | Landing page with TrueFocus animated title. Routes new → onboarding, returning → `/general` |
-| `app/general/page.tsx` | Main hub for returning users. Featured "Today's Fortune" card + category grid. One-tap to fortune |
+| `app/page.tsx` | Landing page with TiltedCard image, TrueFocus animated title, "How It Works" section. Routes new → onboarding, returning → `/general` |
+| `app/general/page.tsx` | Server wrapper with static crawlable content (category grid + descriptions) + `general-client.tsx` interactive hub. One-tap to fortune |
 | `app/quiz/[category]/_components/quiz-client.tsx` | Paginated quiz (one question per page). Pre-fills from saved answers. Shows skip banner if answers exist |
 | `app/golf/page.tsx` | Golf-specific single-page quiz (all questions at once, 2-col grid) — does not use quiz-client |
 | `app/loading/page.tsx` | Atmospheric loading screen — calls `/api/fortune`, stores result in sessionStorage, redirects to `/result` |
 | `app/result/page.tsx` | Renders fortune. **Text-focused for all categories; scores only shown for golf** |
 | `app/choice/page.tsx` | Server-side redirect to `/general` (legacy route preserved) |
+| `app/zodiac/page.tsx` | Zodiac index — links to all 12 sign guide pages with emojis + date ranges |
+| `app/zodiac/[sign]/page.tsx` | Individual zodiac sign guide (statically generated via `generateStaticParams`). ~600 words each: overview, personality, strengths/challenges, love, career, fortune connection |
+| `app/zodiac/zodiac-content.ts` | Content data for all 12 zodiac signs — personality, love style, career style, fortune connection |
 
 ### Page Design Philosophy
 
@@ -139,9 +142,12 @@ Every category prompt must include a **SPECIFICITY RULES** section instructing t
 
 1. Create `app/[category]/[category]-prompts.ts` — follow existing pattern, include all schema fields
 2. Register in `lib/fortune-config.ts` (import + add to both `fortuneCategories` and `fortuneCategoryLabels`)
-3. Add to `app/general/page.tsx` `CATEGORIES` array
-4. If using standard paginated quiz: link to `/quiz/[category]`
-5. If using single-page form (like golf): create `app/[category]/page.tsx` with custom layout
+3. Add to `app/general/page.tsx` static category grid AND `general-client.tsx` `ALL_CATEGORIES` array
+4. Create `app/[category]/page.tsx` as a **server component** with 400+ words of static content (what the reading covers, sample questions, example insight, tips). This is critical for SEO/AdSense — never create a stub page
+5. If using standard paginated quiz: link to `/quiz/[category]`
+6. If using single-page form (like golf): create the quiz form as a separate client component imported by the page
+7. Add the category to `app/sample-results/page.tsx` with a sample fortune
+8. Add to `app/sitemap.ts`
 
 ### Golf Category Notes
 
@@ -178,6 +184,19 @@ Every category prompt must include a **SPECIFICITY RULES** section instructing t
 - **Custom animations** defined in globals.css: `zipIn`, `pulseGlow`, `streamDown`, `warmGlow`, `floatGentle`
 - **AnimatedContent caveat**: wraps children in `<div class="invisible">` and reveals via GSAP ScrollTrigger. Do **not** use for above-the-fold content that must be visible on load — use Framer Motion `initial`/`animate` instead
 - `suppressHydrationWarning` on `<body>` to suppress browser extension attribute mismatches
+
+### SEO & AdSense Architecture
+
+The site is structured for Google AdSense approval. Key principles:
+
+- **Every page must have crawlable content.** Category pages (`/love`, `/money`, etc.) are server components with 400-800 words of static text. Never create empty stub pages.
+- **Server/client split pattern:** Pages that need interactivity use a server component wrapper (`page.tsx` with metadata + static content) that imports a `'use client'` component for the interactive parts. See `app/general/page.tsx` + `general-client.tsx`, `app/job/page.tsx` + `job-selector-client.tsx`.
+- **JSON-LD structured data:** `WebApplication` schema in root `layout.tsx`, `FAQPage` schema on `/faq`. Add appropriate schemas to new content pages.
+- **`noindex` on dynamic pages:** `/loading` and `/result` have `robots: { index: false }` via layout metadata — they're user-specific and provide no crawl value.
+- **Zodiac content pillar:** 12 sign guide pages at `/zodiac/[sign]` provide ~8,000 words of evergreen, SEO-rich content. Content data lives in `app/zodiac/zodiac-content.ts`.
+- **Sitemap:** `app/sitemap.ts` uses two date tiers (`recentDate` / `stableDate`). Update `recentDate` when content changes. All zodiac pages are auto-generated from `ZODIAC_SIGNS`.
+- **robots.txt:** AdSense crawlers (`Mediapartners-Google`, `AdsBot-Google`) are explicitly allowed. `/api/`, `/loading`, `/result`, `/start/` are disallowed.
+- **ads.txt:** Located at `public/ads.txt` with the Google publisher ID.
 
 ### Code Conventions
 

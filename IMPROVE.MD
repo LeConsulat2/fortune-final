@@ -208,9 +208,9 @@ Note: For `'use client'` pages, you may need a `head.tsx` or a server wrapper.
 - [x] Sample results expanded to cover all 10 categories (added composure, interview, assignment, golf)
 - [x] JSON-LD structured data on layout (WebApplication) and FAQ (FAQPage)
 - [x] Homepage has 200+ words of crawlable content (How It Works + category tags)
-- [ ] `/general` hub has introductory text and category descriptions (still 'use client' — needs server wrapper or static text)
+- [x] `/general` hub has introductory text and category descriptions (server wrapper with static content + client interactive component)
 - [x] No pages with <50 words of content (except `/loading` and `/result` which are `noindex`)
-- [ ] At least one content pillar added (zodiac guides, blog, or daily horoscopes)
+- [x] At least one content pillar added — 12 zodiac sign guide pages (500-800 words each, ~8,000 words total) + zodiac index page
 - [x] `noindex` on `/loading` and `/result` (via layout.tsx metadata)
 - [x] All pages have proper `<title>` and `<meta description>`
 - [ ] Site loads fortune in reasonable time during reviewer testing
