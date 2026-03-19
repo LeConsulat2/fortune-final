@@ -31,20 +31,20 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
 {
   "overall": {
     "score": (number 1-100),
-    "message": "One sharp sentence naming the core romantic dynamic today — honest and specific",
-    "detail": "Two paragraphs. First: the specific emotional situation they're navigating today based on their quiz answers — name the relationship status, the tension, the feeling. Second: what today asks of them — a specific action, a specific thing to notice, a specific conversation or moment. Total 6-9 sentences."
+    "message": "One sharp sentence summing up today's dominant theme",
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a real fortune teller: name specific situations, time windows, and people. Weave in any warnings, opportunities, or lucky moments only when they genuinely belong — not as a checklist, but naturally, the way a perceptive reader would. Some readings have a caution. Some have a moment to seize. Some have both. Some have neither. Let the day dictate it."
   },
-  "areas": [
-    { "name": "Connection", "score": (number 1-100), "insight": "One specific sentence about the quality of their romantic connection today — what's alive, what's quiet" },
-    { "name": "Communication", "score": (number 1-100), "insight": "One specific sentence about how communication is flowing today — what's being said and what isn't" },
-    { "name": "Inner State", "score": (number 1-100), "insight": "One specific sentence about their internal emotional landscape today — based on their mood and past relationship answers" },
-    { "name": "Timing", "score": (number 1-100), "insight": "One specific sentence about whether today favors action or patience in their love situation" }
-  ],
-  "caution": "One honest warning about a relational impulse or pattern that could backfire today — name it specifically",
-  "opportunity": "One specific moment or action in their love life today that deserves attention — name it concretely",
-  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day" },
-  "personalised_insight": "2-3 sentences connecting their relationship status, communication style, trust patterns, and zodiac to a specific romantic pattern relevant today"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, watch-outs, things that could go wrong if ignored
+- "seize" type: specific opportunities, actions, or lucky moments to act on
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 

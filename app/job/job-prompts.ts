@@ -31,20 +31,20 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
 {
   "overall": {
     "score": (number 1-100),
-    "message": "One sharp sentence naming the dominant dynamic at work today",
-    "detail": "Two paragraphs. First: what work looks like today — specific interactions, tasks, timing. Second: where to put energy and what to avoid — concrete and role-specific. Total 6-9 sentences."
+    "message": "One sharp sentence summing up today's dominant theme",
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a real fortune teller: name specific situations, time windows, and people. Weave in any warnings, opportunities, or lucky moments only when they genuinely belong — not as a checklist, but naturally, the way a perceptive reader would. Some readings have a caution. Some have a moment to seize. Some have both. Some have neither. Let the day dictate it."
   },
-  "areas": [
-    { "name": "Performance", "score": (number 1-100), "insight": "One specific sentence about how their work output reads today — what's flowing and what's not" },
-    { "name": "Collaboration", "score": (number 1-100), "insight": "One specific sentence about a team dynamic or person-to-person moment likely today" },
-    { "name": "Strategy", "score": (number 1-100), "insight": "One specific sentence about timing for decisions, conversations, or moves today" },
-    { "name": "Growth", "score": (number 1-100), "insight": "One specific sentence about a development signal or opportunity visible today" }
-  ],
-  "caution": "One specific workplace warning — a real situation or impulse to be careful about today",
-  "opportunity": "One concrete professional window they should act on today — name the situation",
-  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day at work" },
-  "personalised_insight": "2-3 sentences connecting their occupation, zodiac, and quiz answers to a specific professional pattern relevant today"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, watch-outs, things that could go wrong if ignored
+- "seize" type: specific opportunities, actions, or lucky moments to act on
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
   quiz: [

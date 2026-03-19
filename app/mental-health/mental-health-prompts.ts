@@ -30,20 +30,20 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
 {
   "overall": {
     "score": (number 1-100),
-    "message": "One honest sentence naming the emotional weather today — what state they're likely in",
-    "detail": "Two paragraphs. First: the specific psychological dynamic in play today — name the pattern, the inner narrative, the morning state. Second: one small, concrete thing that could shift their day — not generic self-care, but a specific action or reframe. Total 6-9 sentences."
+    "message": "One sharp sentence summing up today's dominant theme",
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a real fortune teller: name specific situations, time windows, and people. Weave in any warnings, opportunities, or lucky moments only when they genuinely belong — not as a checklist, but naturally, the way a perceptive reader would. Some readings have a caution. Some have a moment to seize. Some have both. Some have neither. Let the day dictate it."
   },
-  "areas": [
-    { "name": "Clarity", "score": (number 1-100), "insight": "One specific sentence about mental fog vs. clear thinking today" },
-    { "name": "Emotional Balance", "score": (number 1-100), "insight": "One specific sentence about their emotional stability today based on their stress patterns" },
-    { "name": "Energy", "score": (number 1-100), "insight": "One specific sentence about their psychological energy and social battery today" },
-    { "name": "Self-Compassion", "score": (number 1-100), "insight": "One specific sentence about how their inner voice is likely to treat them today" }
-  ],
-  "caution": "One specific psychological warning today — a thought pattern or situation likely to drain them, named concretely",
-  "opportunity": "One specific small action today that could meaningfully shift their inner state — practical and named",
-  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day for mental recharge" },
-  "personalised_insight": "2-3 sentences connecting their specific patterns (inner narrative, stress response, coping mechanism) to a psychological dynamic relevant today"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, watch-outs, things that could go wrong if ignored
+- "seize" type: specific opportunities, actions, or lucky moments to act on
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 

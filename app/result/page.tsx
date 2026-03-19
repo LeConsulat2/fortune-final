@@ -1,28 +1,22 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useUserMemory } from '@/lib/useUserMemory';
 import { Button } from '@/ui/button';
 import { NumberTicker } from '@/ui/number-ticker';
 import { BlurFade } from '@/ui/blur-fade';
-import { Highlighter } from '@/ui/highlighter';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 
-interface FortuneArea {
-  name: string;
-  score: number;
-  insight: string;
+interface FortuneHighlight {
+  text: string;
+  type: 'caution' | 'seize';
 }
 
 interface FortunePrediction {
-  overall: { score: number; message: string; detail: string };
-  areas?: FortuneArea[];
-  caution?: string;
-  opportunity?: string;
-  lucky?: { color: string; number: number; time: string };
-  personalised_insight?: string;
+  overall: { score: number; message: string; reading?: string; detail?: string };
+  highlights?: FortuneHighlight[];
 }
 
 interface FortuneResult {
@@ -226,26 +220,74 @@ function ResultPage() {
           </BlurFade>
         )}
 
-        {/* Actions */}
-        <BlurFade delay={0.35} duration={0.4} className="flex gap-3 w-full max-w-sm mt-8">
+      </div>
+
+      {/* Actions — fixed to bottom, outside the card */}
+      <BlurFade delay={0.35} duration={0.4} className="sticky bottom-0 z-20 w-full bg-gradient-to-t from-background via-background/95 to-transparent pt-6 pb-6 px-4">
+        <div className="flex gap-3 w-full max-w-sm mx-auto">
           <Button
             onClick={() => router.push('/general')}
             variant="outline"
-            className="flex-1 h-12 border-border text-foreground hover:bg-card cursor-pointer"
+            className="flex-1 h-12 border-border text-foreground hover:bg-card cursor-pointer gap-2"
           >
-            Categories
+            <ArrowLeft size={16} />
+            Back
           </Button>
           <Button
             onClick={handleRetry}
-            className="flex-1 h-12 bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer"
+            className="flex-1 h-12 bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer gap-2"
           >
+            <RotateCcw size={15} />
             Try again
           </Button>
-        </BlurFade>
-
-      </div>
+        </div>
+      </BlurFade>
     </div>
   );
+}
+
+// Renders a paragraph with inline CSS-based highlights (no SVG overlays)
+function ReadingParagraph({
+  text,
+  highlights,
+}: {
+  text: string;
+  highlights: FortuneHighlight[];
+}) {
+  if (!highlights || highlights.length === 0) {
+    return <>{text}</>;
+  }
+
+  const found = highlights
+    .map((h) => ({ ...h, idx: text.indexOf(h.text) }))
+    .filter((h) => h.idx !== -1)
+    .sort((a, b) => a.idx - b.idx);
+
+  if (found.length === 0) return <>{text}</>;
+
+  const parts: React.ReactNode[] = [];
+  let cursor = 0;
+
+  for (const h of found) {
+    if (h.idx > cursor) parts.push(text.slice(cursor, h.idx));
+    const isCaution = h.type === 'caution';
+    parts.push(
+      <mark
+        key={h.idx}
+        className={`bg-transparent ${
+          isCaution
+            ? 'text-red-400/90 underline decoration-red-400/40 decoration-wavy underline-offset-4'
+            : 'text-emerald-400/90 underline decoration-emerald-400/50 underline-offset-4'
+        }`}
+      >
+        {h.text}
+      </mark>
+    );
+    cursor = h.idx + h.text.length;
+  }
+
+  if (cursor < text.length) parts.push(text.slice(cursor));
+  return <>{parts}</>;
 }
 
 function FortuneCard({
@@ -262,11 +304,13 @@ function FortuneCard({
   const { category, fortune } = result;
   const isGolf = category === 'golf';
   const meta = CATEGORY_META[category] || { title: category, emoji: '🔮' };
-  const detailParagraphs = (fortune.overall.detail ?? '').split('\n\n').filter(Boolean);
+  const rawReading = fortune.overall.reading ?? fortune.overall.detail ?? '';
+  const paragraphs = rawReading.split('\n\n').filter(Boolean);
+  const highlights = fortune.highlights ?? [];
 
   return (
     <div
-      className={`w-[min(440px,88vw)] rounded-2xl bg-card border transition-shadow duration-300 overflow-y-auto ${
+      className={`w-[min(440px,88vw)] rounded-2xl bg-card border transition-shadow duration-300 overflow-y-auto scrollbar-hide ${
         isActive
           ? 'border-primary/25 shadow-2xl shadow-primary/10'
           : 'border-border/40 cursor-pointer'
@@ -274,7 +318,7 @@ function FortuneCard({
       style={{ maxHeight: '68vh' }}
     >
       {/* Sticky card header */}
-      <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-3.5 bg-card/95 backdrop-blur-sm border-b border-border/30">
+      <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-card/95 backdrop-blur-sm border-b border-border/20">
         <div className="flex items-center gap-2.5">
           <span className="text-xl">{meta.emoji}</span>
           <span className="text-sm font-semibold text-foreground">{meta.title}</span>
@@ -284,7 +328,7 @@ function FortuneCard({
         )}
       </div>
 
-      <div className="px-5 py-5 space-y-5">
+      <div className="px-6 py-6 space-y-6">
 
         {/* GOLF: score hero */}
         {isGolf && (
@@ -305,147 +349,29 @@ function FortuneCard({
         )}
 
         {/* Overall message */}
-        <div>
-          <p className={`font-semibold text-foreground leading-snug tracking-tight ${
-            isGolf
-              ? 'text-sm italic text-foreground/75 text-center'
-              : 'text-xl md:text-2xl'
-          }`}>
-            &ldquo;{fortune.overall.message}&rdquo;
-          </p>
-        </div>
+        <p className={`font-semibold text-foreground leading-snug tracking-tight ${
+          isGolf ? 'text-sm italic text-foreground/75 text-center' : 'text-xl md:text-2xl'
+        }`}>
+          &ldquo;{fortune.overall.message}&rdquo;
+        </p>
 
-        {/* Detailed reading */}
-        {detailParagraphs.length > 0 && (
-          <div>
-            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-2.5">
+        {/* Today's Reading — flowing text with inline highlights */}
+        {paragraphs.length > 0 && (
+          <div className="pt-2">
+            <p className="text-[10px] font-semibold text-muted-foreground/50 uppercase tracking-[0.2em] mb-4">
               Today&apos;s Reading
             </p>
-            <div className="space-y-3">
-              {detailParagraphs.map((p, i) => (
-                <p key={i} className="text-sm md:text-base text-foreground/72 leading-relaxed">
-                  {p}
+            <div className="space-y-4">
+              {paragraphs.map((para, i) => (
+                <p key={i} className="text-[15px] md:text-base text-foreground/85 leading-[1.8]">
+                  <ReadingParagraph text={para} highlights={highlights} />
                 </p>
               ))}
             </div>
           </div>
         )}
 
-        {/* Watch out — Highlighter highlight */}
-        {fortune.caution && (
-          <div className="rounded-xl bg-red-500/5 border border-red-500/10 p-4">
-            <p className="text-[10px] font-bold text-red-400/75 uppercase tracking-[0.15em] mb-2">
-              ⚠ Watch out
-            </p>
-            <p className="text-sm md:text-base text-foreground/72 leading-relaxed">
-              <Highlighter
-                action="highlight"
-                color="rgba(239, 68, 68, 0.18)"
-                strokeWidth={1}
-                animationDuration={900}
-                isView={false}
-              >
-                {fortune.caution}
-              </Highlighter>
-            </p>
-          </div>
-        )}
-
-        {/* Seize this — Highlighter underline */}
-        {fortune.opportunity && (
-          <div className="rounded-xl bg-emerald-500/5 border border-emerald-500/10 p-4">
-            <p className="text-[10px] font-bold text-emerald-400/75 uppercase tracking-[0.15em] mb-2">
-              → Seize this
-            </p>
-            <p className="text-sm md:text-base text-foreground/72 leading-relaxed">
-              <Highlighter
-                action="underline"
-                color="rgba(52, 211, 153, 0.65)"
-                strokeWidth={1.5}
-                animationDuration={700}
-                isView={false}
-              >
-                {fortune.opportunity}
-              </Highlighter>
-            </p>
-          </div>
-        )}
-
-        {/* Breakdown / areas */}
-        {fortune.areas && fortune.areas.length > 0 && (
-          <div>
-            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-3">
-              Breakdown
-            </p>
-            <div className={`grid gap-2 ${isGolf ? 'grid-cols-2' : 'grid-cols-1'}`}>
-              {fortune.areas.map((area) => (
-                <div key={area.name} className="rounded-lg bg-muted/20 border border-border/30 p-3">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-semibold text-foreground">{area.name}</span>
-                    {isGolf && <span className="text-xs font-bold text-foreground/60">{area.score}</span>}
-                  </div>
-                  {isGolf && (
-                    <div className="w-full h-0.5 rounded-full bg-muted overflow-hidden mb-1.5">
-                      <motion.div
-                        className={`h-full rounded-full ${
-                          area.score >= 70 ? 'bg-emerald-500'
-                          : area.score >= 45 ? 'bg-amber-500'
-                          : 'bg-red-500'
-                        }`}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${area.score}%` }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                      />
-                    </div>
-                  )}
-                  <p className="text-xs text-foreground/58 leading-relaxed">{area.insight}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Lucky elements */}
-        {fortune.lucky && (
-          <div className="rounded-xl bg-card/60 border border-border/40 p-4">
-            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-3">
-              Lucky elements
-            </p>
-            <div className="flex justify-around text-center">
-              <div>
-                <div className="text-lg mb-1">🎨</div>
-                <div className="text-[10px] text-muted-foreground/45 mb-0.5">Color</div>
-                <div className="text-xs font-medium text-foreground capitalize">{fortune.lucky.color}</div>
-              </div>
-              <div>
-                <div className="text-lg mb-1">{isGolf ? '⛳' : '🔢'}</div>
-                <div className="text-[10px] text-muted-foreground/45 mb-0.5">{isGolf ? 'Hole' : 'Number'}</div>
-                <div className="text-xs font-medium text-foreground">
-                  {isGolf ? `#${fortune.lucky.number}` : fortune.lucky.number}
-                </div>
-              </div>
-              <div>
-                <div className="text-lg mb-1">⏰</div>
-                <div className="text-[10px] text-muted-foreground/45 mb-0.5">Time</div>
-                <div className="text-xs font-medium text-foreground capitalize">{fortune.lucky.time}</div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Personal insight */}
-        {fortune.personalised_insight && (
-          <div className="rounded-xl bg-primary/5 border border-primary/10 p-4">
-            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-2">
-              Personal insight
-            </p>
-            <p className="text-sm md:text-base text-foreground/68 italic leading-relaxed">
-              {fortune.personalised_insight}
-            </p>
-          </div>
-        )}
-
-        <div className="h-1" />
+        <div className="h-3" />
       </div>
     </div>
   );

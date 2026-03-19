@@ -52,19 +52,19 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
   "overall": {
     "score": (integer between 63 and 95 — the predicted round score),
     "message": "One sharp sentence summing up the kind of round today looks like",
-    "detail": "Two paragraphs. First: what kind of round today is shaping up to be — reference handicap, form, and weather specifically. Second: where to focus and what to protect against on the course today. Total 6–9 sentences."
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a caddie who knows the game: reference handicap, form, weather, and mental state specifically. Name parts of the game, on-course situations, and time windows in the round. Weave in any warnings or key advice only when they genuinely belong — the way a straight-talking caddie would. Not every reading needs a tip. Let the round dictate it."
   },
-  "areas": [
-    { "name": "Driving", "score": (1–100), "insight": "One specific sentence about their tee shot today — accuracy, distance, tendency" },
-    { "name": "Iron Play", "score": (1–100), "insight": "One specific sentence about approach shots — how clean the strike is likely to be" },
-    { "name": "Short Game", "score": (1–100), "insight": "One specific sentence about chipping and pitching around the green today" },
-    { "name": "Putting", "score": (1–100), "insight": "One specific sentence about the putter — whether they'll hole the makeable ones today" }
-  ],
-  "caution": "One specific on-course warning today — a hole type, a situation, or a mental trap to watch for",
-  "opportunity": "One specific scoring opportunity today — where the round can be saved or a birdie made",
-  "lucky": { "color": "a specific color", "number": (integer 1–18 — the lucky hole number today), "time": "best window of the round (e.g. front nine, back nine, after the turn)" },
-  "personalised_insight": "2–3 sentences connecting their handicap, form, mental state, and zodiac to a specific pattern in their game today"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, specific mistakes to avoid, mental traps
+- "seize" type: specific club choices, tactical advantages, key holes or moments to attack
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
   quiz: [

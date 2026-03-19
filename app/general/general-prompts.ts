@@ -32,19 +32,19 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
   "overall": {
     "score": (number 1-100),
     "message": "One sharp sentence summing up today's dominant theme",
-    "detail": "Two paragraphs. First: what the day looks like — name specific situations and time windows. Second: what to do and what to watch for — concrete and actionable. Total 6-9 sentences."
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a real fortune teller: name specific situations, time windows, and people. Weave in any warnings, opportunities, or lucky moments only when they genuinely belong — not as a checklist, but naturally, the way a perceptive reader would. Some readings have a caution. Some have a moment to seize. Some have both. Some have neither. Let the day dictate it."
   },
-  "areas": [
-    { "name": "Energy", "score": (number 1-100), "insight": "One specific sentence about their physical and mental energy today — when it peaks and when it dips" },
-    { "name": "Connections", "score": (number 1-100), "insight": "One specific sentence about who might show up or how social dynamics feel today" },
-    { "name": "Focus", "score": (number 1-100), "insight": "One specific sentence about mental clarity — what kind of work or thinking they can handle today" },
-    { "name": "Opportunity", "score": (number 1-100), "insight": "One specific sentence about a window, opening, or lucky angle available today" }
-  ],
-  "caution": "One specific warning — a real situation or impulse to be careful about today",
-  "opportunity": "One specific action or window they should act on today — name it concretely",
-  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day" },
-  "personalised_insight": "2-3 sentences connecting their zodiac sign, occupation, and name to a specific pattern relevant today — personal and grounded, not generic"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, watch-outs, things that could go wrong if ignored
+- "seize" type: specific opportunities, actions, or lucky moments to act on
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
   quiz: [

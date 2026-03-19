@@ -110,20 +110,20 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
 {
   "overall": {
     "score": (number 1-100),
-    "message": "One sharp sentence naming the composure dynamic today",
-    "detail": "Two paragraphs. First: the specific pressure or challenge they're likely facing today — name the situation type from their answers. Second: what composure looks like practically today — a concrete stance or micro-action. Total 6-9 sentences."
+    "message": "One sharp sentence summing up today's dominant theme",
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a real fortune teller: name specific situations, time windows, and people. Weave in any warnings, opportunities, or lucky moments only when they genuinely belong — not as a checklist, but naturally, the way a perceptive reader would. Some readings have a caution. Some have a moment to seize. Some have both. Some have neither. Let the day dictate it."
   },
-  "areas": [
-    { "name": "Steadiness", "score": (number 1-100), "insight": "One specific sentence about their baseline stability today under the kind of pressure they face" },
-    { "name": "Reactivity", "score": (number 1-100), "insight": "One specific sentence about their risk of being thrown off — what triggers it and when" },
-    { "name": "Focus", "score": (number 1-100), "insight": "One specific sentence about the quality of their attention and execution precision today" },
-    { "name": "Recovery", "score": (number 1-100), "insight": "One specific sentence about how quickly they can re-center after a disruption today" }
-  ],
-  "caution": "One specific situation or impulse today that could break composure — name it concretely",
-  "opportunity": "One specific moment today where holding composure will matter most — name it",
-  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day" },
-  "personalised_insight": "2-3 sentences connecting their performance-under-pressure style, recovery pattern, and zodiac to a specific composure dynamic relevant today"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, watch-outs, things that could go wrong if ignored
+- "seize" type: specific opportunities, actions, or lucky moments to act on
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 

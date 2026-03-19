@@ -29,20 +29,20 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
 {
   "overall": {
     "score": (number 1-100),
-    "message": "One honest sentence naming their assignment energy today based on their timeline and blockers",
-    "detail": "Two paragraphs. First: what today's work session is likely to look like — based on their timeline, blocker, and work style. Second: one specific tactic for today — a time window, a starting point, a way past their current stuck point. Total 6-9 sentences."
+    "message": "One sharp sentence summing up today's dominant theme",
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a real fortune teller: name specific situations, time windows, and people. Weave in any warnings, opportunities, or lucky moments only when they genuinely belong — not as a checklist, but naturally, the way a perceptive reader would. Some readings have a caution. Some have a moment to seize. Some have both. Some have neither. Let the day dictate it."
   },
-  "areas": [
-    { "name": "Clarity", "score": (number 1-100), "insight": "One specific sentence about how clear their thinking and direction is today" },
-    { "name": "Productivity", "score": (number 1-100), "insight": "One specific sentence about their output quality and momentum today" },
-    { "name": "Focus", "score": (number 1-100), "insight": "One specific sentence about distraction risk and depth of concentration today" },
-    { "name": "Completion", "score": (number 1-100), "insight": "One specific sentence about how close they are to finishing and what the final push looks like" }
-  ],
-  "caution": "One specific assignment risk today — the exact blocker or procrastination pattern most likely to cost them",
-  "opportunity": "One specific window or starting move today that will generate the most progress",
-  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "the best work block today" },
-  "personalised_insight": "2-3 sentences connecting their timeline status, work style, blocker, and zodiac to a specific productivity dynamic today"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, watch-outs, things that could go wrong if ignored
+- "seize" type: specific opportunities, actions, or lucky moments to act on
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 

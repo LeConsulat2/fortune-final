@@ -30,20 +30,20 @@ OUTPUT — Return ONLY valid JSON with this exact schema:
 {
   "overall": {
     "score": (number 1-100),
-    "message": "One honest sentence naming the financial theme today — what to lean into or watch",
-    "detail": "Two paragraphs. First: the specific money dynamic in play today based on their quiz answers — name the purchase temptation, the anxiety pattern, the saving habit. Second: concrete guidance — what to do, what to delay, what mindset shift is useful right now. Total 6-9 sentences."
+    "message": "One sharp sentence summing up today's dominant theme",
+    "reading": "Your full reading as a single flowing narrative — 4 to 7 sentences. Speak as a real fortune teller: name specific situations, time windows, and people. Weave in any warnings, opportunities, or lucky moments only when they genuinely belong — not as a checklist, but naturally, the way a perceptive reader would. Some readings have a caution. Some have a moment to seize. Some have both. Some have neither. Let the day dictate it."
   },
-  "areas": [
-    { "name": "Cash Flow", "score": (number 1-100), "insight": "One specific sentence about their money coming in versus going out today or this week" },
-    { "name": "Spending", "score": (number 1-100), "insight": "One specific sentence about their spending impulses or discipline today — name the specific temptation from their quiz" },
-    { "name": "Opportunity", "score": (number 1-100), "insight": "One specific sentence about a financial opening or smart move available today" },
-    { "name": "Risk", "score": (number 1-100), "insight": "One specific sentence about a financial pitfall or impulse to watch today" }
-  ],
-  "caution": "One specific financial warning today — name the exact situation from their quiz answers",
-  "opportunity": "One concrete money move or decision they should make today — name it specifically",
-  "lucky": { "color": "a specific color name", "number": (integer 1-99), "time": "a specific time of day" },
-  "personalised_insight": "2-3 sentences connecting their quiz answers (spending habits, triggers, anxiety level) to a specific financial pattern relevant today"
+  "highlights": [
+    { "text": "exact phrase copied verbatim from the reading", "type": "caution" }
+  ]
 }
+
+HIGHLIGHTS RULES:
+- Include 0 to 3 highlights maximum — only when something genuinely needs attention
+- "caution" type: warnings, watch-outs, things that could go wrong if ignored
+- "seize" type: specific opportunities, actions, or lucky moments to act on
+- The "text" value MUST be an exact verbatim substring of the reading field — copy it character-for-character
+- If nothing stands out strongly, return an empty array: []
 
 Do not include any fields beyond those listed. Do not add explanatory text outside the JSON.`,
 

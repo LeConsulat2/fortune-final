@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
       },
       {
         role: 'user' as const,
-        content: `Based on my information, generate my fortune for today (${new Date().toISOString().split('T')[0]}). Today's luck roll is ${Math.floor(Math.random() * 10) + 1}/10 — let this genuinely shift the outcome, even if it contradicts the inputs. A low roll means things go wrong despite good conditions; a high roll means surprising upside despite bad ones. Do not smooth this out. Ensure you follow the system instructions precisely.`,
+        content: `Based on my information, generate my fortune for today (${new Date().toISOString().split('T')[0]}). Internal variance seed: ${Math.floor(Math.random() * 10) + 1} out of 10 — use this to genuinely shift the fortune's tone and outcome. A low seed means things go sideways despite good conditions; a high seed means surprising upside despite bad ones. Do not mention this seed or any numeric rating in the reading text. Ensure you follow the system instructions precisely.`,
       },
     ];
 
@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
           stream: false,
           response_format: { type: 'json_object' },
           messages,
-          max_completion_tokens: 8000,
+          max_completion_tokens: 10000,
         });
         break;
       } catch (err: unknown) {
