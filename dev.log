@@ -1,0 +1,18 @@
+
+> fortune-final@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.3.6 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.245:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 947ms
+ ○ Compiling /api/fortune ...
+ ✓ Compiled /api/fortune in 815ms
+ POST /api/fortune 500 in 20194ms
+AI response message: {"role":"assistant","content":"","refusal":null,"annotations":[]}
+ POST /api/fortune 500 in 20129ms
+AI response message: {"role":"assistant","content":"{\n  \"overall\": {\n    \"score\": 42,\n    \"message\": \"Small decisions carry more weight than they appear, and a misread can derail a plan\",\n    \"detail\": \"This morning a conversation you have been putting off with a colleague about a project bumps into a small misunderstanding that you can defuse with a precise update. Around midday you receive an unexpected message from someone from your past and if you respond in haste you might misread intent so ask a clarifying question. Late afternoon a small decision whether to push a deadline or accept a slower pace turns out to matter more than you expect so take a moment to confirm the numbers. Tonight a close friend invites you to a casual plan that seems harmless but will poke at a limit you have kept quiet.\\n\\nDo this: pause for 60 seconds before replying to the midday message and double check any dates or numbers. Then in the late afternoon decision require a second opinion or a quick written note of the pros and cons before committing to a new deadline. Watch for an invite this evening that looks light but asks you to bend a boundary decline or renegotiate clearly.\"\n  },\n  \"areas\": [\n    { \"name\": \"Energy\", \"score\": 58, \"insight\": \"You start with steady energy this morning, peaking around late afternoon when you lock in the plan, with a brief dip tonight as you unwind.\" },\n    { \"name\": \"Connections\", \"score\": 62, \"insight\": \"A colleague or someone from your past might reach out around midday; keep replies short and clear to avoid misreads.\" },\n    { \"name\": \"Focus\", \"score\": 55, \"insight\": \"Your best work today is methodical and list driven; avoid multitasking and rely on written notes to anchor decisions.\" },\n    { \"name\": \"Opportunity\", \"score\": 60, \"insight\": \"There is a practical window around late afternoon to propose a small concrete improvement or boundary.\" }\n  ],\n  \"caution\": \"Avoid rushing replies or commitments this midday; a misread could cascade if you skip the clarifying step.\",\n  \"opportunity\": \"Pause for 60 seconds before replying to the midday message to verify dates, numbers, and intent.\",\n  \"lucky\": { \"color\": \"Blue\", \"number\": 27, \"time\": \"around midday\" },\n  \"personalised_insight\": \"As a Capricorn born on January 15, Test, you lean toward structure and measured progress. Today your routine will be tested through conversations and small choices, so translating talk into written plans will anchor you. The day literally tests your boundaries, and your best move is to document decisions and honor your time, even when luck seems on the back foot.\"\n}","refusal":null,"annotations":[]}
+ POST /api/fortune 200 in 27813ms

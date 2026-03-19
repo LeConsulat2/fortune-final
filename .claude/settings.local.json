@@ -5,7 +5,8 @@
       "Bash(npm run:*)",
       "Bash(npm i:*)",
       "Bash(npx next:*)",
-      "Bash(curl -s -X POST http://localhost:3000/api/fortune -H \"Content-Type: application/json\" -d '{\"\"\"\"name\"\"\"\":\"\"\"\"Test\"\"\"\",\"\"\"\"birthDate\"\"\"\":\"\"\"\"1990-01-15\"\"\"\",\"\"\"\"category\"\"\"\":\"\"\"\"general\"\"\"\"}')"
+      "Bash(curl -s -X POST http://localhost:3000/api/fortune -H \"Content-Type: application/json\" -d '{\"\"\"\"name\"\"\"\":\"\"\"\"Test\"\"\"\",\"\"\"\"birthDate\"\"\"\":\"\"\"\"1990-01-15\"\"\"\",\"\"\"\"category\"\"\"\":\"\"\"\"general\"\"\"\"}')",
+      "Bash(curl:*)"
     ]
   }
 }

@@ -3,62 +3,61 @@ import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { getFortuneConfig } from '@/lib/fortune-config';
 import { type UserMemory } from '@/lib/common-constants';
-// Enable edge runtime for better performance
+
 export const runtime = 'edge';
-// Initialize OpenAI client with API key from environment variables
-const openai = new OpenAI({
-  apiKey: process.env.GEMINI_API_KEY ?? '',
-  baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
-});
-/**
- * Builds a comprehensive system prompt by combining guidance with user information
- * @param guidance - The base guidance/instructions for the AI
- * @param userMemory - User's personal information and quiz answers
- * @returns Complete system prompt string
- */
+
+// ---------------------------------------------------------------------------
+// Model selection
+// Set USE_GPT=false in .env.local to fall back to Gemini
+// Default: GPT (gpt-4.1-nano)
+// ---------------------------------------------------------------------------
+const USE_GPT = process.env.USE_GPT !== 'false';
+
+const openai = USE_GPT
+  ? new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY ?? '',
+    })
+  : new OpenAI({
+      apiKey: process.env.GEMINI_API_KEY ?? '',
+      baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
+    });
+
+const MODEL = USE_GPT ? 'gpt-5-nano' : 'gemini-2.5-flash-lite';
+
 function buildSystemPrompt(guidance: string, userMemory: UserMemory): string {
   let prompt = guidance;
-  // Add user's personal information to the prompt
   prompt += '\\n\\n--- User Information ---\\n';
   prompt += `Name: ${userMemory.name || 'Not provided'}\\n`;
   prompt += `Birth Date: ${userMemory.birthDate || 'Not provided'}\\n`;
   prompt += `Occupation: ${userMemory.occupation || 'Not provided'}\\n`;
   prompt += `Zodiac Sign: ${userMemory.zodiacSign || 'Not provided'}\\n`;
-  // Add quiz answers if they exist
   if (
     userMemory.quizAnswers &&
     Object.keys(userMemory.quizAnswers).length > 0
   ) {
     prompt += '\\n--- Quiz Answers ---\\n';
-    // Iterate through quiz answers and add them to the prompt
     for (const [questionId, answer] of Object.entries(userMemory.quizAnswers)) {
       prompt += `${questionId}: ${answer}\\n`;
     }
   }
   return prompt;
 }
-/**
- * POST handler for generating personalized fortunes
- * Accepts user memory data and returns a streamed fortune response
- */
+
 export async function POST(req: NextRequest) {
   try {
-    // Parse user memory data from request body
     const userMemory: UserMemory = await req.json();
-    // Default to 'general' category if none specified
     const category = userMemory.category || 'general';
-    // Get configuration for the specified fortune category
     const config = getFortuneConfig(category);
-    // Validate that the category exists
+
     if (!config) {
       return NextResponse.json(
         { error: `Invalid category: ${category}` },
         { status: 400 },
       );
     }
-    // Build the complete system prompt with user information
+
     const systemPrompt = buildSystemPrompt(config.guidance, userMemory);
-    // Create OpenAI chat completion with retry for rate limits
+
     const messages = [
       {
         role: 'system' as const,
@@ -70,25 +69,25 @@ export async function POST(req: NextRequest) {
       },
     ];
 
+    // 2 attempts — retry once on 429
     let response;
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         response = await openai.chat.completions.create({
-          model: 'gemini-2.5-flash-lite',
+          model: MODEL,
           stream: false,
           response_format: { type: 'json_object' },
           messages,
-          max_tokens: 4000,
+          max_completion_tokens: 8000,
         });
-        break; // success
+        break;
       } catch (err: unknown) {
         const status = (err as { status?: number }).status;
         if (status === 429 && attempt < 1) {
-          // One retry after 5s
           await new Promise((r) => setTimeout(r, 5000));
           continue;
         }
-        throw err; // re-throw on second failure or non-429
+        throw err;
       }
     }
 
@@ -99,22 +98,20 @@ export async function POST(req: NextRequest) {
         { status: 500 },
       );
     }
+
     const fortuneData = JSON.parse(content);
     return NextResponse.json(fortuneData);
   } catch (error) {
     console.error('Error in fortune API:', error);
-    // Handle OpenAI-specific errors
     if (error instanceof OpenAI.APIError) {
       return NextResponse.json(
         { error: error.message, name: error.name },
         { status: error.status || 500 },
       );
     }
-    // Handle general JavaScript errors
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
-    // Handle unexpected errors
     return NextResponse.json(
       { error: 'An unexpected error occurred.' },
       { status: 500 },
