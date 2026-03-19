@@ -27,6 +27,7 @@ const IMAGE_FILES = [
   'somelater-theme.png',
   'answerstime-theme.png',
   'slowdown-theme.png',
+  'youth.png',
 ];
 
 export default function Home() {

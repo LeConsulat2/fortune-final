@@ -64,7 +64,7 @@ export default function AboutPage() {
               Built with privacy in mind. Your profile is stored only in your
               own browser&apos;s localStorage — never on our servers — and your
               generated fortune is ephemeral, disappearing when you close the
-              tab. No user tracking, no accounts, no data collection on our end.
+              tab. No user tracking, no data collection on our end. Currently no account is required to use the service.
             </p>
           </section>
 
@@ -97,10 +97,10 @@ export default function AboutPage() {
               The Project
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              This is a side project built in my spare time, offered as a free
-              service. It&apos;s operated from Auckland, New Zealand, with the
-              goal of providing something useful without the complexity of
-              accounts or data collection.
+              This is a project built in my spare time, operated from Auckland,
+              New Zealand. It&apos;s currently free with no account required —
+              the goal is to provide something genuinely useful, with the
+              simplicity of no sign-up to get started.
             </p>
           </section>
 
@@ -110,9 +110,10 @@ export default function AboutPage() {
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Potential expansions include more fortune categories, different
-              cultural fortune-telling styles, and multi-language support. All
-              additions will maintain the same privacy-first, no-registration
-              approach.
+              cultural fortune-telling styles, multi-language support, and
+              optional account features for saving history and unlocking premium
+              readings. The core privacy-first approach will remain regardless
+              of how the service evolves.
             </p>
           </section>
 

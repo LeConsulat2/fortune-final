@@ -11,7 +11,7 @@ const FAQS = [
   },
   {
     q: 'Is Your-Fortune free?',
-    a: 'Yes — Your-Fortune is completely free to use. We believe thoughtful, emotionally aware tools should be accessible to everyone, with no hidden costs or surprises.',
+    a: 'Your-Fortune is currently free to use. We believe thoughtful, emotionally aware tools should be accessible to everyone. Future premium features may be introduced, but a free tier will always be part of the experience.',
   },
   {
     q: 'Do you store my personal information?',
