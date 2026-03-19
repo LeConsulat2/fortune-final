@@ -61,9 +61,9 @@ export default function Home() {
             imageSrc={imageSrc}
             altText="Fortune image"
             containerWidth="min(320px, 75vw)"
-            containerHeight="min(320px, 75vw)"
+            containerHeight="min(480px, 75vw)"
             imageWidth="min(320px, 75vw)"
-            imageHeight="min(320px, 75vw)"
+            imageHeight="min(480px, 75vw)"
             scaleOnHover={1.05}
             rotateAmplitude={12}
             showMobileWarning={false}
@@ -92,7 +92,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            className="text-muted-foreground mt-5 text-base md:text-lg"
+            className="text-muted-foreground mt-5 text-base md:text-lg italic float-gentle"
           >
             What does today hold for you?
           </motion.p>
@@ -110,7 +110,7 @@ export default function Home() {
             <Button
               asChild
               size="lg"
-              className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20"
+              className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20 cursor-pointer transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
               <Link href="/general">See Today&apos;s Fortune</Link>
             </Button>
@@ -120,7 +120,7 @@ export default function Home() {
               <Button
                 size="lg"
                 onClick={handleQuickFortune}
-                className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20"
+                className="w-full text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/20 cursor-pointer transition-transform hover:scale-[1.03] active:scale-[0.98]"
               >
                 Today&apos;s Fortune
               </Button>
@@ -128,7 +128,7 @@ export default function Home() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="w-full text-base h-12"
+                className="w-full text-base h-12 cursor-pointer transition-transform hover:scale-[1.03] active:scale-[0.98]"
               >
                 <Link href="/start/step-1-personal-info">
                   Personalise My Fortune
