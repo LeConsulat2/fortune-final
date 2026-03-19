@@ -12,7 +12,7 @@ export default function TermsPage() {
           Terms &amp; Conditions
         </h1>
         <p className="text-muted-foreground mb-10">
-          <strong>Last updated:</strong> July&nbsp;17,&nbsp;2025
+          <strong>Last updated:</strong> March&nbsp;19,&nbsp;2026
         </p>
 
         <div className="space-y-10">
@@ -37,8 +37,8 @@ export default function TermsPage() {
               under 13 years old use the Service under the guidance and
               supervision of a parent or legal guardian. The Service requests
               birth date information solely to determine zodiac signs for
-              personalized content generation, and this information is processed
-              temporarily without storage or retention.
+              personalized content generation. This information is stored only in
+              your own browser&apos;s localStorage and is never retained on our servers.
             </p>
           </section>
 

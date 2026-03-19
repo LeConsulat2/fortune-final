@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <div className="rounded-2xl bg-card/50 border border-border p-8 md:p-10">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Privacy Policy</h1>
         <p className="text-muted-foreground mb-10">
-          <strong>Last updated:</strong> July 17, 2025
+          <strong>Last updated:</strong> March 19, 2026
         </p>
 
         <div className="space-y-10">
@@ -39,9 +39,11 @@ export default function PrivacyPage() {
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 your-fortune stores <strong className="text-foreground">no personal data</strong> on our
-                servers. Everything stays within your browser session and
-                disappears automatically when you close the tab or refresh the
-                page.
+                servers. Your profile (name, birth date, occupation, quiz answers)
+                is saved only in your own browser&apos;s localStorage so returning
+                visits feel seamless — it never leaves your device unless you
+                request a fortune. Your generated fortune result is held in
+                sessionStorage and disappears when you close or refresh the tab.
               </p>
             </div>
           </section>
@@ -64,31 +66,37 @@ export default function PrivacyPage() {
                   <tr>
                     <td className="border-b border-border/50 p-3">Name (optional)</td>
                     <td className="border-b border-border/50 p-3">Fortune personalization</td>
-                    <td className="border-b border-border/50 p-3">Browser only</td>
-                    <td className="border-b border-border/50 p-3">Tab close/refresh</td>
+                    <td className="border-b border-border/50 p-3">localStorage (your browser)</td>
+                    <td className="border-b border-border/50 p-3">Until you clear browser data</td>
                   </tr>
                   <tr>
                     <td className="border-b border-border/50 p-3">Birth date</td>
                     <td className="border-b border-border/50 p-3">Zodiac sign calculation</td>
-                    <td className="border-b border-border/50 p-3">Browser only</td>
-                    <td className="border-b border-border/50 p-3">Tab close/refresh</td>
+                    <td className="border-b border-border/50 p-3">localStorage (your browser)</td>
+                    <td className="border-b border-border/50 p-3">Until you clear browser data</td>
                   </tr>
                   <tr>
                     <td className="border-b border-border/50 p-3">Gender (optional)</td>
                     <td className="border-b border-border/50 p-3">Fortune customization</td>
-                    <td className="border-b border-border/50 p-3">Browser only</td>
-                    <td className="border-b border-border/50 p-3">Tab close/refresh</td>
+                    <td className="border-b border-border/50 p-3">localStorage (your browser)</td>
+                    <td className="border-b border-border/50 p-3">Until you clear browser data</td>
                   </tr>
                   <tr>
                     <td className="border-b border-border/50 p-3">Occupation</td>
                     <td className="border-b border-border/50 p-3">Career-related insights</td>
-                    <td className="border-b border-border/50 p-3">Browser only</td>
-                    <td className="border-b border-border/50 p-3">Tab close/refresh</td>
+                    <td className="border-b border-border/50 p-3">localStorage (your browser)</td>
+                    <td className="border-b border-border/50 p-3">Until you clear browser data</td>
                   </tr>
                   <tr>
-                    <td className="p-3">Quiz responses</td>
-                    <td className="p-3">Personalized fortunes</td>
-                    <td className="p-3">Browser only</td>
+                    <td className="border-b border-border/50 p-3">Quiz responses</td>
+                    <td className="border-b border-border/50 p-3">Personalized fortunes</td>
+                    <td className="border-b border-border/50 p-3">localStorage (your browser)</td>
+                    <td className="border-b border-border/50 p-3">Until you clear browser data</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3">Fortune result</td>
+                    <td className="p-3">Display generated reading</td>
+                    <td className="p-3">sessionStorage (your browser)</td>
                     <td className="p-3">Tab close/refresh</td>
                   </tr>
                 </tbody>
@@ -137,11 +145,11 @@ export default function PrivacyPage() {
                 AI Processing
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Your session data and responses are sent to{' '}
-                <strong className="text-foreground">Google&apos;s Gemini API</strong> (US-based) to generate
-                personalized fortunes. Google processes this data according to
-                their own privacy policy but does not store it for training
-                purposes when accessed through our API integration.
+                Your profile data and quiz responses are sent to{' '}
+                <strong className="text-foreground">OpenAI&apos;s API</strong> (US-based) to generate
+                personalized fortunes. OpenAI processes this data according to
+                their own privacy policy. When accessed via API, OpenAI does not
+                use your data to train their models by default.
               </p>
             </div>
             <div className="bg-muted/20 p-5 rounded-xl border border-border">
@@ -204,7 +212,7 @@ export default function PrivacyPage() {
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Your data may be temporarily processed by our third-party services
-              (Google, Vercel) which operate globally, including in the United
+              (OpenAI, Vercel) which operate globally, including in the United
               States. Since no data is permanently stored, there are no lasting
               international transfers or data residency concerns.
             </p>
@@ -215,8 +223,8 @@ export default function PrivacyPage() {
               10. Your control and rights
             </h2>
             <ul className="space-y-2 text-muted-foreground">
-              <li>• <strong className="text-foreground">Delete your data:</strong> Just close the tab or refresh</li>
-              <li>• <strong className="text-foreground">Start fresh:</strong> Clear browser sessionStorage</li>
+              <li>• <strong className="text-foreground">Delete your data:</strong> Clear your browser&apos;s localStorage and sessionStorage, or use your browser&apos;s &quot;Clear site data&quot; option</li>
+              <li>• <strong className="text-foreground">Start fresh:</strong> Clear browser localStorage to reset your profile; sessionStorage clears automatically on tab close</li>
               <li>• <strong className="text-foreground">Ask anything:</strong> Contact us at any time with concerns</li>
               <li>• <strong className="text-foreground">Data portability:</strong> Since no data is stored, there&apos;s nothing to export</li>
             </ul>

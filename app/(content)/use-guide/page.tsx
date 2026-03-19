@@ -33,9 +33,8 @@ export default function FortuneUserGuidePage() {
               reflects your emotional and situational context.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              And because privacy is core, everything happens in your browser — no
-              tracking, no accounts, and no data left behind once you close your
-              tab.
+              And because privacy is core, your profile stays only in your own
+              browser — no server accounts, no tracking, and no data on our end.
             </p>
           </section>
 
@@ -114,18 +113,18 @@ export default function FortuneUserGuidePage() {
               <div className="bg-emerald-500/5 p-5 rounded-xl border border-emerald-500/10">
                 <h3 className="text-base font-semibold text-emerald-400 mb-2">What We Do</h3>
                 <ul className="space-y-1.5 text-muted-foreground text-sm">
-                  <li>• Store data only in your browser session</li>
-                  <li>• Delete everything when you close the tab</li>
-                  <li>• Use ephemeral, stateless processing</li>
-                  <li>• Encrypt all data transfers</li>
+                  <li>• Save your profile in your browser&apos;s localStorage only</li>
+                  <li>• Keep fortune results in sessionStorage (clears on tab close)</li>
+                  <li>• Use stateless, server-side processing</li>
+                  <li>• Encrypt all data transfers via HTTPS</li>
                 </ul>
               </div>
               <div className="bg-red-500/5 p-5 rounded-xl border border-red-500/10">
                 <h3 className="text-base font-semibold text-red-400 mb-2">What We Don&apos;t Do</h3>
                 <ul className="space-y-1.5 text-muted-foreground text-sm">
-                  <li>• Store data on servers</li>
-                  <li>• Create accounts or build profiles</li>
-                  <li>• Track or share your inputs</li>
+                  <li>• Store any data on our servers</li>
+                  <li>• Create accounts or build server-side profiles</li>
+                  <li>• Track, share, or sell your inputs</li>
                   <li>• Retain any history of your fortunes</li>
                 </ul>
               </div>

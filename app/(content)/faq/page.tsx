@@ -7,7 +7,7 @@ export const metadata = {
 const FAQS = [
   {
     q: 'How are my fortunes generated?',
-    a: 'Your fortune is shaped by the answers you provide — capturing your current mindset, emotions, and perspective. From there, a lightweight system interprets those patterns to offer reflections that feel timely and personal. Nothing is saved or sent — everything happens within your browser while the page is open.',
+    a: 'Your fortune is shaped by the profile and quiz answers you provide. These are sent securely to an AI (powered by OpenAI) which generates a personalised reading. Your profile is saved locally in your browser so you don\'t have to re-enter it each visit — nothing is stored on our servers.',
   },
   {
     q: 'Is Your-Fortune free?',
@@ -15,11 +15,11 @@ const FAQS = [
   },
   {
     q: 'Do you store my personal information?',
-    a: "No. All of your responses live temporarily in your browser's session storage. Once you close or refresh the tab, everything disappears automatically.",
+    a: "No personal data is stored on our servers. Your profile (name, birth date, occupation, quiz answers) is saved in your browser's localStorage so returning visits are seamless — it stays on your device only. Your fortune result is held in sessionStorage and disappears when you close or refresh the tab.",
   },
   {
     q: 'Can I reset or delete my data?',
-    a: 'Absolutely. Just refresh the page, close the tab, or clear your browser data to start fresh.',
+    a: 'Yes. To reset your profile (name, quiz answers, etc.), clear your browser\'s localStorage via your browser settings or use the reset option in the app. Your fortune result clears automatically when you close or refresh the tab.',
   },
   {
     q: 'How accurate are the fortunes?',

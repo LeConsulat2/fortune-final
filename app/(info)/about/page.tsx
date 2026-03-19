@@ -49,9 +49,10 @@ export default function AboutPage() {
             <p className="text-muted-foreground leading-relaxed">
               You choose a category that matters to you and answer a few
               meaningful questions based on your current state of mind. From
-              there, a quiet system helps piece together a reflection—rooted in
-              your answers, shaped to feel relevant and grounded. Everything runs
-              entirely in your browser—no logins, no data storage, no tracking.
+              there, an AI generates a reflection rooted in your answers and
+              shaped to feel relevant and grounded. Your profile is saved in your
+              browser&apos;s localStorage so returning visits are seamless — no
+              logins or server accounts required.
             </p>
           </section>
 
@@ -60,9 +61,10 @@ export default function AboutPage() {
               Privacy Approach
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              Built with privacy in mind. Your data isn&apos;t stored on servers,
-              there&apos;s no user tracking, and everything disappears when you
-              close the tab. Simple and clean.
+              Built with privacy in mind. Your profile is stored only in your
+              own browser&apos;s localStorage — never on our servers — and your
+              generated fortune is ephemeral, disappearing when you close the
+              tab. No user tracking, no accounts, no data collection on our end.
             </p>
           </section>
 
@@ -84,8 +86,9 @@ export default function AboutPage() {
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Built with Next.js 15, React 19, and Tailwind CSS. Uses stateless
-              Edge Functions for processing with zero backend storage. The AI
-              integration provides contextual responses based on your inputs.
+              Edge Functions for zero backend storage. Fortune generation is
+              powered by the <strong>OpenAI API</strong>, producing contextual,
+              personalised readings based on your profile and quiz answers.
             </p>
           </section>
 

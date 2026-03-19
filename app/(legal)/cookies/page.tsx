@@ -10,7 +10,7 @@ export default function CookiesPage() {
       <div className="rounded-2xl bg-card/50 border border-border p-8 md:p-10">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Cookie Policy</h1>
         <p className="text-muted-foreground mb-10">
-          <strong>Last updated:</strong> July&nbsp;11,&nbsp;2025
+          <strong>Last updated:</strong> March&nbsp;19,&nbsp;2026
         </p>
 
         <div className="space-y-10">
