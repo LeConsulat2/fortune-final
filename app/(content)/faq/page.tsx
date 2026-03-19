@@ -51,9 +51,26 @@ const FAQS = [
   },
 ];
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
+
 export default function FaqPage() {
   return (
     <main className="max-w-2xl mx-auto px-6 py-12 md:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="rounded-2xl bg-card/50 border border-border p-8 md:p-10">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
           Frequently Asked Questions

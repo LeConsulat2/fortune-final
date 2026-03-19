@@ -31,6 +31,32 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Your-Fortune',
+  url: 'https://www.yourfortune.cool',
+  description:
+    'Personalised AI fortune readings across 10 life categories including love, career, money, mental health, and more.',
+  applicationCategory: 'EntertainmentApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  creator: {
+    '@type': 'Organization',
+    name: 'Your-Fortune',
+    url: 'https://www.yourfortune.cool',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'wecreate5000@gmail.com',
+      contactType: 'customer support',
+    },
+  },
+};
+
 export const viewport: Viewport = {
   themeColor: '#1a1a2e',
 };
@@ -43,6 +69,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Script
           id="adsense-script-head"
           async

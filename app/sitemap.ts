@@ -29,37 +29,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Fortune category landing pages - High priority
     {
       url: `${baseUrl}/love`,
-      lastModified: stableDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/money`,
-      lastModified: stableDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/mental-health`,
-      lastModified: stableDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/job`,
-      lastModified: stableDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/composure`,
-      lastModified: stableDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/assessment`,
-      lastModified: stableDate,
+      lastModified: recentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },

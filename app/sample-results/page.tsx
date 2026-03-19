@@ -67,6 +67,46 @@ const SAMPLE_FORTUNES = [
     insights:
       'Your tendency to push through challenges reflects a Sagittarius trait of adventure \u2014 embrace it, but don\u2019t overlook self-care to maintain your balance.',
   },
+  {
+    type: 'composure',
+    title: 'Your Composure Fortune Today',
+    userDisplay: 'Anonymous \u00b7 Leo \u264C',
+    headline: 'Steadiness is your superpower today.',
+    reading:
+      'You may not feel like the most energetic person in the room, but your calm presence is exactly what today calls for. A conversation later this afternoon could test your patience \u2014 respond with silence first. The person pushing back needs reassurance, not argument. Your ability to stay composed in that moment will shift the dynamic entirely. In the quieter hours, revisit a decision you made last week \u2014 you\u2019ll notice something you missed the first time around.',
+    insights:
+      'Your Leo warmth tends to draw people in, but today your composure \u2014 not your charisma \u2014 is what earns the room\u2019s trust. Lead by listening.',
+  },
+  {
+    type: 'interview',
+    title: 'Your Interview Fortune Today',
+    userDisplay: 'Anonymous \u00b7 Virgo \u264D',
+    headline: 'Preparation meets the right moment.',
+    reading:
+      'Today favours the prepared mind. If you have an interview approaching, focus your final preparation on stories rather than facts \u2014 interviewers remember narratives, not bullet points. Arrive five minutes early and spend that time noticing your breathing, not reviewing notes. Your natural attention to detail is an asset, but today, let your personality lead. The interviewer is looking for someone they want to work with, not just someone who ticks every box.',
+    insights:
+      'Your Virgo precision can sometimes come across as rehearsed. Today, let a small imperfection through \u2014 it makes you memorable and relatable.',
+  },
+  {
+    type: 'assignment',
+    title: 'Your Assignment Fortune Today',
+    userDisplay: 'Anonymous \u00b7 Aquarius \u2652',
+    headline: 'The first draft is closer than you think.',
+    reading:
+      'Deadlines have a way of sharpening focus, and today that pressure works in your favour. Start with the section you know best \u2014 momentum from an easy win will carry you into the harder parts. Avoid opening a browser tab for \u201Cquick research\u201D before you\u2019ve written at least 300 words; that rabbit hole is deeper than it looks. By late afternoon, you\u2019ll have more progress than you expected.',
+    insights:
+      'Your Aquarius tendency to overthink the structure can delay the start. Today, write first and reorganise later \u2014 the structure will emerge from the content.',
+  },
+  {
+    type: 'golf',
+    title: 'Your Golf Fortune Today',
+    userDisplay: 'Anonymous \u00b7 Taurus \u2649',
+    headline: 'Trust the swing you\u2019ve been building.',
+    reading:
+      'The course today favours patience over power. Your iron play feels dialled in, but your driver may betray you on the back nine if you try to force distance. Focus on tempo through the first three holes \u2014 once your rhythm is set, the rest follows. A tricky lie around the 12th or 13th hole will tempt you to go for the green; lay up instead. The strokes you save on course management will matter more than any single heroic shot.',
+    insights:
+      'Your Taurus steadiness is a natural fit for golf\u2019s mental game. Today, resist the urge to change your approach mid-round \u2014 consistency is your edge.',
+  },
 ];
 
 export default function SampleResultsPage() {

@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 pt-16 md:pt-15 relative overflow-hidden">
       {/* Subtle ambient glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -62,9 +62,9 @@ export default function Home() {
             imageSrc={imageSrc}
             altText="Fortune image"
             containerWidth="min(320px, 75vw)"
-            containerHeight="min(480px, 75vw)"
+            containerHeight="min(500px, 75vw)"
             imageWidth="min(320px, 75vw)"
-            imageHeight="min(480px, 75vw)"
+            imageHeight="min(500px, 75vw)"
             scaleOnHover={1.05}
             rotateAmplitude={12}
             showMobileWarning={false}
@@ -142,11 +142,60 @@ export default function Home() {
           )}
         </motion.div>
 
-        <motion.p
+        {/* How It Works */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="text-left max-w-sm mx-auto space-y-4"
+        >
+          <h2 className="text-sm font-medium text-muted-foreground/60 uppercase tracking-[0.15em] text-center">
+            How It Works
+          </h2>
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <span className="text-primary font-bold text-sm mt-0.5">1</span>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Choose a category that matters today — love, career, money, wellness, or more
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-primary font-bold text-sm mt-0.5">2</span>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Answer a short, thoughtful quiz that captures your current mindset
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-primary font-bold text-sm mt-0.5">3</span>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Receive a personalised AI reading with specific insights, cautions, and opportunities
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Categories Preview */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="text-muted-foreground/50 text-xs"
+          className="flex flex-wrap justify-center gap-2 max-w-sm mx-auto"
+        >
+          {['Love', 'Career', 'Money', 'Mental Health', 'Composure', 'Exams', 'Interview', 'Golf'].map((cat) => (
+            <span
+              key={cat}
+              className="px-3 py-1 text-xs text-muted-foreground/70 bg-muted/20 rounded-full border border-border/50"
+            >
+              {cat}
+            </span>
+          ))}
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+          className="text-muted-foreground/50 text-sm"
         >
           For entertainment. You create your own fortune.
         </motion.p>
