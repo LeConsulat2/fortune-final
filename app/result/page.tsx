@@ -4,11 +4,11 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useUserMemory } from '@/lib/useUserMemory';
-import { ZODIAC_SIGNS_LABELS, ZodiacSign } from '@/lib/common-constants';
 import { Button } from '@/ui/button';
-import { formatDate } from '@/lib/zodiac';
 import { NumberTicker } from '@/ui/number-ticker';
-import AnimatedContent from '@/components/AnimatedContent';
+import { BlurFade } from '@/ui/blur-fade';
+import { Highlighter } from '@/ui/highlighter';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface FortuneArea {
   name: string;
@@ -25,20 +25,22 @@ interface FortunePrediction {
   personalised_insight?: string;
 }
 
-const getCategoryTitle = (category: string) => {
-  const titles: Record<string, string> = {
-    general: 'Today\'s Fortune',
-    love: 'Love & Romance',
-    job: 'Career',
-    interview: 'Interview',
-    exam: 'Exam',
-    assignment: 'Assignment',
-    money: 'Money',
-    composure: 'Composure',
-    'mental-health': 'Mental Health',
-    golf: 'Golf',
-  };
-  return titles[category] || category;
+interface FortuneResult {
+  category: string;
+  fortune: FortunePrediction;
+}
+
+const CATEGORY_META: Record<string, { title: string; emoji: string }> = {
+  general:       { title: "Today's Fortune", emoji: '✨' },
+  love:          { title: 'Love & Romance',  emoji: '❤️' },
+  job:           { title: 'Career',          emoji: '💼' },
+  interview:     { title: 'Interview',       emoji: '🎤' },
+  exam:          { title: 'Exam',            emoji: '📝' },
+  assignment:    { title: 'Assignment',      emoji: '💻' },
+  money:         { title: 'Money',           emoji: '💰' },
+  composure:     { title: 'Composure',       emoji: '🧘' },
+  'mental-health': { title: 'Mental Health', emoji: '🧠' },
+  golf:          { title: 'Golf',            emoji: '⛳' },
 };
 
 export default function ResultPageWithSuspense() {
@@ -51,12 +53,15 @@ export default function ResultPageWithSuspense() {
 
 function ResultPage() {
   const router = useRouter();
-  const { userMemory, isLoaded, isComplete } = useUserMemory();
+  const { isLoaded, isComplete } = useUserMemory();
   const searchParams = useSearchParams();
-  const category = searchParams?.get('category') || 'general';
-  const [fortune, setFortune] = useState<FortunePrediction | null>(null);
+  const [results, setResults] = useState<FortuneResult[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const categoriesParam = searchParams?.get('categories');
+  const categoryParam = searchParams?.get('category') || 'general';
 
   useEffect(() => {
     if (!isLoaded) return;
@@ -65,28 +70,37 @@ function ResultPage() {
       return;
     }
     try {
-      const stored = sessionStorage.getItem('fortune-result');
-      if (stored) {
-        setFortune(JSON.parse(stored) as FortunePrediction);
+      if (categoriesParam) {
+        const stored = sessionStorage.getItem('fortune-results');
+        if (stored) {
+          setResults(JSON.parse(stored) as FortuneResult[]);
+        } else {
+          router.push(`/loading?categories=${categoriesParam}`);
+          return;
+        }
       } else {
-        router.push(`/loading?category=${category}`);
-        return;
+        const stored = sessionStorage.getItem('fortune-result');
+        if (stored) {
+          setResults([{ category: categoryParam, fortune: JSON.parse(stored) as FortunePrediction }]);
+        } else {
+          router.push(`/loading?category=${categoryParam}`);
+          return;
+        }
       }
     } catch {
-      setError('Failed to load your fortune.');
+      setError('Failed to load your reading.');
     } finally {
       setReady(true);
     }
-  }, [isLoaded, userMemory, router, category]);
+  }, [isLoaded, isComplete, categoriesParam, categoryParam, router]);
 
   if (!isLoaded || !ready) return null;
 
-  if (error || !fortune) {
+  if (error || results.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6">
         <div className="text-center space-y-4">
           <p className="text-xl font-bold text-foreground">Something went wrong</p>
-          <p className="text-sm text-muted-foreground">{error}</p>
           <Button onClick={() => router.push('/general')} className="bg-primary text-primary-foreground">
             Go back
           </Button>
@@ -95,200 +109,125 @@ function ResultPage() {
     );
   }
 
-  const zodiacInfo = userMemory?.zodiacSign
-    ? ZODIAC_SIGNS_LABELS[userMemory.zodiacSign as ZodiacSign]
-    : { name: '', emoji: '' };
-  const today = formatDate(new Date());
-  const isGolf = category === 'golf';
-  const detailParagraphs = (fortune.overall.detail ?? '').split('\n\n').filter(Boolean);
-
-  const scoreColor = (s: number) => {
-    if (s >= 70) return 'bg-emerald-500';
-    if (s >= 45) return 'bg-amber-500';
-    return 'bg-red-500';
+  const handleRetry = () => {
+    sessionStorage.removeItem('fortune-results');
+    sessionStorage.removeItem('fortune-result');
+    if (categoriesParam) {
+      router.push(`/loading?categories=${categoriesParam}`);
+    } else {
+      router.push(`/loading?category=${categoryParam}`);
+    }
   };
 
+  const prev = () => setActiveIndex((a) => Math.max(0, a - 1));
+  const next = () => setActiveIndex((a) => Math.min(results.length - 1, a + 1));
+
   return (
-    <div className="min-h-screen px-4 py-8 md:py-12 relative">
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden">
       {/* Ambient glow */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-16 left-1/2 -translate-x-1/2 w-[500px] h-[260px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-md md:max-w-2xl lg:max-w-3xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center py-8 md:py-12 px-4 flex-1">
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-6"
-        >
-          <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-[0.2em] mb-1">
-            {getCategoryTitle(category)}
+        {/* Header label */}
+        <BlurFade delay={0.05} duration={0.4} className="mb-6 text-center">
+          <p className="text-[11px] font-medium text-muted-foreground/60 uppercase tracking-[0.22em]">
+            {results.length === 1 ? 'Your Reading' : `${results.length} Readings`}
           </p>
-          <p className="text-xs text-muted-foreground/60">
-            {userMemory?.name} · {zodiacInfo.name} {zodiacInfo.emoji} · {today}
-          </p>
-        </motion.div>
+        </BlurFade>
 
-        {/* GOLF: Show score as hero */}
-        {isGolf && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.15, type: 'spring', damping: 20 }}
-            className="text-center py-8"
+        {/* 3D carousel stage */}
+        <BlurFade delay={0.12} duration={0.65} direction="up" offset={50} className="w-full">
+          <div
+            className="relative w-full flex items-start justify-center"
+            style={{ perspective: 1200, minHeight: '60vh' }}
           >
-            <NumberTicker
-              value={99}
-              startValue={fortune.overall.score}
-              direction="down"
-              delay={0.3}
-              className={`text-8xl md:text-9xl font-bold tabular-nums ${
-                fortune.overall.score <= 74 ? 'text-emerald-400'
-                : fortune.overall.score <= 85 ? 'text-amber-400'
-                : 'text-red-400'
-              }`}
-            />
-            <p className="text-xs text-muted-foreground mt-2">predicted score (lower = better)</p>
-          </motion.div>
-        )}
+            {results.map((result, index) => {
+              const offset = index - activeIndex;
+              const abs = Math.abs(offset);
+              if (abs > 2) return null;
 
-        {/* NON-GOLF: Hero message — the main event */}
-        {!isGolf && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-center py-6 md:py-10 mb-4"
-          >
-            <p className="text-2xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-snug md:leading-tight tracking-tight px-2 md:px-8">
-              &ldquo;{fortune.overall.message}&rdquo;
-            </p>
-          </motion.div>
-        )}
+              const isActive = offset === 0;
 
-        {/* Golf: also show the one-line message */}
-        {isGolf && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-center text-base md:text-lg font-medium text-foreground/90 italic mb-8 px-2"
-          >
-            &ldquo;{fortune.overall.message}&rdquo;
-          </motion.p>
-        )}
-
-        {/* Detailed reading — larger, more readable text */}
-        <AnimatedContent distance={30} duration={0.6} delay={0.1} threshold={0.05}>
-          <div className="mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50">
-            <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4">Today&apos;s Reading</h2>
-            {detailParagraphs.map((p, i) => (
-              <p key={i} className="text-base md:text-lg text-foreground/85 mb-4 leading-relaxed md:leading-loose last:mb-0">
-                {p}
-              </p>
-            ))}
+              return (
+                <motion.div
+                  key={result.category + index}
+                  className="absolute top-0"
+                  animate={{
+                    x: offset * 260,
+                    rotateY: offset * -36,
+                    scale: 1 - abs * 0.13,
+                    opacity: abs === 0 ? 1 : abs === 1 ? 0.58 : 0.22,
+                    zIndex: 10 - abs,
+                  }}
+                  transition={{ type: 'spring', stiffness: 290, damping: 30 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  drag={isActive ? 'x' : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.1}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -80) next();
+                    if (info.offset.x > 80) prev();
+                  }}
+                  onClick={() => {
+                    if (offset === 1) next();
+                    if (offset === -1) prev();
+                  }}
+                >
+                  <FortuneCard
+                    result={result}
+                    isActive={isActive}
+                    index={index}
+                    total={results.length}
+                  />
+                </motion.div>
+              );
+            })}
           </div>
-        </AnimatedContent>
+        </BlurFade>
 
-        {/* Areas */}
-        {fortune.areas && fortune.areas.length > 0 && (
-          <AnimatedContent distance={30} duration={0.6} delay={0.15} threshold={0.05}>
-            <div className="mb-8 md:mb-10">
-              <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4 px-1">Breakdown</h2>
-              <div className={`grid gap-3 ${isGolf ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-1 md:grid-cols-2'}`}>
-                {fortune.areas.map((area, i) => (
-                  <motion.div
-                    key={area.name}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 + i * 0.08 }}
-                    className="p-4 md:p-5 rounded-xl bg-card/50 border border-border/50"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-semibold text-foreground">{area.name}</span>
-                      {isGolf && <span className="text-sm font-bold text-foreground">{area.score}</span>}
-                    </div>
-                    {isGolf && (
-                      <div className="w-full h-1 rounded-full bg-muted overflow-hidden mb-2">
-                        <motion.div
-                          className={`h-full rounded-full ${scoreColor(area.score)}`}
-                          initial={{ width: 0 }}
-                          animate={{ width: `${area.score}%` }}
-                          transition={{ duration: 0.8, delay: 0.6 + i * 0.08 }}
-                        />
-                      </div>
-                    )}
-                    <p className="text-sm md:text-base text-foreground/70 leading-relaxed">{area.insight}</p>
-                  </motion.div>
-                ))}
-              </div>
+        {/* Navigation — dots + arrows */}
+        {results.length > 1 && (
+          <BlurFade delay={0.3} duration={0.4} className="flex flex-col items-center gap-3 mt-6">
+            {/* Pill dots */}
+            <div className="flex gap-2 items-center">
+              {results.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === activeIndex
+                      ? 'w-6 h-2 bg-primary'
+                      : 'w-2 h-2 bg-muted-foreground/25 hover:bg-muted-foreground/50'
+                  }`}
+                />
+              ))}
             </div>
-          </AnimatedContent>
-        )}
-
-        {/* Caution & Opportunity */}
-        {(fortune.caution || fortune.opportunity) && (
-          <AnimatedContent distance={30} duration={0.6} delay={0.2} threshold={0.05}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8 md:mb-10">
-              {fortune.caution && (
-                <div className="p-5 md:p-6 rounded-xl bg-red-500/5 border border-red-500/10">
-                  <p className="text-[11px] font-bold text-red-400 uppercase tracking-[0.15em] mb-2">Watch out</p>
-                  <p className="text-sm md:text-base text-foreground/70 leading-relaxed">{fortune.caution}</p>
-                </div>
-              )}
-              {fortune.opportunity && (
-                <div className="p-5 md:p-6 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
-                  <p className="text-[11px] font-bold text-emerald-400 uppercase tracking-[0.15em] mb-2">Seize this</p>
-                  <p className="text-sm md:text-base text-foreground/70 leading-relaxed">{fortune.opportunity}</p>
-                </div>
-              )}
+            {/* Arrows */}
+            <div className="flex items-center gap-5">
+              <button
+                onClick={prev}
+                disabled={activeIndex === 0}
+                className="p-2 rounded-full border border-border/50 text-muted-foreground/50 hover:text-foreground hover:border-border transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <span className="text-xs text-muted-foreground/40 tabular-nums min-w-[40px] text-center">
+                {activeIndex + 1} / {results.length}
+              </span>
+              <button
+                onClick={next}
+                disabled={activeIndex === results.length - 1}
+                className="p-2 rounded-full border border-border/50 text-muted-foreground/50 hover:text-foreground hover:border-border transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+              >
+                <ChevronRight size={18} />
+              </button>
             </div>
-          </AnimatedContent>
-        )}
-
-        {/* Lucky elements */}
-        {fortune.lucky && (
-          <AnimatedContent distance={20} duration={0.5} delay={0.25} threshold={0.05}>
-            <div className="mb-8 md:mb-10 p-5 md:p-6 rounded-xl bg-card/50 border border-border/50">
-              <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4">Lucky elements</p>
-              <div className="flex justify-around text-center">
-                <div>
-                  <div className="text-xl mb-1">🎨</div>
-                  <div className="text-xs text-muted-foreground/60 mb-0.5">Color</div>
-                  <div className="text-sm md:text-base font-medium text-foreground capitalize">{fortune.lucky.color}</div>
-                </div>
-                <div>
-                  <div className="text-xl mb-1">{isGolf ? '⛳' : '🔢'}</div>
-                  <div className="text-xs text-muted-foreground/60 mb-0.5">{isGolf ? 'Hole' : 'Number'}</div>
-                  <div className="text-sm md:text-base font-medium text-foreground">{isGolf ? `#${fortune.lucky.number}` : fortune.lucky.number}</div>
-                </div>
-                <div>
-                  <div className="text-xl mb-1">⏰</div>
-                  <div className="text-xs text-muted-foreground/60 mb-0.5">Time</div>
-                  <div className="text-sm md:text-base font-medium text-foreground capitalize">{fortune.lucky.time}</div>
-                </div>
-              </div>
-            </div>
-          </AnimatedContent>
-        )}
-
-        {/* Personal insight */}
-        {fortune.personalised_insight && (
-          <AnimatedContent distance={20} duration={0.5} delay={0.3} threshold={0.05}>
-            <div className="mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50">
-              <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-[0.15em] mb-4">Personal insight</h2>
-              <p className="text-base md:text-lg text-foreground/80 italic leading-relaxed md:leading-loose">{fortune.personalised_insight}</p>
-            </div>
-          </AnimatedContent>
+          </BlurFade>
         )}
 
         {/* Actions */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex gap-3 max-w-md mx-auto"
-        >
+        <BlurFade delay={0.35} duration={0.4} className="flex gap-3 w-full max-w-sm mt-8">
           <Button
             onClick={() => router.push('/general')}
             variant="outline"
@@ -297,16 +236,216 @@ function ResultPage() {
             Categories
           </Button>
           <Button
-            onClick={() => {
-              sessionStorage.removeItem('fortune-result');
-              router.push(`/loading?category=${category}`);
-            }}
+            onClick={handleRetry}
             className="flex-1 h-12 bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer"
           >
             Try again
           </Button>
-        </motion.div>
+        </BlurFade>
 
+      </div>
+    </div>
+  );
+}
+
+function FortuneCard({
+  result,
+  isActive,
+  index,
+  total,
+}: {
+  result: FortuneResult;
+  isActive: boolean;
+  index: number;
+  total: number;
+}) {
+  const { category, fortune } = result;
+  const isGolf = category === 'golf';
+  const meta = CATEGORY_META[category] || { title: category, emoji: '🔮' };
+  const detailParagraphs = (fortune.overall.detail ?? '').split('\n\n').filter(Boolean);
+
+  return (
+    <div
+      className={`w-[min(440px,88vw)] rounded-2xl bg-card border transition-shadow duration-300 overflow-y-auto ${
+        isActive
+          ? 'border-primary/25 shadow-2xl shadow-primary/10'
+          : 'border-border/40 cursor-pointer'
+      }`}
+      style={{ maxHeight: '68vh' }}
+    >
+      {/* Sticky card header */}
+      <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-3.5 bg-card/95 backdrop-blur-sm border-b border-border/30">
+        <div className="flex items-center gap-2.5">
+          <span className="text-xl">{meta.emoji}</span>
+          <span className="text-sm font-semibold text-foreground">{meta.title}</span>
+        </div>
+        {total > 1 && (
+          <span className="text-[10px] text-muted-foreground/35 tabular-nums">{index + 1}/{total}</span>
+        )}
+      </div>
+
+      <div className="px-5 py-5 space-y-5">
+
+        {/* GOLF: score hero */}
+        {isGolf && (
+          <div className="text-center py-3">
+            <NumberTicker
+              value={99}
+              startValue={fortune.overall.score}
+              direction="down"
+              delay={0.3}
+              className={`text-7xl font-bold tabular-nums ${
+                fortune.overall.score <= 74 ? 'text-emerald-400'
+                : fortune.overall.score <= 85 ? 'text-amber-400'
+                : 'text-red-400'
+              }`}
+            />
+            <p className="text-[10px] text-muted-foreground/40 mt-1">predicted score · lower is better</p>
+          </div>
+        )}
+
+        {/* Overall message */}
+        <div>
+          <p className={`font-semibold text-foreground leading-snug tracking-tight ${
+            isGolf
+              ? 'text-sm italic text-foreground/75 text-center'
+              : 'text-xl md:text-2xl'
+          }`}>
+            &ldquo;{fortune.overall.message}&rdquo;
+          </p>
+        </div>
+
+        {/* Detailed reading */}
+        {detailParagraphs.length > 0 && (
+          <div>
+            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-2.5">
+              Today&apos;s Reading
+            </p>
+            <div className="space-y-3">
+              {detailParagraphs.map((p, i) => (
+                <p key={i} className="text-sm md:text-base text-foreground/72 leading-relaxed">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Watch out — Highlighter highlight */}
+        {fortune.caution && (
+          <div className="rounded-xl bg-red-500/5 border border-red-500/10 p-4">
+            <p className="text-[10px] font-bold text-red-400/75 uppercase tracking-[0.15em] mb-2">
+              ⚠ Watch out
+            </p>
+            <p className="text-sm md:text-base text-foreground/72 leading-relaxed">
+              <Highlighter
+                action="highlight"
+                color="rgba(239, 68, 68, 0.18)"
+                strokeWidth={1}
+                animationDuration={900}
+                isView={false}
+              >
+                {fortune.caution}
+              </Highlighter>
+            </p>
+          </div>
+        )}
+
+        {/* Seize this — Highlighter underline */}
+        {fortune.opportunity && (
+          <div className="rounded-xl bg-emerald-500/5 border border-emerald-500/10 p-4">
+            <p className="text-[10px] font-bold text-emerald-400/75 uppercase tracking-[0.15em] mb-2">
+              → Seize this
+            </p>
+            <p className="text-sm md:text-base text-foreground/72 leading-relaxed">
+              <Highlighter
+                action="underline"
+                color="rgba(52, 211, 153, 0.65)"
+                strokeWidth={1.5}
+                animationDuration={700}
+                isView={false}
+              >
+                {fortune.opportunity}
+              </Highlighter>
+            </p>
+          </div>
+        )}
+
+        {/* Breakdown / areas */}
+        {fortune.areas && fortune.areas.length > 0 && (
+          <div>
+            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-3">
+              Breakdown
+            </p>
+            <div className={`grid gap-2 ${isGolf ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {fortune.areas.map((area) => (
+                <div key={area.name} className="rounded-lg bg-muted/20 border border-border/30 p-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-semibold text-foreground">{area.name}</span>
+                    {isGolf && <span className="text-xs font-bold text-foreground/60">{area.score}</span>}
+                  </div>
+                  {isGolf && (
+                    <div className="w-full h-0.5 rounded-full bg-muted overflow-hidden mb-1.5">
+                      <motion.div
+                        className={`h-full rounded-full ${
+                          area.score >= 70 ? 'bg-emerald-500'
+                          : area.score >= 45 ? 'bg-amber-500'
+                          : 'bg-red-500'
+                        }`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${area.score}%` }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                      />
+                    </div>
+                  )}
+                  <p className="text-xs text-foreground/58 leading-relaxed">{area.insight}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Lucky elements */}
+        {fortune.lucky && (
+          <div className="rounded-xl bg-card/60 border border-border/40 p-4">
+            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-3">
+              Lucky elements
+            </p>
+            <div className="flex justify-around text-center">
+              <div>
+                <div className="text-lg mb-1">🎨</div>
+                <div className="text-[10px] text-muted-foreground/45 mb-0.5">Color</div>
+                <div className="text-xs font-medium text-foreground capitalize">{fortune.lucky.color}</div>
+              </div>
+              <div>
+                <div className="text-lg mb-1">{isGolf ? '⛳' : '🔢'}</div>
+                <div className="text-[10px] text-muted-foreground/45 mb-0.5">{isGolf ? 'Hole' : 'Number'}</div>
+                <div className="text-xs font-medium text-foreground">
+                  {isGolf ? `#${fortune.lucky.number}` : fortune.lucky.number}
+                </div>
+              </div>
+              <div>
+                <div className="text-lg mb-1">⏰</div>
+                <div className="text-[10px] text-muted-foreground/45 mb-0.5">Time</div>
+                <div className="text-xs font-medium text-foreground capitalize">{fortune.lucky.time}</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Personal insight */}
+        {fortune.personalised_insight && (
+          <div className="rounded-xl bg-primary/5 border border-primary/10 p-4">
+            <p className="text-[10px] font-medium text-muted-foreground/45 uppercase tracking-[0.16em] mb-2">
+              Personal insight
+            </p>
+            <p className="text-sm md:text-base text-foreground/68 italic leading-relaxed">
+              {fortune.personalised_insight}
+            </p>
+          </div>
+        )}
+
+        <div className="h-1" />
       </div>
     </div>
   );

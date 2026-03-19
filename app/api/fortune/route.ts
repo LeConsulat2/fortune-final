@@ -58,24 +58,41 @@ export async function POST(req: NextRequest) {
     }
     // Build the complete system prompt with user information
     const systemPrompt = buildSystemPrompt(config.guidance, userMemory);
-    // Create OpenAI chat completion with streaming enabled
-    const response = await openai.chat.completions.create({
-      model: 'gemini-2.5-flash-lite',
-      stream: false,
-      response_format: { type: 'json_object' },
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        {
-          role: 'user',
-          content: `Based on my information, generate my fortune for today (${new Date().toISOString().split('T')[0]}). Today's luck roll is ${Math.floor(Math.random() * 10) + 1}/10 — let this genuinely shift the outcome, even if it contradicts the inputs. A low roll means things go wrong despite good conditions; a high roll means surprising upside despite bad ones. Do not smooth this out. Ensure you follow the system instructions precisely.`,
-        },
-      ],
-      max_tokens: 4000,
-    });
-    const content = response.choices[0].message.content;
+    // Create OpenAI chat completion with retry for rate limits
+    const messages = [
+      {
+        role: 'system' as const,
+        content: systemPrompt,
+      },
+      {
+        role: 'user' as const,
+        content: `Based on my information, generate my fortune for today (${new Date().toISOString().split('T')[0]}). Today's luck roll is ${Math.floor(Math.random() * 10) + 1}/10 — let this genuinely shift the outcome, even if it contradicts the inputs. A low roll means things go wrong despite good conditions; a high roll means surprising upside despite bad ones. Do not smooth this out. Ensure you follow the system instructions precisely.`,
+      },
+    ];
+
+    let response;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      try {
+        response = await openai.chat.completions.create({
+          model: 'gemini-2.5-flash-lite',
+          stream: false,
+          response_format: { type: 'json_object' },
+          messages,
+          max_tokens: 4000,
+        });
+        break; // success
+      } catch (err: unknown) {
+        const status = (err as { status?: number }).status;
+        if (status === 429 && attempt < 3) {
+          // Wait: 3s, 6s, 12s
+          await new Promise((r) => setTimeout(r, 3000 * Math.pow(2, attempt)));
+          continue;
+        }
+        throw err; // re-throw non-429 or exhausted retries
+      }
+    }
+
+    const content = response!.choices[0].message.content;
     if (!content) {
       return NextResponse.json(
         { error: 'No content received from AI.' },
