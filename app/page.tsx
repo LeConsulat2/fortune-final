@@ -1,15 +1,43 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/ui/button';
 import { useUserMemory } from '@/lib/useUserMemory';
-import { SimpleRandomImage } from '@/components/simple-random-image';
 import TrueFocus from '@/components/TrueFocus';
+import TiltedCard from '@/components/TiltedCard';
+
+const IMAGE_FILES = [
+  'first-one.png',
+  'life-fortune.png',
+  'life-fortune-2.png',
+  'fortune.png',
+  'fortune-theme-1.png',
+  'fortune-theme-2.png',
+  'sadness-theme-3.png.png',
+  'beauty-theme-4.png.png',
+  'maybemust-theme-5.png',
+  'akiharu-theme-6.png',
+  'misfortune-theme-7.png',
+  'noexperience-theme-8.png',
+  'youtellmusic-theme-9.png',
+  'lifemoments-theme.png',
+  'timeerase-theme.png',
+  'somelater-theme.png',
+  'answerstime-theme.png',
+  'slowdown-theme.png',
+];
 
 export default function Home() {
   const { isLoaded, isComplete, updateUserMemory } = useUserMemory();
   const router = useRouter();
+  const [imageSrc, setImageSrc] = useState('/images/akiharu-theme-6.png');
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * IMAGE_FILES.length);
+    setImageSrc(`/images/${IMAGE_FILES[randomIndex]}`);
+  }, []);
 
   const handleQuickFortune = () => {
     updateUserMemory({ onboardingSkipped: true });
@@ -29,10 +57,18 @@ export default function Home() {
           transition={{ duration: 1.2, delay: 0.2 }}
           className="flex justify-center"
         >
-          <div className="relative w-full max-w-[280px] md:max-w-[320px]">
-            <div className="absolute inset-0 bg-primary/8 rounded-2xl blur-xl" />
-            <SimpleRandomImage />
-          </div>
+          <TiltedCard
+            imageSrc={imageSrc}
+            altText="Fortune image"
+            containerWidth="280px"
+            containerHeight="280px"
+            imageWidth="280px"
+            imageHeight="280px"
+            scaleOnHover={1.05}
+            rotateAmplitude={12}
+            showMobileWarning={false}
+            showTooltip={false}
+          />
         </motion.div>
 
         {/* Title with TrueFocus */}
