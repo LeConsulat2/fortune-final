@@ -5,6 +5,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useUserMemory } from '@/lib/useUserMemory';
 import { Button } from '@/ui/button';
+import Image from 'next/image';
 
 const MESSAGES = [
   'Reading your stars',
@@ -129,18 +130,62 @@ function LoadingPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-6">
-        <div className="max-w-sm text-center space-y-4">
-          <div className="text-4xl">😕</div>
-          <h1 className="text-xl font-bold text-foreground">Something went wrong</h1>
-          <p className="text-sm text-muted-foreground">{error}</p>
-          <Button
-            onClick={() => router.push('/general')}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/4 rounded-full blur-[100px] pointer-events-none" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-sm text-center space-y-6 relative z-10"
+        >
+          {/* Sad fortune image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 0.75, scale: 1 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            className="flex justify-center"
           >
-            Go back
-          </Button>
-        </div>
+            <div className="relative w-52 h-52">
+              <div className="absolute inset-0 bg-primary/6 rounded-2xl blur-xl" />
+              <Image
+                src="/images/somelater-theme.png"
+                alt="Fortuner resting"
+                width={208}
+                height={208}
+                className="rounded-2xl object-contain relative z-10"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="space-y-3"
+          >
+            <h1 className="text-xl font-semibold text-foreground">
+              Our fortuner needs a moment
+            </h1>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              The stars are a little busy right now. Our fortuner is resting and will be ready to give you a telling soon — please come back a little later.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            <Button
+              onClick={() => router.push('/general')}
+              variant="outline"
+              className="border-border text-foreground hover:bg-card"
+            >
+              Back to categories
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
     );
   }

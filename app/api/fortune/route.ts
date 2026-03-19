@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     ];
 
     let response;
-    for (let attempt = 0; attempt < 4; attempt++) {
+    for (let attempt = 0; attempt < 2; attempt++) {
       try {
         response = await openai.chat.completions.create({
           model: 'gemini-2.5-flash-lite',
@@ -83,12 +83,12 @@ export async function POST(req: NextRequest) {
         break; // success
       } catch (err: unknown) {
         const status = (err as { status?: number }).status;
-        if (status === 429 && attempt < 3) {
-          // Wait: 3s, 6s, 12s
-          await new Promise((r) => setTimeout(r, 3000 * Math.pow(2, attempt)));
+        if (status === 429 && attempt < 1) {
+          // One retry after 5s
+          await new Promise((r) => setTimeout(r, 5000));
           continue;
         }
-        throw err; // re-throw non-429 or exhausted retries
+        throw err; // re-throw on second failure or non-429
       }
     }
 
