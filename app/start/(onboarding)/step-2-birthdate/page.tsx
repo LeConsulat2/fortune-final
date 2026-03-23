@@ -136,12 +136,12 @@ export default function BirthdatePage() {
     if (isValid && birthDate) {
       const dt = DateTime.fromJSDate(birthDate, { zone: 'Pacific/Auckland' });
       updateUserMemory({ birthDate: dt.toISODate() });
-      router.push('/start/step-3-job');
+      router.push('/general?mode=personalised');
     }
   };
 
   return (
-    <QuizFrame title="Your Birthday" subtitle="We'll calculate your zodiac sign" currentStep={2} totalSteps={3}>
+    <QuizFrame title="Your Birthday" subtitle="We'll calculate your zodiac sign" currentStep={2} totalSteps={2}>
       <div className="space-y-6">
         <QuestionSection question="When were you born?" description="Your zodiac sign personalizes your readings">
           <motion.div

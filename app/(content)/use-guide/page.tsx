@@ -40,11 +40,10 @@ export default function FortuneUserGuidePage() {
 
           <section>
             <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-3">
-              Getting Started: The Three-Step Setup
+              Getting Started: Quick Mode or Personalised Mode
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Getting started is simple and lightweight. In just three steps, we
-              learn the essentials about you so each reading feels grounded and relevant.
+              When you first arrive, you choose how you want to engage. Quick Mode lets you jump straight into any category with no setup required. Personalised Mode takes you through a short two-step setup so each reading feels grounded and relevant to you specifically.
             </p>
             <div className="bg-muted/20 p-5 rounded-xl border border-border">
               <ul className="space-y-3 text-muted-foreground">
@@ -53,9 +52,6 @@ export default function FortuneUserGuidePage() {
                 </li>
                 <li>
                   <strong className="text-foreground">Step 2 — Birth Information:</strong> Your birth date provides an astrological frame.
-                </li>
-                <li>
-                  <strong className="text-foreground">Step 3 — Life Context:</strong> Your occupation (optional) helps tailor work- or balance-focused insights.
                 </li>
               </ul>
             </div>
@@ -189,7 +185,7 @@ export default function FortuneUserGuidePage() {
             </p>
             <div className="text-center">
               <Link
-                href="/start/step-1-personal-info"
+                href="/"
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all"
               >
                 Start Your Fortune Journey

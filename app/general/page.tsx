@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { GeneralFortuneClient } from './general-client';
 
 export const metadata: Metadata = {
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
 export default function GeneralPage() {
   return (
     <>
-      {/* Static crawlable content — visible to search engines */}
-      <section className="max-w-2xl lg:max-w-4xl mx-auto px-6 pt-10 md:pt-14 pb-2">
+      {/* Static crawlable content — hidden visually, readable by search engines */}
+      <section className="sr-only">
         <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
           Your Fortune Hub
         </h1>
@@ -69,7 +70,9 @@ export default function GeneralPage() {
       </section>
 
       {/* Interactive client component */}
-      <GeneralFortuneClient />
+      <Suspense>
+        <GeneralFortuneClient />
+      </Suspense>
     </>
   );
 }

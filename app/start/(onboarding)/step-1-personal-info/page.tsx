@@ -35,7 +35,7 @@ export default function PersonalInfoPage() {
   const canContinue = name.trim().length > 0;
 
   return (
-    <QuizFrame title="Your name" subtitle="Let's personalize your fortune" currentStep={1} totalSteps={3}>
+    <QuizFrame title="Your name" subtitle="Let's personalize your fortune" currentStep={1} totalSteps={2}>
       <div className="space-y-6">
         <QuestionSection question="What shall we call you?" description="This helps personalize your readings">
           <motion.div

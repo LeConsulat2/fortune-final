@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useUserMemory } from '@/lib/useUserMemory';
 import { ZODIAC_SIGNS_LABELS, ZodiacSign } from '@/lib/common-constants';
 import { formatDate } from '@/lib/zodiac';
-import { Settings2, Check } from 'lucide-react';
+import { Settings2, Check, Zap, Sparkles } from 'lucide-react';
 import { BlurFade } from '@/ui/blur-fade';
 import { Button } from '@/ui/button';
 
@@ -33,16 +33,31 @@ const ALL_CATEGORIES: CategoryItem[] = [
 
 export function GeneralFortuneClient() {
   const router = useRouter();
-  const { userMemory, isLoaded, isComplete } = useUserMemory();
+  const searchParams = useSearchParams();
+  const { userMemory, isLoaded, isComplete, isPersonalised } = useUserMemory();
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [maxAlert, setMaxAlert] = useState(false);
+
+  // mode from URL: 'quick' | 'personalised'. If missing, redirect home to pick.
+  const modeParam = searchParams.get('mode') as 'quick' | 'personalised' | null;
 
   useEffect(() => {
-    if (isLoaded && !isComplete) {
-      router.push('/start/step-1-personal-info');
+    if (!isLoaded) return;
+    // No mode chosen — send back to landing to pick
+    if (!modeParam) {
+      router.replace('/');
+      return;
     }
-  }, [isLoaded, isComplete, router]);
+    // Personalised mode but no data — send to onboarding
+    if (modeParam === 'personalised' && !isPersonalised) {
+      router.replace('/start/step-1-personal-info');
+    }
+  }, [isLoaded, modeParam, isPersonalised, router]);
 
-  if (!isLoaded || !isComplete) return null;
+  if (!isLoaded || !modeParam) return null;
+  if (modeParam === 'personalised' && !isPersonalised) return null;
+
+  const isQuickMode = modeParam === 'quick';
 
   const zodiacInfo = userMemory.zodiacSign
     ? ZODIAC_SIGNS_LABELS[userMemory.zodiacSign as ZodiacSign]
@@ -50,11 +65,20 @@ export function GeneralFortuneClient() {
   const today = formatDate(new Date());
   const count = selected.size;
 
+  const MAX_SELECTIONS = 4;
+
   const toggle = (key: string) => {
     setSelected((prev) => {
       const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
+      if (next.has(key)) {
+        next.delete(key);
+      } else if (next.size >= MAX_SELECTIONS) {
+        setMaxAlert(true);
+        setTimeout(() => setMaxAlert(false), 2500);
+        return prev;
+      } else {
+        next.add(key);
+      }
       return next;
     });
   };
@@ -64,7 +88,6 @@ export function GeneralFortuneClient() {
     router.push(`/loading?categories=${cats}`);
   };
 
-  // stagger from center outward for the reveal feel
   const centerIdx = Math.floor(ALL_CATEGORIES.length / 2);
 
   return (
@@ -79,36 +102,65 @@ export function GeneralFortuneClient() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8 md:mb-10"
         >
-          {userMemory.name && (
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground">{userMemory.name}</h1>
+          {!isQuickMode && userMemory.name ? (
+            <>
+              <h1 className="text-2xl md:text-3xl font-bold text-foreground">{userMemory.name}</h1>
+              <p className="text-sm md:text-base text-muted-foreground">
+                {zodiacInfo.name && `${zodiacInfo.name} ${zodiacInfo.emoji} · `}{today}
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-2 mb-1">
+                <Zap size={18} className="text-primary" />
+                <span className="text-xs font-medium text-primary uppercase tracking-wider">Quick Mode</span>
+              </div>
+              <p className="text-sm text-muted-foreground">{today}</p>
+            </>
           )}
-          <p className="text-sm md:text-base text-muted-foreground">
-            {zodiacInfo.name && `${zodiacInfo.name} ${zodiacInfo.emoji} · `}{today}
-          </p>
         </motion.div>
 
         <BlurFade delay={0.08} duration={0.4}>
-          <p className="text-[11px] font-medium text-muted-foreground/60 uppercase tracking-[0.18em] mb-5 px-1">
-            Choose what you want to read today
-          </p>
+          <div className="flex items-center justify-between mb-5 px-1">
+            <p className="text-[11px] font-medium text-muted-foreground/60 uppercase tracking-[0.18em]">
+              {isQuickMode ? 'Pick a category' : 'Choose your reading'}
+            </p>
+            <AnimatePresence>
+              {maxAlert && (
+                <motion.span
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-[11px] text-amber-400/90 font-medium"
+                >
+                  Max 4 at a time
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </div>
         </BlurFade>
 
-        {/* Category grid — staggered from center */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 md:gap-3">
+        {/* Category grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
           {ALL_CATEGORIES.map((cat, index) => {
             const isSelected = selected.has(cat.key);
             const distFromCenter = Math.abs(index - centerIdx);
             const delay = 0.06 + distFromCenter * 0.045;
 
+            const atMax = count >= MAX_SELECTIONS && !isSelected;
+
             return (
               <BlurFade key={cat.key} delay={delay} duration={0.45} inView>
                 <button
                   onClick={() => toggle(cat.key)}
-                  className={`relative w-full text-center p-4 md:p-5 rounded-xl border transition-all duration-200 cursor-pointer group active:scale-[0.95] ${
+                  className={`relative w-full text-center rounded-2xl border transition-all duration-200 cursor-pointer group active:scale-[0.96] ${
                     isSelected
-                      ? 'bg-primary/15 border-primary/50 shadow-lg shadow-primary/10'
-                      : 'bg-card border-border hover:border-primary/25 hover:bg-card/80'
-                  }`}
+                      ? 'bg-primary/12 border-primary/50 shadow-lg shadow-primary/10 ring-1 ring-primary/20'
+                      : atMax
+                      ? 'bg-card/40 border-border/30 opacity-40 cursor-not-allowed'
+                      : 'bg-card/80 border-border/60 hover:border-primary/30 hover:bg-card'
+                  } p-4 md:p-5`}
                 >
                   {/* Checkmark */}
                   <AnimatePresence>
@@ -118,30 +170,30 @@ export function GeneralFortuneClient() {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 25 }}
-                        className="absolute top-1.5 left-1.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center"
+                        className="absolute top-2 left-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center"
                       >
-                        <Check size={10} className="text-primary-foreground" strokeWidth={3} />
+                        <Check size={11} className="text-primary-foreground" strokeWidth={3} />
                       </motion.span>
                     )}
                   </AnimatePresence>
 
-                  <div className={`text-2xl md:text-3xl mb-1.5 transition-transform duration-200 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}`}>
+                  <div className={`text-3xl md:text-4xl mb-2 transition-transform duration-200 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}`}>
                     {cat.emoji}
                   </div>
-                  <div className="text-xs md:text-sm font-medium text-foreground">{cat.name}</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground/60 mt-0.5 leading-tight">{cat.tagline}</div>
+                  <div className="text-sm md:text-base font-medium text-foreground leading-tight">{cat.name}</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground/50 mt-1 leading-tight">{cat.tagline}</div>
 
-                  {/* Quiz / customise gear icon */}
-                  {cat.quizPath && (
+                  {/* Quiz gear — only in personalised mode */}
+                  {!isQuickMode && cat.quizPath && (
                     <span
                       onClick={(e) => {
                         e.stopPropagation();
                         router.push(cat.quizPath!);
                       }}
-                      className="absolute top-1.5 right-1.5 p-1 rounded text-muted-foreground/20 hover:text-muted-foreground/60 opacity-0 group-hover:opacity-100 transition-all"
+                      className="absolute top-2 right-2 p-1.5 rounded-lg text-muted-foreground/25 hover:text-primary/70 hover:bg-primary/10 opacity-0 group-hover:opacity-100 transition-all"
                       title={cat.key === 'golf' ? 'Golf quiz' : 'Customise answers'}
                     >
-                      <Settings2 size={12} />
+                      <Settings2 size={13} />
                     </span>
                   )}
                 </button>
@@ -150,17 +202,35 @@ export function GeneralFortuneClient() {
           })}
         </div>
 
+        {/* Mode indicator at bottom */}
+        {isQuickMode && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="text-center mt-8"
+          >
+            <button
+              onClick={() => router.push('/start/step-1-personal-info')}
+              className="inline-flex items-center gap-1.5 text-xs text-muted-foreground/50 hover:text-primary/70 transition-colors cursor-pointer"
+            >
+              <Sparkles size={12} />
+              Want a personalised reading? Set up your profile
+            </button>
+          </motion.div>
+        )}
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.0 }}
-          className="text-center mt-10 text-muted-foreground/40 text-xs"
+          className="text-center mt-8 text-muted-foreground/40 text-xs"
         >
           For fun. You create your own fortune.
         </motion.p>
       </div>
 
-      {/* Sticky floating CTA — appears when anything is selected */}
+      {/* Sticky floating CTA */}
       <AnimatePresence>
         {count > 0 && (
           <motion.div

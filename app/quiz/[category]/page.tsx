@@ -16,3 +16,4 @@ export default async function QuizPage({
 
   return <QuizClient category={category} questions={config.quiz} />;
 }
+
