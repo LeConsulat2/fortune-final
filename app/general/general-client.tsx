@@ -34,7 +34,7 @@ const ALL_CATEGORIES: CategoryItem[] = [
 export function GeneralFortuneClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { userMemory, isLoaded, isComplete, isPersonalised } = useUserMemory();
+  const { userMemory, isLoaded, isPersonalised } = useUserMemory();
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [maxAlert, setMaxAlert] = useState(false);
 

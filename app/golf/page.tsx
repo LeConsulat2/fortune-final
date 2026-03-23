@@ -19,7 +19,7 @@ export default function GolfQuizPage() {
     if (!isComplete) {
       router.push('/start/step-1-personal-info');
     }
-  }, [isLoaded, userMemory, router]);
+  }, [isLoaded, isComplete, router]);
 
   useEffect(() => {
     if (isLoaded && userMemory.quizAnswers) {
