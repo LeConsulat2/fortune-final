@@ -39,7 +39,7 @@ export default function PrivacyPage() {
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 your-fortune stores <strong className="text-foreground">no personal data</strong> on our
-                servers. Your profile (name, birth date, occupation, quiz answers)
+                servers. Your profile (name, birth date, quiz answers)
                 is saved only in your own browser&apos;s localStorage so returning
                 visits feel seamless — it never leaves your device unless you
                 request a fortune. Your generated fortune result is held in
@@ -78,12 +78,6 @@ export default function PrivacyPage() {
                   <tr>
                     <td className="border-b border-border/50 p-3">Gender (optional)</td>
                     <td className="border-b border-border/50 p-3">Fortune customization</td>
-                    <td className="border-b border-border/50 p-3">localStorage (your browser)</td>
-                    <td className="border-b border-border/50 p-3">Until you clear browser data</td>
-                  </tr>
-                  <tr>
-                    <td className="border-b border-border/50 p-3">Occupation</td>
-                    <td className="border-b border-border/50 p-3">Career-related insights</td>
                     <td className="border-b border-border/50 p-3">localStorage (your browser)</td>
                     <td className="border-b border-border/50 p-3">Until you clear browser data</td>
                   </tr>

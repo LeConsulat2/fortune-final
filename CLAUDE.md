@@ -26,11 +26,24 @@ OPENAI_API_KEY=   # OpenAI API key (required) — store in .env.local, never .en
 ### Data Flow
 
 ```
-Landing (/) → Onboarding (3-step, first visit only) → /general
-Returning users: Landing (/) → /general (one-tap per category) → /loading?category=X → /result?category=X
+All users: Landing (/) → Intercept overlay (Quick | Personalised)
+  Quick:        → /general?mode=quick  (no personal data required)
+  Personalised: → /start/step-1-personal-info → /start/step-2-birthdate → /general?mode=personalised
+                  (returning with data skips onboarding, goes straight to /general?mode=personalised)
+
+From /general?mode=*: select categories → /loading?categories=X,Y → /result?categories=X,Y
 ```
 
-User data persists in **localStorage** (not sessionStorage). Returning users skip onboarding — the landing page CTA detects `isComplete` and routes to `/general` directly. From `/general`, tapping any category goes straight to `/loading` → `/result` (one-tap fortune). Quiz is optional — accessible via a gear icon on hover for each category.
+**Intercept overlay** (`app/page.tsx`): clicking the main CTA (whether "Start" for new users or "See Today's Fortune" for returning) always shows a full-screen animated overlay with two side-by-side cards — Quick (left) and Personalised (right). Mode is passed as `?mode=quick` or `?mode=personalised` URL param to `/general`.
+
+**Mode behaviour in `/general`:**
+- `?mode=quick` — no onboarding required; gear icons hidden; "Quick Mode" badge shown in header
+- `?mode=personalised` — requires `isPersonalised` (name + birthDate); shows user name/zodiac/date; gear icons visible for quiz customisation
+- Missing `?mode` param → redirected back to `/` to pick
+
+**Category selection limit:** max 4 categories at once. Attempting a 5th shows an amber "Max 4 at a time" alert and dims unavailable cards.
+
+User data persists in **localStorage** (not sessionStorage). Onboarding is **2 steps** (name/gender → birthdate). Occupation is not collected.
 
 Quiz answers are pre-filled from saved memory; a "Continue with saved answers" banner lets returning users skip the quiz in one tap.
 
@@ -46,9 +59,9 @@ The API endpoint (`app/api/fortune/route.ts`) is edge-runtime, uses the OpenAI A
 | `lib/fortune-config.ts` | Registry mapping category slugs → prompt config. `getFortuneConfig(category)` used by the API |
 | `lib/common-constants.ts` | `UserMemory` type, zodiac data, zodiac calculation |
 | `app/api/fortune/route.ts` | Edge API: builds system prompt from `fortune-config` + `userMemory`, calls OpenAI, returns JSON |
-| `app/start/(onboarding)/` | 3-step onboarding: name/gender → birthdate → occupation. Only shown to new users |
-| `app/page.tsx` | Landing page with TiltedCard image, TrueFocus animated title, "How It Works" section. Routes new → onboarding, returning → `/general` |
-| `app/general/page.tsx` | Server wrapper with static crawlable content (category grid + descriptions) + `general-client.tsx` interactive hub. One-tap to fortune |
+| `app/start/(onboarding)/` | 2-step onboarding: name/gender → birthdate. Step 2 redirects to `/general?mode=personalised` on completion |
+| `app/page.tsx` | Landing page with TiltedCard image, TrueFocus animated title, "How It Works" section. Single CTA always opens the Quick/Personalised intercept overlay |
+| `app/general/page.tsx` | Server wrapper with sr-only crawlable content + `general-client.tsx` interactive hub. Reads `?mode` param to show mode-specific UI |
 | `app/quiz/[category]/_components/quiz-client.tsx` | Paginated quiz (one question per page). Pre-fills from saved answers. Shows skip banner if answers exist |
 | `app/golf/page.tsx` | Golf-specific single-page quiz (all questions at once, 2-col grid) — does not use quiz-client |
 | `app/loading/page.tsx` | Atmospheric loading screen — calls `/api/fortune`, stores result in sessionStorage, redirects to `/result` |
@@ -190,7 +203,8 @@ Every category prompt must include a **SPECIFICITY RULES** section instructing t
 The site is structured for Google AdSense approval. Key principles:
 
 - **Every page must have crawlable content.** Category pages (`/love`, `/money`, etc.) are server components with 400-800 words of static text. Never create empty stub pages.
-- **Server/client split pattern:** Pages that need interactivity use a server component wrapper (`page.tsx` with metadata + static content) that imports a `'use client'` component for the interactive parts. See `app/general/page.tsx` + `general-client.tsx`, `app/job/page.tsx` + `job-selector-client.tsx`.
+- **Server/client split pattern:** Pages that need interactivity use a server component wrapper (`page.tsx` with metadata + static content) that imports a `'use client'` component for the interactive parts. See `app/general/page.tsx` + `general-client.tsx`.
+- **`/general` static content is `sr-only`** — hidden visually but crawlable by search engines. Do not remove it.
 - **JSON-LD structured data:** `WebApplication` schema in root `layout.tsx`, `FAQPage` schema on `/faq`. Add appropriate schemas to new content pages.
 - **`noindex` on dynamic pages:** `/loading` and `/result` have `robots: { index: false }` via layout metadata — they're user-specific and provide no crawl value.
 - **Zodiac content pillar:** 12 sign guide pages at `/zodiac/[sign]` provide ~8,000 words of evergreen, SEO-rich content. Content data lives in `app/zodiac/zodiac-content.ts`.

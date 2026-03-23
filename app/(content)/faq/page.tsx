@@ -15,7 +15,7 @@ const FAQS = [
   },
   {
     q: 'Do you store my personal information?',
-    a: "No personal data is stored on our servers. Your profile (name, birth date, occupation, quiz answers) is saved in your browser's localStorage so returning visits are seamless — it stays on your device only. Your fortune result is held in sessionStorage and disappears when you close or refresh the tab.",
+    a: "No personal data is stored on our servers. Your profile (name, birth date, quiz answers) is saved in your browser's localStorage so returning visits are seamless — it stays on your device only. Your fortune result is held in sessionStorage and disappears when you close or refresh the tab.",
   },
   {
     q: 'Can I reset or delete my data?',
